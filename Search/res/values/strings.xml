@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Search!</string>
+	<string name="app_name">Search</string>
+	<string name="menu_update">Refresh Result</string>
+	<string name="search_result_details_title">Result details</string>
+	<string name="searchResultDialogTitle">Search result dialog title</string>
+	<string name="search_interrupted">Search result dialog title</string>
+	<string name="search_expression_hint">Search</string>
+	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>	
+</resources>
