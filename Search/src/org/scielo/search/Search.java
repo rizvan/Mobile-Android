@@ -31,9 +31,11 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnKeyListener;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -60,6 +62,7 @@ public class Search extends Activity {
 	    searchExpressionEditText = (EditText) findViewById(R.id.searchExpressionEditText);
 	    searchButton = (View) findViewById(R.id.searchButton);
 	    searchResultListView = (ListView) findViewById(R.id.searchResultListView);
+	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 	       @Override
 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
@@ -75,7 +78,15 @@ public class Search extends Activity {
 				
 			}
 	    });
-	    
+	    searchExpressionEditText.setOnKeyListener(new OnKeyListener(){
+	    	public boolean onKey(View v, int keyCode, KeyEvent event){
+	    			if (keyCode == KeyEvent.KEYCODE_ENTER){
+	    				refreshSearchs();
+	    				return true;
+	    			}
+	    		return false;
+	    	}
+	    });
 	    int layoutID = android.R.layout.simple_list_item_1;
 	    aa = new ArrayAdapter<SearchResult>(this, layoutID , searchResultList);
 	    searchResultListView.setAdapter(aa);
@@ -168,6 +179,7 @@ public class Search extends Activity {
 	  // Add the new quake to our list of searchResultList.
 	  searchResultList.add(_searchResult);
 
+	  
 	  // Notify the array adapter of a change.
 	  aa.notifyDataSetChanged();
 	}
