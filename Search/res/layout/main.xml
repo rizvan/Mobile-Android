@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="1sp" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-   <ListView 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+   android:orientation="vertical" 
+   android:layout_width="fill_parent" 
+   android:layout_height="fill_parent">
+   <EditText
+    android:id="@+id/searchExpressionEditText"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+  />
+  <Button
+    android:id="@+id/searchButton"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/search_button"
+  />
+  <ListView 
        android:id="@+id/searchResultListView" 
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content" 
-       android:background="#FFC0CB" 
-       android:choiceMode="multipleChoice" 
-       android:padding="5sp"   
-       android:textSize="1sp"      
-       android:textColor="#1E90FF"      
+         
        />
 </LinearLayout>

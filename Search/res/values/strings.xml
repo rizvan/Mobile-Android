@@ -7,5 +7,8 @@
 	<string name="searchResultDialogTitle">Search result dialog title</string>
 	<string name="search_interrupted">Search result dialog title</string>
 	<string name="search_expression_hint">Search</string>
-	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>	
+	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
+	<string name="search_button">search</string>
+	
+		
 </resources>

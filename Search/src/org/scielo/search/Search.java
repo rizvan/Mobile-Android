@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 //import android.widget.EditText;
 import android.widget.TextView;
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.io.InputStreamReader;
 
 //import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,8 +41,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Search extends Activity {
 	private static final String TAG = "Search";
-	//private EditText searchExpressionText;
-    ListView searchResultListView;
+	
+	EditText searchExpressionEditText;
+	View searchButton;	
+	ListView searchResultListView;
+    
 	ArrayAdapter<SearchResult> aa;
 	ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
 	      
@@ -51,26 +56,31 @@ public class Search extends Activity {
 	public void onCreate(Bundle icicle) {
 	    super.onCreate(icicle);
 	    setContentView(R.layout.main);
-	    
+
+	    searchExpressionEditText = (EditText) findViewById(R.id.searchExpressionEditText);
+	    searchButton = (View) findViewById(R.id.searchButton);
 	    searchResultListView = (ListView) findViewById(R.id.searchResultListView);
-	    //searchExpressionText = (EditText) findViewById(R.id.search_expression_text);
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
-	     
 	       @Override
 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
 	           selectedSearchResult = searchResultList.get(_index);
 	           showDialog(SEARCH_RESULT_DIALOG);
 	       }
 	    });
-	    
+	    searchButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				refreshSearchs();
+				
+			}
+	    });
 	    
 	    int layoutID = android.R.layout.simple_list_item_1;
 	    aa = new ArrayAdapter<SearchResult>(this, layoutID , searchResultList);
 	    searchResultListView.setAdapter(aa);
-	    //searchExpressionText.setAdapter(aa);
 	    
-	    refreshSearchs();
-	    
+	    refreshSearchs();	
 	}
 	  
 	  
@@ -79,7 +89,7 @@ public class Search extends Activity {
 		HttpURLConnection con = null;
 		String result = "";
 		SearchResult r ;
-		//String searchExpression = this.searchExpressionText.getText().toString().trim();		
+		String searchExpression = this.searchExpressionEditText.getText().toString().trim();		
 		//Log.d(TAG, "refreshSearchs(" + searchExpression +  ")");
 		
 		try {
@@ -89,8 +99,7 @@ public class Search extends Activity {
 			
 			// Build RESTful query for Google API
 			   
-			//String q = URLEncoder.encode(searchExpression, "UTF-8");
-			String q = "dna";
+			String q = URLEncoder.encode(searchExpression, "UTF-8");
 			String u = this.getResources().getString(
 					R.string.search_feed);
 			URL url = new URL(u.replace("amp;", "") + "&q=" + q );
@@ -119,7 +128,7 @@ public class Search extends Activity {
 			// Parse to get translated text
 			JSONObject jsonObject = new JSONObject(payload);
 			
-			
+			searchResultList.clear();
 			int resultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").length();
 			JSONObject resultItem = new JSONObject();
 			for (int i=0; i<resultCount; i++){
@@ -215,6 +224,7 @@ public class Search extends Activity {
           tv.setText(searchResultText);
 
           break;
+          
       }
     }
 }
