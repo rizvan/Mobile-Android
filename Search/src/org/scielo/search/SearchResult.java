@@ -3,16 +3,35 @@ package org.scielo.search;
 
 public class SearchResult {
 	private String text;
+	private String title;
+	private String authors;
+	private String link;
 	
 	SearchResult() {
 		
 	}
 	
-	public void setText(String text){
-		this.text = text;
-	}
+	
 	public String getText(){
-		return this.text;
+		return this.title + "\n" + this.authors + "\n" + this.link;
+	}
+	public void setDocumentTitle(String text){
+		this.title = text;
+	}
+	public String getDocumentTitle(){
+		return this.title;
+	}
+	public void setDocumentAuthors(String text){
+		this.authors = text;
+	}
+	public String getDocumentAuthors(){
+		return this.authors;
+	}
+	public void setDocumentPDFLink(String text){
+		this.link = text;
+	}
+	public String getDocumentPDFLink(){
+		return this.link;
 	}
 	
 	@Override

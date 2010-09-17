@@ -31,11 +31,13 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnKeyListener;
+
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -43,10 +45,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Search extends Activity {
 	private static final String TAG = "Search";
-	
+	TextView resultCountTextView; 
 	EditText searchExpressionEditText;
 	View searchButton;	
 	ListView searchResultListView;
+    String searchResultCount;
     
 	ArrayAdapter<SearchResult> aa;
 	ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
@@ -59,9 +62,14 @@ public class Search extends Activity {
 	    super.onCreate(icicle);
 	    setContentView(R.layout.main);
 
+	    resultCountTextView = (TextView) findViewById(R.id.TextViewDocumentCount);
 	    searchExpressionEditText = (EditText) findViewById(R.id.searchExpressionEditText);
 	    searchButton = (View) findViewById(R.id.searchButton);
 	    searchResultListView = (ListView) findViewById(R.id.searchResultListView);
+	    
+	    int resID = R.layout.result_list_item;
+	    aa = new ResultItemAdapter(this, resID, searchResultList);
+	    searchResultListView.setAdapter(aa);
 	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 	       @Override
@@ -73,12 +81,13 @@ public class Search extends Activity {
 	    searchButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				refreshSearchs();
 				
 			}
 	    });
 	    searchExpressionEditText.setOnKeyListener(new OnKeyListener(){
+	    	
 	    	public boolean onKey(View v, int keyCode, KeyEvent event){
 	    			if (keyCode == KeyEvent.KEYCODE_ENTER){
 	    				refreshSearchs();
@@ -87,10 +96,17 @@ public class Search extends Activity {
 	    		return false;
 	    	}
 	    });
-	    int layoutID = android.R.layout.simple_list_item_1;
+	    
+	    /*
+	     int layoutID = android.R.layout.simple_list_item_1;
+	     
 	    aa = new ArrayAdapter<SearchResult>(this, layoutID , searchResultList);
 	    searchResultListView.setAdapter(aa);
+	     */
 	    
+	    	    
+	    //resultCountTextView.setText(searchResultCount);
+	    resultCountTextView.setText("1113");
 	    refreshSearchs();	
 	}
 	  
@@ -140,16 +156,20 @@ public class Search extends Activity {
 			JSONObject jsonObject = new JSONObject(payload);
 			
 			searchResultList.clear();
+			searchResultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").get("numFound").toString();
 			int resultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").length();
 			JSONObject resultItem = new JSONObject();
 			for (int i=0; i<resultCount; i++){
-				resultItem = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").getJSONObject(i );
-				result = resultItem.getJSONArray("ti").getString(0);
-				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
-					result = result + "\n" + resultItem.getJSONArray("au").getString(j);
-				}
 				r = new SearchResult();
-				r.setText(result);			
+				
+				resultItem = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").getJSONObject(i );
+				r.setDocumentTitle( resultItem.getJSONArray("ti").getString(0));
+				result = "";
+				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
+					result = result + resultItem.getJSONArray("au").getString(j) + "; ";
+				}
+				r.setDocumentAuthors(result);
+				r.setDocumentPDFLink("http://teste.scielo.br");
 				addNewSearchResult(r);				
 			}
 			
@@ -178,8 +198,6 @@ public class Search extends Activity {
     private void addNewSearchResult(SearchResult _searchResult) {
 	  // Add the new quake to our list of searchResultList.
 	  searchResultList.add(_searchResult);
-
-	  
 	  // Notify the array adapter of a change.
 	  aa.notifyDataSetChanged();
 	}
