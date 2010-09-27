@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  android:name="Context Menu">
+  <item 
+    android:id="@+id/menuItemRefineBySubject" 
+    android:title="@string/menuItemRefineBySubject">
+  </item>
+  <item
+    android:id="@+id/menuItemRefineByJournal"
+    android:title="@string/menuItemRefineByJournal">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineByYear" 
+    android:title="@string/menuItemRefineByYear">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineByLanguage" 
+    android:title="@string/menuItemRefineByLanguage">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineByCollection" 
+    android:title="@string/menuItemRefineByCollection">    
+  </item>
+  
+</menu>

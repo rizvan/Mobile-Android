@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="wrap_content"
+	android:gravity="left|center" 
+	android:layout_width="fill_parent" 
+	android:paddingBottom="5px" 
+	android:paddingTop="5px" 
+	android:paddingLeft="5px"
+	>
+	<TableRow>
+	<TextView 
+		android:id="@+id/TextViewDocumentTitle" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		android:gravity="left" 
+		android:background="#FFFFFF"
+		android:textColor="#500000"
+		android:autoLink="all"
+		/>
+	
+	</TableRow>
+	<TableRow>
+	<TextView 
+		android:id="@+id/TextViewDocumentAuthors" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:gravity="left"
+		android:textColor="#000000"
+		android:background="#FFFFFF"
+		/>
+	</TableRow>
+	<TableRow>
+	<TextView 
+		android:id="@+id/TextViewDocumentPDFLink" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:gravity="left"
+        android:background="#FFFFFF"		 
+		android:textColor="#585858"
+		/>
+		</TableRow>
+</TableLayout>

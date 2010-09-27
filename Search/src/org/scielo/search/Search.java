@@ -32,9 +32,11 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View.OnKeyListener;
 
@@ -82,7 +84,7 @@ public class Search extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				refreshSearchs();
+				refreshSearchs("");
 				
 			}
 	    });
@@ -90,7 +92,7 @@ public class Search extends Activity {
 	    	
 	    	public boolean onKey(View v, int keyCode, KeyEvent event){
 	    			if (keyCode == KeyEvent.KEYCODE_ENTER){
-	    				refreshSearchs();
+	    				refreshSearchs("");
 	    				return true;
 	    			}
 	    		return false;
@@ -107,13 +109,14 @@ public class Search extends Activity {
 	    	    
 	    //resultCountTextView.setText(searchResultCount);
 	    resultCountTextView.setText("1113");
-	    refreshSearchs();	
+	    refreshSearchs("");	
 	}
 	  
 	  
-	private void refreshSearchs() {
+	private void refreshSearchs(String filter) {
 		//fixme String result = translate.getResources().getString(R.string.translation_error);
 		HttpURLConnection con = null;
+		String filtering = "";
 		String result = "";
 		SearchResult r ;
 		String searchExpression = this.searchExpressionEditText.getText().toString().trim();		
@@ -126,10 +129,13 @@ public class Search extends Activity {
 			
 			// Build RESTful query for Google API
 			   
+			if (filter.length()>0){
+				filtering = "&fq=" + URLEncoder.encode(filter, "UTF-8");
+			}
 			String q = URLEncoder.encode(searchExpression, "UTF-8");
 			String u = this.getResources().getString(
 					R.string.search_feed);
-			URL url = new URL(u.replace("amp;", "") + "&q=" + q );
+			URL url = new URL(u.replace("amp;", "") + "&q=" + q + filtering);
             
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(10000); /* milliseconds */ 
@@ -202,27 +208,37 @@ public class Search extends Activity {
 	  aa.notifyDataSetChanged();
 	}
     
-    static final private int MENU_UPDATE = Menu.FIRST;
-    
+    //static final private int MENU_REFINE_BY_SUBJECT = Menu.FIRST;
+    /*
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, 
+    		                           View v, 
+    		                           ContextMenu.ContextMenuInfo menuInfo) {
+      super.onCreateContextMenu(menu, v, menuInfo);
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu, menu);
+      menu.setHeaderTitle("Context menu");
+      
+    }
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
       super.onCreateOptionsMenu(menu);
-
-      menu.add(0, MENU_UPDATE, Menu.NONE, R.string.menu_update);
-                  
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu.menu, menu);
       return true;
     }
             
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
       super.onOptionsItemSelected(item);
-           
-      switch (item.getItemId()) {
-        case (MENU_UPDATE): {
-          refreshSearchs();
+      /*
+        case (MENU_REFINE_BY_SUBJECT): {
+          refreshSearchs("ac: Human Sciences");
           return true; 
         }
-      } 
+      }*/
+      refreshSearchs("ac:" + '"' + "Human Sciences" + '"');
       return false;
     }
     
