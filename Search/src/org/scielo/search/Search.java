@@ -231,14 +231,43 @@ public class Search extends Activity {
             
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	String qualifier = "";
+    	String filter = "";
+        
       super.onOptionsItemSelected(item);
-      /*
-        case (MENU_REFINE_BY_SUBJECT): {
-          refreshSearchs("ac: Human Sciences");
-          return true; 
+      switch(item.getItemId()) {
+      case (R.id.menuItemRefineBySubjectHumanSciences): {
+          qualifier = "ac:";
+          filter = '"' + "Human Sciences" + '"' ; 
+          break; 
         }
-      }*/
-      refreshSearchs("ac:" + '"' + "Human Sciences" + '"');
+      case (R.id.menuItemRefineBySubjectHealthSciences): {
+          qualifier = "ac:";
+          filter = '"' + "Health Sciences" + '"' ; 
+          break; 
+        }
+      case (R.id.menuItemRefineBySubjectBiologicalSciences): {
+          qualifier = "ac:";
+          filter = '"' + "Biological Sciences" + '"' ; 
+          break; 
+        }
+      case (R.id.menuItemRefineBySubjectAgriculturalSciences): {
+          qualifier = "ac:";
+          filter = '"' + "Agricultural Sciences" + '"' ; 
+          break; 
+        }
+      case (R.id.menuItemRefineBySubjectExactAndEarthSciences): {
+          qualifier = "ac:";
+          filter = '"' + "Exact And Earth Sciences" + '"' ; 
+          break; 
+        }
+      case (R.id.menuItemRefineBySubjectEngineering): {
+          qualifier = "ac:";
+          filter = '"' + "Engineering" + '"' ; 
+          break; 
+        }
+      }
+      refreshSearchs(qualifier + filter);
       return false;
     }
     

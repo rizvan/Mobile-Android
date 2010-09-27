@@ -4,6 +4,35 @@
   <item 
     android:id="@+id/menuItemRefineBySubject" 
     android:title="@string/menuItemRefineBySubject">
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+  android:name="Context Menu">
+  <item 
+    android:id="@+id/menuItemRefineBySubjectHumanSciences" 
+    android:title="@string/menuItemRefineBySubjectHumanSciences">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineBySubjectHealthSciences" 
+    android:title="@string/menuItemRefineBySubjectHealthSciences">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineBySubjectBiologicalSciences" 
+    android:title="@string/menuItemRefineBySubjectBiologicalSciences">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineBySubjectAgriculturalSciences" 
+    android:title="@string/menuItemRefineBySubjectAgriculturalSciences">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineBySubjectExactAndEarthSciences" 
+    android:title="@string/menuItemRefineBySubjectExactAndEarthSciences">
+  </item>
+  <item 
+    android:id="@+id/menuItemRefineBySubjectEngineering" 
+    android:title="@string/menuItemRefineBySubjectEngineering">
+  </item>
+  
+</menu>
+    
   </item>
   <item
     android:id="@+id/menuItemRefineByJournal"

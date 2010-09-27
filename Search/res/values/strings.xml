@@ -16,6 +16,12 @@
 	<string name="menuItemRefineByCollection">Refine by collection</string>
 	<string name="menuItemRefineByLanguage">Refine by language</string>
 	
+	<string name="menuItemRefineBySubjectHumanSciences">Human Sciences</string>
+	<string name="menuItemRefineBySubjectHealthSciences">Health Sciences</string>
+	<string name="menuItemRefineBySubjectBiologicalSciences">Biological Sciences</string>
+	<string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
+	<string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
+	<string name="menuItemRefineBySubjectEngineering">Engineering</string>
 		
 </resources>
   
