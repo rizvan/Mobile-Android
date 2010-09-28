@@ -52,7 +52,7 @@ public class Search extends Activity {
 	View searchButton;	
 	ListView searchResultListView;
     String searchResultCount;
-    
+    String currSearchExpr = "";
 	ArrayAdapter<SearchResult> aa;
 	ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
 	      
@@ -83,7 +83,6 @@ public class Search extends Activity {
 	    searchButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				refreshSearchs("");
 				
 			}
@@ -107,8 +106,8 @@ public class Search extends Activity {
 	     */
 	    
 	    	    
-	    //resultCountTextView.setText(searchResultCount);
-	    resultCountTextView.setText("1113");
+	    
+	    //resultCountTextView.setText("1113");
 	    refreshSearchs("");	
 	}
 	  
@@ -116,8 +115,9 @@ public class Search extends Activity {
 	private void refreshSearchs(String filter) {
 		//fixme String result = translate.getResources().getString(R.string.translation_error);
 		HttpURLConnection con = null;
-		String filtering = "";
+		String query = "";
 		String result = "";
+		String u = "";
 		SearchResult r ;
 		String searchExpression = this.searchExpressionEditText.getText().toString().trim();		
 		//Log.d(TAG, "refreshSearchs(" + searchExpression +  ")");
@@ -127,16 +127,30 @@ public class Search extends Activity {
 			if (Thread.interrupted())
 				throw new InterruptedException();
 			
-			// Build RESTful query for Google API
-			   
+			u = this.getResources().getString(
+					R.string.search_feed);
+			u =	u.replace("amp;", "" );
+			
+			if (searchExpression.length()>0){
+				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
+			}
 			if (filter.length()>0){
-				filtering = "&fq=" + URLEncoder.encode(filter, "UTF-8");
+				query = query + "&fq=" + URLEncoder.encode(filter,  "UTF-8");
+			}	
+					
+			
+			URL url = new URL(u + query);
+			
+			/* old
+			if (filter.length()>0){
+				query = "&fq=" + URLEncoder.encode(filter, "UTF-8");
 			}
 			String q = URLEncoder.encode(searchExpression, "UTF-8");
-			String u = this.getResources().getString(
+			u = this.getResources().getString(
 					R.string.search_feed);
-			URL url = new URL(u.replace("amp;", "") + "&q=" + q + filtering);
-            
+			URL url = new URL(u.replace("amp;", "") + "&q=" + q + query);
+			*/
+			
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(10000); /* milliseconds */ 
 			con.setConnectTimeout(15000); /* milliseconds */ 
@@ -163,13 +177,15 @@ public class Search extends Activity {
 			
 			searchResultList.clear();
 			searchResultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").get("numFound").toString();
+			resultCountTextView.setText(searchResultCount);
+			
 			int resultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").length();
 			JSONObject resultItem = new JSONObject();
 			for (int i=0; i<resultCount; i++){
 				r = new SearchResult();
 				
 				resultItem = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").getJSONObject(i );
-				r.setDocumentTitle( resultItem.getJSONArray("ti").getString(0));
+				r.setDocumentTitle( new Integer(i+1).toString()+ "\n" + resultItem.getJSONArray("ti").getString(0));
 				result = "";
 				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
 					result = result + resultItem.getJSONArray("au").getString(j) + "; ";
@@ -228,7 +244,7 @@ public class Search extends Activity {
       inflater.inflate(R.menu.menu, menu);
       return true;
     }
-            
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	String qualifier = "";
@@ -302,4 +318,11 @@ public class Search extends Activity {
           
       }
     }
+    /*
+    private void populateMenu(Menu menu, int id, ArrayList<SearchResult>){
+    	SubMenu sub = menu.addSubMenu(this.getResources().getString(id));
+    	
+    }
+    */
+    
 }
