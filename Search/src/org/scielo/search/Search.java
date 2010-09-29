@@ -23,6 +23,8 @@ import java.net.URLEncoder;
 import java.net.URL;
 import java.util.ArrayList;
 
+//import org.json.JSONArray;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +40,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
+//import android.view.SubMenu;
 import android.view.View.OnKeyListener;
 
 import android.widget.ListView;
@@ -55,6 +59,7 @@ public class Search extends Activity {
     String currSearchExpr = "";
 	ArrayAdapter<SearchResult> aa;
 	ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
+	SearchFilterGroupList searchFilterGroupList = new SearchFilterGroupList( new ArrayList<SearchFilterGroup>(), new ArrayList<SearchFilter>());
 	      
 	static final private int SEARCH_RESULT_DIALOG = 1;
 	SearchResult selectedSearchResult;
@@ -119,7 +124,8 @@ public class Search extends Activity {
 		String result = "";
 		String u = "";
 		SearchResult r ;
-		String searchExpression = this.searchExpressionEditText.getText().toString().trim();		
+		String searchExpression = this.searchExpressionEditText.getText().toString().trim();
+		
 		//Log.d(TAG, "refreshSearchs(" + searchExpression +  ")");
 		
 		try {
@@ -140,17 +146,7 @@ public class Search extends Activity {
 					
 			
 			URL url = new URL(u + query);
-			
-			/* old
-			if (filter.length()>0){
-				query = "&fq=" + URLEncoder.encode(filter, "UTF-8");
-			}
-			String q = URLEncoder.encode(searchExpression, "UTF-8");
-			u = this.getResources().getString(
-					R.string.search_feed);
-			URL url = new URL(u.replace("amp;", "") + "&q=" + q + query);
-			*/
-			
+						
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(10000); /* milliseconds */ 
 			con.setConnectTimeout(15000); /* milliseconds */ 
@@ -175,12 +171,14 @@ public class Search extends Activity {
 			// Parse to get translated text
 			JSONObject jsonObject = new JSONObject(payload);
 			
-			searchResultList.clear();
+			
 			searchResultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").get("numFound").toString();
 			resultCountTextView.setText(searchResultCount);
 			
-			int resultCount = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("response").getJSONArray("docs").length();
-			JSONObject resultItem = new JSONObject();
+			JSONObject resultItem ;
+			
+			int resultCount = jsonObject.getJSONArray("diaServerResponse" ).getJSONObject(0).getJSONObject("response").getJSONArray("docs").length();
+			searchResultList.clear();
 			for (int i=0; i<resultCount; i++){
 				r = new SearchResult();
 				
@@ -194,6 +192,17 @@ public class Search extends Activity {
 				r.setDocumentPDFLink("http://teste.scielo.br");
 				addNewSearchResult(r);				
 			}
+			try {
+				resultItem = jsonObject.getJSONArray( "diaServerResponse").getJSONObject(0).getJSONObject("facet_counts");
+				resultItem = resultItem.getJSONObject("facet_fields");
+				
+				populateSearchFilterLists(resultItem);
+			} catch(JSONException e){
+				Log.d(TAG, "JSONException", e);				
+			}
+						
+			
+				
 			
 			// Check if task has been interrupted
 			//if (Thread.interrupted())
@@ -237,21 +246,42 @@ public class Search extends Activity {
       
     }
     */
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+      
       super.onCreateOptionsMenu(menu);
+      
       MenuInflater inflater = getMenuInflater();
       inflater.inflate(R.menu.menu, menu);
+      
+      for (int index = 0; index < searchFilterGroupList.length(); index++){
+    	  populateMenu(menu, searchFilterGroupList.getItem(index).getMenuId(), index);  
+      }
+      
       return true;
     }
     
+    private void populateMenu(Menu menu, int id, int index){
+    	MenuItem menuItem;
+        SubMenu subMenu;
+        SearchFilterGroup searchFilterGroup;
+        
+        menuItem = menu.findItem(id);        
+        subMenu = menuItem.getSubMenu();
+        searchFilterGroup = searchFilterGroupList.getItem(index);
+        subMenu.clear();
+        for (int i=0;i<searchFilterGroup.length();i++){
+          subMenu.add(id, (index * 1000) + searchFilterGroup.getItem(i).getId(), i, searchFilterGroup.getItem(i).getName()+ "(" + searchFilterGroup.getItem(i).getCount() + ")" );
+        }        
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	String qualifier = "";
     	String filter = "";
         
       super.onOptionsItemSelected(item);
-      switch(item.getItemId()) {
+      /*switch(item.getItemId()) {
       case (R.id.menuItemRefineBySubjectHumanSciences): {
           qualifier = "ac:";
           filter = '"' + "Human Sciences" + '"' ; 
@@ -282,7 +312,9 @@ public class Search extends Activity {
           filter = '"' + "Engineering" + '"' ; 
           break; 
         }
-      }
+      }*/
+      qualifier = "ac:";
+      filter = '"' + "Agricultural Sciences" + '"' ;
       refreshSearchs(qualifier + filter);
       return false;
     }
@@ -318,11 +350,58 @@ public class Search extends Activity {
           
       }
     }
-    /*
-    private void populateMenu(Menu menu, int id, ArrayList<SearchResult>){
-    	SubMenu sub = menu.addSubMenu(this.getResources().getString(id));
+    
+    private boolean populateSearchFilterLists(JSONObject filters){
+    	boolean r = true;
     	
+    	
+    	searchFilterGroupList.clear();
+    	
+    	   
+    	r = populateSearchFilterList(getSearchFilterList(filters, "ac", R.id.menuItemRefineBySubject));
+    	r = populateSearchFilterList(getSearchFilterList(filters, "ta_cluster", R.id.menuItemRefineByJournal));
+    	r = populateSearchFilterList(getSearchFilterList(filters, "year_cluster", R.id.menuItemRefineByYear));
+    	r = populateSearchFilterList(getSearchFilterList(filters, "la", R.id.menuItemRefineByLanguage));
+    	r = populateSearchFilterList(getSearchFilterList(filters, "in", R.id.menuItemRefineByCollection));
+    	
+    	return r;
     }
-    */
+    
+    private boolean populateSearchFilterList(SearchFilterGroup list){
+    	boolean r = false;
+    	if (list != null){
+    		searchFilterGroupList.add(list);
+    		r = true;
+    	}
+    	return r;
+    }
+    private SearchFilterGroup getSearchFilterList(JSONObject filterLists, String filterListName, int menuId){
+    	SearchFilterGroup searchFilterList = new SearchFilterGroup( new ArrayList<SearchFilter>(), menuId, filterListName);
+    	SearchFilter searchFilter;
+    	int i;
+    	JSONArray filterList;
+    	JSONArray filter;
+    	String filterName;
+    	String filterResultCount;
+    	
+    	try {
+            //f = filter.getJSONArray(filterName).to;
+    		filterList = filterLists.getJSONArray(filterListName);
+            
+        	for (i=0;i<filterList.length();i++){
+        		filter = filterList.getJSONArray(i);
+        		filterName = filter.getString(0);
+        		filterResultCount = filter.getString(1);
+    			searchFilter = new SearchFilter( i,  filterName, filterResultCount);
+        		searchFilterList.add(searchFilter);
+        	}
+        	            
+        } catch (JSONException e) {
+            
+        }
+        return searchFilterList;
+    }
+
+    
     
 }
