@@ -1,25 +1,38 @@
 package org.scielo.search;
 
 public class SearchFilter {
-	private int id;
-	private String name;
-	private String count;
+	private int submenuId;
+	private String caption;
+	private String resultCount;
+	private String code;
+	private String clusterCode;
 	
-	SearchFilter(int _id, String _name, String _count) {
-		this.id = _id;
-		this.name = _name;
-		this.count = _count;
+	SearchFilter(String _caption, String _resultCount, String _code, String _clusterCode) {
+		this.caption = _caption;
+		this.resultCount = _resultCount;
+		this.code = _code;
+		this.clusterCode = _clusterCode;
 	}
 	
-	
-	public int getId(){
-		return this.id;
+	public void setSubmenuId(int _submenuId){
+		this.submenuId = _submenuId;
 	}
-	public String getName(){
-		return this.name;
+	public int getSubmenuId(){
+		return this.submenuId;
 	}
-	public String getCount(){
-		return this.count;
+	public String getCaption(){
+		return this.caption;
 	}
-	
+	public String getResultCount(){
+		return this.resultCount;
+	}
+	public String getCode(){
+		return this.code;
+	}
+	public String getClusterCode(){
+		return this.clusterCode;
+	}	
+	public String getFilterExpression(){
+		return this.clusterCode + ":" + '"' + this.code + '"' ;
+	}
 }
