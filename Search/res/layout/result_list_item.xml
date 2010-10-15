@@ -39,6 +39,8 @@
 		android:gravity="left"
         android:background="#FFFFFF"		 
 		android:textColor="#585858"
+		android:autoLink="all"
+		
 		/>
 		</TableRow>
 </TableLayout>

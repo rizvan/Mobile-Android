@@ -49,11 +49,26 @@ public class Search extends Activity {
 	ArrayList<SearchFilter> searchFilterList;
 	static final private int SEARCH_RESULT_DIALOG = 1;
 	SearchResult selectedSearchResult;
-
+	
+	String[] col_c;
+	String[] col_n; 
+	String[] col_ln;
+	String[] col_url;
+	
+	JournalCollections jc;
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 	    super.onCreate(icicle);
 	    setContentView(R.layout.main);
+
+	    col_c = getResources().getStringArray(R.array.collections_code);
+		col_n = getResources().getStringArray(R.array.collections_name);
+		col_ln = getResources().getStringArray(R.array.log_collections_code);
+		col_url = getResources().getStringArray(R.array.collections_url);
+		
+		jc = new JournalCollections(col_c, col_n, col_ln, col_url );		
+		
 
 	    resultCountTextView = (TextView) findViewById(R.id.TextViewDocumentCount);
 	    searchExpressionEditText = (EditText) findViewById(R.id.searchExpressionEditText);
@@ -110,13 +125,17 @@ public class Search extends Activity {
 		String payload;
 		
 		ss = new SearchService(this.getResources().getString(R.string.search_feed));
+		
 		searchExpression = this.searchExpressionEditText.getText().toString().trim();		
 		payload = ss.call(searchExpression, filter);
 		if (payload.length()>0){
-			ssData = new SearchServiceData(payload);
+			ssData = new SearchServiceData(payload, this.getResources().getString(R.string.pdf_url));
 			searchResultCount = ssData.getResultCount();
-			resultCountTextView.setText(searchResultCount + " ...");
-			ssData.loadResultList(searchResultList);
+			//resultCountTextView.setText(searchResultCount + " ..." + new Integer(col_c.length).toString());
+			resultCountTextView.setText(searchResultCount + " ..." + jc.getCollectionAppName("scl"));
+			ssData.loadResultList(searchResultList, jc);
+			
+			//ssData.loadResultList(searchResultList);
 			ssData.loadClusterCollection(searchClusterCollection);
 	    	
 			aa.notifyDataSetChanged();

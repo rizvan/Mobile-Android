@@ -7,7 +7,6 @@
 	<string name="searchResultDialogTitle">Search result dialog title</string>
 	<string name="search_interrupted">Search result dialog title</string>
 	<string name="search_expression_hint">Search</string>
-	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
 	<string name="search_button">search</string>
 	
 	<string name="menuItemRefineBySubject">Refine by subject</string>
@@ -22,6 +21,10 @@
 	<string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
 	<string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
 	<string name="menuItemRefineBySubjectEngineering">Engineering</string>
+	
+	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
+	<string name="pdf_url">http://search.scielo.org/showpdf.php?pdf=http://REPLACE_APP_URL/pdf/REPLACE_PDF_FILENAME.pdf&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
+	
 		
 </resources>
   

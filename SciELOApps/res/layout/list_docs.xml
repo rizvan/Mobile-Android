@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#585858" 
+    >
+     <EditText
+    android:id="@+id/searchExpressionEditText"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left" 
+  />
+  <Button
+    android:id="@+id/searchButton"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:text="@string/search_button"    
+    android:layout_toRightOf="@id/searchExpressionEditText"
+  />
+	
+
+  <TextView 
+        android:text="@+id/TextViewDocumentCount" 
+        android:id="@+id/TextViewDocumentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchExpressionEditText"
+        android:background="#FFFF00"
+        >
+        </TextView>
+        
+        
+  <ListView 
+       android:id="@+id/paginationListView" 
+       android:orientation="horizontal" 
+         android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+      android:textSize="40sp" 
+      android:layout_below="@id/TextViewDocumentCount"
+         android:gravity="left" 
+       ></ListView>
+  <ListView 
+       android:id="@+id/searchResultListView" 
+       android:orientation="vertical" 
+         android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+      android:textSize="20sp" 
+      android:layout_below="@id/paginationListView"
+         
+       />
+</RelativeLayout>

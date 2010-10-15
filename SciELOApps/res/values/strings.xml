@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Search!</string>
+	<string name="app_name">SciELO</string>
+	<string name="tab_list_docs_name">Documents</string>
+	<string name="tab_list_journals_name">Journals</string>
+	<string name="tab_list_issues_name">Issues</string>
+	<string name="tab_settings_name">Settings</string>
+	<string name="menu_update">Refresh Result</string>
+	<string name="search_result_details_title">Result details</string>
+	<string name="searchResultDialogTitle">Search result dialog title</string>
+	<string name="search_interrupted">Search result dialog title</string>
+	<string name="search_expression_hint">Search</string>
+	<string name="search_button">search</string>
+	
+	<string name="menuItemRefineBySubject">Refine by subject</string>
+	<string name="menuItemRefineByJournal">Refine by journal</string>
+	<string name="menuItemRefineByYear">Refine by year</string>
+	<string name="menuItemRefineByCollection">Refine by collection</string>
+	<string name="menuItemRefineByLanguage">Refine by language</string>
+	
+	<string name="menuItemRefineBySubjectHumanSciences">Human Sciences</string>
+	<string name="menuItemRefineBySubjectHealthSciences">Health Sciences</string>
+	<string name="menuItemRefineBySubjectBiologicalSciences">Biological Sciences</string>
+	<string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
+	<string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
+	<string name="menuItemRefineBySubjectEngineering">Engineering</string>
+	
+	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;count=10&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
+	<string name="pdf_url">http://search.scielo.org/showpdf.php?pdf=http://REPLACE_APP_URL/pdf/REPLACE_PDF_FILENAME.pdf&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
+	
+	<string name="page_begin">&lt;&lt;</string>
+	<string name="page_previous">&lt;</string>
+	<string name="page_item1">1</string>
+	<string name="page_item2">2</string>
+	<string name="page_item3">3</string>
+	
+	<string name="page_next">&gt;</string>
+	<string name="page_end">&gt;&gt;</string>
+		
+</resources>
+  
