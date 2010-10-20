@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 //import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-
-
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,7 +39,7 @@ public class ListDocsActivity extends Activity {
 	EditText searchExpressionEditText;
 	View searchButton;	
 	ListView searchResultListView;
-	ListView paginationListView;
+	GridView paginationGridView;
     String searchResultCount;
     String currSearchExpr = "";
     ArrayAdapter<SearchResult> aa;
@@ -52,11 +52,12 @@ public class ListDocsActivity extends Activity {
 	static final private int SEARCH_RESULT_DIALOG = 1;
 	SearchResult selectedSearchResult;
 	Page page;
-	
+	String filter;
 	String[] col_c;
 	String[] col_n; 
 	String[] col_ln;
 	String[] col_url;
+	Menu mymenu;
 	
 	JournalCollections jc;
 	
@@ -73,7 +74,7 @@ public class ListDocsActivity extends Activity {
 		jc = new JournalCollections(col_c, col_n, col_ln, col_url );		
 		
 
-	    resultCountTextView = (TextView) findViewById(R.id.TextViewDocumentCount);
+	    //resultCountTextView = (TextView) findViewById(R.id.TextViewDocumentCount);
 	    searchExpressionEditText = (EditText) findViewById(R.id.searchExpressionEditText);
 	    searchButton = (View) findViewById(R.id.searchButton);
 	    searchResultListView = (ListView) findViewById(R.id.searchResultListView);
@@ -84,25 +85,30 @@ public class ListDocsActivity extends Activity {
 	    searchResultListView.setAdapter(aa);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 	       @Override
-		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
+		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
 	           selectedSearchResult = searchResultList.get(_index);
-	           showDialog(SEARCH_RESULT_DIALOG);
+	           //showDialog(SEARCH_RESULT_DIALOG);
+	           
+	           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
+	           //docIntent.putExtra("DATA", selectedSearchResult);
+	           docIntent.putExtra("id", selectedSearchResult.getText());
+	           startActivity( docIntent);
+	           
+               
 	       }
 	    });
 	    
-	    paginationListView = (ListView) findViewById(R.id.paginationListView);
+	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
 	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
-	    paginationListView.setAdapter(aaPage);	    
-	    paginationListView.setOnItemClickListener(new OnItemClickListener() {
+	    paginationGridView.setAdapter(aaPage);	    
+	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 	       @Override
 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
 	           page = pagesList.get(_index);
-	           refreshSearchs("", page.getPosition());	
+	           refreshSearchs(filter, page.getPosition());	
 	       }
 	    });
-	    
-	    
-	    
+
 	    searchButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -121,21 +127,11 @@ public class ListDocsActivity extends Activity {
 	    	}
 	    });
 	    
-	    /*
-	     int layoutID = android.R.layout.simple_list_item_1;
-	     
-	    aa = new ArrayAdapter<SearchResult>(this, layoutID , searchResultList);
-	    searchResultListView.setAdapter(aa);
-	     */
-	    
-	    	    
-	    
-	    //resultCountTextView.setText("1113");
 	    refreshSearchs("", "");	
 	}
 	  
 	
-	private void refreshSearchs(String filter, String pagePosition) {
+	private void refreshSearchs(String _filter, String pagePosition) {
 		SearchServiceData ssData;
 		String searchExpression;
 		SearchService ss;
@@ -143,19 +139,23 @@ public class ListDocsActivity extends Activity {
 		
 		ss = new SearchService(this.getResources().getString(R.string.search_feed));
 		
-		searchExpression = this.searchExpressionEditText.getText().toString().trim();		
-		payload = ss.call(searchExpression, filter, pagePosition);
+		searchExpression = this.searchExpressionEditText.getText().toString().trim();
+		this.filter = _filter;
+		payload = ss.call(searchExpression, "20", _filter, pagePosition);
 		if (payload.length()>0){
 			ssData = new SearchServiceData(payload, this.getResources().getString(R.string.pdf_url));
 			searchResultCount = ssData.getResultCount();
 			//resultCountTextView.setText(searchResultCount + " ..." + new Integer(col_c.length).toString());
-			resultCountTextView.setText(searchResultCount + " ..." + jc.getCollectionAppName("scl"));
+			//resultCountTextView.setText(searchResultCount + " ..." + jc.getCollectionAppName("scl"));
 			ssData.loadResultList(searchResultList, jc, pagesList);
 			
 			//ssData.loadResultList(searchResultList);
 			ssData.loadClusterCollection(searchClusterCollection);
-	    	
+	    	//this.onPrepareOptionsMenu(this.mymenu);
+			
 			aa.notifyDataSetChanged();
+			aaPage.notifyDataSetChanged();
+			
 		}
 	}
     
@@ -174,8 +174,19 @@ public class ListDocsActivity extends Activity {
     }
     */
     
-    @Override
+	  
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
+    	super.onCreateOptionsMenu(menu);
+      
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, menu);
+      
+    	return true;
+    }
+	
+	@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
     	String[] clusterCodeOrder = { "ac", "ta_cluster", "year_cluster", "la", "in"};
     	MenuItem menuItem;
     	MenuItem subMenuItem;
@@ -183,12 +194,8 @@ public class ListDocsActivity extends Activity {
         Cluster cluster;
         SearchFilter sf;
         
-    	super.onCreateOptionsMenu(menu);
-      
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu, menu);
-      
-      
+    	
+        //this.mymenu = menu;
     	for (int index=0; index < menu.size(); index++){
     		menuItem = menu.getItem(index);
     		subMenu = menuItem.getSubMenu();
@@ -207,6 +214,7 @@ public class ListDocsActivity extends Activity {
       
     	return true;
     }
+    
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {    
@@ -232,7 +240,7 @@ public class ListDocsActivity extends Activity {
       }
       return null;
     }
-
+    
     @Override
     public void onPrepareDialog(int id, Dialog dialog) {
       switch(id) {
@@ -249,8 +257,5 @@ public class ListDocsActivity extends Activity {
           
       }
     }
-    public void displayPDF(View v){
-    	//((TextView) v).setText("clicked");
-    	
-    }
+    
 }

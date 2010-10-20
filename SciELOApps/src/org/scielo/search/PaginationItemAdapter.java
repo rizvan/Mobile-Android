@@ -45,5 +45,7 @@ public class PaginationItemAdapter extends ArrayAdapter<Page> {
         
 
         return resultView;
-      }
+    }
+
+
 }

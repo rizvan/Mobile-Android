@@ -20,6 +20,7 @@ public class SearchServiceData {
     String resultCount;
     int listItemCount;
     int currentItem;
+    int itemsPerPage;
     
 	SearchServiceData(String _data, String _generic_pdf_url){		
 		this.generic_PDF_URL = _generic_pdf_url;
@@ -32,9 +33,11 @@ public class SearchServiceData {
 			
 			this.resultCount = this.response.get("numFound").toString();				
 			this.listItemCount = this.response.getJSONArray("docs").length();
+			this.currentItem = 1;
+			this.itemsPerPage = Integer.parseInt(this.result.getJSONObject("responseHeader").getJSONObject("params").get("rows").toString());
 			String from = this.result.getJSONObject("responseHeader").getJSONObject("params").get("start").toString();
 			if (from.length() == 0) {
-				this.currentItem = 1;
+				
 			} else {
 				this.currentItem = Integer.parseInt(from);	
 			}
@@ -61,22 +64,32 @@ public class SearchServiceData {
 		String _filename;
 		String _lang;
 		Page p;
+	    int i;
+	    int k;
+		boolean stop = false;
+		
 		
 		pagesList.clear();
-		p = new Page("1", "1");
-		pagesList.add(p);
-		p = new Page("2", "11");
-		pagesList.add(p);
-		p = new Page("3", "21");
-		pagesList.add(p);
-		
-		
+		i = 1;
+		while (!stop && (i<=5)){
+			k = i * itemsPerPage;
+			if ( Integer.parseInt(this.resultCount) > k) {
+				p = new Page( new Integer( k - itemsPerPage + 1).toString() , new Integer(k - itemsPerPage + 1).toString());
+				pagesList.add(p);
+			} else {
+				stop = true;
+				p = new Page( new Integer( k - itemsPerPage + 1).toString() , new Integer(k - itemsPerPage + 1).toString());
+				pagesList.add(p);
+			}
+			i++;
+		}
+	    
 		searchResultList.clear();
-		for (int i=0; i<this.listItemCount; i++){
+		for (i=0; i<this.listItemCount; i++){
 			r = new SearchResult();
 			try {
 				resultItem = this.response.getJSONArray("docs").getJSONObject(i );
-				r.setDocumentTitle( new Integer(i+currentItem).toString()+ "\n" + resultItem.getJSONArray("ti").getString(0));
+				r.setDocumentTitle( new Integer(i+currentItem).toString() + "/" + this.resultCount + "\n" + resultItem.getJSONArray("ti").getString(0));
 				result = "";
 				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
 					result = result + resultItem.getJSONArray("au").getString(j) + "; ";
@@ -88,6 +101,7 @@ public class SearchServiceData {
 				_pid = resultItem.getString("id");
 				_pid = _pid.replace("art-", "");
 				_pid = _pid.replace("^c" + collectionCode, "");
+				r.setDocumentId(_pid);
 				
 				_filename = resultItem.getString("filename");
 				

@@ -17,7 +17,7 @@
 		android:gravity="left" 
 		android:background="#FFFFFF"
 		android:textColor="#500000"
-		android:autoLink="all"
+		
 		/>
 	
 	</TableRow>
@@ -33,7 +33,7 @@
 	</TableRow>
 	<TableRow>
 	
-	<TextView 
+	<!--  TextView 
 		android:id="@+id/TextViewDocumentPDFLink" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
@@ -42,7 +42,7 @@
 		android:textColor="#585858"
 		android:autoLink="all"
 		android:drawableLeft="@drawable/acroread"
-		/>
+		/>-->
 	
 	</TableRow>
 </TableLayout>

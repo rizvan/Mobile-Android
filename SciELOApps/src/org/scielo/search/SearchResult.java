@@ -6,7 +6,7 @@ public class SearchResult {
 	private String title;
 	private String authors;
 	private String link;
-	
+	private String id;
 	SearchResult() {
 		
 	}
@@ -14,6 +14,12 @@ public class SearchResult {
 	
 	public String getText(){
 		return this.title + "\n" + this.authors + "\n" + this.link;
+	}
+	public void setDocumentId(String text){
+		this.id = text;
+	}
+	public String getDocumentId(){
+		return this.id;
 	}
 	public void setDocumentTitle(String text){
 		this.title = text;

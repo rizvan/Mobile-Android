@@ -16,7 +16,7 @@ public class SearchService {
 	SearchService(String _url){
 		this.url = _url;
 	}
-	public String call(String searchExpression, String filter, String pagePosition) {
+	public String call(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
 		HttpURLConnection con = null;
 		String query = "";
 		String u = "";
@@ -27,9 +27,12 @@ public class SearchService {
 			if (searchExpression.length()>0){
 				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
 			}
+			if (itemsPerPage.length()>0){
+				query = query + "&count=" + itemsPerPage;
+			}	
 			if (filter.length()>0){
 				query = query + "&fq=" + URLEncoder.encode(filter, "UTF-8");
-			}	
+			}
 			if (pagePosition.length()>0){
 				query = query + "&start=" + pagePosition;
 			}	
