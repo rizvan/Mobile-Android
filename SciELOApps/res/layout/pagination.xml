@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="horizontal" 
-  android:layout_width="wrap_content" 
+  android:layout_width="fill_parent" 
   android:layout_height="wrap_content" 
-  android:padding="10dp"
-  android:background="#FFFFFF" 
-  android:gravity="left"
+  
   > 
   <TextView 
     android:id="@+id/page"  
     android:orientation="horizontal" 
     android:layout_width="wrap_content"  
     android:layout_height="wrap_content"  
-    android:textColor="#500000" 
-    android:background="#FFFFFF" 
-    android:textSize="14sp" 
-    android:autoLink="all" 
-    android:gravity="left" 
+    style="@style/page"
   />
   <!-- TextView
     android:id="@+id/pagination_previous"

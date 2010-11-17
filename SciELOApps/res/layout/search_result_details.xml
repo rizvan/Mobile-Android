@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:padding="10dp">
-  <TextView
-    android:id="@+id/searchResultDetailsTextView"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
-    android:textSize="14sp"
-    android:autoLink="all"
-  />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" 
+	android:orientation="vertical">
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" 
+	android:orientation="vertical"
+	style="@style/detail"
+	
+>
+
+	<TextView 
+		android:id="@+id/TextViewDocumentPosition" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		style="@style/detail_textview_document_position"
+		/>	
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentCollection" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		style="@style/detail_textview_document_collection"
+		/>	
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentID" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		style="@style/detail_textview_document_position"
+		/>	
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentTitle" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		style="@style/detail_textview_document_title"		
+		/>
+	
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentAuthors" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		style="@style/detail_textview_document_authors"
+		/>
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentAbstract" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:padding="5px"
+		style="@style/detail_textview_document_abstract"
+		/>
+	
+	<TextView 
+		android:id="@+id/TextViewDocumentPDFLink" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		style="@style/detail_textview_document_pdf" 
+		
+		/>	
+
 </LinearLayout>
+</ScrollView>

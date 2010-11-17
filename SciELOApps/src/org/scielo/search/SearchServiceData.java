@@ -33,7 +33,7 @@ public class SearchServiceData {
 			
 			this.resultCount = this.response.get("numFound").toString();				
 			this.listItemCount = this.response.getJSONArray("docs").length();
-			this.currentItem = 1;
+			this.currentItem = 0;
 			this.itemsPerPage = Integer.parseInt(this.result.getJSONObject("responseHeader").getJSONObject("params").get("rows").toString());
 			String from = this.result.getJSONObject("responseHeader").getJSONObject("params").get("start").toString();
 			if (from.length() == 0) {
@@ -41,9 +41,10 @@ public class SearchServiceData {
 			} else {
 				this.currentItem = Integer.parseInt(from);	
 			}
+			/*
 			if (this.currentItem==0){
 				this.currentItem = 1;
-			}
+			}*/
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
@@ -52,9 +53,9 @@ public class SearchServiceData {
 	public String getResultCount(){
 		return this.resultCount;
 	}
-	public void loadResultList(ArrayList<SearchResult> searchResultList, JournalCollections jc, ArrayList<Page> pagesList){
+	public void loadResultList(ArrayList<Document> searchResultList, JournalCollections jc, ArrayList<Page> pagesList){
 		JSONObject resultItem ;
-		SearchResult r;
+		Document r;
 		String result;
 		String collectionCode;
 		
@@ -71,7 +72,7 @@ public class SearchServiceData {
 		
 		pagesList.clear();
 		i = 1;
-		while (!stop && (i<=5)){
+		while (!stop && (i<=6)){
 			k = i * itemsPerPage;
 			if ( Integer.parseInt(this.resultCount) > k) {
 				p = new Page( new Integer( k - itemsPerPage + 1).toString() , new Integer(k - itemsPerPage + 1).toString());
@@ -86,10 +87,11 @@ public class SearchServiceData {
 	    
 		searchResultList.clear();
 		for (i=0; i<this.listItemCount; i++){
-			r = new SearchResult();
+			r = new Document();
 			try {
 				resultItem = this.response.getJSONArray("docs").getJSONObject(i );
-				r.setDocumentTitle( new Integer(i+currentItem).toString() + "/" + this.resultCount + "\n" + resultItem.getJSONArray("ti").getString(0));
+				r.setPosition( new Integer(i+currentItem).toString() );
+				r.setDocumentTitle(  resultItem.getJSONArray("ti").getString(0));
 				result = "";
 				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
 					result = result + resultItem.getJSONArray("au").getString(j) + "; ";
@@ -102,15 +104,22 @@ public class SearchServiceData {
 				_pid = _pid.replace("art-", "");
 				_pid = _pid.replace("^c" + collectionCode, "");
 				r.setDocumentId(_pid);
+				r.setCollectionId(collectionCode);
 				
 				_filename = resultItem.getString("filename");
 				
 				_lang = resultItem.getJSONArray("la").getString(0);
+				
 				link = article_PDF_URL.getURL(jc.getCollectionUrl(collectionCode), jc.getCollectionAppName(collectionCode), _pid, _filename, _lang);
+				
 				r.setDocumentPDFLink(link);
+				r.setDocumentCollection(jc.getCollectionName(collectionCode));
+				r.setDocumentAbstracts(resultItem.getJSONArray("ab_" + _lang).getString(0));
 				//r.setDocumentPDFLink("<a href=" + '"' + link + '"' +"> </a>");
 				//r.setDocumentPDFLink("http://teste.scielo.br");
-				
+				//r.setJournalISSN(text);
+				//r.setJournalTitle(resultItem.getJSONArray("ta").getString(0));
+				r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));
 				
 				searchResultList.add(r);
 			} catch (JSONException e) {

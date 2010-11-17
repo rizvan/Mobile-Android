@@ -4,7 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
       
-    <application android:icon="@drawable/scielo" android:label="@string/app_name">
+    <application android:icon="@drawable/scielo" android:label="@string/app_name" android:theme="@style/Theme.SciELOApps">
         <activity android:name=".SciELOApps" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -16,11 +16,13 @@
             
         </activity>
         <activity android:name=".DocumentActivity">
-        <intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-				<category android:name="android.intent.category.LAUNCHER"/>
+            <intent-filter>
+        	    <action android:name="android.intent.action.SEND"/>
+        	    <category android:name="android.intent.category.BROWSABLE"/>
+				
 			</intent-filter>
         </activity>
+        
         <activity android:name=".ListJournalsActivity"
                   android:label="@string/tab_list_journals_name">
             

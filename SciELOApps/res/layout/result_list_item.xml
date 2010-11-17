@@ -1,48 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout 
+<LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:layout_height="wrap_content"
-	android:gravity="left|center" 
 	android:layout_width="fill_parent" 
+	android:orientation="vertical"
 	android:paddingBottom="5px" 
 	android:paddingTop="5px" 
 	android:paddingLeft="5px"
 	android:background="#FFFFFF"
 	>
-	<TableRow>
+	<TextView 
+		android:id="@+id/TextViewDocumentPosition" 
+		android:layout_width="wrap_content" 		
+		android:layout_height="wrap_content" 
+		style="@style/textview_document_position"
+		/>	
 	<TextView 
 		android:id="@+id/TextViewDocumentTitle" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		android:gravity="left" 
-		android:background="#FFFFFF"
-		android:textColor="#500000"
+		style="@style/textview_document_title"
 		
 		/>
-	
-	</TableRow>
-	<TableRow>
 	<TextView 
 		android:id="@+id/TextViewDocumentAuthors" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		android:gravity="left"
-		android:textColor="#000000"
-		android:background="#FFFFFF"
+		style="@style/textview_document_authors"
 		/>
-	</TableRow>
-	<TableRow>
-	
-	<!--  TextView 
-		android:id="@+id/TextViewDocumentPDFLink" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:gravity="left"
-        android:background="#FFFFFF"		 
-		android:textColor="#585858"
-		android:autoLink="all"
-		android:drawableLeft="@drawable/acroread"
-		/>-->
-	
-	</TableRow>
-</TableLayout>
+</LinearLayout>

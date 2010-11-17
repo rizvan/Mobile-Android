@@ -42,15 +42,15 @@ public class ListDocsActivity extends Activity {
 	GridView paginationGridView;
     String searchResultCount;
     String currSearchExpr = "";
-    ArrayAdapter<SearchResult> aa;
+    ArrayAdapter<Document> aa;
     ArrayAdapter<Page> aaPage;
 	
-	ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
+	ArrayList<Document> searchResultList = new ArrayList<Document>();
 	ArrayList<Page> pagesList = new ArrayList<Page>();
 	ClusterCollection searchClusterCollection = new ClusterCollection( new ArrayList<Cluster>());
 	ArrayList<SearchFilter> searchFilterList;
 	static final private int SEARCH_RESULT_DIALOG = 1;
-	SearchResult selectedSearchResult;
+	Document document;
 	Page page;
 	String filter;
 	String[] col_c;
@@ -81,18 +81,24 @@ public class ListDocsActivity extends Activity {
 	    
 	    int resID = R.layout.result_list_item;
 	    
-	    aa = new ResultItemAdapter(this, resID, searchResultList);
+	    aa = new DocumentAdapter(this, resID, searchResultList);
 	    searchResultListView.setAdapter(aa);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 	       @Override
 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
-	           selectedSearchResult = searchResultList.get(_index);
+	           document = searchResultList.get(_index);
 	           //showDialog(SEARCH_RESULT_DIALOG);
 	           
 	           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
 	           //docIntent.putExtra("DATA", selectedSearchResult);
-	           docIntent.putExtra("id", selectedSearchResult.getText());
-	           startActivity( docIntent);
+	           docIntent.putExtra("id", document.getDocumentId());
+	           docIntent.putExtra("title", document.getDocumentTitle());
+	           docIntent.putExtra("authors", document.getDocumentAuthors());
+	           docIntent.putExtra("pdf", document.getDocumentPDFLink());
+	           docIntent.putExtra("collection", document.getDocumentCollection());
+	           docIntent.putExtra("abstract", document.getDocumentAbstracts());
+	           docIntent.putExtra("issue", document.getIssueLabel());
+	           startActivity(docIntent);
 	           
                
 	       }
@@ -194,7 +200,7 @@ public class ListDocsActivity extends Activity {
         Cluster cluster;
         SearchFilter sf;
         
-    	
+    	//menu.clear();
         //this.mymenu = menu;
     	for (int index=0; index < menu.size(); index++){
     		menuItem = menu.getItem(index);
@@ -205,7 +211,7 @@ public class ListDocsActivity extends Activity {
     		if (cluster!=null){
         		for (int i=0;i<cluster.getFilterCount();i++){
         			sf = cluster.getFilter(i);
-        			subMenuItem = subMenu.add(menuItem.getItemId(),  sf.getSubmenuId(), i, sf.getCaption()+ " (" + sf.getResultCount() + ")" );
+        			subMenuItem = subMenu.add(menuItem.getItemId(),  sf.getSubmenuId(), i, sf.getCaption()); // + " (" + sf.getResultCount() + ")" );
         			sf.setSubmenuId(subMenuItem.getItemId());
         	    } 
     			
@@ -241,12 +247,16 @@ public class ListDocsActivity extends Activity {
       return null;
     }
     
-    @Override
+    /*
+     @Override(non-Javadoc)
+     @see android.app.Activity#onPrepareDialog(int, android.app.Dialog)
+     
+    
     public void onPrepareDialog(int id, Dialog dialog) {
       switch(id) {
         case (SEARCH_RESULT_DIALOG) :
           
-          String searchResultText = selectedSearchResult.getText();
+          String searchResultText = document.getText();
 
           AlertDialog searchResultDialog = (AlertDialog)dialog;
           searchResultDialog.setTitle(R.string.searchResultDialogTitle);
@@ -257,5 +267,6 @@ public class ListDocsActivity extends Activity {
           
       }
     }
+      */
     
 }

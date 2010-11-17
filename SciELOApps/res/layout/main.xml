@@ -2,21 +2,49 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    style="@style/MyTabHost"
+    >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="5dp">
+        
+        style="MyTabHostLinearLayout"
+        >
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" 
+            style="MyTabWidget"
+            >
+            	
+            	<!-- TextView 
+            	  android:id="@+id/tab_journals"
+            	  android:text="@string/tab_list_journals_name"
+            	  style="tab">            	
+            	</TextView>
+            	<TextView  
+            	  android:id="@+id/tab_documents"
+            	  android:text="@string/tab_list_docs_name"
+            	  style="tab">            	
+            	</TextView>
+            	<TextView 
+            	  android:id="@+id/tab_issues"
+            	  android:text="@string/tab_list_issues_name"
+            	  style="tab">            	
+            	</TextView>
+            	<TextView 
+            	  android:id="@+id/tab_settings"
+            	  android:text="@string/tab_settings_name"
+            	  style="tab">            	
+            	</TextView-->
+            </TabWidget>
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:padding="5dp" />
+             />
             
         
     </LinearLayout>

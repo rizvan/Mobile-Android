@@ -14,17 +14,17 @@
 	<item>sss</item>
 </string-array>
 <string-array name="collections_name">
-	<item>scielobr</item>
-	<item>scielocl</item>
-	<item>scielosp</item>
-	<item>scieloar</item>
-	<item>scielocu</item>
-	<item>scieloes</item>
-	<item>scielocol</item>
-	<item>scielomex</item>
-	<item>scieloven</item>
-	<item>scielopt</item>
-	<item>scieloss</item>
+	<item>SciELO Brasil</item>
+	<item>SciELO Chile</item>
+	<item>SciELO Salud Pública</item>
+	<item>SciELO Argentina</item>
+	<item>SciELO Cuba</item>
+	<item>SciELO España</item>
+	<item>SciELO Colombia</item>
+	<item>SciELO México</item>
+	<item>SciELO Venezuela</item>
+	<item>SciELO Portugal</item>
+	<item>SciELO Social Sciences</item>
 </string-array>
 <string-array name="log_collections_code">
 	<item>scielobr</item>
