@@ -35,7 +35,9 @@ public class SearchService {
 			}
 			if (pagePosition.length()>0){
 				query = query + "&start=" + pagePosition;
-			}	
+			} else {
+				query = query + "&start=1" ;
+			}
 			
 			URL url = new URL(u + query);						
 			con = (HttpURLConnection) url.openConnection();

@@ -19,108 +19,178 @@ public final class R {
     public static final class color {
         public static final int app_background=0x7f060000;
         /**  black 
+ black 
+ black 
          */
         public static final int app_textcolor=0x7f060001;
         /**  white 
+ white 
+ white 
          */
         public static final int default_background=0x7f060002;
         /**  black 
+ black 
+ black 
          */
         public static final int default_textcolor=0x7f060003;
         /**  black
+ black
+ black
          */
         public static final int detail_textview_document_abstract_background=0x7f060023;
         /**  white
+ white
+ white
          */
         public static final int detail_textview_document_abstract_textcolor=0x7f060022;
         /**  black
+ black
+ black
          */
         public static final int detail_textview_document_authors_background=0x7f06001f;
         /**  dark red
+ dark red
+ dark red
          */
         public static final int detail_textview_document_authors_textcolor=0x7f06001e;
         /**  black
+ black
+ black
          */
         public static final int detail_textview_document_collection_background=0x7f060021;
         /**  white
+ white
+ white
          */
         public static final int detail_textview_document_collection_textcolor=0x7f060020;
         /**  black
+ black
+ black
          */
         public static final int detail_textview_document_position_background=0x7f06001a;
         /**  white
+ white
+ white
          */
         public static final int detail_textview_document_position_textcolor=0x7f06001b;
         /**  black
+ black
+ black
          */
         public static final int detail_textview_document_title_background=0x7f06001c;
         /**  white
+ white
+ white
          */
         public static final int detail_textview_document_title_textcolor=0x7f06001d;
         /**  black
+ black
+ black
          */
         public static final int details_background=0x7f060018;
         /**  white
+ white
+ white
          */
         public static final int details_textcolor=0x7f060019;
         /**  dark red 
+ dark red 
+ dark red 
          */
         public static final int gridview_background=0x7f06000b;
         /**  white 
+ white 
+ white 
          */
         public static final int listview_background=0x7f06000a;
         /**  white
+ white
+ white
          */
         public static final int page_background=0x7f060016;
         /**  white
+ white
+ white
          */
         public static final int page_textcolor=0x7f060017;
         /**  white 
+ white 
+ white 
          */
         public static final int tab_background=0x7f060007;
         /**  gray 
+ gray 
+ gray 
          */
         public static final int tab_shadowcolor=0x7f060008;
         /**  white 
+ white 
+ white 
          */
         public static final int tab_textcolor=0x7f060006;
         /**  black  
+ black  
+ black  
          */
         public static final int tabhost_background=0x7f060005;
         /**  white 
+ white 
+ white 
          */
         public static final int tabhost_textcolor=0x7f060004;
         /**  gray 
+ gray 
+ gray 
          */
         public static final int tabview_background=0x7f060009;
         /**  black
+ black
+ black
          */
         public static final int textview_document_abstract_background=0x7f060015;
         /**  white
+ white
+ white
          */
         public static final int textview_document_abstract_textcolor=0x7f060014;
         /**  black
+ black
+ black
          */
         public static final int textview_document_authors_background=0x7f060011;
         /**  dark red
+ dark red
+ dark red
          */
         public static final int textview_document_authors_textcolor=0x7f060010;
         /**  black
+ black
+ black
          */
         public static final int textview_document_collection_background=0x7f060013;
         /**  white
+ white
+ white
          */
         public static final int textview_document_collection_textcolor=0x7f060012;
         /**  dark red 
+ dark red 
+ dark red 
          */
         public static final int textview_document_position_background=0x7f06000c;
         /**  white
+ white
+ white
          */
         public static final int textview_document_position_textcolor=0x7f06000d;
         /**  black
+ black
+ black
          */
         public static final int textview_document_title_background=0x7f06000e;
         /**  white
+ white
+ white
          */
         public static final int textview_document_title_textcolor=0x7f06000f;
     }
@@ -211,6 +281,8 @@ public final class R {
         public static final int MyListView=0x7f070004;
         public static final int MyMenu=0x7f070011;
         /**  white
+ white
+ white
          */
         public static final int MyTabHost=0x7f070000;
         public static final int MyTabHostLinearLayout=0x7f070001;

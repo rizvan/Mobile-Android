@@ -11,40 +11,59 @@ import android.util.Log;
 public class SearchServiceData {
 	// Parse to get translated text
 	private static final String TAG = "SearchServiceData";
-	JSONObject jsonObject;
-	JSONObject result;
-	JSONObject response;
-	JSONObject facetFields;
+
+	
+	
+	private JSONArray docs;
+	private JSONObject facetFields;
+	
 	String generic_PDF_URL;
 	
     String resultCount;
-    int listItemCount;
+    String from;
     int currentItem;
     int itemsPerPage;
     
 	SearchServiceData(String _data, String _generic_pdf_url){		
+		JSONObject jsonObject;
+		JSONObject diaServerResponse;
+		JSONObject response;
+		JSONObject responseParameters;
+		
 		this.generic_PDF_URL = _generic_pdf_url;
+		
 		try {
-			this.jsonObject = new JSONObject(_data);
-			this.result = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0);
+			jsonObject = new JSONObject(_data);
+			diaServerResponse = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0);
+			Log.d("SearchServiceData","1");	
+			this.facetFields = diaServerResponse.getJSONObject("facet_counts").getJSONObject("facet_fields");
+			Log.d("SearchServiceData","2");	
+			response = diaServerResponse.getJSONObject("response");
+			Log.d("SearchServiceData","3");	
+			responseParameters = diaServerResponse.getJSONObject("responseHeader").getJSONObject("params");
+			Log.d("SearchServiceData","4");	
 			
-			this.facetFields = this.result.getJSONObject("facet_counts").getJSONObject("facet_fields");
-			this.response = this.result.getJSONObject("response");
+			this.resultCount = response.get("numFound").toString();				
+			Log.d("SearchServiceData","5");	
 			
-			this.resultCount = this.response.get("numFound").toString();				
-			this.listItemCount = this.response.getJSONArray("docs").length();
+			this.from = responseParameters.get("start").toString();
+			Log.d("SearchServiceData","6");	
+			this.itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
+			Log.d("SearchServiceData","7");	
+			
+			this.docs = response.getJSONArray("docs");
+			Log.d("SearchServiceData","8");	
+			
+			
 			this.currentItem = 0;
-			this.itemsPerPage = Integer.parseInt(this.result.getJSONObject("responseHeader").getJSONObject("params").get("rows").toString());
-			String from = this.result.getJSONObject("responseHeader").getJSONObject("params").get("start").toString();
-			if (from.length() == 0) {
-				
-			} else {
-				this.currentItem = Integer.parseInt(from);	
-			}
-			/*
-			if (this.currentItem==0){
+			Log.d("SearchServiceData","9");	
+			if ((this.from.length() == 0) ) {
 				this.currentItem = 1;
-			}*/
+			} else {
+				this.currentItem = Integer.parseInt(this.from);	
+			}
+			Log.d("SearchServiceData","10");	
+			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
@@ -67,30 +86,36 @@ public class SearchServiceData {
 		Page p;
 	    int i;
 	    int k;
-		boolean stop = false;
+	    String pText;
+	    
+	    boolean stop = false;
 		
 		
 		pagesList.clear();
 		i = 1;
 		while (!stop && (i<=6)){
 			k = i * itemsPerPage;
+			pText = new Integer( k - itemsPerPage + 1).toString();
 			if ( Integer.parseInt(this.resultCount) > k) {
-				p = new Page( new Integer( k - itemsPerPage + 1).toString() , new Integer(k - itemsPerPage + 1).toString());
-				pagesList.add(p);
 			} else {
 				stop = true;
-				p = new Page( new Integer( k - itemsPerPage + 1).toString() , new Integer(k - itemsPerPage + 1).toString());
-				pagesList.add(p);
 			}
+			p = new Page( pText, pText);
+			pagesList.add(p);
+
 			i++;
 		}
 	    
 		searchResultList.clear();
-		for (i=0; i<this.listItemCount; i++){
+		int test = 0;
+		for (i=0; i<this.docs.length(); i++){
 			r = new Document();
 			try {
-				resultItem = this.response.getJSONArray("docs").getJSONObject(i );
-				r.setPosition( new Integer(i+currentItem).toString() );
+				resultItem = this.docs.getJSONObject(i);
+				test++;
+				//r.setPosition( new Integer(i+currentItem).toString() );
+				r.setPosition( new Integer(i + this.currentItem -1).toString() + "(" + new Integer(test).toString() + "," + new Integer(i).toString() + "," + new Integer(this.currentItem).toString() +  ")" );
+				
 				r.setDocumentTitle(  resultItem.getJSONArray("ti").getString(0));
 				result = "";
 				for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {

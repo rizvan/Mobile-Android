@@ -12,8 +12,10 @@ public class SciELOApps extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
-
+          
+	    
 	    Resources res = getResources(); // Resource object to get Drawables
+	    
 	    TabHost tabHost = getTabHost();  // The activity TabHost
 	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
 	    Intent intent;  // Reusable Intent for each tab
@@ -34,7 +36,7 @@ public class SciELOApps extends TabActivity {
 	    tabHost.addTab(spec);
 
 	    intent = new Intent().setClass(this, SettingsActivity.class);
-	    spec = tabHost.newTabSpec("tab_settings").setIndicator(res.getString(R.string.tab_settings_name) ).setContent(intent);
+	    spec = tabHost.newTabSpec("tab_settings").setIndicator(res.getString(R.string.tab_settings_name ) ).setContent(intent);
 	    
 	    tabHost.addTab(spec);
 
