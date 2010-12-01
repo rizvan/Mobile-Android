@@ -24,19 +24,19 @@ public class SearchService {
 		try { 
 			u = this.url;
 			u =	u.replace("amp;", "" );
-			if (searchExpression.length()>0){
-				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
-			}
 			if (itemsPerPage.length()>0){
 				query = query + "&count=" + itemsPerPage;
 			}	
-			if (filter.length()>0){
-				query = query + "&fq=" + URLEncoder.encode(filter, "UTF-8");
-			}
 			if (pagePosition.length()>0){
 				query = query + "&start=" + pagePosition;
 			} else {
 				query = query + "&start=1" ;
+			}
+			if (searchExpression.length()>0){
+				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
+			}
+			if (filter.length()>0){
+				query = query + "&fq=" + URLEncoder.encode(filter, "UTF-8");
 			}
 			
 			URL url = new URL(u + query);						

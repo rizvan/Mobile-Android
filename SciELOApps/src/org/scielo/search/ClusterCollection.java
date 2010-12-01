@@ -1,54 +1,53 @@
 package org.scielo.search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.util.Log;
 
 public class ClusterCollection {
-	private ArrayList<Cluster> list;
-	//private ArrayList<SearchFilter> sorted;
+	private HashMap<String,Cluster> list;
+	private ArrayList<Cluster> sorted;
 	
-	ClusterCollection(ArrayList<Cluster> _list){
-		
-		//, ArrayList<SearchFilter> _sorted
-		this.list = _list;
-		//this.sorted = _sorted;
+	ClusterCollection(){
+		list = new HashMap<String,Cluster>();	
+		sorted = new ArrayList<Cluster>();		
 	}
 	
-	public boolean addCluster(Cluster cluster){
+	public boolean add(Cluster cluster){
 		boolean r = false;
 		Log.d("ClusterCollection.addCluster", "inicio" );
     	if (cluster != null){
     		Log.d("ClusterCollection.addCluster", "list.add" );
         	
-    		this.list.add(cluster);
-    		
+    		this.list.put(cluster.getId(),cluster);
+    		sorted.add(cluster);
     		r = true;
     	}
     	return r;
 	}
-	public Cluster getCluster(int index){		
-		return this.list.get(index);
+	public Cluster getItemById(String id){		
+		return list.get(id);
 	}
-	public int getClusterCount(){
+	public Cluster getItemByIndex(int index){		
+		return sorted.get(index);
+	}
+	public int getCount(){
 		return this.list.size();
 	}
 	public void clear(){
 		this.list.clear();
-		//this.sorted.clear();
+		this.sorted.clear();
 	}
-	/*
-	public SearchFilter getFilterBySubmenuId(int submenuId){
-		return this.sorted.get(submenuId);
-	}*/
 	
-	public SearchFilter getFilterById(int submenuId){
+	
+	public SearchFilter getFilterBySubmenuId(int submenuId){
 		int i = 0;
 		boolean found = false;
 		SearchFilter sf = null;
 		
-		while (i< getClusterCount() && !found){
-			sf = getCluster(i).getFilterById(submenuId);
+		while (i < getCount() && !found){
+			sf = getItemByIndex(i).getFilterBySubmenuId(submenuId);
 			found = (sf != null);
 			i++;
 		}
@@ -58,21 +57,5 @@ public class ClusterCollection {
 			return null;
 		}		
 	}
-	public Cluster getClusterByCode(String code){
-		int i = 0;
-		boolean found = false;
-		Cluster cluster = null;
-		
-		while (i< getClusterCount() && !found){
-			cluster = getCluster(i);
-			found = (cluster.getCode().equals(code));
-			i++;
-			Log.d("xx", cluster.getCode() + " " + code);
-		}
-		if (found){
-			return cluster;	
-		} else {
-			return null;
-		}		
-	}
+	
 }

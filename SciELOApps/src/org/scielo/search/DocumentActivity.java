@@ -25,7 +25,7 @@ public class DocumentActivity extends Activity{
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
-	    setContentView(R.layout.search_result_details);
+	    setContentView(R.layout.doc);
 	    
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    
 	    TextViewID = (TextView) findViewById(R.id.TextViewDocumentID);	    

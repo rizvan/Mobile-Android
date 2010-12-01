@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-<color  name="app_background">#000000</color> <!-- black -->
+<color  name="app_background">#FFFFFF</color> <!-- black -->
 <color  name="app_textcolor">#FFFFFF</color> <!-- white -->
 
 <color  name="default_background">#000000</color> <!-- black -->
@@ -172,7 +172,7 @@
 <style name="MyMenu" parent="android:Theme.Light">
 <item name="android:background">#FFFF00</item>
 <item name="android:textColor">#FF00FF</item>
-<item name="android:textSize">15sp</item>
+<item name="android:textSize">10sp</item>
 </style>
 
 </resources>

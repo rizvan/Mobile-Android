@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="Context Menu" style="MyMenu">
+    <item android:id="@+id/search"
+          android:title="@string/search_label"
+          android:icon="@drawable/ic_menu_search" />
+
 	<item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject">
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  style="MyMenu">
 			
 		</menu>
 	</item>

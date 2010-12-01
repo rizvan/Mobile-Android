@@ -1,42 +1,45 @@
 package org.scielo.search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cluster {
-	private ArrayList<SearchFilter> list;
-	private String code;
+	private HashMap<String,SearchFilter> list;
+	private ArrayList<SearchFilter> array;
+	private String id;
 	
-	Cluster(ArrayList<SearchFilter> _list, String _code){
-		this.list = _list;
-		this.code = _code;
+	Cluster(String _id){
+		list = new HashMap<String,SearchFilter>();
+		array = new ArrayList<SearchFilter>();
+		id = _id;
 	}
 	
-	public String getCode(){
-		return this.code;
+	public String getId(){
+		return this.id;
 	}
 	public void addFilter(SearchFilter filter){	
 		if (filter!=null){		
-		   this.list.add(filter);
+		   this.list.put(filter.getCode(),filter);
+		   this.array.add(filter);
 		}
 	}
-	public SearchFilter getFilter(int index){		
-		return this.list.get(index);
+	public SearchFilter getFilterById(String id){		
+		return this.list.get(id);
 	}
-	public int getFilterCount(){
-		return this.list.size();
+	public SearchFilter getFilterByIndex(int index){		
+		return this.array.get(index);
 	}
-	public SearchFilter getFilterById(int id){
-		int j = 0;
+	public SearchFilter getFilterBySubmenuId(int submenuId){		
+		int i = 0;
 		boolean found = false;
 		SearchFilter sf = null;
 		
-		j = 0;
-		while (j < getFilterCount() && !found){
-			sf = getFilter(j);
-			if (sf.getSubmenuId() == id){
+		while (i < getFilterCount() && !found){
+			if (getFilterByIndex(i).getSubmenuId() == submenuId){
 				found = true;
-			}
-			j++;
+				sf = getFilterByIndex(i);
+			}			
+			i++;
 		}
 		if (found){
 			return sf;	
@@ -44,4 +47,9 @@ public class Cluster {
 			return null;
 		}		
 	}
+	
+	public int getFilterCount(){
+		return this.list.size();
+	}
+	
 }
