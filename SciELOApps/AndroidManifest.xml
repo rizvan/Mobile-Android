@@ -20,7 +20,18 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable" />
         </activity>
-        
+        <activity android:name=".SearchJournals"
+                  android:label="@string/search_button"
+                  android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable" />
+        </activity>
+        <activity android:name=".ListIssuesActivity"
+                  android:label="@string/tab_list_issues_name">            
+        </activity>       
         <activity android:name=".DocumentActivity">
             <intent-filter>
         	    <action android:name="android.intent.action.SEND"/>
@@ -28,19 +39,13 @@
 				
 			</intent-filter>
         </activity>
+        <activity android:name=".JournalActivity">
+            
+        </activity>
+        <activity android:name=".IssueActivity">
+        </activity>
         
-        <activity android:name=".ListJournalsActivity"
-                  android:label="@string/tab_list_journals_name">
-            
-        </activity>
-        <activity android:name=".ListIssuesActivity"
-                  android:label="@string/tab_list_issues_name">
-            
-        </activity>
-        <activity android:name=".SettingsActivity"
-                  android:label="@string/tab_settings_name">
-            
-        </activity>
+        
     </application>
     <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.INTERNET"/>

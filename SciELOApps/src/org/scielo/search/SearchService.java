@@ -11,35 +11,21 @@ import android.util.Log;
 
 public class SearchService {
 	private static final String TAG = "Search";
-	private String url;
 	
-	SearchService(String _url){
-		this.url = _url;
+	
+	SearchService(){
+		
 	}
-	public String call(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
+	public String call(String queryURL) {
 		HttpURLConnection con = null;
-		String query = "";
-		String u = "";
 		String payload = "";
+		String u = "";
 		try { 
-			u = this.url;
-			u =	u.replace("amp;", "" );
-			if (itemsPerPage.length()>0){
-				query = query + "&count=" + itemsPerPage;
-			}	
-			if (pagePosition.length()>0){
-				query = query + "&start=" + pagePosition;
-			} else {
-				query = query + "&start=1" ;
-			}
-			if (searchExpression.length()>0){
-				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
-			}
-			if (filter.length()>0){
-				query = query + "&fq=" + URLEncoder.encode(filter, "UTF-8");
-			}
 			
-			URL url = new URL(u + query);						
+			u = URLEncoder.encode(queryURL, "UTF-8");
+			
+			
+			URL url = new URL(u);						
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(10000); /* milliseconds */ 
 			con.setConnectTimeout(15000); /* milliseconds */ 

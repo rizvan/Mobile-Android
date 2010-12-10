@@ -34,7 +34,7 @@ public class SciELOApps extends TabActivity {
 	    
 	    
 	    // Do the same for the other tabs
-	    intent = new Intent().setClass(this, ListJournalsActivity.class);
+	    intent = new Intent().setClass(this, SearchJournals.class);
 	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
 	    tabHost.addTab(spec);
         
@@ -42,15 +42,12 @@ public class SciELOApps extends TabActivity {
 	    spec = tabHost.newTabSpec("tab_list_issues").setIndicator(res.getString(R.string.tab_list_issues_name)).setContent(intent);
 	    tabHost.addTab(spec);
 
-	    intent = new Intent().setClass(this, SettingsActivity.class);
-	    spec = tabHost.newTabSpec("tab_settings").setIndicator(res.getString(R.string.tab_settings_name ) ).setContent(intent);
 	    
-	    tabHost.addTab(spec);
 
 	    tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
 	    tabHost.getTabWidget().getChildAt(1).getLayoutParams().height = 40;
 	    tabHost.getTabWidget().getChildAt(2).getLayoutParams().height = 40;
-	    tabHost.getTabWidget().getChildAt(3).getLayoutParams().height = 40;
+	    //tabHost.getTabWidget().getChildAt(3).getLayoutParams().height = 40;
 	    
 	    tabHost.setup();
 	    tabHost.setCurrentTab(0);
