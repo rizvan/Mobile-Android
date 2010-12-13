@@ -10,7 +10,7 @@ public class Issue {
 	
 	Issue(){
 		id = "";
-		journal = null;
+		journal = new Journal();
 		volume = "";
 		number = "";
 		suppl = "";
@@ -53,16 +53,16 @@ public class Issue {
 		this.date = date;
 	}
 	public String getText(){
-		String r = "";
-		r = r + format("v.", volume, " ");
-		r = r + format("n.", number, " ");
-		r = r + format("s.", suppl, " ");
-		r = r + format("", date, " ");
+		String r = journal.getCollection() + "\n" + journal.getTitle() + " ";
+		r = r + format("v.", " ", volume);
+		r = r + format("n.", " ", number);
+		r = r + format("s.", " ", suppl);
+		r = r + format("", " ", date);
 		
 		return r;
 	}
 	private String format(String prefix, String suffix, String s){
-		String r = "";
+		String r = s;
 		if (s.length()>0){
 			r = prefix + s + suffix;
 		}

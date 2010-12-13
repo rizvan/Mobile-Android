@@ -44,9 +44,9 @@ public class SearchActivity extends Activity {
 	Page page;
 	
 	protected String filter = "";
-	
+	protected String pagePosition = "";
 	protected String query = "";
-	//protected Menu mymenu;
+	protected String query_id = "";
 	
     
 	@Override
@@ -60,7 +60,7 @@ public class SearchActivity extends Activity {
 	      query = intent.getStringExtra(SearchManager.QUERY);
 	       
 	    } else {
-	    	query = "";
+	    	query = query_id;
 	    }
 	    doSearch();
 	}

@@ -1,5 +1,7 @@
 package org.scielo.search;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,14 +21,31 @@ public class DocumentActivity extends Activity{
 	private TextView TextViewAbstract; 
 	private TextView TextViewCollection; 
 	
-	
+	private ArrayList<Document> searchResultList =  new ArrayList<Document>();
+	private SciELONetwork jc;
+	private PairsList subjects;
+	private PairsList languages;
+	private SearchDocsResult ssData;
+	private SearchService ss;
 	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
 	    setContentView(R.layout.doc);
-	    
+
+	    jc = new SciELONetwork(
+	  		    getResources().getStringArray(R.array.collections_code),
+				getResources().getStringArray(R.array.collections_name), 
+				getResources().getStringArray(R.array.log_collections_code), 
+				getResources().getStringArray(R.array.collections_url) );		
+	    subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
+					getResources().getStringArray(R.array.subjects_name));
+	    languages = new PairsList(getResources().getStringArray(R.array.languages_id),
+					getResources().getStringArray(R.array.languages_name));
+	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), this.getResources().getString(R.string.pdf_url) ,jc, subjects, languages, searchResultList);
+	    ss = new SearchService();
+		
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    
 	    TextViewID = (TextView) findViewById(R.id.TextViewDocumentID);	    
 	    TextViewTitle = (TextView) findViewById(R.id.TextViewDocumentTitle);
@@ -34,14 +53,30 @@ public class DocumentActivity extends Activity{
 	    TextViewPDF = (TextView) findViewById(R.id.TextViewDocumentPDFLink);	
 	    TextViewAbstract = (TextView) findViewById(R.id.TextViewDocumentAbstract);
 	    TextViewCollection = (TextView) findViewById(R.id.TextViewDocumentCollection);	
-	    
-	    TextViewIssue.setText(getIntent().getStringExtra("issue"));
-	    TextViewID.setText(getIntent().getStringExtra("id"));
-	    TextViewTitle.setText(getIntent().getStringExtra("title"));
-	    TextViewAuthors.setText(getIntent().getStringExtra("authors"));
-	    TextViewPDF.setText(getIntent().getStringExtra("pdf"));
-	    TextViewAbstract.setText(getIntent().getStringExtra("abstract"));
-	    TextViewCollection.setText(getIntent().getStringExtra("collection"));
+	    if (getIntent().getStringExtra("query").length()>0){
+	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", "0");
+			String result = ss.call(queryurl);
+			ssData.loadData(result);
+			//ssData.loadSearchResultList();
+			searchResultList = ssData.getSearchResultList();
+
+			Document doc = searchResultList.get(0);
+			TextViewIssue.setText(doc.getIssueLabel());
+		    TextViewID.setText(doc.getDocumentId());
+		    TextViewTitle.setText(doc.getDocumentTitle());
+		    TextViewAuthors.setText(doc.getDocumentAuthors());
+		    TextViewPDF.setText(doc.getDocumentPDFLink());
+		    TextViewAbstract.setText(doc.getDocumentAbstracts());
+		    TextViewCollection.setText(jc.getItem(doc.getCollectionId()).getName());
+	    } else {
+		    TextViewIssue.setText(getIntent().getStringExtra("issue"));
+		    TextViewID.setText(getIntent().getStringExtra("id"));
+		    TextViewTitle.setText(getIntent().getStringExtra("title"));
+		    TextViewAuthors.setText(getIntent().getStringExtra("authors"));
+		    TextViewPDF.setText(getIntent().getStringExtra("pdf"));
+		    TextViewAbstract.setText(getIntent().getStringExtra("abstract"));
+		    TextViewCollection.setText(getIntent().getStringExtra("collection"));	    	
+	    }
 	}
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

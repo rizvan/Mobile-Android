@@ -11,7 +11,7 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".SearchDocs"
+		<activity android:name=".SearchDocsActivity"
                   android:label="@string/search_button"
                   android:launchMode="singleInstance">
             <intent-filter>
@@ -20,7 +20,7 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".SearchJournals"
+        <activity android:name=".SearchJournalsActivity"
                   android:label="@string/search_button"
                   android:launchMode="singleInstance">
             <intent-filter>
@@ -29,7 +29,7 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ListIssuesActivity"
+        <activity android:name=".SearchIssuesActivity"
                   android:label="@string/tab_list_issues_name">            
         </activity>       
         <activity android:name=".DocumentActivity">
@@ -39,10 +39,7 @@
 				
 			</intent-filter>
         </activity>
-        <activity android:name=".JournalActivity">
-            
-        </activity>
-        <activity android:name=".IssueActivity">
+        <activity android:name=".TOCActivity">
         </activity>
         
         

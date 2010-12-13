@@ -4,12 +4,25 @@ public class Journal {
 	private String id;
 	private String title;
 	private String collection;
+	private String collectionId;
 	
+	public Journal() {
+		super();
+		id = "";
+		title = "";
+		collection ="";
+	}
 	public String getCollection() {
 		return collection;
 	}
 	public void setCollection(String collection) {
 		this.collection = collection;
+	}
+	public String getCollectionId() {
+		return collectionId;
+	}
+	public void setCollectionId(String collectionId) {
+		this.collectionId = collectionId;
 	}
 	public String getId() {
 		return id;

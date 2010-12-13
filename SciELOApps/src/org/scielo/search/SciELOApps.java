@@ -27,18 +27,18 @@ public class SciELOApps extends TabActivity {
 	    spec = tabHost.newTabSpec("tab_list_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);	    
 	    tabHost.addTab(spec);
 	    */
-	    intent = new Intent().setClass(this, SearchDocs.class);
+	    intent = new Intent().setClass(this, SearchDocsActivity.class);
 	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabHost.newTabSpec("tab_search_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);	    
 	    tabHost.addTab(spec);
 	    
 	    
 	    // Do the same for the other tabs
-	    intent = new Intent().setClass(this, SearchJournals.class);
+	    intent = new Intent().setClass(this, SearchJournalsActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
 	    tabHost.addTab(spec);
         
-	    intent = new Intent().setClass(this, ListIssuesActivity.class);
+	    intent = new Intent().setClass(this, SearchIssuesActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_issues").setIndicator(res.getString(R.string.tab_list_issues_name)).setContent(intent);
 	    tabHost.addTab(spec);
 

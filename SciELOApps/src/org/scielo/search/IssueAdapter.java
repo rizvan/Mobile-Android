@@ -26,7 +26,7 @@ public class IssueAdapter extends ArrayAdapter<Issue> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LinearLayout resultView;
-        String s;
+        //String s;
         Issue item = getItem(position);
         
         if (convertView == null) {
@@ -39,7 +39,7 @@ public class IssueAdapter extends ArrayAdapter<Issue> {
         }
         //convertView.setBackgroundColor((position & 1) == 1 ? Color.WHITE : Color.LTGRAY);
 
-        TextView titleView = (TextView)resultView.findViewById(R.id.TextViewDocumentTitle);
+        TextView titleView = (TextView)resultView.findViewById(R.id.TextViewTitle);
         //TextView linkView = (TextView)resultView.findViewById(R.id.TextViewDocumentPDFLink);
         
         titleView.setText(item.getText());

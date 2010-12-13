@@ -8,6 +8,10 @@ public class SciELOCollection {
 	
 	public SciELOCollection() {
 		super();
+		id = "";
+		nickname = "";
+		name = "";
+		url = "";
 	}
 	public String getId() {
 		return id;

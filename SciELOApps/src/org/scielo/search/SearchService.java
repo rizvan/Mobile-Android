@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+
 
 import android.util.Log;
 
@@ -16,19 +16,28 @@ public class SearchService {
 	SearchService(){
 		
 	}
+	private int getMilliseconds(int min){
+		int sec;
+		int millisec;
+		sec = min * 60;
+		millisec = sec * 1000;
+		return millisec;
+	}
 	public String call(String queryURL) {
 		HttpURLConnection con = null;
 		String payload = "";
 		String u = "";
+		
+		
+		
 		try { 
 			
-			u = URLEncoder.encode(queryURL, "UTF-8");
-			
-			
+			//u = URLEncoder.encode(queryURL, "UTF-8");
+			u = queryURL;
 			URL url = new URL(u);						
 			con = (HttpURLConnection) url.openConnection();
-			con.setReadTimeout(10000); /* milliseconds */ 
-			con.setConnectTimeout(15000); /* milliseconds */ 
+			con.setReadTimeout(getMilliseconds(10)); /* milliseconds */ 
+			con.setConnectTimeout(getMilliseconds(10)); /* milliseconds */ 
 			con.setRequestMethod("GET");
 			//con.addRequestProperty("Referer", "http://www.pragprog.com/titles/eband3/hello-android");
 			con.setDoInput(true);			
