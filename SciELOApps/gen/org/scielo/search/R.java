@@ -9,15 +9,17 @@ package org.scielo.search;
 
 public final class R {
     public static final class array {
-        public static final int cluster_list=0x7f050000;
-        public static final int collections_code=0x7f050001;
-        public static final int collections_name=0x7f050002;
-        public static final int collections_url=0x7f050004;
-        public static final int languages_id=0x7f050007;
-        public static final int languages_name=0x7f050008;
-        public static final int log_collections_code=0x7f050003;
-        public static final int subjects_id=0x7f050005;
-        public static final int subjects_name=0x7f050006;
+        public static final int cluster_list=0x7f05000a;
+        public static final int cluster_list_doc=0x7f050000;
+        public static final int cluster_list_journal=0x7f050001;
+        public static final int collections_code=0x7f050002;
+        public static final int collections_name=0x7f050003;
+        public static final int collections_url=0x7f050005;
+        public static final int languages_id=0x7f050008;
+        public static final int languages_name=0x7f050009;
+        public static final int log_collections_code=0x7f050004;
+        public static final int subjects_id=0x7f050006;
+        public static final int subjects_name=0x7f050007;
     }
     public static final class attr {
     }
@@ -224,22 +226,29 @@ public final class R {
         public static final int TextViewDocumentPDFLink=0x7f0a0006;
         public static final int TextViewDocumentPosition=0x7f0a0000;
         public static final int TextViewDocumentTitle=0x7f0a0003;
+        public static final int TextViewFolder=0x7f0a0013;
+        public static final int TextViewID=0x7f0a0010;
         public static final int TextViewSendTo=0x7f0a0007;
+        public static final int TextViewStatus=0x7f0a0012;
+        public static final int TextViewTime=0x7f0a0011;
         public static final int TextViewTitle=0x7f0a0009;
         public static final int button_send=0x7f0a0008;
-        public static final int definition=0x7f0a000d;
-        public static final int list=0x7f0a0010;
-        public static final int menuItemRefineByCollection=0x7f0a0016;
-        public static final int menuItemRefineByJournal=0x7f0a0013;
-        public static final int menuItemRefineByLanguage=0x7f0a0015;
-        public static final int menuItemRefineBySubject=0x7f0a0012;
-        public static final int menuItemRefineByYear=0x7f0a0014;
-        public static final int menuItemSendEmail=0x7f0a0017;
-        public static final int msgTextView=0x7f0a000e;
-        public static final int page=0x7f0a000b;
-        public static final int paginationListView=0x7f0a000f;
-        public static final int search=0x7f0a0011;
-        public static final int word=0x7f0a000c;
+        public static final int definition=0x7f0a000f;
+        public static final int label=0x7f0a000b;
+        public static final int list=0x7f0a0016;
+        public static final int list_items=0x7f0a000c;
+        public static final int menuItemDownloadPDF=0x7f0a001e;
+        public static final int menuItemRefineByCollection=0x7f0a001c;
+        public static final int menuItemRefineByJournal=0x7f0a0019;
+        public static final int menuItemRefineByLanguage=0x7f0a001b;
+        public static final int menuItemRefineBySubject=0x7f0a0018;
+        public static final int menuItemRefineByYear=0x7f0a001a;
+        public static final int menuItemSendEmail=0x7f0a001d;
+        public static final int msgTextView=0x7f0a0014;
+        public static final int page=0x7f0a000d;
+        public static final int paginationListView=0x7f0a0015;
+        public static final int search=0x7f0a0017;
+        public static final int word=0x7f0a000e;
     }
     public static final class layout {
         public static final int doc=0x7f030000;
@@ -248,21 +257,25 @@ public final class R {
         public static final int list_item_doc=0x7f030003;
         public static final int list_item_issue=0x7f030004;
         public static final int list_item_journal=0x7f030005;
-        public static final int main=0x7f030006;
-        public static final int pagination=0x7f030007;
-        public static final int result=0x7f030008;
-        public static final int search=0x7f030009;
-        public static final int word=0x7f03000a;
+        public static final int list_items=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int pagination=0x7f030008;
+        public static final int result=0x7f030009;
+        public static final int saveddoc=0x7f03000a;
+        public static final int search=0x7f03000b;
+        public static final int word=0x7f03000c;
     }
     public static final class menu {
         public static final int menu=0x7f090000;
         public static final int menu_details=0x7f090001;
-        public static final int menu_search=0x7f090002;
+        public static final int menu_journals=0x7f090002;
+        public static final int menu_search=0x7f090003;
     }
     public static final class string {
         public static final int app_name=0x7f060001;
-        public static final int button_send=0x7f060020;
+        public static final int button_send=0x7f060021;
         public static final int hello=0x7f060000;
+        public static final int menuItemDownloadPDF=0x7f06001f;
         public static final int menuItemRefineByCollection=0x7f06000f;
         public static final int menuItemRefineByJournal=0x7f06000d;
         public static final int menuItemRefineByLanguage=0x7f060010;
@@ -286,15 +299,15 @@ public final class R {
         public static final int search_feed_issues=0x7f060019;
         public static final int search_feed_issuetoc=0x7f06001a;
         public static final int search_feed_journal=0x7f060018;
-        public static final int search_hint=0x7f060022;
+        public static final int search_hint=0x7f060023;
         public static final int search_interrupted=0x7f060009;
-        public static final int search_label=0x7f060021;
+        public static final int search_label=0x7f060022;
         public static final int search_result_details_title=0x7f060007;
         public static final int tab_list_docs_name=0x7f060002;
         public static final int tab_list_issues_name=0x7f060004;
         public static final int tab_list_journals_name=0x7f060003;
         public static final int tab_settings_name=0x7f060005;
-        public static final int text_sendTo=0x7f06001f;
+        public static final int text_sendTo=0x7f060020;
     }
     public static final class style {
         public static final int MyGridView=0x7f080005;

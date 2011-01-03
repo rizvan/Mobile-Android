@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,15 +15,10 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-
-
-
 public class SearchDocsActivity extends SearchActivity {
 	
 	private String serviceURL = "";
 
-	private ClusterCollection searchClusterCollection ;
-	private String[] clusterCodeOrder;
 	
 	private SciELONetwork jc;
 
@@ -36,7 +31,7 @@ public class SearchDocsActivity extends SearchActivity {
 	
 	private SearchDocsResult ssData;
 	
-	private SearchService ss;
+	
 	
 			
 	
@@ -45,7 +40,7 @@ public class SearchDocsActivity extends SearchActivity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
 	    
-	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list);
+	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    serviceURL = this.getResources().getString(R.string.search_feed);
 	    
 		jc = new SciELONetwork(
@@ -74,6 +69,7 @@ public class SearchDocsActivity extends SearchActivity {
 		           
 		           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
 		           //docIntent.putExtra("DATA", selectedSearchResult);
+		           docIntent.putExtra("query", "");
 		           docIntent.putExtra("id", document.getDocumentId());
 		           docIntent.putExtra("title", document.getDocumentTitle());
 		           docIntent.putExtra("authors", document.getDocumentAuthors());
@@ -99,82 +95,28 @@ public class SearchDocsActivity extends SearchActivity {
 		    });
 
 	    //oldOnCreate();
-	    onSearchRequested();
+	    //onSearchRequested();
 	    handleIntent(getIntent());
 	}	
-	
 	@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	
-    	MenuItem menuItem;
-    	MenuItem subMenuItem;
-        SubMenu subMenu;
-        Cluster cluster;
-        SearchFilter sf;
-        
-    	//menu.clear();
-        //this.mymenu = menu;
-    	for (int index=1; index < menu.size(); index++){
-    		menuItem = menu.getItem(index);
-    		subMenu = menuItem.getSubMenu();
-    		subMenu.clear();
-    		
-    		cluster = this.searchClusterCollection.getItemById(this.clusterCodeOrder[index-1]);
-    		if (cluster!=null){
-        		for (int i=0;i<cluster.getFilterCount();i++){
-        			sf = cluster.getFilterByIndex(i);
-        			subMenuItem = subMenu.add(menuItem.getItemId(),  sf.getSubmenuId(), i, sf.getCaption() + " (" + sf.getResultCount() + ")" ); 
-        			sf.setSubmenuId(subMenuItem.getItemId());
-        			
-        	    } 
-    			
-    		}
-    	}
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	super.onCreateOptionsMenu(menu);
+      
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, menu);
         
     	return true;
     }
-	
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {    
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-	        case R.id.search:
-	            onSearchRequested();
-	            return true;
-	        default:
-	    	    SearchFilter sf = searchClusterCollection.getFilterBySubmenuId(item.getItemId());
-	            if (sf != null) {
-	            	addFilter(sf.getFilterExpression());
-	            	this.pagePosition = "";
-	            	doSearch();
-	            	
-	            }
-	            return true;	          	          
-        }
-    }
-	
-	
-	@Override
-	public void doSearch() {
-		String queryurl;
-		String result;
-		queryurl = ssData.getURL(query, "20", this.filter, this.pagePosition);
-		result = ss.call(queryurl);
-		treatSearchResult(result);
+	protected String getURL(){
+		return ssData.getURL(query, "20", this.filter, this.pagePosition);
 	}
-	
-
-	private void treatSearchResult(String result) {
-		if (result.length()>0){
-			pagesList = ssData.getPageList();
-			
-			ssData.loadData(result);
-			//searchResultCount = ssData.getResultCount();
-			searchClusterCollection = ssData.getSearchClusterCollection();
-			
-			aa.notifyDataSetChanged();
-			aaPage.notifyDataSetChanged();
-		}
+	protected void loadAndDisplayData(String result){
+		pagesList = ssData.getPageList();
+		
+		ssData.loadData(result);
+		//searchResultCount = ssData.getResultCount();
+		clusterCollection = ssData.getSearchClusterCollection();
+		
+		aa.notifyDataSetChanged();		
 	}
-	
 }

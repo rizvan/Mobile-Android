@@ -4,12 +4,18 @@
 		android:title="@string/menuItemSendEmail">
 		
 	</item>
+	<item 
+		android:id="@+id/menuItemDownloadPDF" 
+		android:title="@string/menuItemDownloadPDF">
+		
+	</item>
+	
 	<!-- item 
 		android:id="@+id/menuItemSaveResult" 
 		android:title="@string/menuItemSaveResult">
 		
-	</item>
-	<item 
+	</item>  -->
+	<!-- <item 
 		android:id="@+id/menuItemSaveBookmark" 
 		android:title="@string/menuItemSaveBookmark">
 		

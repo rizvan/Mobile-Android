@@ -63,9 +63,7 @@ public class SearchJournalsResult {
 		}	
 		if (pagePosition.length()>0){
 			query = query + "&start=" + pagePosition;
-		} else {
-			query = query + "&start=1" ;
-		}
+		} 
 		if (searchExpression.length()>0){
 			query = query + "&q=" + searchExpression;
 		}

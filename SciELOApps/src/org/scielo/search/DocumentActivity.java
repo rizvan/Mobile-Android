@@ -89,19 +89,29 @@ public class DocumentActivity extends Activity{
     }
 	
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {    
-      
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	boolean res = false;
+    	final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
       // item.getItemId()
         switch (item.getItemId()) {
         case R.id.menuItemSendEmail:
-    	    final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-			emailIntent.setType("text/plain");
+    	    emailIntent.setType("text/plain");
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
 			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText()+ "\n" + TextViewPDF.getText() );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
 
 			
-            return true;
+            res = true;
+            break;
+        case R.id.menuItemDownloadPDF:
+        	
+			emailIntent.setType("text/plain");
+			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText()+ "\n" + TextViewPDF.getText() );
+			startActivity(Intent.createChooser(emailIntent, "Email:"));
+
+        	res= true;
+        	break;
       //case R.id.menuItemSaveResult:
           //quit();
       //    return true;
@@ -112,5 +122,5 @@ public class DocumentActivity extends Activity{
        //   return true;
       }
 
-      return true;
+      return res;
     }}

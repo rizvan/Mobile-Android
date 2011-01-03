@@ -38,15 +38,16 @@ public class SciELOApps extends TabActivity {
 	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
 	    tabHost.addTab(spec);
         
+	    /*
 	    intent = new Intent().setClass(this, SearchIssuesActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_issues").setIndicator(res.getString(R.string.tab_list_issues_name)).setContent(intent);
 	    tabHost.addTab(spec);
 
-	    
+	    */
 
 	    tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
 	    tabHost.getTabWidget().getChildAt(1).getLayoutParams().height = 40;
-	    tabHost.getTabWidget().getChildAt(2).getLayoutParams().height = 40;
+	    //tabHost.getTabWidget().getChildAt(2).getLayoutParams().height = 40;
 	    //tabHost.getTabWidget().getChildAt(3).getLayoutParams().height = 40;
 	    
 	    tabHost.setup();

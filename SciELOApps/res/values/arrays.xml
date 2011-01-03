@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="cluster_list">
+<string-array name="cluster_list_doc">
 	<item>ac</item>
 	<item>ta_cluster</item>
 	<item>year_cluster</item>
 	<item>la</item>
+	<item>in</item>	
+</string-array>
+<string-array name="cluster_list_journal">
+	<item>ac</item>
 	<item>in</item>	
 </string-array>
 <string-array name="collections_code">

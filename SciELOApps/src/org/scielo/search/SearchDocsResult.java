@@ -67,11 +67,8 @@ public class SearchDocsResult {
 		if (pagePosition.length()>0){
 			query = query + "&start=" + pagePosition;
 		} else {
-			if (pagePosition.equals("0")){
-				
-			} else {
-				query = query + "&start=1" ;
-			}
+			query = query + "&start=0" ;
+			
 			
 		}
 		if (searchExpression.length()>0){
@@ -136,6 +133,7 @@ public class SearchDocsResult {
 			
 			loadClusterCollection();
 			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
+			pagination.generatePageList();
 			loadSearchResultList();
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
@@ -349,6 +347,5 @@ public class SearchDocsResult {
 		return searchResultList;
 	}
 
-	
 	
 }

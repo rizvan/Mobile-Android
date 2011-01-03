@@ -11,8 +11,8 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".SearchDocsActivity"
-                  android:label="@string/search_button"
+		<activity android:name=".SearchDocsActivity" 
+                  android:label="@string/search_button" 
                   android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -20,16 +20,16 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".SearchJournalsActivity"
-                  android:label="@string/search_button"
+        <activity android:name=".SearchJournalsActivity" 
+                  android:label="@string/search_button" 
                   android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
+            <meta-data android:name="android.app.searchable" 
                        android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".SearchIssuesActivity"
+        <activity android:name=".SearchIssuesActivity" 
                   android:label="@string/tab_list_issues_name">            
         </activity>       
         <activity android:name=".DocumentActivity">
@@ -42,8 +42,13 @@
         <activity android:name=".TOCActivity">
         </activity>
         
-        
+        <!-- activity android:name=".ShowPreferencesActivity">
+            
+        </activity -->
     </application>
+    <provider android:name=".SavedItemsProvider" android:authorities="org.scielo.search">
+    </provider>
+    
     <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
