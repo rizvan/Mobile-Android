@@ -18,23 +18,22 @@ import android.widget.AdapterView.OnItemClickListener;
 public class SearchDocsActivity extends SearchActivity {
 	
 	private String serviceURL = "";
-
 	
 	private SciELONetwork jc;
-
 	private PairsList languages;
 	private PairsList subjects;
 
     private Document document;
     private ArrayAdapter<Document> aa;
-    private ArrayList<Document> searchResultList =  new ArrayList<Document>();
-	
+    private ArrayList<Document> searchResultList =  new ArrayList<Document>();	
 	private SearchDocsResult ssData;
+
+	GridView paginationGridView;    
+	ArrayAdapter<Page> aaPage;    
+	ArrayList<Page> pagesList  = new ArrayList<Page>();
 	
-	
-	
-			
-	
+	Page page;
+		
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -53,8 +52,10 @@ public class SearchDocsActivity extends SearchActivity {
 		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
 				getResources().getStringArray(R.array.languages_name));
 		
-		ssData = new SearchDocsResult(serviceURL, this.getResources().getString(R.string.pdf_url) ,jc, subjects, languages, searchResultList);
+		ssData = new SearchDocsResult(serviceURL, this.getResources().getString(R.string.pdf_url) ,jc, subjects, languages, searchResultList, pagesList);
 		ss = new SearchService();
+		
+		
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 
@@ -83,7 +84,7 @@ public class SearchDocsActivity extends SearchActivity {
 		       }
 		});
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+	    aaPage = new PaginationItemAdapter(this, R.layout.pagination,  pagesList);
 	    paginationGridView.setAdapter(aaPage);	    
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
@@ -97,6 +98,7 @@ public class SearchDocsActivity extends SearchActivity {
 	    //oldOnCreate();
 	    //onSearchRequested();
 	    handleIntent(getIntent());
+		
 	}	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,12 +113,23 @@ public class SearchDocsActivity extends SearchActivity {
 		return ssData.getURL(query, "20", this.filter, this.pagePosition);
 	}
 	protected void loadAndDisplayData(String result){
-		pagesList = ssData.getPageList();
 		
 		ssData.loadData(result);
-		//searchResultCount = ssData.getResultCount();
+		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
 		
 		aa.notifyDataSetChanged();		
+		aaPage.notifyDataSetChanged();
 	}
+	
+	protected void presentResult(String result) {
+		if (result.length()>0){
+			ssData.loadData(result);
+			clusterCollection = ssData.getSearchClusterCollection();
+			
+			aa.notifyDataSetChanged();		
+			aaPage.notifyDataSetChanged();
+		}
+	}	
+
 }

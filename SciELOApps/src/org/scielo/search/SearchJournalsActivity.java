@@ -14,21 +14,18 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.view.MenuInflater;
+
 
 
 public class SearchJournalsActivity extends SearchActivity {
 	
 	private String serviceURL = "";
-
-	
 	private String filter = "";
 	
 	//private String searchResultCount;
 	//private String currSearchExpr = "";
     
 	private SciELONetwork jc;
-
 	private PairsList languages;
 	private PairsList subjects;
 
@@ -36,11 +33,12 @@ public class SearchJournalsActivity extends SearchActivity {
     private ArrayAdapter<Journal> aa;
     private ArrayList<Journal> searchResultList =  new ArrayList<Journal>();
 	private SearchJournalsResult ssData;
-	
-	
-	
-			
-	
+
+	GridView paginationGridView;    
+	ArrayAdapter<Page> aaPage;    
+	ArrayList<Page> pagesList  = new ArrayList<Page>();
+	Page page;
+
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -116,12 +114,13 @@ public class SearchJournalsActivity extends SearchActivity {
 		return ssData.getURL(query, "20", this.filter, this.pagePosition);
 	}
 	protected void loadAndDisplayData(String result){
-		pagesList = ssData.getPageList();
+		
 		
 		ssData.loadData(result);
 		//searchResultCount = ssData.getResultCount();
 		clusterCollection = ssData.getSearchClusterCollection();
 		
 		aa.notifyDataSetChanged();		
+		aaPage.notifyDataSetChanged();
 	}
 }

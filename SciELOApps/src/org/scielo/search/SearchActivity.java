@@ -11,12 +11,9 @@ import android.view.SubMenu;
 import android.view.View;
 
 
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 //import android.widget.EditText;
 
-import java.util.ArrayList;
 
 //import org.json.JSONArray;
 
@@ -39,11 +36,8 @@ public class SearchActivity extends Activity {
 	View searchButton;	
 	TextView messageTextView;
 	ListView searchResultListView;
-	GridView paginationGridView;
-    
-	ArrayAdapter<Page> aaPage;    
-	ArrayList<Page> pagesList  = new ArrayList<Page>();
-	Page page;
+	
+	
 	
 	protected String filter = "";
 	protected String pagePosition = "";
@@ -146,10 +140,10 @@ public class SearchActivity extends Activity {
 	}
 	
 
-	private void presentResult(String result) {
+	protected void presentResult(String result) {
 		if (result.length()>0){
 			loadAndDisplayData(result);
-			aaPage.notifyDataSetChanged();
+			//aaPage.notifyDataSetChanged();
 		}
 	}	
 	

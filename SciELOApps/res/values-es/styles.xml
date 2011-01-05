@@ -34,6 +34,9 @@
 
 <color  name="page_background">#FFFFFF</color> <!-- white-->
 <color  name="page_textcolor">#000000</color> <!-- black-->
+<color  name="pagelist_background">#000FFF</color> <!-- 000FFF-->
+<color  name="pagelist_textcolor">#FFF000</color> <!-- FFF000-->
+
 <color  name="details_background">#FFFFFF</color> <!-- white-->
 <color  name="details_textcolor">#000000</color> <!-- black-->
 
@@ -65,7 +68,7 @@
 <style name="MyTabWidget" parent="@android:style/Widget.TabWidget">
 <item name="android:background">@color/tab_background</item>
 <item name="android:textColor">@color/tab_textcolor</item>
-<item name="android:padding">30sp</item>
+<item name="android:padding">10sp</item>
 <item name="android:ellipsize">marquee</item>
 <item name="android:gravity">top</item>
  <item name="android:singleLine">true</item>
@@ -157,11 +160,13 @@
 	<item name="android:textSize">15sp</item>	
 	<item name="android:autoLink">all</item>	
 	<item name="android:gravity">left</item>	
-	<item name="android:paddingRight">10sp</item>
-	<item name="android:paddingLeft">10sp</item>
-	<item name="android:paddingTop">5sp</item>
-	<item name="android:paddingBottom">5sp</item>
+	<item name="android:layout_width">40sp</item>
+	<item name="android:padding">10sp</item>
 	<item name="android:shadowColor">@color/tab_shadowcolor</item>
+</style>
+<style name="pagelist">
+	<item name="android:textColor">@color/pagelist_textcolor</item>
+	<item name="android:background">@color/page_background</item>
 </style>
 <style name="detail">
 	<item name="android:textColor">@color/details_textcolor</item>

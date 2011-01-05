@@ -15,6 +15,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+
 public class TOCActivity extends SearchActivity {
 	
 	private String serviceURL = "";
@@ -40,7 +41,12 @@ public class TOCActivity extends SearchActivity {
 	
 	private SearchService ss;
 	private String collectionId;
-			
+		
+	GridView paginationGridView;    
+	ArrayAdapter<Page> aaPage;    
+	ArrayList<Page> pagesList  = new ArrayList<Page>();
+	Page page;
+
 	
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
@@ -170,7 +176,6 @@ public class TOCActivity extends SearchActivity {
 
 	private void treatSearchResult(String result) {
 		if (result.length()>0){
-			pagesList = ssData.getPageList();
 			
 			ssData.loadData(result);
 			//searchResultCount = ssData.getResultCount();

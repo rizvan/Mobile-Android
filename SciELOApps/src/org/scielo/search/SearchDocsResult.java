@@ -25,7 +25,8 @@ public class SearchDocsResult {
 	protected PairsList subjects;
 	protected PairsList languages;
 	
-	private Pagination pagination;
+	//private Pagination pagination;
+	private ArrayList<Page> pagesList;
 	protected static final String TAG = "SearchServiceData";
 	private String resultCount;
 	private int currentItem;
@@ -43,7 +44,7 @@ public class SearchDocsResult {
 		this.resultCount = resultCount;
 	}
 
-	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList){
+	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
 		clusterCollection = new ClusterCollection();
     	this.url = url;
     	this.generic_PDF_URL = _generic_pdf_url;		
@@ -53,7 +54,9 @@ public class SearchDocsResult {
     	this.languages = languages;
 		    	
 		this.searchResultList = searchResultList;
-		this.pagination = new Pagination();		
+		this.pagesList = pagesList;
+		
+		
     }
 	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
 		String u = "";
@@ -132,8 +135,11 @@ public class SearchDocsResult {
 			Log.d("SearchServiceData","10");	
 			
 			loadClusterCollection();
+			
+			Pagination pagination = new Pagination();
 			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			pagination.generatePageList();
+			pagination.generatePageList(this.pagesList);
+			
 			loadSearchResultList();
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
@@ -143,9 +149,7 @@ public class SearchDocsResult {
 	public String getResultCount(){
 		return this.resultCount;
 	}
-	public ArrayList<Page> getPageList(){
-		return this.pagination.getPageList();
-	}
+	
 	public ClusterCollection getSearchClusterCollection(){
 		return this.clusterCollection;
 	}
@@ -341,10 +345,6 @@ public class SearchDocsResult {
 				Log.d(TAG, "JSONException loadResultList " + new Integer(i).toString() + " " + last, e);	
 	        } 
 		}
-	}
-
-	public ArrayList<Document> getSearchResultList() {
-		return searchResultList;
 	}
 
 	

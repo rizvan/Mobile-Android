@@ -9,13 +9,10 @@ public class Pagination {
 	protected String from;
 	protected int currentItem;
 	protected int itemsPerPage;
-	protected ArrayList<Page> pagesList;
 	
 	protected static final String TAG = "SearchServiceData";
 	
     Pagination(){		    	
-		this.pagesList = new ArrayList<Page>();		
-		
     }
     public void loadData(String from, String resultCount, int currentItem, int itemsPerPage){		
     	this.from = from;
@@ -28,7 +25,7 @@ public class Pagination {
 		return this.resultCount;
 	}
 	
-	public void generatePageList(){
+	public void generatePageList(ArrayList<Page> pagesList){
 		int i;
 	    int k;
 	    boolean stop = false;
@@ -49,9 +46,8 @@ public class Pagination {
 
 			i++;
 		}
+		
 	}
-	public ArrayList<Page> getPageList(){
-		return this.pagesList;
-	}
+	
 	
 }

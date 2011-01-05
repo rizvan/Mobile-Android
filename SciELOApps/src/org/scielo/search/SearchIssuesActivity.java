@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 
+
 public class SearchIssuesActivity extends SearchActivity {
 	
 	private String serviceURL = "";
@@ -40,6 +41,12 @@ public class SearchIssuesActivity extends SearchActivity {
     private ArrayAdapter<Issue> aa;
     private ArrayList<Issue> searchResultList =  new ArrayList<Issue>();
 	private SearchIssuesResult ssData;
+	
+	GridView paginationGridView;    
+	ArrayAdapter<Page> aaPage;    
+	ArrayList<Page> pagesList  = new ArrayList<Page>();
+	Page page;
+
 	
 	private SearchService ss;
 	private String  collectionId = "";
@@ -183,7 +190,6 @@ public class SearchIssuesActivity extends SearchActivity {
 
 	private void treatSearchResult(String result) {
 		if (result.length()>0){
-			pagesList = ssData.getPageList();
 			
 			ssData.loadData(result);
 			//searchResultCount = ssData.getResultCount();

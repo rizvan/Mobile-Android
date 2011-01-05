@@ -26,7 +26,7 @@ public class Article_PDF_URL {
 		
 		f = a[i-4] + "/" + a[i-3] + "/" + a[i-1];
 		pdfUrl = this.generic_PDF_URL;
-		pdfUrl = pdfUrl.replace("REPLACE_APP_URL", _appUrl);
+		pdfUrl = pdfUrl.replace("REPLACE_COLLECTION_URL", _appUrl);
 		pdfUrl = pdfUrl.replace("REPLACE_PDF_FILENAME", f);
 		pdfUrl = pdfUrl.replace("REPLACE_APP", _appName);
 		pdfUrl = pdfUrl.replace("REPLACE_PID", _pid);

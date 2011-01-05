@@ -131,9 +131,7 @@ public class SearchIssuesResult {
 	public String getResultCount(){
 		return this.resultCount;
 	}
-	public ArrayList<Page> getPageList(){
-		return this.pagination.getPageList();
-	}
+	
 	public ClusterCollection getSearchClusterCollection(){
 		return this.clusterCollection;
 	}
