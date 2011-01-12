@@ -30,11 +30,11 @@ public class SearchDocsActivity extends SearchActivity {
     private ArrayList<Document> searchResultList =  new ArrayList<Document>();	
 	private SearchDocsResult ssData;
 
-	GridView paginationGridView;    
-	PaginationItemAdapter aaPage;    
-	ArrayList<Page> pagesList  = new ArrayList<Page>();
+	protected GridView paginationGridView;    
+	protected PaginationItemAdapter aaPage;    
+	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
+	protected Page page;
 	
-	Page page;
 		
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SearchDocsActivity extends SearchActivity {
 		searchResultListView = (ListView) findViewById(R.id.list);
 
 	    int resID = R.layout.list_item_doc;
-	    aa = new DocumentAdapter(this, resID, searchResultList);
+	    aa = new DocumentAdapter(this, resID, searchResultList,false);
 	    searchResultListView.setAdapter(aa);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
@@ -128,14 +128,6 @@ public class SearchDocsActivity extends SearchActivity {
 		aaPage.notifyDataSetChanged();
 	}
 	
-	protected void presentResult(String result) {
-		if (result.length()>0){
-			ssData.loadData(result);
-			clusterCollection = ssData.getSearchClusterCollection();
-			
-			aa.notifyDataSetChanged();		
-			aaPage.notifyDataSetChanged();
-		}
-	}	
+	
 
 }

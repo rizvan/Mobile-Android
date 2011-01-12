@@ -21,7 +21,7 @@ public class SearchResult {
 	protected int itemsPerPage;
 	protected JSONObject jsonObject;
 	
-	protected static final String TAG = "SearchServiceData";
+	protected static final String TAG = "SearchResult";
 	protected String url;
 		
 	
@@ -38,6 +38,7 @@ public class SearchResult {
 	}
 
 	SearchResult( String url, ArrayList<Page> pagesList ){
+		clusterCollection = new ClusterCollection();
 		this.pagesList = pagesList;
 		this.url = url;
     }
@@ -51,13 +52,13 @@ public class SearchResult {
 			loadControlData(_data);
 			
 			currentItem = 0;
-			Log.d("SearchServiceData","9");	
+			Log.d("SearchResult","9");	
 			if (from.length() == 0 || from.equals("0")) {
 				currentItem = 1;
 			} else {
 				currentItem = Integer.parseInt(from);	
 			}
-			Log.d("SearchServiceData","10");	
+			Log.d("SearchResult","10");	
 			
 			loadClusterCollection();
 			

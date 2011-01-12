@@ -14,12 +14,14 @@ import android.widget.*;
 public class DocumentAdapter extends ArrayAdapter<Document> {
 
     int resource;
+    private boolean isTOC = false;
     
-    public DocumentAdapter(Context _context, 
+
+	public DocumentAdapter(Context _context, 
                              int _resource, 
-                             List<Document> _items) {
+                             List<Document> _items, boolean isTOC) {
         super(_context, _resource, _items);
-        
+        this.isTOC = isTOC;
         resource = _resource;
     }
 
@@ -44,15 +46,22 @@ public class DocumentAdapter extends ArrayAdapter<Document> {
         TextView titleView = (TextView)resultView.findViewById(R.id.TextViewDocumentTitle);
         TextView authorsView = (TextView)resultView.findViewById(R.id.TextViewDocumentAuthors);
         TextView abstrView = (TextView)resultView.findViewById(R.id.TextViewDocumentAbstract);
-        //TextView linkView = (TextView)resultView.findViewById(R.id.TextViewDocumentPDFLink);
-        positionView.setText(item.getPosition());
+        TextView colView = (TextView)resultView.findViewById(R.id.TextViewDocumentCollection);
+        TextView issueView = (TextView)resultView.findViewById(R.id.TextViewIssue);
+        
+        if (! this.isTOC){
+        	colView.setText(item.getDocumentCollection());
+            issueView.setText(item.getIssueLabel());
+            positionView.setText(item.getPosition());
+            abstr = item.getDocumentAbstracts();
+            if (abstr.length()>300){
+            	abstr = abstr.substring(1, 300) + "...";
+            }
+            abstrView.setText(abstr);
+        }
+        
         titleView.setText(item.getDocumentTitle());
         authorsView.setText(item.getDocumentAuthors());
-        abstr = item.getDocumentAbstracts();
-        if (abstr.length()>300){
-        	abstr = abstr.substring(1, 300) + "...";
-        }
-        abstrView.setText(abstr);
         //linkView.setText( item.getDocumentPDFLink());
         
 

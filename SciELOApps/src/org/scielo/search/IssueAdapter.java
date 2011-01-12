@@ -39,10 +39,10 @@ public class IssueAdapter extends ArrayAdapter<Issue> {
         }
         //convertView.setBackgroundColor((position & 1) == 1 ? Color.WHITE : Color.LTGRAY);
 
-        TextView titleView = (TextView)resultView.findViewById(R.id.TextViewTitle);
+        TextView titleView = (TextView)resultView.findViewById(R.id.TextViewIssue);
         //TextView linkView = (TextView)resultView.findViewById(R.id.TextViewDocumentPDFLink);
         
-        titleView.setText(item.getText());
+        titleView.setText(item.getIssueLabel());
         
 
         return resultView;

@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,9 +21,6 @@ public class SearchIssuesActivity extends SearchActivity {
 	
 	private String serviceURL = "";
 
-	private ClusterCollection searchClusterCollection ;
-	private String[] clusterCodeOrder;
-	
 	private String filter = "";
 	
 	//private String searchResultCount;
@@ -42,11 +37,12 @@ public class SearchIssuesActivity extends SearchActivity {
     private ArrayList<Issue> searchResultList =  new ArrayList<Issue>();
 	private SearchIssuesResult ssData;
 	
-	GridView paginationGridView;    
-	ArrayAdapter<Page> aaPage;    
-	ArrayList<Page> pagesList  = new ArrayList<Page>();
-	Page page;
-
+	protected GridView paginationGridView;    
+	protected PaginationItemAdapter aaPage;    
+	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
+	protected Page page;
+	
+	
 	
 	private String  collectionId = "";
 			
@@ -126,38 +122,6 @@ public class SearchIssuesActivity extends SearchActivity {
 	    //onSearchRequested();
 	    handleIntent(getIntent());
 	}	
-	
-	@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	
-    	MenuItem menuItem;
-    	MenuItem subMenuItem;
-        SubMenu subMenu;
-        Cluster cluster;
-        SearchFilter sf;
-        
-    	//menu.clear();
-        //this.mymenu = menu;
-    	for (int index=1; index < menu.size(); index++){
-    		menuItem = menu.getItem(index);
-    		subMenu = menuItem.getSubMenu();
-    		subMenu.clear();
-    		
-    		cluster = this.searchClusterCollection.getItemById(this.clusterCodeOrder[index-1]);
-    		if (cluster!=null){
-        		for (int i=0;i<cluster.getFilterCount();i++){
-        			sf = cluster.getFilterByIndex(i);
-        			subMenuItem = subMenu.add(menuItem.getItemId(),  sf.getSubmenuId(), i, sf.getCaption() + " (" + sf.getResultCount() + ")" ); 
-        			sf.setSubmenuId(subMenuItem.getItemId());
-        			
-        	    } 
-    			
-    		}
-    	}
-        
-    	return true;
-    }
-	
 	
 	
 	protected String getURL(){

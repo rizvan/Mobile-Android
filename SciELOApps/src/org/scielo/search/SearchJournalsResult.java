@@ -9,134 +9,47 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class SearchJournalsResult {
+public class SearchJournalsResult extends SearchResult {
 	// Parse to get translated text
-	protected JSONArray docs;
-	protected JSONObject facetFields;
+	//protected JSONObject facetFields;
 	
-	protected String generic_PDF_URL;	
 	
 	protected ArrayList<Journal> searchResultList;
-	protected ClusterCollection clusterCollection;
 	
 	protected SciELONetwork jc;
 	protected PairsList subjects;
 	protected PairsList languages;
 	
-	private Pagination pagination;
-	protected static final String TAG = "SearchServiceData";
-	private String resultCount;
-	private int currentItem;
-	private String url;
 	
-	public int getCurrentItem() {
-		return currentItem;
-	}
-
-	public void setCurrentItem(int currentItem) {
-		this.currentItem = currentItem;
-	}
-
-	public void setResultCount(String resultCount) {
-		this.resultCount = resultCount;
-	}
-
-	SearchJournalsResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Journal> searchResultList){
-		clusterCollection = new ClusterCollection();
-    	this.url = url;
-    	
+	
+	SearchJournalsResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
+		super(url, pagesList);
+		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
 		    	
 		this.searchResultList = searchResultList;
-		this.pagination = new Pagination();		
+				
     }
 	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
-		String u = "";
-		String query = "";
-		
-		u = this.url;
-		/*
-		u =	u.replace("amp;", "" );
-		if (itemsPerPage.length()>0){
-			query = query + "&count=" + itemsPerPage;
-		}	
-		if (pagePosition.length()>0){
-			query = query + "&start=" + pagePosition;
-		} 
-		if (searchExpression.length()>0){
-			query = query + "&q=" + searchExpression;
-		}
-		if (filter.length()>0){
-			query = query + "&fq=" + filter;
-		}
-		*/
-		return u + query;						
+		return url;
 	}
-	public void loadData(String _data){		
-		JSONObject jsonObject;
-		
-		//JSONObject diaServerResponse;
-		//JSONObject response;
-		//JSONObject responseParameters;
-		
-		String from = "";
-		int itemsPerPage;
-		
-		
+	public void loadControlData(String _data){		
 		try {
-			jsonObject = new JSONObject(_data);
-			/*
-			diaServerResponse = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0);
-			Log.d("SearchServiceData","1");	
-			this.facetFields = diaServerResponse.getJSONObject("facet_counts").getJSONObject("facet_fields");
-			Log.d("SearchServiceData","2");	
-			response = diaServerResponse.getJSONObject("response");
-			Log.d("SearchServiceData","3");	
-			responseParameters = diaServerResponse.getJSONObject("responseHeader").getJSONObject("params");
-			Log.d("SearchServiceData","4");	
-			
-			resultCount = response.get("numFound").toString();				
-			Log.d("SearchServiceData","5");	
-			
-			from = responseParameters.get("start").toString();
-			Log.d("SearchServiceData","6");	
-			itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
-			Log.d("SearchServiceData","7");	
-			
-			this.docs = response.getJSONArray("docs");
-			Log.d("SearchServiceData","8");	
-			*/
 			docs = jsonObject.getJSONArray("rows");
 			resultCount = new Integer(docs.length()).toString();
-			currentItem = 0;
-			Log.d("SearchServiceData","9");	
-			if ((from.length() == 0) ) {
-				currentItem = 1;
-			} else {
-				currentItem = Integer.parseInt(from);	
-			}
-			Log.d("SearchServiceData","10");	
 			itemsPerPage = 3000;
-			loadClusterCollection();
-			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			loadSearchResultList();
+			from = "1";
+			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
 	
-	public String getResultCount(){
-		return this.resultCount;
-	}
-	
-	public ClusterCollection getSearchClusterCollection(){
-		return this.clusterCollection;
-	}
 	
 
-	private boolean loadClusterCollection() {
+	public boolean loadClusterCollection() {
     	boolean r = true;
     	/* 
     	int i_clusters = 0;
@@ -232,7 +145,9 @@ public class SearchJournalsResult {
 		String last = "";
 		String _pid;
 		SciELOCollection col = new SciELOCollection();
-	    
+		JSONArray s;
+		String subj = "";
+		
 		searchResultList.clear();
 		/*
 		 * {"id":"9553ce99-9536-47de-b987-3a5626e7680d","key":["arg","20030404"],"value":{"collection":"arg","issn":"0002-7014","title":"Ameghiniana","subject":["PALEONTOLOGIA"],"publisher":{"_":"Asociaci\u00f3n Paleontol\u00f3gica Argentina"},"insert_date":"20030404"}},
@@ -262,6 +177,17 @@ public class SearchJournalsResult {
 				try {
 					_pid = resultItem.getString("issn");	
 					r.setId(_pid);
+				} catch (JSONException e) {
+					last = last + "\n" +"id" ;
+					_pid = "";
+				}
+				try {
+					s = resultItem.getJSONArray("subject");
+					subj = "";
+					for (int k=0; k<s.length();k++){
+						subj = subj + s.getString(k) +  ";";
+					}
+					r.setSubjects(subj);
 				} catch (JSONException e) {
 					last = last + "\n" +"id" ;
 					_pid = "";

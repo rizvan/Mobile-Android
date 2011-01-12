@@ -10,10 +10,10 @@
 	android:background="#FFFFFF"
 	>
 	<TextView 
-		android:id="@+id/TextViewTitle" 
+		android:id="@+id/TextViewIssue" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_title"
+		style="@style/textview_issue"
 		
 		/>
 	

@@ -6,13 +6,13 @@
     style="@style/MyTabView"
     >
     
-    <!-- TextView 
-	    android:id="@+id/msgTextView"
+    <TextView 
+	    android:id="@+id/TextViewHeader"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:textColor="#00FF00"
+	    style="@style/textview_header"
 	  />
- -->
+ 
    <GridView   
        android:id="@+id/paginationListView" 
        android:orientation="vertical" 

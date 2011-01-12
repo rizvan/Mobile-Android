@@ -34,10 +34,11 @@ public class SearchJournalsActivity extends SearchActivity {
     private ArrayList<Journal> searchResultList =  new ArrayList<Journal>();
 	private SearchJournalsResult ssData;
 
-	GridView paginationGridView;    
-	ArrayAdapter<Page> aaPage;    
-	ArrayList<Page> pagesList  = new ArrayList<Page>();
-	Page page;
+	protected GridView paginationGridView;    
+	protected PaginationItemAdapter aaPage;    
+	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
+	protected Page page;
+	
 
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
 				getResources().getStringArray(R.array.languages_name));
 		
-		ssData = new SearchJournalsResult(serviceURL, jc, subjects, languages, searchResultList);
+		ssData = new SearchJournalsResult(serviceURL, jc, subjects, languages, searchResultList,pagesList);
 		ss = new SearchService();
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
@@ -84,7 +85,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		       }
 		});
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = (ArrayAdapter<Page>) new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
 	    paginationGridView.setAdapter(aaPage);	    
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override

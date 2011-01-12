@@ -1,6 +1,8 @@
 package org.scielo.search;
 
 
+
+
 import android.app.Activity;
 
 
@@ -9,6 +11,7 @@ import android.view.SubMenu;
 
 
 import android.view.View;
+
 
 
 import android.widget.TextView;
@@ -36,7 +39,6 @@ public class SearchActivity extends Activity {
 	View searchButton;	
 	TextView messageTextView;
 	ListView searchResultListView;
-	
 	
 	
 	protected String filter = "";

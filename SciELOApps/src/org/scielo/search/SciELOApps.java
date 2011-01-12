@@ -22,28 +22,23 @@ public class SciELOApps extends TabActivity {
 	    
 	    // Create an Intent to launch an Activity for the tab (to be reused)
 	    
-	    /*intent = new Intent().setClass(this, ListDocsActivity.class);
-	    // Initialize a TabSpec for each tab and add it to the TabHost
-	    spec = tabHost.newTabSpec("tab_list_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);	    
-	    tabHost.addTab(spec);
-	    */
+	    
+	    
 	    intent = new Intent().setClass(this, SearchDocsActivity.class);
-	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabHost.newTabSpec("tab_search_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);	    
 	    tabHost.addTab(spec);
 	    
 	    
-	    // Do the same for the other tabs
 	    intent = new Intent().setClass(this, SearchJournalsActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
 	    tabHost.addTab(spec);
         
-	    /*
+        /*
 	    intent = new Intent().setClass(this, SearchIssuesActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_issues").setIndicator(res.getString(R.string.tab_list_issues_name)).setContent(intent);
 	    tabHost.addTab(spec);
-
-	    */
+         */
+	    
 
 	    tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
 	    tabHost.getTabWidget().getChildAt(1).getLayoutParams().height = 40;

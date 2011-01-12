@@ -5,12 +5,21 @@ public class Journal {
 	private String title;
 	private String collection;
 	private String collectionId;
+	private String subjects;
 	
 	public Journal() {
 		super();
 		id = "";
 		title = "";
 		collection ="";
+		collectionId = "";
+		subjects = "";
+	}
+	public String getSubjects() {
+		return subjects;
+	}
+	public void setSubjects(String subjects) {
+		this.subjects = subjects;
 	}
 	public String getCollection() {
 		return collection;

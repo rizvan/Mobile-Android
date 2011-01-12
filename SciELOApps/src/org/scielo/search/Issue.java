@@ -61,6 +61,15 @@ public class Issue {
 		
 		return r;
 	}
+	public String getIssueLabel(){
+		String r = journal.getTitle() + " ";
+		r = r + format("v.", " ", volume);
+		r = r + format("n.", " ", number);
+		r = r + format("s.", " ", suppl);
+		r = r + format("", " ", date);
+		
+		return r;
+	}
 	private String format(String prefix, String suffix, String s){
 		String r = s;
 		if (s.length()>0){

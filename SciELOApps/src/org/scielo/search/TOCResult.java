@@ -153,7 +153,7 @@ public class TOCResult {
 				r.setPosition( new Integer(i + this.currentItem).toString() + "/" + new Integer(this.resultCount).toString() );
 				
 				try {
-					r.setDocumentTitle(  resultItem.getJSONArray("ti").getString(0));	
+					r.setDocumentTitle( clean( resultItem.getJSONArray("ti").getString(0)));	
 				} catch (JSONException e) {
 					last = last + "\n" +"ti";
 				}
@@ -199,6 +199,9 @@ public class TOCResult {
 				Log.d(TAG, "JSONException loadResultList " + new Integer(i).toString() + " " + last, e);	
 	        } 
 		}
+	}
+	private String clean(String title){
+		return title.replace("<b>", "").replace("</b>", "").replace("<i>", "").replace("</i>","");
 	}
 	
 }

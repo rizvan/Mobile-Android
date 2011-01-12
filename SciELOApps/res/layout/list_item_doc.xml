@@ -29,6 +29,18 @@
 		style="@style/textview_document_authors"
 		/>
 	<TextView 
+		android:id="@+id/TextViewDocumentCollection" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		style="@style/textview_document_position"
+		/>  
+	<TextView 
+		android:id="@+id/TextViewIssue" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		style="@style/textview_document_position"
+		/>  
+	<TextView 
 		android:id="@+id/TextViewDocumentAbstract" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 

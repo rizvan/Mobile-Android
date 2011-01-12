@@ -24,12 +24,15 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        /**  white 
+         */
         public static final int app_background=0x7f070000;
         /**  black 
  black 
  black 
          */
         public static final int app_textcolor=0x7f070001;
+        public static final int blank=0x7f070024;
         /**  white 
  white 
  white 
@@ -122,10 +125,10 @@ public final class R {
         public static final int page_textcolor=0x7f070017;
         /**  black
          */
-        public static final int pagelist_background=0x7f070024;
+        public static final int pagelist_background=0x7f070025;
         /**  000FFF
          */
-        public static final int pagelist_textcolor=0x7f070025;
+        public static final int pagelist_textcolor=0x7f070026;
         /**  white 
  white 
  white 
@@ -156,6 +159,12 @@ public final class R {
  gray 
          */
         public static final int tabview_background=0x7f070009;
+        /**  dark red
+         */
+        public static final int textview_collection_background=0x7f070029;
+        /**  white
+         */
+        public static final int textview_collection_textcolor=0x7f07002a;
         /**  black
  black
  black
@@ -206,6 +215,18 @@ public final class R {
  white
          */
         public static final int textview_document_title_textcolor=0x7f07000f;
+        /**  white
+         */
+        public static final int textview_journal_background=0x7f070027;
+        /**  white
+         */
+        public static final int textview_journal_textcolor=0x7f070028;
+        /**  black
+         */
+        public static final int textview_subject_background=0x7f07002b;
+        /**  white
+         */
+        public static final int textview_subject_textcolor=0x7f07002c;
     }
     public static final class drawable {
         public static final int acroread=0x7f020000;
@@ -229,32 +250,35 @@ public final class R {
         public static final int TextViewDocumentAuthors=0x7f0a0004;
         public static final int TextViewDocumentCollection=0x7f0a0001;
         public static final int TextViewDocumentID=0x7f0a0002;
-        public static final int TextViewDocumentPDFLink=0x7f0a0012;
+        public static final int TextViewDocumentPDFLink=0x7f0a0014;
         public static final int TextViewDocumentPosition=0x7f0a0000;
         public static final int TextViewDocumentTitle=0x7f0a0003;
-        public static final int TextViewFolder=0x7f0a0014;
-        public static final int TextViewID=0x7f0a0010;
+        public static final int TextViewFolder=0x7f0a0016;
+        public static final int TextViewHeader=0x7f0a0017;
+        public static final int TextViewID=0x7f0a0012;
+        public static final int TextViewIssue=0x7f0a000a;
         public static final int TextViewSendTo=0x7f0a0006;
-        public static final int TextViewStatus=0x7f0a0013;
-        public static final int TextViewTime=0x7f0a0011;
+        public static final int TextViewStatus=0x7f0a0015;
+        public static final int TextViewSubjects=0x7f0a000b;
+        public static final int TextViewTime=0x7f0a0013;
         public static final int TextViewTitle=0x7f0a0008;
-        public static final int banner=0x7f0a000c;
+        public static final int banner=0x7f0a000e;
         public static final int button_send=0x7f0a0007;
-        public static final int definition=0x7f0a000f;
-        public static final int label=0x7f0a000a;
-        public static final int list=0x7f0a0016;
-        public static final int list_items=0x7f0a000b;
-        public static final int menuItemDownloadPDF=0x7f0a001e;
-        public static final int menuItemRefineByCollection=0x7f0a001c;
-        public static final int menuItemRefineByJournal=0x7f0a0019;
-        public static final int menuItemRefineByLanguage=0x7f0a001b;
-        public static final int menuItemRefineBySubject=0x7f0a0018;
-        public static final int menuItemRefineByYear=0x7f0a001a;
-        public static final int menuItemSendEmail=0x7f0a001d;
-        public static final int page=0x7f0a000d;
-        public static final int paginationListView=0x7f0a0015;
-        public static final int search=0x7f0a0017;
-        public static final int word=0x7f0a000e;
+        public static final int definition=0x7f0a0011;
+        public static final int label=0x7f0a000c;
+        public static final int list=0x7f0a0019;
+        public static final int list_items=0x7f0a000d;
+        public static final int menuItemDownloadPDF=0x7f0a0021;
+        public static final int menuItemRefineByCollection=0x7f0a001f;
+        public static final int menuItemRefineByJournal=0x7f0a001c;
+        public static final int menuItemRefineByLanguage=0x7f0a001e;
+        public static final int menuItemRefineBySubject=0x7f0a001b;
+        public static final int menuItemRefineByYear=0x7f0a001d;
+        public static final int menuItemSendEmail=0x7f0a0020;
+        public static final int page=0x7f0a000f;
+        public static final int paginationListView=0x7f0a0018;
+        public static final int search=0x7f0a001a;
+        public static final int word=0x7f0a0010;
     }
     public static final class layout {
         public static final int doc=0x7f030000;
@@ -328,8 +352,8 @@ public final class R {
         public static final int MyTabHostLinearLayout=0x7f080001;
         public static final int MyTabView=0x7f080003;
         public static final int MyTabWidget=0x7f080002;
-        public static final int Theme_SciELOApps=0x7f080014;
-        /**  white
+        public static final int Theme_SciELOApps=0x7f08001a;
+        /**  black
          */
         public static final int banner=0x7f080012;
         public static final int detail=0x7f080010;
@@ -339,11 +363,17 @@ public final class R {
         public static final int detail_textview_document_pdf=0x7f08000e;
         public static final int detail_textview_document_position=0x7f080009;
         public static final int detail_textview_document_title=0x7f08000a;
+        public static final int document_page=0x7f080018;
         public static final int page=0x7f08000f;
-        public static final int pagelist=0x7f080013;
+        public static final int pagelist=0x7f080019;
+        public static final int textview_collection=0x7f080015;
         public static final int textview_document_authors=0x7f080008;
         public static final int textview_document_position=0x7f080006;
         public static final int textview_document_title=0x7f080007;
+        public static final int textview_header=0x7f080013;
+        public static final int textview_issue=0x7f080016;
+        public static final int textview_journal=0x7f080017;
+        public static final int textview_subject=0x7f080014;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;

@@ -27,7 +27,7 @@ public class SearchDocsResult extends SearchResult{
 	
 	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
 		super(url, pagesList);
-		clusterCollection = new ClusterCollection();
+		
     	
     	this.generic_PDF_URL = _generic_pdf_url;		
 		
@@ -54,7 +54,7 @@ public class SearchDocsResult extends SearchResult{
 			query = query + "&start=0" ;
 			
 		} else {
-			query = query + "&start=" + new Integer( new Integer(pagePosition) - 1).toString();
+			query = query + "&start=" + pagePosition;
 			
 			
 		}
@@ -85,24 +85,24 @@ public class SearchDocsResult extends SearchResult{
 		
 		try {
 			diaServerResponse = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0);
-			Log.d("SearchServiceData","1");	
+			Log.d("SearchResult_DOC","1");	
 			this.facetFields = diaServerResponse.getJSONObject("facet_counts").getJSONObject("facet_fields");
-			Log.d("SearchServiceData","2");	
+			Log.d("SearchResult_DOC","2");	
 			response = diaServerResponse.getJSONObject("response");
-			Log.d("SearchServiceData","3");	
+			Log.d("SearchResult_DOC","3");	
 			responseParameters = diaServerResponse.getJSONObject("responseHeader").getJSONObject("params");
-			Log.d("SearchServiceData","4");	
+			Log.d("SearchResult_DOC","4");	
 			
 			resultCount = response.get("numFound").toString();				
-			Log.d("SearchServiceData","5");	
+			Log.d("SearchResult_DOC","5");	
 			
 			from = responseParameters.get("start").toString();
-			Log.d("SearchServiceData","6");	
+			Log.d("SearchResult_DOC","6");	
 			itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
-			Log.d("SearchServiceData","7");	
+			Log.d("SearchResult_DOC","7");	
 			
 			this.docs = response.getJSONArray("docs");
-			Log.d("SearchServiceData","8");	
+			Log.d("SearchResult_DOC","8");	
 			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				

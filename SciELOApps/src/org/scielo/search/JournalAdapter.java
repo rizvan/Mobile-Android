@@ -43,6 +43,8 @@ public class JournalAdapter extends ArrayAdapter<Journal> {
         titleView.setText(item.getTitle());
         TextView colView = (TextView)resultView.findViewById(R.id.TextViewCollection);
         colView.setText(item.getCollection());
+        TextView subjectView = (TextView)resultView.findViewById(R.id.TextViewSubjects);
+        subjectView.setText(item.getSubjects());
         
 
         return resultView;
