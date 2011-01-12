@@ -57,6 +57,7 @@ public class SearchJournalsResult {
 		String query = "";
 		
 		u = this.url;
+		/*
 		u =	u.replace("amp;", "" );
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
@@ -70,6 +71,7 @@ public class SearchJournalsResult {
 		if (filter.length()>0){
 			query = query + "&fq=" + filter;
 		}
+		*/
 		return u + query;						
 	}
 	public void loadData(String _data){		
@@ -106,7 +108,7 @@ public class SearchJournalsResult {
 			this.docs = response.getJSONArray("docs");
 			Log.d("SearchServiceData","8");	
 			*/
-			docs = jsonObject.getJSONArray("titles");
+			docs = jsonObject.getJSONArray("rows");
 			resultCount = new Integer(docs.length()).toString();
 			currentItem = 0;
 			Log.d("SearchServiceData","9");	
@@ -232,14 +234,18 @@ public class SearchJournalsResult {
 		SciELOCollection col = new SciELOCollection();
 	    
 		searchResultList.clear();
-		
+		/*
+		 * {"id":"9553ce99-9536-47de-b987-3a5626e7680d","key":["arg","20030404"],"value":{"collection":"arg","issn":"0002-7014","title":"Ameghiniana","subject":["PALEONTOLOGIA"],"publisher":{"_":"Asociaci\u00f3n Paleontol\u00f3gica Argentina"},"insert_date":"20030404"}},
+
+		 * 
+		 */
 		//message = "docs.length: " +  new Integer(this.docs.length()).toString() + "\n" + "rows: " + this.itemsPerPage;
 		for (int i=0; i<this.docs.length(); i++){
 			r = new Journal();
 			last = "";
 			try {				
 				last = last + "\n" +"item " ;
-				resultItem = this.docs.getJSONObject(i);
+				resultItem = this.docs.getJSONObject(i).getJSONObject("value");
 				
 				try {
 					r.setTitle(  resultItem.getString("title"));	
@@ -247,14 +253,14 @@ public class SearchJournalsResult {
 					last = last + "\n" +"ti";
 				}
 				try {
-					collectionCode = resultItem.getString("col");
+					collectionCode = resultItem.getString("collection");
 					r.setCollectionId(collectionCode);
 				} catch (JSONException e) {
 					last = last + "\n" +"in" ;	
 					collectionCode = "";
 				}
 				try {
-					_pid = resultItem.getString("pid");	
+					_pid = resultItem.getString("issn");	
 					r.setId(_pid);
 				} catch (JSONException e) {
 					last = last + "\n" +"id" ;

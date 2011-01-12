@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+
 <color  name="app_background">#000000</color> <!-- black -->
 <color  name="app_textcolor">#FFFFFF</color> <!-- white -->
 
-<color  name="default_background">#000000</color> <!-- black -->
-<color  name="default_textcolor">#FFFFFF</color> <!-- white -->
+<color  name="default_background">#FFFFFF</color> <!-- black -->
+<color  name="default_textcolor">#000000</color> <!-- white -->
 
 <color  name="tabhost_textcolor">#000000</color>  <!-- black  -->
 <color  name="tabhost_background">#500000</color><!-- white -->
@@ -16,7 +17,7 @@
 
 <color  name="tabview_background">#FFFFFF</color> <!-- white -->
 <color  name="listview_background">#500000</color> <!-- dark red -->
-<color  name="gridview_background">#500000</color> <!-- dark red -->
+<color  name="gridview_background">#FFFFFF</color> <!-- dark red -->
 
 <color  name="textview_document_position_background">#FFFFFF</color> <!-- white-->
 <color  name="textview_document_position_textcolor">#000000</color> <!-- black-->
@@ -34,8 +35,8 @@
 
 <color  name="page_background">#FFFFFF</color> <!-- white-->
 <color  name="page_textcolor">#000000</color> <!-- black-->
-<color  name="pagelist_background">#000FFF</color> <!-- 000FFF-->
-<color  name="pagelist_textcolor">#FFF000</color> <!-- FFF000-->
+<color  name="pagelist_background">#FFFFFF</color> <!-- 000FFF-->
+<color  name="pagelist_textcolor">#000000</color> <!-- FFF000-->
 
 <color  name="details_background">#FFFFFF</color> <!-- white-->
 <color  name="details_textcolor">#000000</color> <!-- black-->
@@ -53,6 +54,11 @@
 
 <color  name="detail_textview_document_abstract_textcolor">#000000</color> <!-- black-->
 <color  name="detail_textview_document_abstract_background">#FFFFFF</color> <!-- white-->
+
+<style name="banner">
+	<item name="android:gravity">center</item>
+	<item name="android:background">@drawable/scielo</item>
+</style>
 
 <style name="MyTabHost" parent="android:Theme.Light">
 <item name="android:background">@color/default_background</item>
@@ -86,9 +92,8 @@
 </style>
 <style name="MyGridView" parent="@android:style/Widget.GridView">
 <item name="android:background">@color/gridview_background</item>
-<item name="android:textSize">15sp</item>
-<item name="android:gravity">center</item>
-<item name="android:numColumns">6</item>
+<item name="android:gravity">left</item>
+<item name="android:numColumns">10</item>
 
 </style>
 <style name="textview_document_position" parent="MyListView">
@@ -157,16 +162,13 @@
 <style name="page">
 	<item name="android:textColor">@color/page_textcolor</item>
 	<item name="android:background">@color/page_background</item>
-	<item name="android:textSize">15sp</item>	
-	<item name="android:autoLink">all</item>	
+	<item name="android:textSize">10sp</item>	
 	<item name="android:gravity">left</item>	
-	<item name="android:layout_width">40sp</item>
-	<item name="android:padding">10sp</item>
-	<item name="android:shadowColor">@color/tab_shadowcolor</item>
+		
 </style>
 <style name="pagelist">
 	<item name="android:textColor">@color/pagelist_textcolor</item>
-	<item name="android:background">@color/page_background</item>
+	<item name="android:background">@color/pagelist_background</item>
 </style>
 <style name="detail">
 	<item name="android:textColor">@color/details_textcolor</item>

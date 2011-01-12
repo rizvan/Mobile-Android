@@ -18,6 +18,6 @@
 <resources>
     <style name="Theme.SciELOApps" parent="android:Theme">
         <item name="android:windowBackground">@drawable/scielo</item> 
-               
+        <item name="android:background">#FFFFFF</item>       
     </style>
 </resources>

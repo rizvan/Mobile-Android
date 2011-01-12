@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -29,7 +31,7 @@ public class SearchDocsActivity extends SearchActivity {
 	private SearchDocsResult ssData;
 
 	GridView paginationGridView;    
-	ArrayAdapter<Page> aaPage;    
+	PaginationItemAdapter aaPage;    
 	ArrayList<Page> pagesList  = new ArrayList<Page>();
 	
 	Page page;
@@ -84,16 +86,19 @@ public class SearchDocsActivity extends SearchActivity {
 		       }
 		});
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
+	    //aaPage = new ButtonPageAdapter(this, R.layout.pagination,  pagesList);
 	    aaPage = new PaginationItemAdapter(this, R.layout.pagination,  pagesList);
-	    paginationGridView.setAdapter(aaPage);	    
+	    //aaPage.setList(pagesList);
+	    paginationGridView.setAdapter(aaPage);
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
-		       @Override
-			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
-		           page = pagesList.get(_index);
-		           pagePosition = page.getPosition( );
-		           doSearch();	
-		       }
-		    });
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	page = pagesList.get(position);
+		        pagePosition = page.getPosition( );
+		        doSearch();	
+	        }
+	    });
+
+	    //btn.setOnClickListener(new MyOnClickListener(position)); 
 
 	    //oldOnCreate();
 	    //onSearchRequested();
@@ -110,6 +115,7 @@ public class SearchDocsActivity extends SearchActivity {
     	return true;
     }
 	protected String getURL(){
+		//this.pagePosition = aaPage.getPageSelected();
 		return ssData.getURL(query, "20", this.filter, this.pagePosition);
 	}
 	protected void loadAndDisplayData(String result){

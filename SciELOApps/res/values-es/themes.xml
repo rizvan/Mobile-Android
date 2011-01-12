@@ -17,7 +17,8 @@
 
 <resources>
     <style name="Theme.SciELOApps" parent="android:Theme">
-        <item name="android:windowBackground">@drawable/scielo</item>  
+        <item name="android:windowBackground">@drawable/scielo</item> 
+          
         <item name="android:textSize">15sp</item>      
     </style>
 </resources>

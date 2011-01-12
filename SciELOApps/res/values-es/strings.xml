@@ -16,7 +16,8 @@
 	<string name="menuItemRefineByCollection">Refinar por colección</string>
 	<string name="menuItemRefineByLanguage">Refinar por idioma</string>
 	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
-	<string name="search_feed_journal">http://search.teste.scielo.org/mobile/getCollectionData.php?data=titles</string>
+	<string name="search_feed_journal_old">http://search.teste.scielo.org/mobile/getCollectionData.php?data=titles</string>
+	<string name="search_feed_journal">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title</string>
 	<string name="search_feed_issues">http://search.teste.scielo.org/mobile/getCollectionData.php?data=issues</string>
 	<string name="search_feed_issuetoc">http://search.teste.scielo.org/mobile/getCollectionData.php?data=issuetoc</string>
 	

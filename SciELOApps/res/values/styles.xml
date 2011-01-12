@@ -4,8 +4,8 @@
 <color  name="app_background">#FFFFFF</color> <!-- black -->
 <color  name="app_textcolor">#FFFFFF</color> <!-- white -->
 
-<color  name="default_background">#000000</color> <!-- black -->
-<color  name="default_textcolor">#FFFFFF</color> <!-- white -->
+<color  name="default_background">#FFFFFF</color> <!-- black -->
+<color  name="default_textcolor">#000000</color> <!-- white -->
 
 <color  name="tabhost_textcolor">#000000</color>  <!-- black  -->
 <color  name="tabhost_background">#500000</color><!-- white -->

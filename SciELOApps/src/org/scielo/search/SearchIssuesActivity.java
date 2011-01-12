@@ -48,7 +48,6 @@ public class SearchIssuesActivity extends SearchActivity {
 	Page page;
 
 	
-	private SearchService ss;
 	private String  collectionId = "";
 			
 	
@@ -124,7 +123,7 @@ public class SearchIssuesActivity extends SearchActivity {
 		    });
 
 	    //oldOnCreate();
-	    onSearchRequested();
+	    //onSearchRequested();
 	    handleIntent(getIntent());
 	}	
 	
@@ -159,45 +158,21 @@ public class SearchIssuesActivity extends SearchActivity {
     	return true;
     }
 	
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {    
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-	        case R.id.search:
-	            onSearchRequested();
-	            return true;
-	        default:
-	    	    SearchFilter sf = searchClusterCollection.getFilterBySubmenuId(item.getItemId());
-	            if (sf != null) {
-	            	addFilter(sf.getFilterExpression());
-	            	this.pagePosition = "";
-	            	doSearch();
-	            	
-	            }
-	            return true;	          	          
-        }
-    }
 	
-	@Override
-	public void doSearch() {
-		String queryurl;
-		String result;
-		queryurl = ssData.getURL(query, "20", this.filter, this.pagePosition, collectionId);
-		result = ss.call(queryurl);
-		treatSearchResult(result);
+	
+	protected String getURL(){
+		//this.pagePosition = aaPage.getPageSelected();
+		return ssData.getURL(query, "20", this.filter, this.pagePosition, collectionId);
+	}
+	protected void loadAndDisplayData(String result){
+		
+		ssData.loadData(result);
+		//pagesList = ssData.getPageList();
+		clusterCollection = ssData.getSearchClusterCollection();
+		
+		aa.notifyDataSetChanged();		
+		aaPage.notifyDataSetChanged();
 	}
 	
-
-	private void treatSearchResult(String result) {
-		if (result.length()>0){
-			
-			ssData.loadData(result);
-			//searchResultCount = ssData.getResultCount();
-			searchClusterCollection = ssData.getSearchClusterCollection();
-			
-			aa.notifyDataSetChanged();
-			aaPage.notifyDataSetChanged();
-		}
-	}
 	
 }

@@ -51,8 +51,6 @@ public class DocumentAdapter extends ArrayAdapter<Document> {
         abstr = item.getDocumentAbstracts();
         if (abstr.length()>300){
         	abstr = abstr.substring(1, 300) + "...";
-        	
-        	
         }
         abstrView.setText(abstr);
         //linkView.setText( item.getDocumentPDFLink());

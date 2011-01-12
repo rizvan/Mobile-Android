@@ -84,7 +84,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		       }
 		});
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+	    aaPage = (ArrayAdapter<Page>) new PaginationItemAdapter(this, R.layout.pagination, pagesList);
 	    paginationGridView.setAdapter(aaPage);	    
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override

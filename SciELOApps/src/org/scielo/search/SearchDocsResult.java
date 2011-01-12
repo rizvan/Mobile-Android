@@ -11,42 +11,24 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class SearchDocsResult {
+public class SearchDocsResult extends SearchResult{
 	// Parse to get translated text
-	protected JSONArray docs;
-	protected JSONObject facetFields;
+	private JSONObject facetFields;	
+	private String generic_PDF_URL;	
 	
-	protected String generic_PDF_URL;	
-	
-	protected ArrayList<Document> searchResultList;
-	protected ClusterCollection clusterCollection;
-	
-	protected SciELONetwork jc;
-	protected PairsList subjects;
-	protected PairsList languages;
+	private ArrayList<Document> searchResultList;
+		
+	private SciELONetwork jc;
+	private PairsList subjects;
+	private PairsList languages;
 	
 	//private Pagination pagination;
-	private ArrayList<Page> pagesList;
-	protected static final String TAG = "SearchServiceData";
-	private String resultCount;
-	private int currentItem;
-	private String url;
 	
-	public int getCurrentItem() {
-		return currentItem;
-	}
-
-	public void setCurrentItem(int currentItem) {
-		this.currentItem = currentItem;
-	}
-
-	public void setResultCount(String resultCount) {
-		this.resultCount = resultCount;
-	}
-
+	
 	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
+		super(url, pagesList);
 		clusterCollection = new ClusterCollection();
-    	this.url = url;
+    	
     	this.generic_PDF_URL = _generic_pdf_url;		
 		
     	this.jc = jc;
@@ -54,7 +36,7 @@ public class SearchDocsResult {
     	this.languages = languages;
 		    	
 		this.searchResultList = searchResultList;
-		this.pagesList = pagesList;
+		
 		
 		
     }
@@ -67,10 +49,12 @@ public class SearchDocsResult {
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
 		}	
-		if (pagePosition.length()>0){
-			query = query + "&start=" + pagePosition;
-		} else {
+		if (pagePosition.length()==0 || pagePosition.equals("0")){
+			
 			query = query + "&start=0" ;
+			
+		} else {
+			query = query + "&start=" + new Integer( new Integer(pagePosition) - 1).toString();
 			
 			
 		}
@@ -92,18 +76,14 @@ public class SearchDocsResult {
 		}
 		return u + query;						
 	}
-	public void loadData(String _data){		
-		JSONObject jsonObject;
+	@Override
+	public void loadControlData(String _data){		
 		JSONObject diaServerResponse;
 		JSONObject response;
 		JSONObject responseParameters;
 		
-		String from;
-		int itemsPerPage;
-		
 		
 		try {
-			jsonObject = new JSONObject(_data);
 			diaServerResponse = jsonObject.getJSONArray("diaServerResponse").getJSONObject(0);
 			Log.d("SearchServiceData","1");	
 			this.facetFields = diaServerResponse.getJSONObject("facet_counts").getJSONObject("facet_fields");
@@ -124,38 +104,12 @@ public class SearchDocsResult {
 			this.docs = response.getJSONArray("docs");
 			Log.d("SearchServiceData","8");	
 			
-			
-			currentItem = 0;
-			Log.d("SearchServiceData","9");	
-			if ((from.length() == 0) ) {
-				currentItem = 1;
-			} else {
-				currentItem = Integer.parseInt(from);	
-			}
-			Log.d("SearchServiceData","10");	
-			
-			loadClusterCollection();
-			
-			Pagination pagination = new Pagination();
-			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			pagination.generatePageList(this.pagesList);
-			
-			loadSearchResultList();
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
-	
-	public String getResultCount(){
-		return this.resultCount;
-	}
-	
-	public ClusterCollection getSearchClusterCollection(){
-		return this.clusterCollection;
-	}
-	
-
-	private boolean loadClusterCollection() {
+	@Override
+	public boolean loadClusterCollection() {
     	boolean r = true;
     	int i_clusters = 0;
     	int i = 0;
@@ -240,7 +194,7 @@ public class SearchDocsResult {
     	Log.d(TAG, "loadClusterCollection fim mesmo");
     	return r;
 	}
-	
+	@Override
 	public void loadSearchResultList(){
 		JSONObject resultItem ;
 		int k;
@@ -345,6 +299,12 @@ public class SearchDocsResult {
 				Log.d(TAG, "JSONException loadResultList " + new Integer(i).toString() + " " + last, e);	
 	        } 
 		}
+	}
+
+	public ArrayList<Document> getSearchResultList() {
+		// TODO Auto-generated method stub
+		
+		return searchResultList;
 	}
 
 	

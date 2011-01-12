@@ -27,7 +27,7 @@ public class SearchService {
 		HttpURLConnection con = null;
 		String payload = "";
 		String u = "";
-		
+		String line = "";
 		
 		
 		try { 
@@ -51,7 +51,12 @@ public class SearchService {
 			// Read results from the query
 			BufferedReader reader = new BufferedReader(
 					new InputStreamReader(con.getInputStream(), "UTF-8"));
-			payload = reader.readLine();
+			
+			while ((line = reader.readLine()) != null) {
+				//old_line = line;
+				payload = payload.concat(line);
+			}
+			
 			reader.close();			
 		} catch (IOException e) {
 			Log.e(TAG, "IOException", e);
@@ -63,6 +68,7 @@ public class SearchService {
 				con.disconnect();
 			}	
 		}	
+		
 		return payload;
 	}
 }

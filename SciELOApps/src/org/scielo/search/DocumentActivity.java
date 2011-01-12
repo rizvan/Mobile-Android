@@ -59,8 +59,8 @@ public class DocumentActivity extends Activity{
 	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", "0");
 			String result = ss.call(queryurl);
 			ssData.loadData(result);
-			//ssData.loadSearchResultList();
-			//searchResultList = ssData.getSearchResultList();
+			
+			searchResultList = ssData.getSearchResultList();
 
 			Document doc = searchResultList.get(0);
 			TextViewIssue.setText(doc.getIssueLabel());
@@ -99,6 +99,7 @@ public class DocumentActivity extends Activity{
       // item.getItemId()
         switch (item.getItemId()) {
         case R.id.menuItemSendEmail:
+        	//final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         	final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         	emailIntent.setType("text/plain");
         	//emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "roberta.takenaka@scielo.org");
