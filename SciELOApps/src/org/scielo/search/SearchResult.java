@@ -15,28 +15,22 @@ public class SearchResult {
 	protected ClusterCollection clusterCollection;
 	protected ArrayList<Page> pagesList;
 
-	protected String resultCount;
-	protected int currentItem;
-	protected String from = "";
-	protected int itemsPerPage;
+	
 	protected JSONObject jsonObject;
 	
 	protected static final String TAG = "SearchResult";
 	protected String url;
 		
+	protected Pagination pagination;
 	
 	public int getCurrentItem() {
-		return currentItem;
+		return pagination.getCurrentItem();
 	}
 
-	public void setCurrentItem(int currentItem) {
-		this.currentItem = currentItem;
+	public String getResultCount(){
+		return this.pagination.getResultCount();
 	}
-
-	public void setResultCount(String resultCount) {
-		this.resultCount = resultCount;
-	}
-
+	
 	SearchResult( String url, ArrayList<Page> pagesList ){
 		clusterCollection = new ClusterCollection();
 		this.pagesList = pagesList;
@@ -45,26 +39,21 @@ public class SearchResult {
 	protected String getURL() {
 		return url;						
 	}
+	
+	
 	protected void loadData(String _data){		
 		try {
 			jsonObject = new JSONObject(_data);
+			pagination = new Pagination();
+			loadPaginationAndDocsData();
+			//pagination.loadData(from, resultCount, currentItem, itemsPerPage, paginationType);
+			pagination.generatePages(this.pagesList);
 			
-			loadControlData(_data);
 			
-			currentItem = 0;
-			Log.d("SearchResult","9");	
-			if (from.length() == 0 || from.equals("0")) {
-				currentItem = 1;
-			} else {
-				currentItem = Integer.parseInt(from);	
-			}
 			Log.d("SearchResult","10");	
 			
 			loadClusterCollection();
 			
-			Pagination pagination = new Pagination();
-			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			pagination.generatePageList(this.pagesList);
 			
 			loadSearchResultList();
 		} catch(JSONException e){
@@ -72,15 +61,15 @@ public class SearchResult {
 		}
 	}
 	
-	public String getResultCount(){
-		return this.resultCount;
-	}
+	
+
+	
 	
 	public ClusterCollection getSearchClusterCollection(){
 		return this.clusterCollection;
 	}
 	
-	protected void loadControlData(String _data){
+	protected void loadPaginationAndDocsData(){
 		
 	}
 	protected boolean loadClusterCollection() {

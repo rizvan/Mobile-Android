@@ -89,7 +89,7 @@ public class TOCActivity extends SearchActivity {
 	    query_id = issue.getId();
 	    collectionId = getIntent().getStringExtra("collection_id");
 		
-		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc, subjects, languages, searchResultList);
+		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc, subjects, languages, searchResultList, pagesList);
 		ss = new SearchService();
 		
 		TextView header = (TextView) findViewById(R.id.TextViewHeader);
@@ -120,9 +120,8 @@ public class TOCActivity extends SearchActivity {
 	    paginationGridView.setAdapter(aaPage);	    
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
-			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
-		           page = pagesList.get(_index);
-		           pagePosition = page.getPosition( );
+			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
+		           selectedPageIndex = _index;
 		           doSearch();	
 		       }
 		    });
@@ -134,7 +133,7 @@ public class TOCActivity extends SearchActivity {
 		
 	protected String getURL(){
 		//this.pagePosition = aaPage.getPageSelected();
-		return ssData.getURL(query, "20", this.filter, this.pagePosition, collectionId);
+		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
 	protected void loadAndDisplayData(String result){
 		

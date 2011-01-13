@@ -5,31 +5,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
 
-public class SearchIssuesResult {
-	// Parse to get translated text
-	protected JSONArray docs;
-	protected JSONObject facetFields;
+public class SearchIssuesResult extends SearchResult {
 	
-	protected String generic_PDF_URL;	
-	
+	protected JSONObject facetFields;	
+	protected String generic_PDF_URL;		
 	protected ArrayList<Issue> searchResultList;
-	protected ClusterCollection clusterCollection;
 	
 	protected SciELONetwork jc;
 	protected PairsList subjects;
 	protected PairsList languages;
-	
-	private Pagination pagination;
-	protected static final String TAG = "SearchServiceData";
-	private String resultCount;
-	private int currentItem;
-	private String url;
 	
 	private Journal journal;
 	
@@ -41,31 +30,16 @@ public class SearchIssuesResult {
 		this.journal = journal;
 	}
 
-	public int getCurrentItem() {
-		return currentItem;
-	}
-
-	public void setCurrentItem(int currentItem) {
-		this.currentItem = currentItem;
-	}
-
-	public void setResultCount(String resultCount) {
-		this.resultCount = resultCount;
-	}
-
-	SearchIssuesResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Issue> searchResultList){
-		clusterCollection = new ClusterCollection();
-    	this.url = url;
-    	
+	
+	SearchIssuesResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Issue> searchResultList, ArrayList<Page> pagesList){
+		super(url, pagesList);
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
-		    	
 		this.searchResultList = searchResultList;
-		this.pagination = new Pagination();	
 		this.journal = new Journal();
     }
-	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition, String colid) {
+	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex, String colid) {
 		String u = "";
 		String query = "";
 		//URLEncoder.encode(queryURL, "UTF-8")
@@ -77,8 +51,8 @@ public class SearchIssuesResult {
 		if (colid.length()>0){
 			query = query + "&col=" + colid;
 		}
-		if (pagePosition.length()>0){
-			query = query + "&start=" + pagePosition;
+		if (selectedPageIndex>0){
+			query = query + "&start=" + pagination.getPageSearchKey(selectedPageIndex);
 		} else {
 			query = query + "&start=1" ;
 		}
@@ -100,45 +74,13 @@ public class SearchIssuesResult {
 		}
 		return u + query;						
 	}
-	public void loadData(String _data){		
-		JSONObject jsonObject;
-		
-		String from = "";
-		int itemsPerPage = 1000;
-		
-		
+	public void loadPaginationAndDocsData(){		
 		try {
-			jsonObject = new JSONObject(_data);
 			docs = jsonObject.getJSONArray("issues");
-			resultCount = new Integer(docs.length()).toString();
-			currentItem = 0;
-			Log.d("SearchServiceData","9");	
-			if ((from.length() == 0) ) {
-				currentItem = 1;
-			} else {
-				currentItem = Integer.parseInt(from);	
-			}
-			Log.d("SearchServiceData","10");	
-			itemsPerPage = 3000;
-			loadClusterCollection();
-			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			loadSearchResultList();
+			pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
-	}
-	
-	public String getResultCount(){
-		return this.resultCount;
-	}
-	
-	public ClusterCollection getSearchClusterCollection(){
-		return this.clusterCollection;
-	}
-	
-
-	private boolean loadClusterCollection() {
-		return true;
 	}
 	
 	public void loadSearchResultList(){

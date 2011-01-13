@@ -20,33 +20,58 @@ public class SearchJournalsResult extends SearchResult {
 	protected PairsList subjects;
 	protected PairsList languages;
 	
+	String journalsTotal;
 	
+	
+	public String getJournalsTotal() {
+		return journalsTotal;
+	}
 	
 	SearchJournalsResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
 		super(url, pagesList);
-		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
-		    	
 		this.searchResultList = searchResultList;
-				
     }
-	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
-		return url;
+	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
+		String r;
+		r = url;
+		r = r + "?";
+		if (pagination!=null){
+			if (pagination.getPagesList()!=null){				
+				r = r + "&startkey=" + '"' + pagination.getPageSearchKey(selectedPageIndex) + '"';
+				if (selectedPageIndex + 1 < pagination.getPagesList().size()){
+					r = r + "&endkey=" + '"' + pagination.getPageSearchKey(selectedPageIndex+1) + '"';
+				}		
+			} else {
+				r = r + "&startkey=" + '"' + "A" + '"';
+				r = r + "&endkey=" + '"' + "B" + '"';
+				
+			}
+		} else {
+			r = r + "&startkey=" + '"' + "A" + '"';
+			r = r + "&endkey=" + '"' + "B" + '"';
+			
+		}
+		
+		return r;
 	}
-	public void loadControlData(String _data){		
+	public void loadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("rows");
-			resultCount = new Integer(docs.length()).toString();
-			itemsPerPage = 3000;
-			from = "1";
+			String total;
 			
+			total = new Integer(docs.length()).toString() ;
+			
+			journalsTotal = jsonObject.getString("total_rows") ;
+			
+			pagination.generateLetters();
+			pagination.loadData("1", total , docs.length(), 2);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
-	
 	
 
 	public boolean loadClusterCollection() {
@@ -161,6 +186,7 @@ public class SearchJournalsResult extends SearchResult {
 			try {				
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i).getJSONObject("value");
+				r.setPosition( new Integer(i + pagination.getCurrentItem()).toString() + "/" + new Integer(pagination.getResultCount()).toString() );
 				
 				try {
 					r.setTitle(  resultItem.getString("title"));	

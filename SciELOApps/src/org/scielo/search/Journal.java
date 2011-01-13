@@ -6,7 +6,7 @@ public class Journal {
 	private String collection;
 	private String collectionId;
 	private String subjects;
-	
+	private String position;
 	public Journal() {
 		super();
 		id = "";
@@ -14,7 +14,17 @@ public class Journal {
 		collection ="";
 		collectionId = "";
 		subjects = "";
+		position = "";
 	}
+	
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 	public String getSubjects() {
 		return subjects;
 	}

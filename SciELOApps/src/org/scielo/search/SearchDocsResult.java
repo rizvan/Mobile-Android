@@ -27,20 +27,13 @@ public class SearchDocsResult extends SearchResult{
 	
 	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
 		super(url, pagesList);
-		
-    	
     	this.generic_PDF_URL = _generic_pdf_url;		
-		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
-		    	
 		this.searchResultList = searchResultList;
-		
-		
-		
     }
-	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition) {
+	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
 		String u = "";
 		String query = "";
 		//URLEncoder.encode(queryURL, "UTF-8")
@@ -49,14 +42,10 @@ public class SearchDocsResult extends SearchResult{
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
 		}	
-		if (pagePosition.length()==0 || pagePosition.equals("0")){
-			
+		if (selectedPageIndex==0){
 			query = query + "&start=0" ;
-			
 		} else {
-			query = query + "&start=" + pagePosition;
-			
-			
+			query = query + "&start=" + this.pagination.getPageSearchKey(selectedPageIndex);
 		}
 		if (searchExpression.length()>0){
 			try {
@@ -77,7 +66,7 @@ public class SearchDocsResult extends SearchResult{
 		return u + query;						
 	}
 	@Override
-	public void loadControlData(String _data){		
+	public void loadPaginationAndDocsData(){		
 		JSONObject diaServerResponse;
 		JSONObject response;
 		JSONObject responseParameters;
@@ -93,17 +82,14 @@ public class SearchDocsResult extends SearchResult{
 			responseParameters = diaServerResponse.getJSONObject("responseHeader").getJSONObject("params");
 			Log.d("SearchResult_DOC","4");	
 			
-			resultCount = response.get("numFound").toString();				
-			Log.d("SearchResult_DOC","5");	
 			
-			from = responseParameters.get("start").toString();
-			Log.d("SearchResult_DOC","6");	
-			itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
-			Log.d("SearchResult_DOC","7");	
+			String resultCount = response.get("numFound").toString();				
+			String from = responseParameters.get("start").toString();
+			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			
+			pagination.loadData(from, resultCount, itemsPerPage, 1);
+
 			this.docs = response.getJSONArray("docs");
-			Log.d("SearchResult_DOC","8");	
-			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
@@ -225,7 +211,7 @@ public class SearchDocsResult extends SearchResult{
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i);
 				//r.setPosition( new Integer(i+currentItem).toString() );
-				r.setPosition( new Integer(i + this.currentItem).toString() + "/" + new Integer(this.resultCount).toString() );
+				r.setPosition( new Integer(i + pagination.getCurrentItem()).toString() + "/" + new Integer(pagination.getResultCount()).toString() );
 				
 				try {
 					r.setDocumentTitle(  resultItem.getJSONArray("ti").getString(0));	

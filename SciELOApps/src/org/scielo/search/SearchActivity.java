@@ -42,7 +42,7 @@ public class SearchActivity extends Activity {
 	
 	
 	protected String filter = "";
-	protected String pagePosition = "";
+	protected int selectedPageIndex = 0;
 	protected String query = "";
 	protected String query_id = "";
 	protected ClusterCollection clusterCollection;
@@ -120,7 +120,7 @@ public class SearchActivity extends Activity {
 	    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(item.getItemId());
 	            if (sf != null) {
 	            	addFilter(sf.getFilterExpression());
-	            	this.pagePosition = "";
+	            	this.selectedPageIndex = 0;
 	            	doSearch();
 	            	
 	            }

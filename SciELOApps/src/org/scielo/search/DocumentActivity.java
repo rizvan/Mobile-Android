@@ -56,7 +56,7 @@ public class DocumentActivity extends Activity{
 	    TextViewAbstract = (TextView) findViewById(R.id.TextViewDocumentAbstract);
 	    TextViewCollection = (TextView) findViewById(R.id.TextViewDocumentCollection);	
 	    if (getIntent().getStringExtra("query").length()>0){
-	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", "0");
+	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", 0);
 			String result = ss.call(queryurl);
 			ssData.loadData(result);
 			
@@ -106,8 +106,6 @@ public class DocumentActivity extends Activity{
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
 			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + pdf );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
-
-			
             res = true;
             break;
         case R.id.menuItemDownloadPDF:

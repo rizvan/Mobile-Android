@@ -5,57 +5,38 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
 
-public class TOCResult {
-	// Parse to get translated text
-	protected JSONArray docs;
+public class TOCResult extends SearchResult {
+
 	protected JSONObject facetFields;
 	
 	protected String generic_PDF_URL;	
 	
 	protected ArrayList<Document> searchResultList;
-	protected ClusterCollection clusterCollection;
 	
 	protected SciELONetwork jc;
 	protected PairsList subjects;
 	protected PairsList languages;
 	
-	private Pagination pagination;
-	protected static final String TAG = "SearchServiceData";
-	private String resultCount;
-	private int currentItem;
-	private String url;
 	
-	public int getCurrentItem() {
-		return currentItem;
-	}
 
-	public void setCurrentItem(int currentItem) {
-		this.currentItem = currentItem;
-	}
-
-	public void setResultCount(String resultCount) {
-		this.resultCount = resultCount;
-	}
-
-	TOCResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList){
-		clusterCollection = new ClusterCollection();
-    	this.url = url;
-    	this.generic_PDF_URL = _generic_pdf_url;		
+	TOCResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList){
+		super(url, pagesList);
+		this.generic_PDF_URL = _generic_pdf_url;		
 		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
 		    	
 		this.searchResultList = searchResultList;
-		this.pagination = new Pagination();		
+				
     }
-	public String getURL(String searchExpression, String itemsPerPage, String filter, String pagePosition, String collectionId) {
+	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex, String collectionId) {
 		String u = "";
 		String query = "";
 		//URLEncoder.encode(queryURL, "UTF-8")
@@ -67,8 +48,8 @@ public class TOCResult {
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
 		}	
-		if (pagePosition.length()>0){
-			query = query + "&start=" + pagePosition;
+		if (selectedPageIndex>0){
+			query = query + "&start=" + pagination.getPageSearchKey(selectedPageIndex);
 		} else {
 			query = query + "&start=1" ;
 		}
@@ -90,42 +71,20 @@ public class TOCResult {
 		}
 		return u + query;						
 	}
-	public void loadData(String _data){		
-		JSONObject jsonObject;
-		
-		String from;
-		int itemsPerPage;
-		
-		
+	
+	public void loadPaginationAndDocsData(){		
 		try {
-			jsonObject = new JSONObject(_data);
-		
-			this.docs = jsonObject.getJSONArray("issuetoc");
-			Log.d("SearchServiceData","8");	
-			resultCount = new Integer( this.docs.length()).toString();				
-			currentItem = 1;
-			from = "1";
-			itemsPerPage = 1000;
-			Log.d("SearchServiceData","10");	
+			docs = jsonObject.getJSONArray("issuetoc");
+			pagination.loadData("1", new Integer(docs.length()).toString(), docs.length(), 0);
 			
-			loadClusterCollection();
-			pagination.loadData(from, resultCount, currentItem, itemsPerPage);
-			loadSearchResultList();
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
 	
-	public String getResultCount(){
-		return this.resultCount;
-	}
-	
-	public ClusterCollection getSearchClusterCollection(){
-		return this.clusterCollection;
-	}
 	
 
-	private boolean loadClusterCollection() {
+	public boolean loadClusterCollection() {
     	boolean r = true;
     	
     	return r;
@@ -150,7 +109,7 @@ public class TOCResult {
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i);
 				//r.setPosition( new Integer(i+currentItem).toString() );
-				r.setPosition( new Integer(i + this.currentItem).toString() + "/" + new Integer(this.resultCount).toString() );
+				//r.setPosition( new Integer(i + this.currentItem).toString() + "/" + new Integer(this.resultCount).toString() );
 				
 				try {
 					r.setDocumentTitle( clean( resultItem.getJSONArray("ti").getString(0)));	

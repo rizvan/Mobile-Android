@@ -76,7 +76,8 @@ public class SearchIssuesActivity extends SearchActivity {
 	    collectionId = getIntent().getStringExtra("collection_id");
 	    //serviceURL = serviceURL.replace("REPLACE_PID", document.getId());
 		
-		ssData = new SearchIssuesResult(serviceURL, jc, subjects, languages, searchResultList);
+		ssData = new SearchIssuesResult( serviceURL, jc, subjects, languages, searchResultList, pagesList);
+		
 		ssData.setJournal(journal);
 		ss = new SearchService();
 		
@@ -112,8 +113,8 @@ public class SearchIssuesActivity extends SearchActivity {
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
-		           page = pagesList.get(_index);
-		           pagePosition = page.getPosition( );
+		           
+		           selectedPageIndex = _index;
 		           doSearch();	
 		       }
 		    });
@@ -126,7 +127,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	
 	protected String getURL(){
 		//this.pagePosition = aaPage.getPageSelected();
-		return ssData.getURL(query, "20", this.filter, this.pagePosition, collectionId);
+		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
 	protected void loadAndDisplayData(String result){
 		

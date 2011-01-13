@@ -2,16 +2,16 @@ package org.scielo.search;
 
 public class Page {
 	private String label;
-	private String position;
+	private String searchkey;
 	
-	Page(String _label, String _position){
+	Page(String _label, String _searchkey){
 		this.label = _label;
-		this.position = _position;
+		this.searchkey = _searchkey;
 	}
 	public String getLabel(){
 		return this.label;
 	}
-	public String getPosition(){
-		return this.position;
+	public String getSearchKey(){
+		return this.searchkey;
 	}
 }

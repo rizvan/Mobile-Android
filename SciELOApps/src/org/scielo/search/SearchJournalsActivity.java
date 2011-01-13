@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 
 
@@ -39,6 +40,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 	protected Page page;
 	
+
 
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,9 +91,9 @@ public class SearchJournalsActivity extends SearchActivity {
 	    paginationGridView.setAdapter(aaPage);	    
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
-			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
-		           page = pagesList.get(_index);
-		           pagePosition = page.getPosition( );
+			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
+		           selectedPageIndex = _index;
+		           
 		           doSearch();	
 		       }
 		    });
@@ -112,7 +114,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	
 
 	protected String getURL(){
-		return ssData.getURL(query, "20", this.filter, this.pagePosition);
+		return ssData.getURL(query, "", this.filter, this.selectedPageIndex);
 	}
 	protected void loadAndDisplayData(String result){
 		
@@ -120,7 +122,8 @@ public class SearchJournalsActivity extends SearchActivity {
 		ssData.loadData(result);
 		//searchResultCount = ssData.getResultCount();
 		clusterCollection = ssData.getSearchClusterCollection();
-		
+		TextView t = (TextView) findViewById(R.id.TextViewHeader);
+		t.setText(ssData.getJournalsTotal());
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

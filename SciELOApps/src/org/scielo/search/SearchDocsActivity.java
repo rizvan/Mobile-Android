@@ -33,7 +33,7 @@ public class SearchDocsActivity extends SearchActivity {
 	protected GridView paginationGridView;    
 	protected PaginationItemAdapter aaPage;    
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
-	protected Page page;
+	
 	
 		
 	@Override	
@@ -92,8 +92,8 @@ public class SearchDocsActivity extends SearchActivity {
 	    paginationGridView.setAdapter(aaPage);
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        	page = pagesList.get(position);
-		        pagePosition = page.getPosition( );
+	        	//page = pagesList.get(position);
+		        selectedPageIndex = position;
 		        doSearch();	
 	        }
 	    });
@@ -116,7 +116,7 @@ public class SearchDocsActivity extends SearchActivity {
     }
 	protected String getURL(){
 		//this.pagePosition = aaPage.getPageSelected();
-		return ssData.getURL(query, "20", this.filter, this.pagePosition);
+		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex);
 	}
 	protected void loadAndDisplayData(String result){
 		
