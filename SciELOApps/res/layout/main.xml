@@ -9,8 +9,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        
-        style="MyTabHostLinearLayout"
+    	style="@style/MyTabHostLinearLayout"
         >
         <TextView 
 		android:id="@+id/banner" 
@@ -22,35 +21,16 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            style="MyTabWidget"
+            android:layout_height="wrap_content"
+            style="@style/MyTabWidget"
             >
-            	
-            	<!-- TextView 
-            	  android:id="@+id/tab_journals"
-            	  android:text="@string/tab_list_journals_name"
-            	  style="tab">            	
-            	</TextView>
-            	<TextView  
-            	  android:id="@+id/tab_documents"
-            	  android:text="@string/tab_list_docs_name"
-            	  style="tab">            	
-            	</TextView>
-            	<TextView 
-            	  android:id="@+id/tab_issues"
-            	  android:text="@string/tab_list_issues_name"
-            	  style="tab">            	
-            	</TextView>
-            	<TextView 
-            	  android:id="@+id/tab_settings"
-            	  android:text="@string/tab_settings_name"
-            	  style="tab">            	
-            	</TextView-->
-            </TabWidget>
+
+           </TabWidget>
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            
              />
             
         

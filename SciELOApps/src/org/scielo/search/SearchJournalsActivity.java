@@ -46,7 +46,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
-	    
+	    header = "";
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
 	    serviceURL = this.getResources().getString(R.string.search_feed_journal);
 	    
@@ -93,7 +93,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
-		           
+		           header = ssData.getJournalsTotal() + " /" + pagesList.get(_index).getLabel()+ ":";
 		           doSearch();	
 		       }
 		    });
@@ -122,8 +122,12 @@ public class SearchJournalsActivity extends SearchActivity {
 		ssData.loadData(result);
 		//searchResultCount = ssData.getResultCount();
 		clusterCollection = ssData.getSearchClusterCollection();
-		TextView t = (TextView) findViewById(R.id.TextViewHeader);
-		t.setText(ssData.getJournalsTotal());
+		if (header.length()==0){
+			header = ssData.getJournalsTotal();
+		} else {
+			header = header + ssData.getResultCount();
+		}
+		// ssData.getJournalsTotal();
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

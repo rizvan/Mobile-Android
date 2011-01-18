@@ -51,6 +51,7 @@ public class SearchResult {
 			
 			
 			Log.d("SearchResult","10");	
+			clusterCollection.clear();
 			
 			loadClusterCollection();
 			

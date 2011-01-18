@@ -4,52 +4,52 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cluster {
-	private HashMap<String,SearchFilter> list;
-	private ArrayList<SearchFilter> array;
+	private HashMap<String,SearchFilter> values;
+	private HashMap<String,SearchFilter> menuId;
+	private ArrayList<SearchFilter> valuesSorted;
 	private String id;
 	
 	Cluster(String _id){
-		list = new HashMap<String,SearchFilter>();
-		array = new ArrayList<SearchFilter>();
+		menuId = new HashMap<String,SearchFilter>();
+		values = new HashMap<String,SearchFilter>();		
+		valuesSorted = new ArrayList<SearchFilter>();
 		id = _id;
 	}
 	
 	public String getId(){
 		return this.id;
 	}
-	public void addFilter(SearchFilter filter){	
+	public void addFilter(SearchFilter filter, int menuId, String filterCode){	
 		if (filter!=null){		
-		   this.list.put(filter.getCode(),filter);
-		   this.array.add(filter);
+		   this.values.put(filterCode,filter);
+		   this.valuesSorted.add(filter);
+		   this.menuId.put(new Integer(menuId).toString() ,filter);
 		}
 	}
 	public SearchFilter getFilterById(String id){		
-		return this.list.get(id);
+		return this.values.get(id);
 	}
 	public SearchFilter getFilterByIndex(int index){		
-		return this.array.get(index);
+		return this.valuesSorted.get(index);
 	}
 	public SearchFilter getFilterBySubmenuId(int submenuId){		
-		int i = 0;
-		boolean found = false;
-		SearchFilter sf = null;
-		
-		while (i < getFilterCount() && !found){
-			if (getFilterByIndex(i).getSubmenuId() == submenuId){
-				found = true;
-				sf = getFilterByIndex(i);
-			}			
-			i++;
-		}
-		if (found){
-			return sf;	
-		} else {
-			return null;
-		}		
+		return this.menuId.get(new Integer(submenuId).toString());
 	}
-	
+	public String display(){
+		String r = "";
+		SearchFilter filter;
+		for (int i=0;i<valuesSorted.size();i++){
+			filter = valuesSorted.get(i);
+			r = r + new Integer( filter.getSubmenuId()).toString() + "; " ;
+			r = r + filter.getClusterCode()+ "; " ;
+			r = r + filter.getCode() + "; " ;
+			r = r + filter.getCaption() + "; " ;
+			r = r + "\n";
+		}
+		return r;
+	}
 	public int getFilterCount(){
-		return this.list.size();
+		return this.values.size();
 	}
 	
 }

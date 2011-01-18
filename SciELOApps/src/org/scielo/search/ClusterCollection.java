@@ -6,48 +6,50 @@ import java.util.HashMap;
 import android.util.Log;
 
 public class ClusterCollection {
-	private HashMap<String,Cluster> list;
-	private ArrayList<Cluster> sorted;
+	private HashMap<String,Cluster> clusterValues;
+	private ArrayList<Cluster> sortedClusters;
 	
 	ClusterCollection(){
-		list = new HashMap<String,Cluster>();	
-		sorted = new ArrayList<Cluster>();		
+		clusterValues = new HashMap<String,Cluster>();	
+		sortedClusters = new ArrayList<Cluster>();		
 	}
 	
 	public boolean add(Cluster cluster){
 		boolean r = false;
 		Log.d("ClusterCollection.addCluster", "inicio" );
     	if (cluster != null){
-    		Log.d("ClusterCollection.addCluster", "list.add" );
+    		Log.d("ClusterCollection.addCluster", "clusterValues.add" );
         	
-    		this.list.put(cluster.getId(),cluster);
-    		sorted.add(cluster);
+    		this.clusterValues.put(cluster.getId(),cluster);
+    		sortedClusters.add(cluster);
     		r = true;
     	}
     	return r;
 	}
 	public Cluster getItemById(String id){		
-		return list.get(id);
+		return clusterValues.get(id);
 	}
 	public Cluster getItemByIndex(int index){		
-		return sorted.get(index);
+		return sortedClusters.get(index);
 	}
 	public int getCount(){
-		return this.list.size();
+		return this.clusterValues.size();
 	}
 	public void clear(){
-		this.list.clear();
-		this.sorted.clear();
+		this.clusterValues.clear();
+		this.sortedClusters.clear();
 	}
 	
 	
-	public SearchFilter getFilterBySubmenuId(int submenuId){
+	public SearchFilter getFilterBySubmenuId(int submenuId, String test){
 		int i = 0;
 		boolean found = false;
 		SearchFilter sf = null;
+		test = "";
 		
 		while (i < getCount() && !found){
 			sf = getItemByIndex(i).getFilterBySubmenuId(submenuId);
+			test = test + getItemByIndex(i).display();
 			found = (sf != null);
 			i++;
 		}

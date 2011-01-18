@@ -1,28 +1,14 @@
 package org.scielo.search;
 
-
-
-
 import android.app.Activity;
-
-
 import android.view.MenuItem;
 import android.view.SubMenu;
-
-
 import android.view.View;
-
-
-
 import android.widget.TextView;
 //import android.widget.EditText;
-
-
 //import org.json.JSONArray;
-
 //import org.json.JSONException;
 //import org.json.JSONObject;
-
 import android.app.SearchManager;
 import android.content.Intent;
 //import android.view.KeyEvent;
@@ -31,16 +17,15 @@ import android.view.Menu;
 //import android.view.SubMenu;
 //import android.view.SubMenu;
 //import android.view.View.OnKeyListener;
-
 import android.widget.ListView;
-
 
 public class SearchActivity extends Activity {
 	View searchButton;	
-	TextView messageTextView;
+	TextView headerTextView;
 	ListView searchResultListView;
-	
-	
+
+	protected int selectedMenuId;
+	protected String header = "";
 	protected String filter = "";
 	protected int selectedPageIndex = 0;
 	protected String query = "";
@@ -62,6 +47,7 @@ public class SearchActivity extends Activity {
 	    } else {
 	    	query = query_id;
 	    }
+	    header = query;
 	    doSearch();
 	}
 	
@@ -82,7 +68,8 @@ public class SearchActivity extends Activity {
         SubMenu subMenu;
         Cluster cluster;
         SearchFilter sf;
-        
+        int i;
+        int teste;
     	//menu.clear();
         //this.mymenu = menu;
        
@@ -92,15 +79,13 @@ public class SearchActivity extends Activity {
     		subMenu.clear();
     		
     		if (clusterCollection.getCount()>0){
-	    		cluster = this.clusterCollection.getItemById(this.clusterCodeOrder[index-1]);
+	    		cluster = clusterCollection.getItemById(clusterCodeOrder[index-1]);
 	    		if (cluster!=null){
-	        		for (int i=0;i<cluster.getFilterCount();i++){
+	        		for (i=0;i<cluster.getFilterCount();i++){
 	        			sf = cluster.getFilterByIndex(i);
-	        			subMenuItem = subMenu.add(menuItem.getItemId(),  sf.getSubmenuId(), i, sf.getCaption() + " (" + sf.getResultCount() + ")" ); 
-	        			sf.setSubmenuId(subMenuItem.getItemId());
-	        			
+	        			subMenuItem = subMenu.add(menuItem.getItemId(), sf.getSubmenuId(), i, sf.getCaption() + " (" + sf.getResultCount() + ")" );
+	        			teste = subMenuItem.getItemId();
 	        	    } 
-	    			
 	    		}
     		}
     	}
@@ -112,18 +97,24 @@ public class SearchActivity extends Activity {
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {    
         super.onOptionsItemSelected(item);
+        int teste;
+        String teste2 = "";
         switch (item.getItemId()) {
 	        case R.id.search:
 	            onSearchRequested();
 	            return true;
 	        default:
-	    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(item.getItemId());
-	            if (sf != null) {
-	            	addFilter(sf.getFilterExpression());
-	            	this.selectedPageIndex = 0;
-	            	doSearch();
-	            	
-	            }
+	        	if (!item.hasSubMenu()){
+	        		teste = item.getItemId();
+		    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(teste, teste2);
+		            if (sf != null) {
+		            	addFilter(sf.getFilterExpression());
+		            	this.selectedPageIndex = 0;
+		            	header = header + "/" + sf.getCaption();
+		            	doSearch();	            	
+		            }	        	
+		            
+	        	}
 	            return true;	          	          
         }
     }
@@ -138,6 +129,7 @@ public class SearchActivity extends Activity {
 		String result;
 		queryurl = getURL();
 		result = ss.call(queryurl);
+		
 		presentResult(result);
 	}
 	
@@ -146,6 +138,9 @@ public class SearchActivity extends Activity {
 		if (result.length()>0){
 			loadAndDisplayData(result);
 			//aaPage.notifyDataSetChanged();
+			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
+			headerTextView.setText(header);
+			
 		}
 	}	
 	

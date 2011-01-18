@@ -23,211 +23,6 @@ public final class R {
     }
     public static final class attr {
     }
-    public static final class color {
-        /**  white 
-         */
-        public static final int app_background=0x7f070000;
-        /**  black 
- black 
- black 
-         */
-        public static final int app_textcolor=0x7f070001;
-        public static final int blank=0x7f070024;
-        /**  white 
- white 
- white 
-         */
-        public static final int default_background=0x7f070002;
-        /**  black 
- black 
- black 
-         */
-        public static final int default_textcolor=0x7f070003;
-        /**  black
- black
- black
-         */
-        public static final int detail_textview_document_abstract_background=0x7f070023;
-        /**  white
- white
- white
-         */
-        public static final int detail_textview_document_abstract_textcolor=0x7f070022;
-        /**  black
- black
- black
-         */
-        public static final int detail_textview_document_authors_background=0x7f07001f;
-        /**  dark red
- dark red
- dark red
-         */
-        public static final int detail_textview_document_authors_textcolor=0x7f07001e;
-        /**  black
- black
- black
-         */
-        public static final int detail_textview_document_collection_background=0x7f070021;
-        /**  white
- white
- white
-         */
-        public static final int detail_textview_document_collection_textcolor=0x7f070020;
-        /**  black
- black
- black
-         */
-        public static final int detail_textview_document_position_background=0x7f07001a;
-        /**  white
- white
- white
-         */
-        public static final int detail_textview_document_position_textcolor=0x7f07001b;
-        /**  black
- black
- black
-         */
-        public static final int detail_textview_document_title_background=0x7f07001c;
-        /**  white
- white
- white
-         */
-        public static final int detail_textview_document_title_textcolor=0x7f07001d;
-        /**  black
- FFF000
- black
-         */
-        public static final int details_background=0x7f070018;
-        /**  white
- white
- white
-         */
-        public static final int details_textcolor=0x7f070019;
-        /**  dark red 
- dark red 
- dark red 
-         */
-        public static final int gridview_background=0x7f07000b;
-        /**  white 
- white 
- white 
-         */
-        public static final int listview_background=0x7f07000a;
-        /**  white
- white
- white
-         */
-        public static final int page_background=0x7f070016;
-        /**  white
- white
- white
-         */
-        public static final int page_textcolor=0x7f070017;
-        /**  black
-         */
-        public static final int pagelist_background=0x7f070025;
-        /**  000FFF
-         */
-        public static final int pagelist_textcolor=0x7f070026;
-        /**  white 
- white 
- white 
-         */
-        public static final int tab_background=0x7f070007;
-        /**  gray 
- gray 
- gray 
-         */
-        public static final int tab_shadowcolor=0x7f070008;
-        /**  white 
- white 
- white 
-         */
-        public static final int tab_textcolor=0x7f070006;
-        /**  black  
- black  
- black  
-         */
-        public static final int tabhost_background=0x7f070005;
-        /**  white 
- white 
- white 
-         */
-        public static final int tabhost_textcolor=0x7f070004;
-        /**  gray 
- gray 
- gray 
-         */
-        public static final int tabview_background=0x7f070009;
-        /**  dark red
-         */
-        public static final int textview_collection_background=0x7f070029;
-        /**  white
-         */
-        public static final int textview_collection_textcolor=0x7f07002a;
-        /**  black
- black
- black
-         */
-        public static final int textview_document_abstract_background=0x7f070015;
-        /**  white
- white
- white
-         */
-        public static final int textview_document_abstract_textcolor=0x7f070014;
-        /**  black
- black
- black
-         */
-        public static final int textview_document_authors_background=0x7f070011;
-        /**  dark red
- dark red
- dark red
-         */
-        public static final int textview_document_authors_textcolor=0x7f070010;
-        /**  black
- black
- black
-         */
-        public static final int textview_document_collection_background=0x7f070013;
-        /**  white
- white
- white
-         */
-        public static final int textview_document_collection_textcolor=0x7f070012;
-        /**  dark red 
- dark red 
- dark red 
-         */
-        public static final int textview_document_position_background=0x7f07000c;
-        /**  white
- white
- white
-         */
-        public static final int textview_document_position_textcolor=0x7f07000d;
-        /**  black
- black
- black
-         */
-        public static final int textview_document_title_background=0x7f07000e;
-        /**  white
- white
- white
-         */
-        public static final int textview_document_title_textcolor=0x7f07000f;
-        /**  white
-         */
-        public static final int textview_journal_background=0x7f070027;
-        /**  white
-         */
-        public static final int textview_journal_textcolor=0x7f070028;
-        /**  black
-         */
-        public static final int textview_subject_background=0x7f07002b;
-        /**  white
-         */
-        public static final int textview_subject_textcolor=0x7f07002c;
-    }
     public static final class drawable {
         public static final int acroread=0x7f020000;
         public static final int background=0x7f020001;
@@ -238,49 +33,45 @@ public final class R {
         public static final int ic_tab_albums_grey=0x7f020006;
         public static final int ic_tab_albums_white=0x7f020007;
         public static final int icon=0x7f020008;
-        public static final int scielo=0x7f020009;
-        public static final int tab_issues=0x7f02000a;
-        public static final int tab_journals=0x7f02000b;
-        public static final int tab_search=0x7f02000c;
-        public static final int tab_settings=0x7f02000d;
+        public static final int logo=0x7f020009;
+        public static final int scielo=0x7f02000a;
+        public static final int tab_issues=0x7f02000b;
+        public static final int tab_journals=0x7f02000c;
+        public static final int tab_search=0x7f02000d;
+        public static final int tab_settings=0x7f02000e;
     }
     public static final class id {
-        public static final int TextViewCollection=0x7f0a0009;
-        public static final int TextViewDocumentAbstract=0x7f0a0005;
-        public static final int TextViewDocumentAuthors=0x7f0a0004;
-        public static final int TextViewDocumentCollection=0x7f0a0001;
-        public static final int TextViewDocumentID=0x7f0a0002;
-        public static final int TextViewDocumentPDFLink=0x7f0a0016;
-        public static final int TextViewDocumentPosition=0x7f0a0000;
-        public static final int TextViewDocumentTitle=0x7f0a0003;
-        public static final int TextViewFolder=0x7f0a0018;
-        public static final int TextViewHeader=0x7f0a001a;
-        public static final int TextViewID=0x7f0a0014;
-        public static final int TextViewISSN=0x7f0a000c;
-        public static final int TextViewIssue=0x7f0a000a;
-        public static final int TextViewPosition=0x7f0a000b;
-        public static final int TextViewSendTo=0x7f0a0006;
-        public static final int TextViewStatus=0x7f0a0017;
-        public static final int TextViewSubjects=0x7f0a000d;
-        public static final int TextViewTime=0x7f0a0015;
-        public static final int TextViewTitle=0x7f0a0008;
-        public static final int banner=0x7f0a0010;
-        public static final int button_send=0x7f0a0007;
-        public static final int definition=0x7f0a0013;
-        public static final int label=0x7f0a000e;
-        public static final int list=0x7f0a001b;
-        public static final int list_items=0x7f0a000f;
-        public static final int menuItemDownloadPDF=0x7f0a0023;
-        public static final int menuItemRefineByCollection=0x7f0a0021;
-        public static final int menuItemRefineByJournal=0x7f0a001e;
-        public static final int menuItemRefineByLanguage=0x7f0a0020;
-        public static final int menuItemRefineBySubject=0x7f0a001d;
-        public static final int menuItemRefineByYear=0x7f0a001f;
-        public static final int menuItemSendEmail=0x7f0a0022;
-        public static final int page=0x7f0a0011;
-        public static final int paginationListView=0x7f0a0019;
-        public static final int search=0x7f0a001c;
-        public static final int word=0x7f0a0012;
+        public static final int TextViewCollection=0x7f090009;
+        public static final int TextViewDocumentAbstract=0x7f090005;
+        public static final int TextViewDocumentAuthors=0x7f090004;
+        public static final int TextViewDocumentCollection=0x7f090001;
+        public static final int TextViewDocumentID=0x7f090002;
+        public static final int TextViewDocumentPosition=0x7f090000;
+        public static final int TextViewDocumentTitle=0x7f090003;
+        public static final int TextViewHeader=0x7f090014;
+        public static final int TextViewISSN=0x7f09000c;
+        public static final int TextViewIssue=0x7f09000a;
+        public static final int TextViewPosition=0x7f09000b;
+        public static final int TextViewSendTo=0x7f090006;
+        public static final int TextViewSubjects=0x7f09000d;
+        public static final int TextViewTitle=0x7f090008;
+        public static final int banner=0x7f090010;
+        public static final int button_send=0x7f090007;
+        public static final int definition=0x7f090013;
+        public static final int label=0x7f09000e;
+        public static final int list=0x7f090016;
+        public static final int list_items=0x7f09000f;
+        public static final int menuItemDownloadPDF=0x7f09001e;
+        public static final int menuItemRefineByCollection=0x7f09001c;
+        public static final int menuItemRefineByJournal=0x7f090019;
+        public static final int menuItemRefineByLanguage=0x7f09001b;
+        public static final int menuItemRefineBySubject=0x7f090018;
+        public static final int menuItemRefineByYear=0x7f09001a;
+        public static final int menuItemSendEmail=0x7f09001d;
+        public static final int page=0x7f090011;
+        public static final int paginationListView=0x7f090015;
+        public static final int search=0x7f090017;
+        public static final int word=0x7f090012;
     }
     public static final class layout {
         public static final int doc=0x7f030000;
@@ -293,15 +84,14 @@ public final class R {
         public static final int main=0x7f030007;
         public static final int pagination=0x7f030008;
         public static final int result=0x7f030009;
-        public static final int saveddoc=0x7f03000a;
-        public static final int search=0x7f03000b;
-        public static final int word=0x7f03000c;
+        public static final int search=0x7f03000a;
+        public static final int word=0x7f03000b;
     }
     public static final class menu {
-        public static final int menu=0x7f090000;
-        public static final int menu_details=0x7f090001;
-        public static final int menu_journals=0x7f090002;
-        public static final int menu_search=0x7f090003;
+        public static final int menu=0x7f080000;
+        public static final int menu_details=0x7f080001;
+        public static final int menu_journals=0x7f080002;
+        public static final int menu_search=0x7f080003;
     }
     public static final class string {
         public static final int app_name=0x7f060001;
@@ -342,40 +132,37 @@ public final class R {
         public static final int tab_list_journals_name=0x7f060003;
         public static final int tab_settings_name=0x7f060005;
         public static final int text_sendTo=0x7f060022;
+        public static final int total=0x7f060026;
     }
     public static final class style {
-        public static final int MyGridView=0x7f080005;
-        public static final int MyListView=0x7f080004;
-        public static final int MyMenu=0x7f080011;
-        /**  white
- white
+        public static final int MyGridView=0x7f070011;
+        public static final int MyListView=0x7f070012;
+        public static final int MyMenu=0x7f070019;
+        public static final int MyTabHost=0x7f070000;
+        public static final int MyTabHostLinearLayout=0x7f070001;
+        public static final int MyTabView=0x7f070003;
+        public static final int MyTabWidget=0x7f070002;
+        public static final int TextView=0x7f070014;
+        public static final int TextView1=0x7f070015;
+        public static final int TextView2=0x7f070016;
+        public static final int Theme_Document=0x7f070017;
+        /**  item name="android:textViewStyle">@style/TextView1</item> 
          */
-        public static final int MyTabHost=0x7f080000;
-        public static final int MyTabHostLinearLayout=0x7f080001;
-        public static final int MyTabView=0x7f080003;
-        public static final int MyTabWidget=0x7f080002;
-        public static final int Theme_SciELOApps=0x7f08001a;
-        /**  black
-         */
-        public static final int banner=0x7f080012;
-        public static final int detail=0x7f080010;
-        public static final int detail_textview_document_abstract=0x7f08000d;
-        public static final int detail_textview_document_authors=0x7f08000b;
-        public static final int detail_textview_document_collection=0x7f08000c;
-        public static final int detail_textview_document_pdf=0x7f08000e;
-        public static final int detail_textview_document_position=0x7f080009;
-        public static final int detail_textview_document_title=0x7f08000a;
-        public static final int document_page=0x7f080018;
-        public static final int page=0x7f08000f;
-        public static final int pagelist=0x7f080019;
-        public static final int textview_collection=0x7f080015;
-        public static final int textview_document_authors=0x7f080008;
-        public static final int textview_document_position=0x7f080006;
-        public static final int textview_document_title=0x7f080007;
-        public static final int textview_header=0x7f080013;
-        public static final int textview_issue=0x7f080016;
-        public static final int textview_journal=0x7f080017;
-        public static final int textview_subject=0x7f080014;
+        public static final int Theme_SciELOApps=0x7f070013;
+        public static final int banner=0x7f070018;
+        public static final int document_page=0x7f07000e;
+        public static final int page=0x7f07000f;
+        public static final int pagelist=0x7f070010;
+        public static final int textview_collection=0x7f070008;
+        public static final int textview_document_abstract=0x7f070009;
+        public static final int textview_document_authors=0x7f070007;
+        public static final int textview_document_position=0x7f070004;
+        public static final int textview_document_title=0x7f070005;
+        public static final int textview_header=0x7f07000a;
+        public static final int textview_highlight=0x7f070006;
+        public static final int textview_issue=0x7f07000c;
+        public static final int textview_journal=0x7f07000d;
+        public static final int textview_subject=0x7f07000b;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;

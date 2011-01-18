@@ -5,12 +5,7 @@
   android:layout_height="wrap_content" 
   style="@style/pagelist"
   > 
-  <!-- Button 
-  	 android:id="@+id/page"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     style="@style/page"
-     /> -->
+  
   <TextView 
     android:id="@+id/page"  
     android:orientation="horizontal" 

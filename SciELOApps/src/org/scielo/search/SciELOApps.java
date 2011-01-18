@@ -12,7 +12,6 @@ public class SciELOApps extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
-          
 	    
 	    Resources res = getResources(); // Resource object to get Drawables
 	    
@@ -21,24 +20,13 @@ public class SciELOApps extends TabActivity {
 	    Intent intent;  // Reusable Intent for each tab
 	    
 	    // Create an Intent to launch an Activity for the tab (to be reused)
-	    
-	    
-	    
 	    intent = new Intent().setClass(this, SearchDocsActivity.class);
-	    spec = tabHost.newTabSpec("tab_search_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);	    
+	    spec = tabHost.newTabSpec("tab_search_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);
 	    tabHost.addTab(spec);
-	    
 	    
 	    intent = new Intent().setClass(this, SearchJournalsActivity.class);
 	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
 	    tabHost.addTab(spec);
-        
-        /*
-	    intent = new Intent().setClass(this, SearchIssuesActivity.class);
-	    spec = tabHost.newTabSpec("tab_list_issues").setIndicator(res.getString(R.string.tab_list_issues_name)).setContent(intent);
-	    tabHost.addTab(spec);
-         */
-	    
 
 	    tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 40;
 	    tabHost.getTabWidget().getChildAt(1).getLayoutParams().height = 40;
@@ -47,8 +35,5 @@ public class SciELOApps extends TabActivity {
 	    
 	    tabHost.setup();
 	    tabHost.setCurrentTab(0);
-	    
-	    
-	    
 	}
 }

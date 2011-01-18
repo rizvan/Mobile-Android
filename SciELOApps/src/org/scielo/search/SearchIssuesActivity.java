@@ -134,7 +134,7 @@ public class SearchIssuesActivity extends SearchActivity {
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
-		
+		header = ssData.getJournal().getTitle() + " " + ssData.getJournal().getId();
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

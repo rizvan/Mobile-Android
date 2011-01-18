@@ -140,7 +140,7 @@ public class TOCActivity extends SearchActivity {
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
-		
+		header = issue.getIssueLabel(true);
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

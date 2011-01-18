@@ -5,31 +5,25 @@
     android:orientation="vertical"
     style="@style/MyTabView"
     >
-    
-    <GridView   
-       android:id="@+id/paginationListView" 
-       android:orientation="vertical" 
-       android:layout_width="fill_parent" 
-       android:layout_height="wrap_content"
-       style="@style/MyGridView" 
-       />
-   <TextView 
+    <TextView 
 	    android:id="@+id/TextViewHeader"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    style="@style/textview_header"
-	  />
- 
-   
-  <ListView 
-       android:id="@+id/list" 
-       android:orientation="vertical" 
-         android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
-    style="@style/MyListView"
-    
-       
+	  /> 
+    <GridView   
+       android:id="@+id/paginationListView" 
+       android:orientation="horizontal" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       style="@style/MyGridView"
        />
-   
-  
+   	
+ 	<ListView 
+       	android:id="@+id/list" 
+       	android:orientation="vertical" 
+       	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent" 
+    	
+       />
 </LinearLayout>

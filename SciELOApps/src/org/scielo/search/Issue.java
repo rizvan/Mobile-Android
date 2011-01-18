@@ -61,8 +61,12 @@ public class Issue {
 		
 		return r;
 	}
-	public String getIssueLabel(){
-		String r = journal.getTitle() + " ";
+	public String getIssueLabel(boolean displayTitle){
+		String r = "";
+		if (displayTitle){
+			r = journal.getTitle() + " ";	
+		}
+		
 		r = r + format("v.", " ", volume);
 		r = r + format("n.", " ", number);
 		r = r + format("s.", " ", suppl);

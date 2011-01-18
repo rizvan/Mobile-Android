@@ -33,7 +33,7 @@
 	<string name="search_hint">búsqueda</string>
 	<string name="search_expression_hint">búsqueda</string>
 	<string name="search_button">buscar</string>
-<string name="menuItemDownloadPDF">Download PDF</string>
+	<string name="menuItemDownloadPDF">Download PDF</string>
 	
-
+	
 </resources>

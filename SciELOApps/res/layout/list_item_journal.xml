@@ -4,42 +4,38 @@
 	android:layout_height="wrap_content"
 	android:layout_width="fill_parent" 
 	android:orientation="vertical"
-	android:paddingBottom="5px" 
-	android:paddingTop="5px" 
-	android:paddingLeft="5px"
-	android:background="#FFFFFF"
 	>
 	
 	<TextView 
 		android:id="@+id/TextViewPosition" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_document_position"
 		
 		/>
 	<TextView 
 		android:id="@+id/TextViewTitle" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_journal"
+		style="@style/textview_highlight"
 		
 		/>
 	<TextView 
 		android:id="@+id/TextViewISSN" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_collection"
 		
 		/>
 	<TextView 
 		android:id="@+id/TextViewCollection" 
-		android:layout_width="wrap_content" 
+		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
 		style="@style/textview_collection"
 		/>
 	<TextView 
 		android:id="@+id/TextViewSubjects" 
-		android:layout_width="wrap_content" 
+		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
 		style="@style/textview_subject"
 		/>

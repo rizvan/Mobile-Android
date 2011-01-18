@@ -42,7 +42,7 @@ public class IssueAdapter extends ArrayAdapter<Issue> {
         TextView titleView = (TextView)resultView.findViewById(R.id.TextViewIssue);
         //TextView linkView = (TextView)resultView.findViewById(R.id.TextViewDocumentPDFLink);
         
-        titleView.setText(item.getIssueLabel());
+        titleView.setText(item.getIssueLabel(false));
         
 
         return resultView;

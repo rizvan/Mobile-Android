@@ -13,7 +13,7 @@
 		</activity>
 		<activity android:name=".SearchDocsActivity" 
                   android:label="@string/search_button" 
-                  android:launchMode="singleInstance">
+                  android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -23,15 +23,11 @@
         <activity android:name=".SearchJournalsActivity" 
                   android:label="@string/search_button" 
                   android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable" 
-                       android:resource="@xml/searchable" />
+            
         </activity>
         <activity android:name=".SearchIssuesActivity" >            
         </activity>       
-        <activity android:name=".DocumentActivity">
+        <activity android:name=".DocumentActivity" android:theme="@style/Theme.Document">
             <intent-filter>
         	    <action android:name="android.intent.action.SEND"/>
         	    <category android:name="android.intent.category.BROWSABLE"/>

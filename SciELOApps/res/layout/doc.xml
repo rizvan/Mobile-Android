@@ -3,13 +3,12 @@
 	android:layout_height="fill_parent"
 	android:layout_width="fill_parent" 
 	android:orientation="vertical"
-	style="@style/document_page">
+	>
 <LinearLayout
 xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:layout_height="fill_parent"
 	android:layout_width="fill_parent" 
 	android:orientation="vertical"
-	style="@style/detail"
 	
 >
 
@@ -17,28 +16,28 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/TextViewDocumentPosition" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		style="@style/detail_textview_document_position"
+		style="@style/textview_document_position"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentCollection" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		style="@style/detail_textview_document_collection"
+		style="@style/textview_collection"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentID" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		style="@style/detail_textview_document_position"
+		style="@style/textview_document_position"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentTitle" 
 		android:layout_width="wrap_content" 		
 		android:layout_height="wrap_content" 
-		style="@style/detail_textview_document_title"		
+		style="@style/textview_highlight"		
 		/>
 	
 	
@@ -46,22 +45,21 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/TextViewDocumentAuthors" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		style="@style/detail_textview_document_authors"
+		style="@style/textview_document_authors"
 		/>
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentAbstract" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		android:padding="5px"
-		style="@style/detail_textview_document_abstract"
+		style="@style/textview_document_abstract"
 		/>
 	
 	<!-- TextView 
 		android:id="@+id/TextViewDocumentPDFLink" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
-		style="@style/detail_textview_document_pdf" 
+		style="@style/textview_document_pdf" 
 		
 		/>	 -->
 

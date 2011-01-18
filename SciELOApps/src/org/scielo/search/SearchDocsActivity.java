@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class SearchDocsActivity extends SearchActivity {
 	
@@ -58,6 +59,7 @@ public class SearchDocsActivity extends SearchActivity {
 		ss = new SearchService();
 		
 		
+
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 
@@ -107,11 +109,9 @@ public class SearchDocsActivity extends SearchActivity {
 	}	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-      
+    	super.onCreateOptionsMenu(menu);      
     	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu, menu);
-        
+    	inflater.inflate(R.menu.menu, menu);        
     	return true;
     }
 	protected String getURL(){
@@ -123,6 +123,7 @@ public class SearchDocsActivity extends SearchActivity {
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
+		header = header + ":"+ ssData.getResultCount();
 		
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();

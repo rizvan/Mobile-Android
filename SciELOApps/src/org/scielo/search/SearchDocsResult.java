@@ -116,6 +116,8 @@ public class SearchDocsResult extends SearchResult{
     	
     	Cluster cluster;
     	Log.d(TAG, "loadClusterCollection inicio");
+    	
+    	
     	for (i_clusters=0;i_clusters<a_clusters.length();i_clusters++){
     		cluster_id="";
     		Log.d(TAG,  new Integer(i_clusters).toString() + "/" + new Integer(a_clusters.length()).toString());
@@ -158,7 +160,7 @@ public class SearchDocsResult extends SearchResult{
 	    				searchFilter = new SearchFilter(filterName, filterResultCount,  filterCode, cluster.getId() );
 	    				searchFilter.setSubmenuId(subMenuId);
 	        			Log.d(TAG,  " addFilter ");
-	    				cluster.addFilter(searchFilter);        			
+	    				cluster.addFilter(searchFilter, subMenuId, filterCode);        			
 	    				Log.d(TAG, "fim " + cluster_id + ":" + filterCode);	 				
 	    			} catch (JSONException e) {
 	    				// TODO Auto-generated catch block
@@ -178,6 +180,12 @@ public class SearchDocsResult extends SearchResult{
 			Log.d(TAG, "fim loop " + cluster_id);
     	}
     	Log.d(TAG, "loadClusterCollection fim mesmo");
+    	
+    	String t="";
+    	for (i=0;i<clusterCollection.getCount();i++){
+    		t = t + clusterCollection.getItemByIndex(i).display();
+    	}
+    	Log.d(TAG, t);
     	return r;
 	}
 	@Override
