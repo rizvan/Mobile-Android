@@ -58,16 +58,7 @@
 	<item>www.scielo.oces.mctes.pt</item>
 	<item>socialsciences.scielo.org</item>
 </string-array>
-<string-array name="subjects_id">
-    <item>Human Sciences</item>
-	<item>Health Sciences</item>
-	<item>Biological Sciences</item>
-	<item>Agricultural Sciences</item>
-	<item>Exact And Earth Sciences</item>
-	<item>Engineering</item>
-    <item>Linguistics, Letters and Arts</item>	
-    <item>nd</item>
-</string-array>
+
 <string-array name="subjects_name">
     <item>Ciencias humanas</item>
 	<item>Ciencias da saúde</item>

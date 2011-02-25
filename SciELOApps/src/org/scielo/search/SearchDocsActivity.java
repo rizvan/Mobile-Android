@@ -16,15 +16,15 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
+
 
 public class SearchDocsActivity extends SearchActivity {
 	
 	private String serviceURL = "";
 	
 	private SciELONetwork jc;
-	private PairsList languages;
-	private PairsList subjects;
+	private IdAndValueObjects languages;
+	private IdAndValueObjects subjects;
 
     private Document document;
     private ArrayAdapter<Document> aa;
@@ -45,20 +45,23 @@ public class SearchDocsActivity extends SearchActivity {
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    serviceURL = this.getResources().getString(R.string.search_feed);
 	    
-		jc = new SciELONetwork(
+		jc = new SciELONetwork();
+		jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
 			getResources().getStringArray(R.array.log_collections_code), 
 			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name));
-		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name));
+		subjects = new IdAndValueObjects();
+		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+				getResources().getStringArray(R.array.subjects_name),true);
+		languages = new IdAndValueObjects();
+		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+				getResources().getStringArray(R.array.languages_name), false);
 		
-		ssData = new SearchDocsResult(serviceURL, this.getResources().getString(R.string.pdf_url) ,jc, subjects, languages, searchResultList, pagesList);
+		//setClusterCollection(jc, subjects, languages);
+		clusterCollection = new ClusterCollection();
+		ssData = new SearchDocsResult(serviceURL, clusterCollection, jc, subjects, languages, searchResultList, pagesList, this.getResources().getString(R.string.pdf_url));
 		ss = new SearchService();
-		
-		
 
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
@@ -67,25 +70,25 @@ public class SearchDocsActivity extends SearchActivity {
 	    aa = new DocumentAdapter(this, resID, searchResultList,false);
 	    searchResultListView.setAdapter(aa);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
-		       @Override
-			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
-		           document = searchResultList.get(_index);
-		           //showDialog(SEARCH_RESULT_DIALOG);
-		           
-		           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
-		           //docIntent.putExtra("DATA", selectedSearchResult);
-		           docIntent.putExtra("query", "");
-		           docIntent.putExtra("id", document.getDocumentId());
-		           docIntent.putExtra("title", document.getDocumentTitle());
-		           docIntent.putExtra("authors", document.getDocumentAuthors());
-		           docIntent.putExtra("pdf", document.getDocumentPDFLink());
-		           docIntent.putExtra("collection", document.getDocumentCollection());
-		           docIntent.putExtra("abstract", document.getDocumentAbstracts());
-		           docIntent.putExtra("issue", document.getIssueLabel());
-		           startActivity(docIntent);
-		           
-	               
-		       }
+	       @Override
+		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
+	           document = searchResultList.get(_index);
+	           //showDialog(SEARCH_RESULT_DIALOG);
+	           
+	           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
+	           //docIntent.putExtra("DATA", selectedSearchResult);
+	           docIntent.putExtra("query", "");
+	           docIntent.putExtra("id", document.getDocumentId());
+	           docIntent.putExtra("title", document.getDocumentTitle());
+	           docIntent.putExtra("authors", document.getDocumentAuthors());
+	           docIntent.putExtra("pdf", document.getDocumentPDFLink());
+	           docIntent.putExtra("collection", document.getDocumentCollection());
+	           docIntent.putExtra("abstract", document.getDocumentAbstracts());
+	           docIntent.putExtra("issue", document.getIssueLabel());
+	           startActivity(docIntent);
+	           
+               
+	       }
 		});
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
 	    //aaPage = new ButtonPageAdapter(this, R.layout.pagination,  pagesList);
@@ -95,6 +98,7 @@ public class SearchDocsActivity extends SearchActivity {
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	        	//page = pagesList.get(position);
+	        	//header = header + ssData.getResultCount();
 		        selectedPageIndex = position;
 		        doSearch();	
 	        }
@@ -123,7 +127,7 @@ public class SearchDocsActivity extends SearchActivity {
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
-		header = header + ":"+ ssData.getResultCount();
+		//header = header + ssData.getResultCount();
 		
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();

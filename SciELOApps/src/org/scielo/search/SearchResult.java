@@ -31,10 +31,10 @@ public class SearchResult {
 		return this.pagination.getResultCount();
 	}
 	
-	SearchResult( String url, ArrayList<Page> pagesList ){
-		clusterCollection = new ClusterCollection();
+	SearchResult(ArrayList<Page> pagesList ){
+		//clusterCollection = new ClusterCollection();
 		this.pagesList = pagesList;
-		this.url = url;
+		
     }
 	protected String getURL() {
 		return url;						
@@ -47,24 +47,14 @@ public class SearchResult {
 			pagination = new Pagination();
 			loadPaginationAndDocsData();
 			//pagination.loadData(from, resultCount, currentItem, itemsPerPage, paginationType);
-			pagination.generatePages(this.pagesList);
-			
-			
-			Log.d("SearchResult","10");	
-			clusterCollection.clear();
 			
 			loadClusterCollection();
-			
-			
 			loadSearchResultList();
+			pagination.generatePages(this.pagesList); //ordem obrigatoria
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
-	
-	
-
-	
 	
 	public ClusterCollection getSearchClusterCollection(){
 		return this.clusterCollection;

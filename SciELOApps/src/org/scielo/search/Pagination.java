@@ -13,7 +13,7 @@ public class Pagination {
 	private int type;
 	private ArrayList<Page> pagesList;
 	protected static final String TAG = "Pagination";
-	private String[] letters ;
+	private String letters;
 	
     Pagination(){		    	
     }
@@ -27,14 +27,10 @@ public class Pagination {
 		} else {
 			currentItem = Integer.parseInt(from);	
 		}
+    	this.letters="";
 	}
 	
-    public String[] getLetters() {
-		return letters;
-	}
-	public void setLetters(String[] letters) {
-		this.letters = letters;
-	}
+    
 	public String getFrom() {
 		return from;
 	}
@@ -54,7 +50,16 @@ public class Pagination {
 		return this.pagesList;
 	}
 	public String getPageSearchKey(int index){
-		return pagesList.get(index).getSearchKey();
+		String r="";
+		if (index < this.pagesList.size()){
+			r = pagesList.get(index).getSearchKey();
+		} else {
+			if (this.type==2){
+				r = "{}";
+			}
+		}
+			
+		return r;
 	}
 	public void generatePages(ArrayList<Page> pagesList){
 		switch (type){
@@ -91,21 +96,18 @@ public class Pagination {
 		}
 		
 	}
-	public void generateLetters(){
-		int i;
-	    int k=0;
-	    letters = new String[91-65];
-		for (i = 65; i < 91; i++){			
-	    	letters[k++] = String.valueOf((char)i);	    	
-	    }
+	public void addLetter(String letter){
+		if (!letters.contains("," + letter )) {
+			letters = letters + "," + letter ;
+		}
 	}
 	public void generateAlphabeticPages(ArrayList<Page> pagesList){
 		int i;	    
 	    Page p;
-		
+		String[] l = letters.substring(1).split(","); 
 	    pagesList.clear();
-	    for (i = 0; i < letters.length; i++){
-	    	p = new Page(letters[i], letters[i]);
+	    for (i = 0; i < l.length; i++){
+	    	p = new Page( l[i],  l[i]);
 	    	pagesList.add(p);
 	    }
 	}

@@ -53,9 +53,13 @@ public class SearchActivity extends Activity {
 	
     
 	
-	public void addFilter(String _filter){
-		if (this.filter.length()>0){
-			this.filter = this.filter + " AND " + _filter;
+	protected void addFilter(String _filter){
+		if (this.filter.length()>0){			
+			if (this.filter.contains(_filter.substring(0, 2))){
+				this.filter = _filter;
+			} else {
+				this.filter = this.filter + " AND " + _filter;
+			}
 		} else {
 			this.filter = _filter;
 		}			
@@ -64,13 +68,12 @@ public class SearchActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
     	
     	MenuItem menuItem;
-    	MenuItem subMenuItem;
+    	//MenuItem subMenuItem;
         SubMenu subMenu;
         Cluster cluster;
         SearchFilter sf;
         int i;
-        int teste;
-    	//menu.clear();
+        //menu.clear();
         //this.mymenu = menu;
        
         for (int index=1; index < menu.size(); index++){
@@ -83,8 +86,8 @@ public class SearchActivity extends Activity {
 	    		if (cluster!=null){
 	        		for (i=0;i<cluster.getFilterCount();i++){
 	        			sf = cluster.getFilterByIndex(i);
-	        			subMenuItem = subMenu.add(menuItem.getItemId(), sf.getSubmenuId(), i, sf.getCaption() + " (" + sf.getResultCount() + ")" );
-	        			teste = subMenuItem.getItemId();
+	        			subMenu.add(menuItem.getItemId(), sf.getSubmenuId(), i, sf.displayCaptionAndCount());
+	        			//teste = subMenuItem.getItemId();
 	        	    } 
 	    		}
     		}
@@ -98,6 +101,7 @@ public class SearchActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {    
         super.onOptionsItemSelected(item);
         int teste;
+        
         String teste2 = "";
         switch (item.getItemId()) {
 	        case R.id.search:
@@ -108,9 +112,10 @@ public class SearchActivity extends Activity {
 	        		teste = item.getItemId();
 		    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(teste, teste2);
 		            if (sf != null) {
-		            	addFilter(sf.getFilterExpression());
+		            	teste2 = sf.getFilterExpression();
+		            	addFilter(teste2);
 		            	this.selectedPageIndex = 0;
-		            	header = header + "/" + sf.getCaption();
+		            	header = header + "/" + sf.getCaption() + ":";
 		            	doSearch();	            	
 		            }	        	
 		            
@@ -143,5 +148,49 @@ public class SearchActivity extends Activity {
 			
 		}
 	}	
+
+	protected void setClusterCollection(SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages){
+		
+		clusterCollection = new ClusterCollection();
+		Cluster cluster;
+		IdAndValueObjects idAndValueObjects;
+		IdAndValue idAndValue;
+		int subMenuId;
+		SearchFilter searchFilter;
+		int k;
+		SciELOCollection c;
+		for (int i=0;i<clusterCodeOrder.length;i++){
+			idAndValueObjects = null;
+			
+			cluster = new Cluster(clusterCodeOrder[i]);
+			if (clusterCodeOrder[i].equals("in")){
+				for (k=0;k<jc.getCount() ;k++){        		
+		    		c = jc.getItemByIndex(k);
+		    		
+		    		searchFilter = new SearchFilter(c.getName(), "0", c.getId(), cluster.getId() );
+					subMenuId = k + (i * 100) ;
+		    		searchFilter.setSubmenuId(subMenuId);
+		    		cluster.addFilter(searchFilter, subMenuId, c.getId());        			
+				}
+				clusterCollection.add(cluster);
+			} else {
+				if (clusterCodeOrder[i].equals("ac")){
+					idAndValueObjects = subjects;
+				} else {
+	    			if (clusterCodeOrder[i].equals("la")){
+	    				idAndValueObjects = languages;
+	    			}		        				
 	
+				}
+		    	for (k=0;k<idAndValueObjects.getCount();k++){        		
+		    		idAndValue = idAndValueObjects.getItemByIndex(k);
+		    		searchFilter = new SearchFilter(idAndValue.getValue(), "0",  idAndValue.getId(), cluster.getId() );
+					subMenuId = k + (i * 100) ;
+		    		searchFilter.setSubmenuId(subMenuId);
+		    		cluster.addFilter(searchFilter, subMenuId, idAndValue.getId());        			
+				}
+				clusterCollection.add(cluster);
+			}
+		}
+	}
 }

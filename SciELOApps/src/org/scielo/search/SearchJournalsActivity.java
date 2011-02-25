@@ -2,6 +2,8 @@ package org.scielo.search;
 
 import java.util.ArrayList;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,22 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
 
 
 
 
 public class SearchJournalsActivity extends SearchActivity {
 	
-	private String serviceURL = "";
-	private String filter = "";
 	
 	//private String searchResultCount;
 	//private String currSearchExpr = "";
     
 	private SciELONetwork jc;
-	private PairsList languages;
-	private PairsList subjects;
+	private IdAndValueObjects languages;
+	private IdAndValueObjects subjects;
+	private IdAndValueObjects searchURLs;
 
     private Journal document;
     private ArrayAdapter<Journal> aa;
@@ -47,20 +47,27 @@ public class SearchJournalsActivity extends SearchActivity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
 	    header = "";
+	    selectedPageIndex = -1;
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
-	    serviceURL = this.getResources().getString(R.string.search_feed_journal);
 	    
-		jc = new SciELONetwork(
+		jc = new SciELONetwork();
+		jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
 			getResources().getStringArray(R.array.log_collections_code), 
 			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name));
-		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name));
+		subjects = new IdAndValueObjects();
+		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+				getResources().getStringArray(R.array.subjects_name),false);
+		languages = new IdAndValueObjects();
+		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+				getResources().getStringArray(R.array.languages_name), false);
+		searchURLs = new IdAndValueObjects();
+		searchURLs.multiAdd(getResources().getStringArray(R.array.journal_urls_id),
+				getResources().getStringArray(R.array.journal_urls), false);
 		
-		ssData = new SearchJournalsResult(serviceURL, jc, subjects, languages, searchResultList,pagesList);
+		setClusterCollection(jc, subjects, languages);
+		ssData = new SearchJournalsResult(searchURLs, clusterCollection, jc, subjects, languages, searchResultList,pagesList);
 		ss = new SearchService();
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
@@ -93,7 +100,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
-		           header = ssData.getJournalsTotal() + " /" + pagesList.get(_index).getLabel()+ ":";
+		           header = header + " /" + pagesList.get(_index).getLabel()+ ":";
 		           doSearch();	
 		       }
 		    });
@@ -114,7 +121,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	
 
 	protected String getURL(){
-		return ssData.getURL(query, "", this.filter, this.selectedPageIndex);
+		return ssData.getURL(query, "",  this.filter, this.selectedPageIndex);
 	}
 	protected void loadAndDisplayData(String result){
 		

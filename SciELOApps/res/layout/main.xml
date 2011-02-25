@@ -9,20 +9,20 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-    	style="@style/MyTabHostLinearLayout"
+    	
         >
-        <TextView 
-		android:id="@+id/banner" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		style="@style/banner" 
-		
+        
+        	<TextView 
+				android:id="@+id/banner" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				style="@style/banner" 		
 		/>	
-        <TabWidget
+		<TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            style="@style/MyTabWidget"
+            
             >
 
            </TabWidget>
@@ -30,6 +30,7 @@
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:paddingTop="65px"
             
              />
             

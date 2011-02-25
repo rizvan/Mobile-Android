@@ -20,13 +20,14 @@ public class TOCResult extends SearchResult {
 	protected ArrayList<Document> searchResultList;
 	
 	protected SciELONetwork jc;
-	protected PairsList subjects;
-	protected PairsList languages;
+	protected IdAndValueObjects subjects;
+	protected IdAndValueObjects languages;
 	
 	
 
-	TOCResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList){
-		super(url, pagesList);
+	TOCResult(String url, String _generic_pdf_url, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList){
+		super(pagesList);
+		this.url = url;
 		this.generic_PDF_URL = _generic_pdf_url;		
 		
     	this.jc = jc;

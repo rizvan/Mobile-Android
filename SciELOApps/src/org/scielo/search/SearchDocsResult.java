@@ -19,19 +19,21 @@ public class SearchDocsResult extends SearchResult{
 	private ArrayList<Document> searchResultList;
 		
 	private SciELONetwork jc;
-	private PairsList subjects;
-	private PairsList languages;
+	private IdAndValueObjects subjects;
+	private IdAndValueObjects languages;
 	
 	//private Pagination pagination;
 	
 	
-	SearchDocsResult(String url, String _generic_pdf_url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
-		super(url, pagesList);
+	SearchDocsResult(String url, ClusterCollection clusterCollection, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList, String _generic_pdf_url ){
+		super(pagesList);
+		this.url = url;
     	this.generic_PDF_URL = _generic_pdf_url;		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
 		this.searchResultList = searchResultList;
+		this.clusterCollection = clusterCollection;
     }
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
 		String u = "";
@@ -117,7 +119,7 @@ public class SearchDocsResult extends SearchResult{
     	Cluster cluster;
     	Log.d(TAG, "loadClusterCollection inicio");
     	
-    	
+    	clusterCollection = new ClusterCollection();
     	for (i_clusters=0;i_clusters<a_clusters.length();i_clusters++){
     		cluster_id="";
     		Log.d(TAG,  new Integer(i_clusters).toString() + "/" + new Integer(a_clusters.length()).toString());

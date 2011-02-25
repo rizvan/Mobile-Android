@@ -25,8 +25,8 @@ public class DocumentActivity extends Activity{
 	private ArrayList<Document> searchResultList =  new ArrayList<Document>();
 	private ArrayList<Page> pagesList =  new ArrayList<Page>();
 	private SciELONetwork jc;
-	private PairsList subjects;
-	private PairsList languages;
+	private IdAndValueObjects subjects;
+	private IdAndValueObjects languages;
 	private SearchDocsResult ssData;
 	private SearchService ss;
 	private String pdf;
@@ -36,16 +36,20 @@ public class DocumentActivity extends Activity{
 		
 	    setContentView(R.layout.doc);
 
-	    jc = new SciELONetwork(
+	    jc = new SciELONetwork();
+	    jc.multiAdd(
 	  		    getResources().getStringArray(R.array.collections_code),
 				getResources().getStringArray(R.array.collections_name), 
 				getResources().getStringArray(R.array.log_collections_code), 
 				getResources().getStringArray(R.array.collections_url) );		
-	    subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
-					getResources().getStringArray(R.array.subjects_name));
-	    languages = new PairsList(getResources().getStringArray(R.array.languages_id),
-					getResources().getStringArray(R.array.languages_name));
-	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), this.getResources().getString(R.string.pdf_url) ,jc, subjects, languages, searchResultList, pagesList);
+	    subjects = new IdAndValueObjects();
+	    subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+					getResources().getStringArray(R.array.subjects_name),true);
+	    languages = new IdAndValueObjects();
+	    languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+					getResources().getStringArray(R.array.languages_name),false);
+	    ClusterCollection clusterCollection = new ClusterCollection();
+	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), clusterCollection ,jc, subjects, languages, searchResultList, pagesList, this.getResources().getString(R.string.pdf_url));
 	    ss = new SearchService();
 		
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    

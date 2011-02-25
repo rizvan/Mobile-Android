@@ -17,8 +17,9 @@ public class SearchJournalsResult extends SearchResult {
 	protected ArrayList<Journal> searchResultList;
 	
 	protected SciELONetwork jc;
-	protected PairsList subjects;
-	protected PairsList languages;
+	protected IdAndValueObjects subjects;
+	protected IdAndValueObjects languages;
+	protected IdAndValueObjects URL_list;
 	
 	String journalsTotal;
 	
@@ -27,36 +28,68 @@ public class SearchJournalsResult extends SearchResult {
 		return journalsTotal;
 	}
 	
-	SearchJournalsResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
-		super(url, pagesList);
+	SearchJournalsResult(IdAndValueObjects urls, ClusterCollection clusterCollection, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
+		super(pagesList);
+		this.URL_list = urls;
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
 		this.searchResultList = searchResultList;
+		this.clusterCollection = clusterCollection;		
     }
+	
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
-		String r;
-		r = url;
-		r = r + "?";
-		if (pagination!=null){
-			if (pagination.getPagesList()!=null){				
-				r = r + "&startkey=" + '"' + pagination.getPageSearchKey(selectedPageIndex) + '"';
-				if (selectedPageIndex + 1 < pagination.getPagesList().size()){
-					r = r + "&endkey=" + '"' + pagination.getPageSearchKey(selectedPageIndex+1) + '"';
-				}		
+		String r = "";
+		String filterSubject = "";
+		String filterCollection = "";
+		String[] temp = filter.split(" AND ");
+		
+		
+		for (int i=0; i < temp.length;i++){
+			if (temp[i].contains("ac:")){
+				filterSubject = temp[i].substring(3);
 			} else {
-				r = r + "&startkey=" + '"' + "A" + '"';
-				r = r + "&endkey=" + '"' + "B" + '"';
-				
+				if (temp[i].contains("in:")){
+					filterCollection = temp[i].substring(3);
+				}
+			}
+		}
+		
+		
+		if ((filterSubject.length()==0) && (filterCollection.length()==0)){
+			r = URL_list.getItem("initial_url").getValue() + "?limit=";
+			if (itemsPerPage.equals("")){
+				r += "20"; 
+			} else {
+				r += itemsPerPage;
 			}
 		} else {
-			r = r + "&startkey=" + '"' + "A" + '"';
-			r = r + "&endkey=" + '"' + "B" + '"';
-			
+			if ((filterSubject.length()>0) && (filterCollection.length()>0)){
+				r = URL_list.getItem("collection_subject").getValue();
+				r = r.replace("SUBJECT", filterSubject );
+				r = r.replace("COLLECTION", filterCollection);
+			} else{
+				if (filterSubject.length()>0){					
+					r = URL_list.getItem("subject").getValue();
+					r = r.replace("SUBJECT", filterSubject );
+				} else{
+					r = URL_list.getItem("collection").getValue();
+					r = r.replace("COLLECTION", filterCollection );
+				}
+			}
+		}
+		
+		if (selectedPageIndex>0){
+			r = r.replace("LETTER\u9999" ,'"'+ pagination.getPageSearchKey(selectedPageIndex) + "z" + '"');
+			r = r.replace("LETTER" ,'"'+ pagination.getPageSearchKey(selectedPageIndex)  + '"');
+		} else {
+			r = r.replace(",LETTER\u9999", ",{}");						
+			r = r.replace(",LETTER", "");
 		}
 		
 		return r;
 	}
+	
 	public void loadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("rows");
@@ -66,100 +99,11 @@ public class SearchJournalsResult extends SearchResult {
 			
 			journalsTotal = jsonObject.getString("total_rows") ;
 			
-			pagination.generateLetters();
+			
 			pagination.loadData("1", total , docs.length(), 2);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
-	}
-	
-
-	public boolean loadClusterCollection() {
-    	boolean r = true;
-    	/* 
-    	int i_clusters = 0;
-    	int i = 0;
-    	int subMenuId = 0;
-    	int filterCount = 0;
-    	
-    	JSONArray a_clusters = this.facetFields.names();
-    	JSONArray clusterData;
-    	JSONArray filter = null;
-    	
-    	SearchFilter searchFilter;
-    	
-    	String cluster_id ;
-    	String filterCode = "";
-    	String filterName = "";
-    	String filterResultCount = "0";
-    	
-    	
-    	Cluster cluster;
-    	Log.d(TAG, "loadClusterCollection inicio");
-    	for (i_clusters=0;i_clusters<a_clusters.length();i_clusters++){
-    		cluster_id="";
-    		Log.d(TAG,  new Integer(i_clusters).toString() + "/" + new Integer(a_clusters.length()).toString());
-			try {
-    			cluster_id = a_clusters.getString(i_clusters);
-    			cluster = new Cluster(cluster_id);
-    			
-    			clusterData = (JSONArray) this.facetFields.get(cluster_id);				
-	    		filterCount = clusterData.length();
-	            
-	        	for (i=0;i<filterCount;i++){        		
-	        		try {
-	        			
-	        			Log.d(TAG, "cluster:" + cluster_id);
-	        			Log.d(TAG, "filter:" + new Integer(i).toString() + "/" + new Integer(filterCount).toString());
-	        			filter = clusterData.getJSONArray(i);
-	        			filterResultCount = filter.getString(1);
-	        			filterCode = filter.getString(0);
-	        			Log.d(TAG, " filterCode:" + filterCode);
-	        			
-	        			
-	        			if (cluster_id.equals("in")){
-	        				filterName = jc.getItem(filterCode).getName();
-	        			} else {
-		        			if (cluster_id.equals("la")){
-		        				filterName = languages.getItem(filterCode).getValue();
-		        			} else {
-			        			if (cluster_id.equals("ac")){
-			        				filterName = subjects.getItem(filterCode).getValue() ;
-			        			} else {
-			        				filterName = filterCode;
-			        			}		        				
-		        			}	        				
-	        			}
-	    				
-	        			Log.d(TAG,  " filterName:" + filterName);
-	    				
-	    				subMenuId = i + (i_clusters * 100) ;
-	        			Log.d(TAG,  " submenuId" + new Integer(subMenuId).toString());
-	    				searchFilter = new SearchFilter(filterName, filterResultCount,  filterCode, cluster.getId() );
-	    				searchFilter.setSubmenuId(subMenuId);
-	        			Log.d(TAG,  " addFilter ");
-	    				cluster.addFilter(searchFilter);        			
-	    				Log.d(TAG, "fim " + cluster_id + ":" + filterCode);	 				
-	    			} catch (JSONException e) {
-	    				// TODO Auto-generated catch block
-	    				Log.d(TAG, "JSONException 1");
-	    				e.printStackTrace();
-	    				
-	    			}
-	        	}     
-	        	Log.d(TAG, "addCluster inicio");
-	    		r = clusterCollection.add(cluster);
-	    		Log.d(TAG, "addCluster fim");
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				Log.d(TAG, "JSONException 2");
-				e.printStackTrace();
-			}
-			Log.d(TAG, "fim loop " + cluster_id);
-    	}
-    	Log.d(TAG, "loadClusterCollection fim mesmo");
-    	 */
-		return r;
 	}
 	
 	public void loadSearchResultList(){
@@ -188,25 +132,34 @@ public class SearchJournalsResult extends SearchResult {
 				resultItem = this.docs.getJSONObject(i).getJSONObject("value");
 				r.setPosition( new Integer(i + pagination.getCurrentItem()).toString() + "/" + new Integer(pagination.getResultCount()).toString() );
 				
+				Log.d(TAG, "[" + new Integer(i).toString()+ "] 1");
 				try {
-					r.setTitle(  resultItem.getString("title"));	
+					r.setTitle(  resultItem.getString("title"));
+					pagination.addLetter(r.getTitle().substring(0,1));
+					
 				} catch (JSONException e) {
 					last = last + "\n" +"ti";
+					Log.d(TAG, "[" + new Integer(i).toString()+ "]" + last);
 				}
+				Log.d(TAG, "[" + new Integer(i).toString()+ "] 2");
 				try {
 					collectionCode = resultItem.getString("collection");
 					r.setCollectionId(collectionCode);
 				} catch (JSONException e) {
 					last = last + "\n" +"in" ;	
 					collectionCode = "";
+					Log.d(TAG, "[" + new Integer(i).toString()+ "]" + last);
 				}
+				Log.d(TAG, "[" + new Integer(i).toString()+ "] 3");
 				try {
 					_pid = resultItem.getString("issn");	
 					r.setId(_pid);
 				} catch (JSONException e) {
 					last = last + "\n" +"id" ;
 					_pid = "";
+					Log.d(TAG, "[" + new Integer(i).toString()+ "]" + last);
 				}
+				Log.d(TAG, "[" + new Integer(i).toString()+ "] 4");
 				try {
 					s = resultItem.getJSONArray("subject");
 					subj = "";
@@ -214,18 +167,23 @@ public class SearchJournalsResult extends SearchResult {
 						subj = subj + s.getString(k) +  ";";
 					}
 					r.setSubjects(subj);
+					
 				} catch (JSONException e) {
 					last = last + "\n" +"id" ;
 					_pid = "";
+					Log.d(TAG, "[" + new Integer(i).toString()+ "] " + last);
 				}
 				
-				col = jc.getItem(collectionCode);							
+				Log.d(TAG, "[" + new Integer(i).toString()+ "] 5");
+				col = jc.getItem(collectionCode);
+				
 				r.setCollection(col.getName());
+				
 				searchResultList.add(r);
+					
 			} catch (JSONException e) {
 				Log.d(TAG, "JSONException loadResultList " + new Integer(i).toString() + " " + last, e);	
 	        } 
 		}
 	}
-	
-}
+	}

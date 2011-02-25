@@ -26,8 +26,8 @@ public class TOCActivity extends SearchActivity {
     
 	private SciELONetwork jc;
 
-	private PairsList languages;
-	private PairsList subjects;
+	private IdAndValueObjects languages;
+	private IdAndValueObjects subjects;
 
 	private Issue issue;
     private Document document;
@@ -52,15 +52,18 @@ public class TOCActivity extends SearchActivity {
 	    serviceURL = this.getResources().getString(R.string.search_feed_issuetoc);
 	    
 
-	    jc = new SciELONetwork(
+	    jc = new SciELONetwork();
+		jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
 			getResources().getStringArray(R.array.log_collections_code), 
 			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name));
-		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name));
+		subjects = new IdAndValueObjects();
+		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+				getResources().getStringArray(R.array.subjects_name),true);
+		languages = new IdAndValueObjects();
+		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+				getResources().getStringArray(R.array.languages_name), false);
 		
 	    //serviceURL = serviceURL.replace("REPLACE_PID", document.getId());
 		
@@ -136,6 +139,8 @@ public class TOCActivity extends SearchActivity {
 		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
 	protected void loadAndDisplayData(String result){
+		
+		
 		
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();

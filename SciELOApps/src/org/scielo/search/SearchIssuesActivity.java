@@ -28,8 +28,8 @@ public class SearchIssuesActivity extends SearchActivity {
     
 	private SciELONetwork jc;
 
-	private PairsList languages;
-	private PairsList subjects;
+	private IdAndValueObjects languages;
+	private IdAndValueObjects subjects;
 
 	private Issue document;
     private Journal journal;
@@ -56,15 +56,18 @@ public class SearchIssuesActivity extends SearchActivity {
 	    serviceURL = this.getResources().getString(R.string.search_feed_issues);
 	    
 
-	    jc = new SciELONetwork(
+	    jc = new SciELONetwork();
+	    jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
 			getResources().getStringArray(R.array.log_collections_code), 
 			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new PairsList(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name));
-		languages = new PairsList(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name));
+		subjects = new IdAndValueObjects();
+		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+				getResources().getStringArray(R.array.subjects_name), true);
+		languages = new IdAndValueObjects();
+		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+				getResources().getStringArray(R.array.languages_name),false);
 		
 		journal = new Journal();
 		

@@ -9,12 +9,14 @@ package org.scielo.search;
 
 public final class R {
     public static final class array {
-        public static final int cluster_list=0x7f05000a;
+        public static final int cluster_list=0x7f05000c;
         public static final int cluster_list_doc=0x7f050000;
         public static final int cluster_list_journal=0x7f050001;
         public static final int collections_code=0x7f050002;
         public static final int collections_name=0x7f050003;
         public static final int collections_url=0x7f050005;
+        public static final int journal_urls=0x7f05000b;
+        public static final int journal_urls_id=0x7f05000a;
         public static final int languages_id=0x7f050008;
         public static final int languages_name=0x7f050009;
         public static final int log_collections_code=0x7f050004;
@@ -48,44 +50,49 @@ public final class R {
         public static final int TextViewDocumentID=0x7f090002;
         public static final int TextViewDocumentPosition=0x7f090000;
         public static final int TextViewDocumentTitle=0x7f090003;
-        public static final int TextViewHeader=0x7f090014;
-        public static final int TextViewISSN=0x7f09000c;
-        public static final int TextViewIssue=0x7f09000a;
-        public static final int TextViewPosition=0x7f09000b;
+        public static final int TextViewHeader=0x7f090019;
+        public static final int TextViewISSN=0x7f090011;
+        public static final int TextViewIssue=0x7f09000f;
+        public static final int TextViewPosition=0x7f090010;
         public static final int TextViewSendTo=0x7f090006;
-        public static final int TextViewSubjects=0x7f09000d;
+        public static final int TextViewSubjects=0x7f090012;
         public static final int TextViewTitle=0x7f090008;
-        public static final int banner=0x7f090010;
+        public static final int banner=0x7f090015;
         public static final int button_send=0x7f090007;
-        public static final int definition=0x7f090013;
-        public static final int label=0x7f09000e;
-        public static final int list=0x7f090016;
-        public static final int list_items=0x7f09000f;
-        public static final int menuItemDownloadPDF=0x7f09001e;
-        public static final int menuItemRefineByCollection=0x7f09001c;
-        public static final int menuItemRefineByJournal=0x7f090019;
-        public static final int menuItemRefineByLanguage=0x7f09001b;
-        public static final int menuItemRefineBySubject=0x7f090018;
-        public static final int menuItemRefineByYear=0x7f09001a;
-        public static final int menuItemSendEmail=0x7f09001d;
-        public static final int page=0x7f090011;
-        public static final int paginationListView=0x7f090015;
-        public static final int search=0x7f090017;
-        public static final int word=0x7f090012;
+        public static final int definition=0x7f090018;
+        public static final int label=0x7f090013;
+        public static final int list=0x7f09001a;
+        public static final int list_items=0x7f090014;
+        public static final int menuItemDownloadPDF=0x7f090022;
+        public static final int menuItemRefineByCollection=0x7f090020;
+        public static final int menuItemRefineByJournal=0x7f09001d;
+        public static final int menuItemRefineByLanguage=0x7f09001f;
+        public static final int menuItemRefineBySubject=0x7f09001c;
+        public static final int menuItemRefineByYear=0x7f09001e;
+        public static final int menuItemSendEmail=0x7f090021;
+        public static final int page=0x7f090016;
+        public static final int paginationListView=0x7f09000d;
+        public static final int search=0x7f09001b;
+        public static final int searchBox=0x7f09000a;
+        public static final int searchButton=0x7f09000c;
+        public static final int searchExpressionEditText=0x7f09000b;
+        public static final int searchResultListView=0x7f09000e;
+        public static final int word=0x7f090017;
     }
     public static final class layout {
         public static final int doc=0x7f030000;
         public static final int email=0x7f030001;
         public static final int journal=0x7f030002;
-        public static final int list_item_doc=0x7f030003;
-        public static final int list_item_issue=0x7f030004;
-        public static final int list_item_journal=0x7f030005;
-        public static final int list_items=0x7f030006;
-        public static final int main=0x7f030007;
-        public static final int pagination=0x7f030008;
-        public static final int result=0x7f030009;
-        public static final int search=0x7f03000a;
-        public static final int word=0x7f03000b;
+        public static final int list_docs=0x7f030003;
+        public static final int list_item_doc=0x7f030004;
+        public static final int list_item_issue=0x7f030005;
+        public static final int list_item_journal=0x7f030006;
+        public static final int list_items=0x7f030007;
+        public static final int main=0x7f030008;
+        public static final int pagination=0x7f030009;
+        public static final int result=0x7f03000a;
+        public static final int search=0x7f03000b;
+        public static final int word=0x7f03000c;
     }
     public static final class menu {
         public static final int menu=0x7f080000;
@@ -135,34 +142,47 @@ public final class R {
         public static final int total=0x7f060026;
     }
     public static final class style {
-        public static final int MyGridView=0x7f070011;
-        public static final int MyListView=0x7f070012;
-        public static final int MyMenu=0x7f070019;
-        public static final int MyTabHost=0x7f070000;
-        public static final int MyTabHostLinearLayout=0x7f070001;
-        public static final int MyTabView=0x7f070003;
-        public static final int MyTabWidget=0x7f070002;
-        public static final int TextView=0x7f070014;
-        public static final int TextView1=0x7f070015;
-        public static final int TextView2=0x7f070016;
-        public static final int Theme_Document=0x7f070017;
-        /**  item name="android:textViewStyle">@style/TextView1</item> 
+        public static final int MyGridView=0x7f070012;
+        public static final int MyListView=0x7f070013;
+        public static final int MyMenu=0x7f07001a;
+        /**  amarelo FFFF33
          */
-        public static final int Theme_SciELOApps=0x7f070013;
-        public static final int banner=0x7f070018;
-        public static final int document_page=0x7f07000e;
-        public static final int page=0x7f07000f;
-        public static final int pagelist=0x7f070010;
-        public static final int textview_collection=0x7f070008;
-        public static final int textview_document_abstract=0x7f070009;
-        public static final int textview_document_authors=0x7f070007;
-        public static final int textview_document_position=0x7f070004;
-        public static final int textview_document_title=0x7f070005;
-        public static final int textview_header=0x7f07000a;
-        public static final int textview_highlight=0x7f070006;
-        public static final int textview_issue=0x7f07000c;
-        public static final int textview_journal=0x7f07000d;
-        public static final int textview_subject=0x7f07000b;
+        public static final int MyTabContent=0x7f070003;
+        /**  roxo #660066
+         */
+        public static final int MyTabHost=0x7f070000;
+        /**  pink #FF33FF
+         */
+        public static final int MyTabHostLinearLayout=0x7f070001;
+        public static final int MyTabView=0x7f070004;
+        /**   item name="android:background">#33FFCC</item>  azul #33FFCC
+         */
+        public static final int MyTabWidget=0x7f070002;
+        public static final int TextView=0x7f070015;
+        public static final int TextView1=0x7f070016;
+        public static final int TextView2=0x7f070017;
+        /**   texto 
+         */
+        public static final int Theme_Document=0x7f070018;
+        /**  item name="android:background">#CCFF00</item> 
+verde, fundo da app e tab 
+ item name="android:textViewStyle">@style/TextView1</item> 
+         */
+        public static final int Theme_SciELOApps=0x7f070014;
+        public static final int banner=0x7f070019;
+        public static final int document_page=0x7f07000f;
+        public static final int page=0x7f070010;
+        public static final int pagelist=0x7f070011;
+        public static final int textview_collection=0x7f070009;
+        public static final int textview_document_abstract=0x7f07000a;
+        public static final int textview_document_authors=0x7f070008;
+        public static final int textview_document_position=0x7f070005;
+        public static final int textview_document_title=0x7f070006;
+        public static final int textview_header=0x7f07000b;
+        public static final int textview_highlight=0x7f070007;
+        public static final int textview_issue=0x7f07000d;
+        public static final int textview_journal=0x7f07000e;
+        public static final int textview_subject=0x7f07000c;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;

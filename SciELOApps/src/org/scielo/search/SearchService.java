@@ -16,6 +16,7 @@ public class SearchService {
 	SearchService(){
 		
 	}
+	
 	private int getMilliseconds(int min){
 		int sec;
 		int millisec;
@@ -28,36 +29,31 @@ public class SearchService {
 		String payload = "";
 		String u = "";
 		String line = "";
-		
+		BufferedReader reader;
 		
 		try { 
-			
-			//u = URLEncoder.encode(queryURL, "UTF-8");
 			u = queryURL;
-			URL url = new URL(u);						
+			URL url = new URL(u);		
+			
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(getMilliseconds(10)); /* milliseconds */ 
 			con.setConnectTimeout(getMilliseconds(10)); /* milliseconds */ 
 			con.setRequestMethod("GET");
-			//con.addRequestProperty("Referer", "http://www.pragprog.com/titles/eband3/hello-android");
 			con.setDoInput(true);			
-			// Start the query
 			con.connect();
-			
 			// Check if task has been interrupted
 			if (Thread.interrupted())
 				throw new InterruptedException();
-						
+			
 			// Read results from the query
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(con.getInputStream(), "UTF-8"));
+			reader = new BufferedReader(
+					new InputStreamReader(con.getInputStream(), "UTF-8") );
 			
 			while ((line = reader.readLine()) != null) {
-				//old_line = line;
-				payload = payload.concat(line);
+				payload += line;
 			}
+			reader.close();
 			
-			reader.close();			
 		} catch (IOException e) {
 			Log.e(TAG, "IOException", e);
 		} catch (InterruptedException e) {

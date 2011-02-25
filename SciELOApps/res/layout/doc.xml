@@ -14,28 +14,28 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
 	<TextView 
 		android:id="@+id/TextViewDocumentPosition" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_document_position"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentCollection" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_collection"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentID" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_document_position"
 		/>	
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentTitle" 
-		android:layout_width="wrap_content" 		
+		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
 		style="@style/textview_highlight"		
 		/>
@@ -43,14 +43,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentAuthors" 
-		android:layout_width="wrap_content" 
+		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
 		style="@style/textview_document_authors"
 		/>
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentAbstract" 
-		android:layout_width="wrap_content" 
+		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
 		style="@style/textview_document_abstract"
 		/>

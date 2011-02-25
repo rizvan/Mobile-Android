@@ -51,7 +51,7 @@
 	<item>scieloss</item>
 </string-array>
 <string-array name="collections_url">
-<item>www.scielo.br</item>
+	<item>www.scielo.br</item>
 	<item>www.scielo.cl</item>
 	<item>www.scielosp.org</item>
 	<item>www.scielo.org.ar</item>
@@ -68,13 +68,13 @@
 	<item>Health Sciences</item>
 	<item>Biological Sciences</item>
 	<item>Agricultural Sciences</item>
-	<item>Exact And Earth Sciences</item>
+	<item>Exact and Earth Sciences</item>
 	<item>Engineering</item>
     <item>Linguistics, Letters and Arts</item>	
     <item>nd</item>
 </string-array>
 <string-array name="subjects_name">
-<item>Human Sciences</item>
+	<item>Human Sciences</item>
 	<item>Health Sciences</item>
 	<item>Biological Sciences</item>
 	<item>Agricultural Sciences</item>
@@ -129,45 +129,72 @@
   <item>nd</item>
 </string-array>
 <string-array name="languages_name">
-<item>English</item>
-<item>Portuguese</item>
-<item>Spanish</item>
-<item>Afrikaans</item>
-<item>Arabic</item>
-<item>Bulgarian</item>
-<item>Chinese</item>
-<item>Czech</item>
-<item>Danish</item>
-<item>Dutch</item>
-<item>Esperanto</item>
-<item>French</item>
-<item>German</item>
-<item>Greek</item>
-<item>Hebrew</item>
-<item>Hindi</item>
-<item>Hungarian</item>
-<item>Indonesian</item>
-<item>Interlingua</item>
-<item>Interlingue</item>
-<item>Italian</item>
-<item>Japanese</item>
-<item>Korean</item>
-<item>Latin</item>
-<item>Norwergian</item>
-<item>Polish</item>
-<item>Romanian</item>
-<item>Russian</item>
-<item>Sanskrit</item>
-<item>Serbo-Croat</item>
-<item>Slovak</item>
-<item>Slovenian</item>
-<item>Swedish</item>
-<item>Turkish</item>
-<item>Ukrainian</item>
-<item>Urdu</item>
-<item>Other</item>
-<item>Galician</item>
-<item>Basque</item>
-<item>Catalan</item>
-<item>unknown</item>
-</string-array></resources>
+	<item>English</item>
+	<item>Portuguese</item>
+	<item>Spanish</item>
+	<item>Afrikaans</item>
+	<item>Arabic</item>
+	<item>Bulgarian</item>
+	<item>Chinese</item>
+	<item>Czech</item>
+	<item>Danish</item>
+	<item>Dutch</item>
+	<item>Esperanto</item>
+	<item>French</item>
+	<item>German</item>
+	<item>Greek</item>
+	<item>Hebrew</item>
+	<item>Hindi</item>
+	<item>Hungarian</item>
+	<item>Indonesian</item>
+	<item>Interlingua</item>
+	<item>Interlingue</item>
+	<item>Italian</item>
+	<item>Japanese</item>
+	<item>Korean</item>
+	<item>Latin</item>
+	<item>Norwergian</item>
+	<item>Polish</item>
+	<item>Romanian</item>
+	<item>Russian</item>
+	<item>Sanskrit</item>
+	<item>Serbo-Croat</item>
+	<item>Slovak</item>
+	<item>Slovenian</item>
+	<item>Swedish</item>
+	<item>Turkish</item>
+	<item>Ukrainian</item>
+	<item>Urdu</item>
+	<item>Other</item>
+	<item>Galician</item>
+	<item>Basque</item>
+	<item>Catalan</item>
+	<item>unknown</item>
+</string-array>
+
+<string-array name="journal_urls_id">
+    <item>initial_url</item>
+	<item>collection_subject</item>
+	<item>collection</item>
+	<item>subject</item>
+	<item>issue</item>
+	
+</string-array>
+<string-array name="journal_urls">
+	<!-- colocar em ordem alfabetica, filtrar por letra -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title</item>
+	
+	<!-- ok  -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTER\u9999"]</item>
+	
+	<!-- colocar em ordem alfabetica, filtrar por letra -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTER\u9999"]</item>
+	
+	<!-- ok  -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTER\u9999"]</item>
+	
+	<!-- colocar em ordem cronologica inversa -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue?key=["PID"]</item>
+	
+</string-array>
+</resources>

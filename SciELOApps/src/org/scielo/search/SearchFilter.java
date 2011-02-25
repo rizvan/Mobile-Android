@@ -35,4 +35,13 @@ public class SearchFilter {
 	public String getFilterExpression(){
 		return this.clusterCode + ":" + '"' + this.code + '"' ;
 	}
+
+	public String displayCaptionAndCount() {
+		// TODO Auto-generated method stub
+		String r = caption;
+		if (!resultCount.equals("0")){
+			r = r + "(" + resultCount + ")";
+		}
+		return r;
+	}
 }

@@ -1,18 +1,19 @@
 package org.scielo.search;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cluster {
 	private HashMap<String,SearchFilter> values;
 	private HashMap<String,SearchFilter> menuId;
-	private ArrayList<SearchFilter> valuesSorted;
+	private ArrayList<String> arrayId = new ArrayList<String>();
 	private String id;
 	
 	Cluster(String _id){
 		menuId = new HashMap<String,SearchFilter>();
 		values = new HashMap<String,SearchFilter>();		
-		valuesSorted = new ArrayList<SearchFilter>();
+		
 		id = _id;
 	}
 	
@@ -22,7 +23,7 @@ public class Cluster {
 	public void addFilter(SearchFilter filter, int menuId, String filterCode){	
 		if (filter!=null){		
 		   this.values.put(filterCode,filter);
-		   this.valuesSorted.add(filter);
+		   arrayId.add(arrayId.size(), filterCode);		   
 		   this.menuId.put(new Integer(menuId).toString() ,filter);
 		}
 	}
@@ -30,7 +31,7 @@ public class Cluster {
 		return this.values.get(id);
 	}
 	public SearchFilter getFilterByIndex(int index){		
-		return this.valuesSorted.get(index);
+		return this.values.get(arrayId.get(index));
 	}
 	public SearchFilter getFilterBySubmenuId(int submenuId){		
 		return this.menuId.get(new Integer(submenuId).toString());
@@ -38,8 +39,8 @@ public class Cluster {
 	public String display(){
 		String r = "";
 		SearchFilter filter;
-		for (int i=0;i<valuesSorted.size();i++){
-			filter = valuesSorted.get(i);
+		for (int i=0;i<arrayId.size();i++){
+			filter = values.get(arrayId.get(i));
 			r = r + new Integer( filter.getSubmenuId()).toString() + "; " ;
 			r = r + filter.getClusterCode()+ "; " ;
 			r = r + filter.getCode() + "; " ;

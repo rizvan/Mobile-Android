@@ -17,8 +17,8 @@ public class SearchIssuesResult extends SearchResult {
 	protected ArrayList<Issue> searchResultList;
 	
 	protected SciELONetwork jc;
-	protected PairsList subjects;
-	protected PairsList languages;
+	protected IdAndValueObjects subjects;
+	protected IdAndValueObjects languages;
 	
 	private Journal journal;
 	
@@ -31,8 +31,9 @@ public class SearchIssuesResult extends SearchResult {
 	}
 
 	
-	SearchIssuesResult(String url, SciELONetwork jc, PairsList subjects, PairsList languages, ArrayList<Issue> searchResultList, ArrayList<Page> pagesList){
-		super(url, pagesList);
+	SearchIssuesResult(String url, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Issue> searchResultList, ArrayList<Page> pagesList){
+		super(pagesList);
+		this.url = url;
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;

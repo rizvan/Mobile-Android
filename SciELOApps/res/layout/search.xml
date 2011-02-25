@@ -5,12 +5,7 @@
     android:orientation="vertical"
     style="@style/MyTabView"
     >
-    <TextView 
-	    android:id="@+id/TextViewHeader"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    style="@style/textview_header"
-	  /> 
+    
     <GridView   
        android:id="@+id/paginationListView" 
        android:orientation="horizontal" 
@@ -18,7 +13,12 @@
        android:layout_height="wrap_content"
        style="@style/MyGridView"
        />
-   	
+   	<TextView 
+	    android:id="@+id/TextViewHeader"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    style="@style/textview_header"
+	  /> 
  	<ListView 
        	android:id="@+id/list" 
        	android:orientation="vertical" 

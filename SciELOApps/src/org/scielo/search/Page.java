@@ -9,7 +9,7 @@ public class Page {
 		this.searchkey = _searchkey;
 	}
 	public String getLabel(){
-		return this.label;
+		return "[ " + this.label + " ]";
 	}
 	public String getSearchKey(){
 		return this.searchkey;
