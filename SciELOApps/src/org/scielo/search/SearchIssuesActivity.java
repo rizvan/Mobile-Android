@@ -52,7 +52,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
 	    
-	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list);
+	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    serviceURL = this.getResources().getString(R.string.search_feed_issues);
 	    
 
@@ -82,7 +82,6 @@ public class SearchIssuesActivity extends SearchActivity {
 		ssData = new SearchIssuesResult( serviceURL, jc, subjects, languages, searchResultList, pagesList);
 		
 		ssData.setJournal(journal);
-		ss = new SearchService();
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 

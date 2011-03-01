@@ -52,11 +52,13 @@ public class SearchIssuesResult extends SearchResult {
 		if (colid.length()>0){
 			query = query + "&col=" + colid;
 		}
+		/*
 		if (selectedPageIndex>0){
 			query = query + "&start=" + pagination.getPageSearchKey(selectedPageIndex);
 		} else {
 			query = query + "&start=1" ;
 		}
+		*/
 		if (searchExpression.length()>0){
 			try {
 				query = query + "&pid=" + URLEncoder.encode(searchExpression, "UTF-8");
@@ -78,7 +80,7 @@ public class SearchIssuesResult extends SearchResult {
 	public void loadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("issues");
-			pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
+			//pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}

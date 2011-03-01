@@ -3,36 +3,26 @@ package org.scielo.search;
 import java.util.ArrayList;
 
 
-public class Pagination {
+public class NumericPagination {
 	// Parse to get translated text
 	protected String resultCount;
 	
 	protected String from;
 	protected int currentItem;
 	protected int itemsPerPage;
-	private int type;
+	
 	private ArrayList<Page> pagesList;
 	protected static final String TAG = "Pagination";
-	private String letters;
 	
-    Pagination(){
-    	from = "";
-    	currentItem = 0;
-    	itemsPerPage = 20;
-    	type = 1;
-    	this.letters="";    	
-    }
-    public void loadData(String from, String resultCount, int itemsPerPage, int type){		
+	NumericPagination(String from, String resultCount, int itemsPerPage){		
     	this.from = from;
     	this.resultCount = resultCount;
     	this.itemsPerPage = itemsPerPage;   
-    	this.type = type;
     	if (from.length() == 0 || from.equals("0")) {
 			currentItem = 1;
 		} else {
 			currentItem = Integer.parseInt(from);	
 		}
-    	this.letters="";
 	}
 	
     
@@ -48,37 +38,14 @@ public class Pagination {
 	public String getResultCount(){
 		return this.resultCount;
     }
-	public int getType(){
-		return this.type;
-    }
 	public ArrayList<Page> getPagesList(){
 		return this.pagesList;
 	}
-	public String getPageSearchKey(int index){
-		String r="";
-		if (index < this.pagesList.size()){
-			r = pagesList.get(index).getSearchKey();
-		} else {
-			if (this.type==2){
-				r = "{}";
-			}
-		}
-			
-		return r;
+	public String getPageSearchKey(int index){		
+		return pagesList.get(index).getSearchKey();
 	}
 	public void generatePages(ArrayList<Page> pagesList){
-		switch (type){
-		case 1:
-			generateNumericPages(pagesList);
-			break;
-		case 2:
-			generateAlphabeticPages(pagesList);
-			break;
-		}
-		this.pagesList = pagesList;
-	}
-	
-	public void generateNumericPages(ArrayList<Page> pagesList){
+		
 		int i;
 	    int k;
 	    boolean stop = false;
@@ -101,20 +68,6 @@ public class Pagination {
 		}
 		
 	}
-	public void addLetter(String letter){
-		if (!letters.contains("," + letter )) {
-			letters = letters + "," + letter ;
-		}
-	}
-	public void generateAlphabeticPages(ArrayList<Page> pagesList){
-		int i;	    
-	    Page p;
-		String[] l = letters.substring(1).split(","); 
-	    pagesList.clear();
-	    for (i = 0; i < l.length; i++){
-	    	p = new Page( l[i],  l[i]);
-	    	pagesList.add(p);
-	    }
-	}
+	
 	
 }

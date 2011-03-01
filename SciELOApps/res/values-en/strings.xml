@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="tab_list_docs_name">Documents</string>
+	<string name="tab_list_journals_name">Journals</string>
+	<string name="tab_list_issues_name">Recent issues</string>
+	<string name="tab_settings_name">Settings</string>
+	<string name="menu_update">Refresh Result</string>
+	<string name="search_result_details_title">Result details</string>
+	<string name="searchResultDialogTitle">Search result dialog title</string>
+	<string name="search_interrupted">Search result dialog title</string>
+	<string name="search_expression_hint">Search</string>
+	<string name="search_button">search</string>
+	<string name="menuItemRefineBySubject">Refine by subject</string>
+	<string name="menuItemRefineByJournal">Refine by journal</string>
+	<string name="menuItemRefineByYear">Refine by year</string>
+	<string name="menuItemRefineByCollection">Refine by collection</string>
+	<string name="menuItemRefineByLanguage">Refine by language</string>
+	<string name="menuItemRefineBySubjectHumanSciences">Human Sciences</string>
+	<string name="menuItemRefineBySubjectHealthSciences">Health Sciences</string>
+	<string name="menuItemRefineBySubjectBiologicalSciences">Biological Sciences</string>
+	<string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
+	<string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
+	<string name="menuItemRefineBySubjectEngineering">Engineering</string>
+	<string name="menuItemSendEmail">Send e-mail</string>
+	<string name="menuItemSaveResult">Save</string>
+	<string name="menuItemSaveBookmark">Bookmark</string>
+	<string name="menuItemDownloadPDF">Download PDF</string>
+	
+	<string name="text_sendTo">e-mail</string>
+	<string name="button_send">send</string>
+	<string name="search_label">search</string>
+	<string name="search_hint">search</string>
+	<string name="total">total</string>
+</resources>

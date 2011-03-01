@@ -22,7 +22,7 @@ public class SearchDocsResult extends SearchResult{
 	private IdAndValueObjects subjects;
 	private IdAndValueObjects languages;
 	
-	//private Pagination pagination;
+	private NumericPagination pagination;
 	
 	
 	SearchDocsResult(String url, ClusterCollection clusterCollection, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList, String _generic_pdf_url ){
@@ -89,8 +89,9 @@ public class SearchDocsResult extends SearchResult{
 			String from = responseParameters.get("start").toString();
 			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			
-			pagination.loadData(from, resultCount, itemsPerPage, 1);
-
+			
+			pagination = new NumericPagination(from, resultCount, itemsPerPage);
+			pagination.generatePages(pagesList);
 			this.docs = response.getJSONArray("docs");
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				

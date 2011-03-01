@@ -26,13 +26,17 @@ public class SearchActivity extends Activity {
 
 	protected int selectedMenuId;
 	protected String header = "";
+	protected String partial_header = "";
+	
 	protected String filter = "";
 	protected int selectedPageIndex = 0;
 	protected String query = "";
 	protected String query_id = "";
 	protected ClusterCollection clusterCollection;
-	protected SearchService ss;
+	protected SearchService ss  = new SearchService();
 	protected String[] clusterCodeOrder;
+	protected String total;
+	
 	
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -43,11 +47,11 @@ public class SearchActivity extends Activity {
 	protected void handleIntent(Intent intent) {
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      query = intent.getStringExtra(SearchManager.QUERY);
-	       
+	      partial_header = query;	       
 	    } else {
 	    	query = query_id;
 	    }
-	    header = query;
+	    
 	    doSearch();
 	}
 	
@@ -115,7 +119,8 @@ public class SearchActivity extends Activity {
 		            	teste2 = sf.getFilterExpression();
 		            	addFilter(teste2);
 		            	this.selectedPageIndex = 0;
-		            	header = header + "/" + sf.getCaption() + ":";
+		            	//header = header + "/" + sf.getCaption() + ":";
+		            	partial_header = sf.getCaption() + ":";
 		            	doSearch();	            	
 		            }	        	
 		            
@@ -135,14 +140,18 @@ public class SearchActivity extends Activity {
 		queryurl = getURL();
 		result = ss.call(queryurl);
 		
-		presentResult(result);
-	}
-	
-
-	protected void presentResult(String result) {
 		if (result.length()>0){
 			loadAndDisplayData(result);
 			//aaPage.notifyDataSetChanged();
+			
+			if (total.length()>0){
+				if (partial_header.length()>0){
+					partial_header = "/" + partial_header +  total;
+				}
+				header = header + partial_header;
+				partial_header = "";				
+			}
+			
 			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
 			headerTextView.setText(header);
 			

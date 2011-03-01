@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="cluster_list">
-	<item>ac</item>
-	<item>ta_cluster</item>
-	<item>year_cluster</item>
-	<item>la</item>
-	<item>in</item>	
-</string-array><string-array name="collections_code">
-	<item>scl</item>
-	<item>chl</item>
-	<item>spa</item>
-	<item>arg</item>
-	<item>cub</item>
-	<item>esp</item>
-	<item>col</item>
-	<item>mex</item>
-	<item>ven</item>
-	<item>prt</item>
-	<item>sss</item>
-</string-array>
+
 <string-array name="collections_name">
 	<item>SciELO Brasil</item>
 	<item>SciELO Chile</item>
@@ -31,32 +13,7 @@
 	<item>SciELO Venezuela</item>
 	<item>SciELO Portugal</item>
 	<item>SciELO Social Sciences</item>
-</string-array>
-<string-array name="log_collections_code">
-	<item>scielobr</item>
-	<item>scielocl</item>
-	<item>scielosp</item>
-	<item>scieloar</item>
-	<item>scielocu</item>
-	<item>scieloes</item>
-	<item>scielocol</item>
-	<item>scielomex</item>
-	<item>scieloven</item>
-	<item>scielopt</item>
-	<item>scieloss</item>
-</string-array>
-<string-array name="collections_url">
-<item>www.scielo.br</item>
-	<item>www.scielo.cl</item>
-	<item>www.scielosp.org</item>
-	<item>www.scielo.org.ar</item>
-	<item>scielo.sld.cu</item>
-	<item>scielo.isciii.es</item>
-	<item>www.scielo.org.co</item>
-	<item>www.scielo.org.mx</item>
-	<item>www.scielo.org.ve</item>
-	<item>www.scielo.oces.mctes.pt</item>
-	<item>socialsciences.scielo.org</item>
+	<item>SciELO África do Sul</item>
 </string-array>
 
 <string-array name="subjects_name">

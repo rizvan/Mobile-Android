@@ -48,7 +48,7 @@ public class TOCActivity extends SearchActivity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
 	    
-	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list);
+	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    serviceURL = this.getResources().getString(R.string.search_feed_issuetoc);
 	    
 
@@ -93,7 +93,6 @@ public class TOCActivity extends SearchActivity {
 	    collectionId = getIntent().getStringExtra("collection_id");
 		
 		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc, subjects, languages, searchResultList, pagesList);
-		ss = new SearchService();
 		
 		TextView header = (TextView) findViewById(R.id.TextViewHeader);
 		header.setText(issue.getText());

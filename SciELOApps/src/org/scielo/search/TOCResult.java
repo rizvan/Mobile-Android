@@ -49,11 +49,11 @@ public class TOCResult extends SearchResult {
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
 		}	
-		if (selectedPageIndex>0){
+		/*if (selectedPageIndex>0){
 			query = query + "&start=" + pagination.getPageSearchKey(selectedPageIndex);
 		} else {
 			query = query + "&start=1" ;
-		}
+		}*/
 		if (searchExpression.length()>0){
 			try {
 				query = query + "&pid=" + URLEncoder.encode(searchExpression, "UTF-8");
@@ -76,7 +76,7 @@ public class TOCResult extends SearchResult {
 	public void loadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("issuetoc");
-			pagination.loadData("1", new Integer(docs.length()).toString(), docs.length(), 0);
+			//pagination.loadData("1", new Integer(docs.length()).toString(), docs.length(), 0);
 			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				

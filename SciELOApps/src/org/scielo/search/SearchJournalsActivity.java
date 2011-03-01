@@ -68,7 +68,6 @@ public class SearchJournalsActivity extends SearchActivity {
 		
 		setClusterCollection(jc, subjects, languages);
 		ssData = new SearchJournalsResult(searchURLs, clusterCollection, jc, subjects, languages, searchResultList,pagesList);
-		ss = new SearchService();
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 
@@ -100,7 +99,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
-		           header = header + " /" + pagesList.get(_index).getLabel()+ ":";
+		           partial_header = pagesList.get(_index).getLabel()+ ":";
 		           doSearch();	
 		       }
 		    });
@@ -130,9 +129,9 @@ public class SearchJournalsActivity extends SearchActivity {
 		//searchResultCount = ssData.getResultCount();
 		clusterCollection = ssData.getSearchClusterCollection();
 		if (header.length()==0){
-			header = ssData.getJournalsTotal();
+			total = ssData.getJournalsTotal();
 		} else {
-			header = header + ssData.getResultCount();
+			total = ssData.getResultCount();
 		}
 		// ssData.getJournalsTotal();
 		aa.notifyDataSetChanged();		

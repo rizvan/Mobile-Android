@@ -61,7 +61,7 @@ public class SearchDocsActivity extends SearchActivity {
 		//setClusterCollection(jc, subjects, languages);
 		clusterCollection = new ClusterCollection();
 		ssData = new SearchDocsResult(serviceURL, clusterCollection, jc, subjects, languages, searchResultList, pagesList, this.getResources().getString(R.string.pdf_url));
-		ss = new SearchService();
+		
 
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
@@ -127,7 +127,8 @@ public class SearchDocsActivity extends SearchActivity {
 		ssData.loadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
-		//header = header + ssData.getResultCount();
+		
+		total = ssData.getResultCount();
 		
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();

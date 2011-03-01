@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Search!</string>
-	<string name="app_name">SciELO</string>
 	<string name="tab_list_docs_name">Documentos</string>
 	<string name="tab_list_journals_name">Periódicos</string>
 	<string name="tab_list_issues_name">Números recentes</string>
@@ -15,15 +13,6 @@
 	<string name="menuItemRefineByYear">Refinar por ano</string>
 	<string name="menuItemRefineByCollection">Refinar por coleção</string>
 	<string name="menuItemRefineByLanguage">Refinar por idioma</string>
-	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
-
-	<string name="search_feed_journal">http://search.teste.scielo.org/mobile/getCollectionData.php?data=titles</string>
-	<string name="search_feed_issues">http://search.teste.scielo.org/mobile/getCollectionData.php?data=issues</string>
-	<string name="search_feed_issuetoc">http://search.teste.scielo.org/mobile/getCollectionData.php?data=issuetoc</string>
-	
-	<string name="pdf_url">http://search.scielo.org/showpdf.php?pdf=http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
-	
-	<string name="pdf_url_clean">http://search.scielo.org/viewpdf.php?pdf=REPLACE_PDF_FILENAME.pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG&amp;tlng=REPLACE_LANG</string>
 	<string name="menuItemSendEmail">e-mail</string>
 	<string name="menuItemSaveResult">guardar</string>
 	<string name="menuItemSaveBookmark">bookmark</string>
@@ -33,7 +22,5 @@
 	<string name="search_hint">pesquisa</string>
 	<string name="search_expression_hint">pesquisa</string>
 	<string name="search_button">pesquisar</string>
-<string name="menuItemDownloadPDF">Download PDF</string>
-	
-
+	<string name="menuItemDownloadPDF">Download PDF</string>
 </resources>
