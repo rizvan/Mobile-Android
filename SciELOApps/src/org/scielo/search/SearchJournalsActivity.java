@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,6 +38,7 @@ public class SearchJournalsActivity extends SearchActivity {
 
 	protected GridView paginationGridView;    
 	protected PaginationItemAdapter aaPage;    
+	protected PageAdapter aaPageH;
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 	protected Page page;
 	
@@ -92,6 +94,8 @@ public class SearchJournalsActivity extends SearchActivity {
 	               
 		       }
 		});
+	    
+	    
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
 	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
 	    paginationGridView.setAdapter(aaPage);	    
@@ -106,6 +110,28 @@ public class SearchJournalsActivity extends SearchActivity {
 		           selectedPageIndex = -1;
 		       }
 		    });
+	    
+	    // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_gallery_item, new ArrayList<String>());
+	    
+/*
+	    gal = (Gallery) findViewById(R.id.gallery);
+	    
+	    
+	    aaPageH = new PageAdapter(this, R.layout.pagination_horizontal, pagesList);
+	    gal.setAdapter(aaPageH);	    
+	    gal.setOnItemClickListener(new OnItemClickListener() {
+		       @Override
+			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
+		           selectedPageIndex = _index;
+		           
+		           specHeaderLetter = "/" + pagesList.get(_index).getLabel()+ ":";
+		           searchAndPresentResults();
+		           
+		           selectedPageIndex = -1;
+		       }
+		    });
+	    
+	    */
 
 	    //oldOnCreate();
 	    //onSearchRequested();

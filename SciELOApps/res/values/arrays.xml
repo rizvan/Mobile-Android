@@ -79,21 +79,21 @@
 </string-array>
 <string-array name="journal_urls">
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=20</item>
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=20</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
 	
 	<!-- ok  -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
 	
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
 	
 	<!-- ok  -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
 	
 	<!-- colocar em ordem cronologica inversa -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PID"&amp;endkey="PIDz"</item>
+	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PID"&amp;endkey="PIDz"</item>
 	
 </string-array>
 </resources>

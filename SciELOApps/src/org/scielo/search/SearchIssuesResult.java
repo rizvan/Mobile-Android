@@ -1,8 +1,6 @@
 package org.scielo.search;
 
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -42,44 +40,21 @@ public class SearchIssuesResult extends SearchResult {
     }
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex, String colid) {
 		String u = "";
-		String query = "";
 		//URLEncoder.encode(queryURL, "UTF-8")
 		u = this.url;
 		u =	u.replace("&amp;", "&" );
-		if (itemsPerPage.length()>0){
-			query = query + "&count=" + itemsPerPage;
-		}	
-		if (colid.length()>0){
-			query = query + "&col=" + colid;
-		}
-		/*
-		if (selectedPageIndex>0){
-			query = query + "&start=" + pagination.getPageSearchKey(selectedPageIndex);
-		} else {
-			query = query + "&start=1" ;
-		}
-		*/
+		
 		if (searchExpression.length()>0){
-			try {
-				query = query + "&pid=" + URLEncoder.encode(searchExpression, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			u = u.replace("PIDz", '"' + searchExpression + "z" + '"');
+			u = u.replace("PID", '"' + searchExpression + '"');
+			
 		}
-		if (filter.length()>0){
-			try {
-				query = query + "&fq=" + URLEncoder.encode(filter, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return u + query;						
+		
+		return u ;						
 	}
 	public void specLoadPaginationAndDocsData(){		
 		try {
-			docs = jsonObject.getJSONArray("issues");
+			docs = jsonObject.getJSONArray("rows");
 			//pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
@@ -89,47 +64,64 @@ public class SearchIssuesResult extends SearchResult {
 	public void specLoadSearchResultList(){
 		JSONObject resultItem ;
 		Issue r;
-		
+		String suppl = "";
 		String last = "";
-		
+		String id = "";
 		
 		searchResultList.clear();
 		
 		//message = "docs.length: " +  new Integer(this.docs.length()).toString() + "\n" + "rows: " + this.itemsPerPage;
 		for (int i=0; i<this.docs.length(); i++){
 			r = new Issue();
+			r.setJournal(journal);
+			
 			last = "";
-				
+			suppl = "";
 			try {				
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i);
-				r.setJournal(journal);
+				id = resultItem.getString("key");
+				
 				try {					
-					r.setDate(resultItem.getString("year"));	
+					resultItem = resultItem.getJSONObject("doc");	
+				} catch (JSONException e) {
+					last = last + "\n" +"doc";
+				}
+				// "v31":[{"_":"23"}]
+
+				try {					
+					// jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("responseHeader").getJSONObject("params");
+					r.setDate(resultItem.getJSONArray("v65").getJSONObject(0).getString("_").substring(0,3));	
 				} catch (JSONException e) {
 					last = last + "\n" +"year";
 				}
 				try {
-					r.setVolume(resultItem.getString("vol"));					
+					r.setVolume(resultItem.getJSONArray("v31").getJSONObject(0).getString("_"));					
 				} catch (JSONException e) {
 					last = last + "\n" +"vol" ;						
 				}
 				try {
-					r.setNumber(resultItem.getString("issue"));						
+					r.setNumber(resultItem.getJSONArray("v32").getJSONObject(0).getString("_"));						
 				} catch (JSONException e) {
 					last = last + "\n" +"number" ;
 					
 				}
 				try {
-					r.setSuppl(resultItem.getString("suppl"));						
+					suppl = resultItem.getJSONArray("v131").getJSONObject(0).getString("_");
 				} catch (JSONException e) {
 					last = last + "\n" +"suppl" ;			
 				}
-				try {
-					r.setId(resultItem.getString("pid"));						
-				} catch (JSONException e) {
-					last = last + "\n" +"pid" ;			
+				if (suppl==""){
+					try {
+						suppl = resultItem.getJSONArray("v132").getJSONObject(0).getString("_");
+					} catch (JSONException e) {
+						last = last + "\n" +"suppl" ;			
+					}					
 				}
+				
+				r.setSuppl(suppl);
+				
+					r.setId(id);						
 				
 				
 				

@@ -31,9 +31,6 @@ public class SearchDocsActivity extends SearchActivity {
     private ArrayList<Document> searchResultList =  new ArrayList<Document>();	
 	private SearchDocsResult ssData;
 
-	protected GridView paginationGridView;    
-	protected PaginationItemAdapter aaPage;    
-	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 	
 	
 	

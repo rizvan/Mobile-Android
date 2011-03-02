@@ -92,7 +92,7 @@ public class TOCActivity extends SearchActivity {
 	    query_id = issue.getId();
 	    collectionId = getIntent().getStringExtra("collection_id");
 		
-		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc, subjects, languages, searchResultList, pagesList);
+		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc.getItem(collectionId), subjects, languages, searchResultList, pagesList);
 		
 		TextView header = (TextView) findViewById(R.id.TextViewHeader);
 		header.setText(issue.getText());

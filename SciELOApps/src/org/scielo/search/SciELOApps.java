@@ -36,17 +36,11 @@ public class SciELOApps extends TabActivity implements OnTabChangeListener{
 	    tabHost.setup();
 	    tabHost.setCurrentTab(1);
 	    
-	    /*
 	    for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
         {
-	    	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#7392B5"));
-	    	tabHost.getTabWidget().getChildAt(i).setPadding(3, 3, 1, 0);
-	    	
+	    	tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 40;
         }
         
-        tabHost.getTabWidget().setCurrentTab(1);
-        tabHost.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#4E4E9C"));
-        */
     }
 
     

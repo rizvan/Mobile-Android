@@ -1,9 +1,13 @@
 package org.scielo.search;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.Gallery;
+import android.widget.GridView;
 import android.widget.TextView;
 //import android.widget.EditText;
 //import org.json.JSONArray;
@@ -23,7 +27,15 @@ public class SearchActivity extends Activity {
 	View searchButton;	
 	TextView headerTextView;
 	ListView searchResultListView;
+	protected Gallery gal;
 
+	protected GridView paginationGridView;    
+	protected PaginationItemAdapter aaPage;  
+	
+	
+	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
+	
+	
 	protected int selectedMenuId;
 	
 	protected String filter = "";
