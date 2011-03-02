@@ -77,7 +77,7 @@ public class SearchIssuesResult extends SearchResult {
 		}
 		return u + query;						
 	}
-	public void loadPaginationAndDocsData(){		
+	public void specLoadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("issues");
 			//pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
@@ -86,7 +86,7 @@ public class SearchIssuesResult extends SearchResult {
 		}
 	}
 	
-	public void loadSearchResultList(){
+	public void specLoadSearchResultList(){
 		JSONObject resultItem ;
 		Issue r;
 		

@@ -36,6 +36,7 @@ public class SearchDocsActivity extends SearchActivity {
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 	
 	
+	
 		
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class SearchDocsActivity extends SearchActivity {
 	        	//page = pagesList.get(position);
 	        	//header = header + ssData.getResultCount();
 		        selectedPageIndex = position;
-		        doSearch();	
+		        searchAndPresentResults();	
 	        }
 	    });
 
@@ -118,22 +119,27 @@ public class SearchDocsActivity extends SearchActivity {
     	inflater.inflate(R.menu.menu, menu);        
     	return true;
     }
-	protected String getURL(){
+	protected String specGetURL(){
 		//this.pagePosition = aaPage.getPageSelected();
+		if (this.filter.length()==0){
+			specHeaderFilterName = "";
+		}
 		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex);
 	}
-	protected void loadAndDisplayData(String result){
+	protected void specLoadAndDisplayData(String result){
 		
-		ssData.loadData(result);
+		ssData.genLoadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
 		
-		total = ssData.getResultCount();
+		specResultCount = ssData.getResultCount();
 		
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}
-	
+	protected String specGetAcumHeader(){
+		return ssData.getAcumHeader();
+	}
 	
 
 }

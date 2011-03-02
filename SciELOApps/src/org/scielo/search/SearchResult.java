@@ -21,7 +21,7 @@ public class SearchResult {
 	protected static final String TAG = "SearchResult";
 	protected String url;
 	
-	protected String total;
+	protected String total="";
 		
 	SearchResult(ArrayList<Page> pagesList ){
 		//clusterCollection = new ClusterCollection();
@@ -32,20 +32,19 @@ public class SearchResult {
 	public String getResultCount(){
 		return total;
 	}
-	
+	/*
 	protected String getURL() {
 		
 		return url;						
 	}
+	*/
 	
-	
-	protected void loadData(String _data){		
+	protected void genLoadData(String _data){		
 		try {
 			jsonObject = new JSONObject(_data);
-			
-			loadPaginationAndDocsData();
-			loadClusterCollection();
-			loadSearchResultList();
+			specLoadPaginationAndDocsData();
+			specLoadClusterCollection();
+			specLoadSearchResultList();
 			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
@@ -56,15 +55,15 @@ public class SearchResult {
 		return this.clusterCollection;
 	}
 	
-	protected void loadPaginationAndDocsData(){
+	protected void specLoadPaginationAndDocsData(){
 		
 	}
-	protected boolean loadClusterCollection() {
+	protected boolean specLoadClusterCollection() {
     	boolean r = true;
     	return r;
 	}
 	
-	protected void loadSearchResultList(){
+	protected void specLoadSearchResultList(){
 	}
 
 	

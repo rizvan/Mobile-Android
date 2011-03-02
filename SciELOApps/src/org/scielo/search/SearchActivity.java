@@ -25,8 +25,6 @@ public class SearchActivity extends Activity {
 	ListView searchResultListView;
 
 	protected int selectedMenuId;
-	protected String header = "";
-	protected String partial_header = "";
 	
 	protected String filter = "";
 	protected int selectedPageIndex = 0;
@@ -35,8 +33,14 @@ public class SearchActivity extends Activity {
 	protected ClusterCollection clusterCollection;
 	protected SearchService ss  = new SearchService();
 	protected String[] clusterCodeOrder;
-	protected String total;
 	
+	protected String specHeader = "";
+	protected String specQuery = "";
+	
+	protected String specHeaderFilterName = "";
+	protected String specResultCount ="";
+	protected String specTotal = "";
+	protected String specHeaderLetter = "";
 	
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -47,26 +51,36 @@ public class SearchActivity extends Activity {
 	protected void handleIntent(Intent intent) {
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      query = intent.getStringExtra(SearchManager.QUERY);
-	      partial_header = query;	       
 	    } else {
 	    	query = query_id;
 	    }
 	    
-	    doSearch();
+	    searchAndPresentResults();
 	}
 	
     
 	
-	protected void addFilter(String _filter){
+	protected void addFilter(String _filter, String caption){
+		String prefix = _filter.substring(0, 4);
+		
 		if (this.filter.length()>0){			
-			if (this.filter.contains(_filter.substring(0, 2))){
+			if (this.filter.contains(prefix)){
 				this.filter = _filter;
+		    	specHeaderFilterName = "/" + caption + ":";
+
 			} else {
 				this.filter = this.filter + " AND " + _filter;
+		    	specHeaderFilterName = specHeaderFilterName + "/" + caption + ":";
+
 			}
 		} else {
 			this.filter = _filter;
+	    	specHeaderFilterName = "/" +  caption + ":";
 		}			
+		
+    	this.selectedPageIndex = -1;
+    	specHeaderLetter = "";
+
 	}
 	@Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -77,22 +91,28 @@ public class SearchActivity extends Activity {
         Cluster cluster;
         SearchFilter sf;
         int i;
+        int clusterIndex = 0;
         //menu.clear();
         //this.mymenu = menu;
        
-        for (int index=1; index < menu.size(); index++){
+        
+        for (int index=0; index < menu.size(); index++){
     		menuItem = menu.getItem(index);
     		subMenu = menuItem.getSubMenu();
-    		subMenu.clear();
     		
-    		if (clusterCollection.getCount()>0){
-	    		cluster = clusterCollection.getItemById(clusterCodeOrder[index-1]);
-	    		if (cluster!=null){
-	        		for (i=0;i<cluster.getFilterCount();i++){
-	        			sf = cluster.getFilterByIndex(i);
-	        			subMenu.add(menuItem.getItemId(), sf.getSubmenuId(), i, sf.displayCaptionAndCount());
-	        			//teste = subMenuItem.getItemId();
-	        	    } 
+    		if (subMenu != null) {
+	    		subMenu.clear();
+	    		
+	    		if (clusterCollection.getCount()>0){
+		    		cluster = clusterCollection.getItemById(clusterCodeOrder[clusterIndex]);
+		    		if (cluster!=null){
+		        		for (i=0;i<cluster.getFilterCount();i++){
+		        			sf = cluster.getFilterByIndex(i);
+		        			subMenu.add(menuItem.getItemId(), sf.getSubmenuId(), i, sf.displayCaptionAndCount());
+		        			//teste = subMenuItem.getItemId();
+		        	    } 
+		    		}
+		    		clusterIndex ++;
 	    		}
     		}
     	}
@@ -104,56 +124,72 @@ public class SearchActivity extends Activity {
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {    
         super.onOptionsItemSelected(item);
-        int teste;
+        int itemSelected;
         
         String teste2 = "";
-        switch (item.getItemId()) {
+        itemSelected = item.getItemId();
+        switch (itemSelected) {
 	        case R.id.search:
 	            onSearchRequested();
 	            return true;
 	        default:
 	        	if (!item.hasSubMenu()){
-	        		teste = item.getItemId();
-		    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(teste, teste2);
+	        		
+		    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(itemSelected, teste2);
 		            if (sf != null) {
 		            	teste2 = sf.getFilterExpression();
-		            	addFilter(teste2);
-		            	this.selectedPageIndex = 0;
-		            	//header = header + "/" + sf.getCaption() + ":";
-		            	partial_header = sf.getCaption() + ":";
-		            	doSearch();	            	
+		            	addFilter(teste2 , sf.getCaption());
+		            	searchAndPresentResults();	            	
 		            }	        	
 		            
 	        	}
 	            return true;	          	          
         }
+        
     }
-	protected void loadAndDisplayData(String result){
+	protected void specLoadAndDisplayData(String result){
 		
 	}
-	protected String getURL(){
+	protected String specGetURL(){
 		return "";
 	}
-	public void doSearch() {
+	protected String specGetAcumHeader(){
+		return "";
+	}
+	public void searchAndPresentResults() {
 		String queryurl;
 		String result;
-		queryurl = getURL();
+		
+		queryurl = specGetURL();
 		result = ss.call(queryurl);
 		
 		if (result.length()>0){
-			loadAndDisplayData(result);
+			specLoadAndDisplayData(result);
 			//aaPage.notifyDataSetChanged();
 			
-			if (total.length()>0){
-				if (partial_header.length()>0){
-					partial_header = "/" + partial_header +  total;
-				}
-				header = header + partial_header;
-				partial_header = "";				
+			
+			if (query.length()>0){
+				specQuery = query + ":";
 			}
 			
+			specHeader = specQuery + specTotal + specHeaderFilterName + specHeaderLetter ;
+			if ((specHeaderFilterName.length()>0) || (specHeaderLetter.length()>0)){
+				specHeader = specHeader + specResultCount;
+			}
+				
+			
+			
+			if (specHeaderFilterName.length()>0){
+				if (specHeaderLetter.length()==0){
+					// it means specResultCount is related to the filter
+					specHeaderFilterName = specHeaderFilterName + specResultCount;	
+				}
+			}
+			
+			
+			
 			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
-			headerTextView.setText(header);
+			headerTextView.setText(specHeader);
 			
 		}
 	}	

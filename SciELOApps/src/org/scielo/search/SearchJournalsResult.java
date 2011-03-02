@@ -43,8 +43,10 @@ public class SearchJournalsResult extends SearchResult {
     	this.languages = languages;
 		this.searchResultList = searchResultList;
 		this.clusterCollection = clusterCollection;	
-		this.currentAndNextLetters = new IdAndValueObjects();
+		
 		pagination = new AlphabeticPagination();
+		pagination.generateLetters();
+		pagination.loadPagesList(pagesList);
 		
     }
 	
@@ -53,7 +55,7 @@ public class SearchJournalsResult extends SearchResult {
 		String filterSubject = "";
 		String filterCollection = "";
 		String[] temp = filter.split(" AND ");
-		String teste = "";
+		
 		
 		for (int i=0; i < temp.length;i++){
 			if (temp[i].contains("ac:")){
@@ -70,7 +72,7 @@ public class SearchJournalsResult extends SearchResult {
 			
 			if (selectedPageIndex<0){
 				r = URL_list.getItem("initial_url").getValue() ;
-				generateAlphabeticList();
+				//generateAlphabeticList();
 				rebuildPagination = false;
 				isInit = true;
 			} else {
@@ -97,9 +99,12 @@ public class SearchJournalsResult extends SearchResult {
 			}
 		}
 		
-		if (selectedPageIndex > -1){			
-			r = r.replace("LETTERz" ,'"'+ currentAndNextLetters.getItem( teste ).getValue() + '"');
-			r = r.replace("LETTER" ,'"'+ teste  + '"');
+		if (selectedPageIndex > -1){	
+			IdAndValue item;
+			item = pagination.getLetterInfo(selectedPageIndex);
+			r = r.replace("LETTERz" ,'"'+ item.getValue()   + '"');
+			r = r.replace("LETTER" , '"'+ item.getId()+ '"');
+			
 			rebuildPagination = false;
 		} else {
 			r = r.replace(",LETTERz", ",{}");						
@@ -110,21 +115,20 @@ public class SearchJournalsResult extends SearchResult {
 		return r;
 	}
 	
-	public void loadPaginationAndDocsData(){		
+	public void specLoadPaginationAndDocsData(){		
 		try {
 			
 			docs = jsonObject.getJSONArray("rows");
 			
 			if (isInit){
 				journalsTotal = jsonObject.getString("total_rows") ;
-			}
-						
+			} 			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				
 		}
 	}
 
-	public void loadSearchResultList(){
+	public void specLoadSearchResultList(){
 		JSONObject resultItem ;
 		Journal r;
 		
@@ -148,14 +152,14 @@ public class SearchJournalsResult extends SearchResult {
 		total = t;
 		
 		if (rebuildPagination){
-			pagination = new AlphabeticPagination();
+			pagination.resetLetters();
 		}
 		
 		for (int i=0; i<this.docs.length(); i++){
 			r = new Journal();
 			last = "";
 			
-			str_i = new Integer(i).toString();
+			str_i = new Integer(i+1).toString();
 			try {				
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i).getJSONObject("value");
@@ -216,11 +220,13 @@ public class SearchJournalsResult extends SearchResult {
 				Log.d(TAG, "JSONException loadResultList " + str_i + " " + last, e);	
 	        } 
 			
-			
+		}
+		if (rebuildPagination){
+			pagination.loadPagesList(pagesList);
 		}
 		
 	}
-
+/*
 	private void generateAlphabeticList(){
 		String u = "";
 		SearchService ss = new SearchService();
@@ -230,6 +236,7 @@ public class SearchJournalsResult extends SearchResult {
 		String letter="";
 		String nextLetter="";
 		IdAndValue item ;
+		int q = 0;
 		
 		pagination = new AlphabeticPagination();
 		for (int i=65;i<91;i++){
@@ -242,9 +249,9 @@ public class SearchJournalsResult extends SearchResult {
 				jsonData = new JSONObject(_data);
 				try {
 					jsonArray = jsonData.getJSONArray("rows");
-					if (jsonArray.length()>0){
-						item = new IdAndValue(letter, nextLetter);
-						currentAndNextLetters.add(letter, item, false);
+					q = jsonArray.length();
+					if (q>0){
+						
 						pagination.addLetter(letter);
 					}
 				} catch (JSONException e) {
@@ -257,6 +264,9 @@ public class SearchJournalsResult extends SearchResult {
 			}
 			
 		}
+		pagination.loadPagesList(pagesList);
+
 		
 	}
+	*/
 }

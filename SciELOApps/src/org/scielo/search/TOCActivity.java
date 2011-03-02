@@ -124,7 +124,7 @@ public class TOCActivity extends SearchActivity {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
-		           doSearch();	
+		           searchAndPresentResults();	
 		       }
 		    });
 
@@ -133,18 +133,18 @@ public class TOCActivity extends SearchActivity {
 	}	
 	
 		
-	protected String getURL(){
+	protected String specGetURL(){
 		//this.pagePosition = aaPage.getPageSelected();
 		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
-	protected void loadAndDisplayData(String result){
+	protected void specLoadAndDisplayData(String result){
 		
 		
 		
-		ssData.loadData(result);
+		ssData.genLoadData(result);
 		//pagesList = ssData.getPageList();
 		clusterCollection = ssData.getSearchClusterCollection();
-		header = issue.getIssueLabel(true);
+		specHeader = issue.getIssueLabel(true);
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

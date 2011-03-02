@@ -62,7 +62,7 @@ public class DocumentActivity extends Activity{
 	    if (getIntent().getStringExtra("query").length()>0){
 	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", 0);
 			String result = ss.call(queryurl);
-			ssData.loadData(result);
+			ssData.genLoadData(result);
 			
 			searchResultList = ssData.getSearchResultList();
 

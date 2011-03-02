@@ -73,7 +73,7 @@ public class TOCResult extends SearchResult {
 		return u + query;						
 	}
 	
-	public void loadPaginationAndDocsData(){		
+	public void specLoadPaginationAndDocsData(){		
 		try {
 			docs = jsonObject.getJSONArray("issuetoc");
 			//pagination.loadData("1", new Integer(docs.length()).toString(), docs.length(), 0);
@@ -85,13 +85,13 @@ public class TOCResult extends SearchResult {
 	
 	
 
-	public boolean loadClusterCollection() {
+	public boolean specLoadClusterCollection() {
     	boolean r = true;
     	
     	return r;
 	}
 	
-	public void loadSearchResultList(){
+	public void specLoadSearchResultList(){
 		JSONObject resultItem ;
 		Document r;
 		String result;

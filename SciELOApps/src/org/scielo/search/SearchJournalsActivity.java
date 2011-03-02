@@ -40,13 +40,13 @@ public class SearchJournalsActivity extends SearchActivity {
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 	protected Page page;
 	
-
-
+	
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.search);
-	    header = "";
+	    specHeader = "";
+	    query = "";
 	    selectedPageIndex = -1;
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
 	    
@@ -99,8 +99,11 @@ public class SearchJournalsActivity extends SearchActivity {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
-		           partial_header = pagesList.get(_index).getLabel()+ ":";
-		           doSearch();	
+		           
+		           specHeaderLetter = "/" + pagesList.get(_index).getLabel()+ ":";
+		           searchAndPresentResults();
+		           
+		           selectedPageIndex = -1;
 		       }
 		    });
 
@@ -108,6 +111,8 @@ public class SearchJournalsActivity extends SearchActivity {
 	    //onSearchRequested();
 	    handleIntent(getIntent());
 	}	
+	
+	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -119,20 +124,21 @@ public class SearchJournalsActivity extends SearchActivity {
     }
 	
 
-	protected String getURL(){
+	protected String specGetURL(){
 		return ssData.getURL(query, "",  this.filter, this.selectedPageIndex);
 	}
-	protected void loadAndDisplayData(String result){
+	protected void specLoadAndDisplayData(String result){
 		
 		
-		ssData.loadData(result);
+		ssData.genLoadData(result);
 		//searchResultCount = ssData.getResultCount();
 		clusterCollection = ssData.getSearchClusterCollection();
-		if (header.length()==0){
-			total = ssData.getJournalsTotal();
-		} else {
-			total = ssData.getResultCount();
-		}
+		
+		specTotal = ssData.getJournalsTotal();
+		specResultCount = ssData.getResultCount();
+		
+		
+		
 		// ssData.getJournalsTotal();
 		aa.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();

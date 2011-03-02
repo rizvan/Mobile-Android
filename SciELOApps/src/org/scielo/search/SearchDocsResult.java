@@ -52,6 +52,8 @@ public class SearchDocsResult extends SearchResult{
 		if (searchExpression.length()>0){
 			try {
 				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
+				
+				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,7 +70,7 @@ public class SearchDocsResult extends SearchResult{
 		return u + query;						
 	}
 	@Override
-	public void loadPaginationAndDocsData(){		
+	public void specLoadPaginationAndDocsData(){		
 		JSONObject diaServerResponse;
 		JSONObject response;
 		JSONObject responseParameters;
@@ -85,12 +87,13 @@ public class SearchDocsResult extends SearchResult{
 			Log.d("SearchResult_DOC","4");	
 			
 			
-			String resultCount = response.get("numFound").toString();				
+			total = response.get("numFound").toString();				
 			String from = responseParameters.get("start").toString();
 			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			
 			
-			pagination = new NumericPagination(from, resultCount, itemsPerPage);
+			
+			pagination = new NumericPagination(from, total, itemsPerPage);
 			pagination.generatePages(pagesList);
 			this.docs = response.getJSONArray("docs");
 		} catch(JSONException e){
@@ -98,7 +101,7 @@ public class SearchDocsResult extends SearchResult{
 		}
 	}
 	@Override
-	public boolean loadClusterCollection() {
+	public boolean specLoadClusterCollection() {
     	boolean r = true;
     	int i_clusters = 0;
     	int i = 0;
@@ -192,7 +195,7 @@ public class SearchDocsResult extends SearchResult{
     	return r;
 	}
 	@Override
-	public void loadSearchResultList(){
+	public void specLoadSearchResultList(){
 		JSONObject resultItem ;
 		int k;
 	    Document r;
@@ -302,6 +305,10 @@ public class SearchDocsResult extends SearchResult{
 		// TODO Auto-generated method stub
 		
 		return searchResultList;
+	}
+	public String getAcumHeader() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

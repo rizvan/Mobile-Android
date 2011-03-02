@@ -87,7 +87,7 @@
 	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
 	
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
 	
 	<!-- ok  -->
 	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
