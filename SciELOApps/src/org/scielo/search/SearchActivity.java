@@ -38,6 +38,8 @@ public class SearchActivity extends Activity {
 	
 	protected int selectedMenuId;
 	
+	protected String filterSelectionTracker = "";
+	protected String letterOrPageSelected = "";
 	protected String filter = "";
 	protected int selectedPageIndex = 0;
 	protected String query = "";
@@ -75,18 +77,21 @@ public class SearchActivity extends Activity {
 	protected void addFilter(String _filter, String caption){
 		String prefix = _filter.substring(0, 4);
 		
-		if (this.filter.length()>0){			
-			if (this.filter.contains(prefix)){
+		if (this.filterSelectionTracker.length()>0){			
+			if (this.filterSelectionTracker.contains(prefix)){
+				// reinicializa
+				this.filterSelectionTracker = _filter;
 				this.filter = _filter;
 		    	specHeaderFilterName = "/" + caption + ":";
 
 			} else {
-				this.filter = this.filter + " AND " + _filter;
+				this.filterSelectionTracker = this.filterSelectionTracker + "|" + _filter;
+				this.filter = this.filter + " AND " + _filter;				
 		    	specHeaderFilterName = specHeaderFilterName + "/" + caption + ":";
-
 			}
 		} else {
 			this.filter = _filter;
+			this.filterSelectionTracker = _filter;
 	    	specHeaderFilterName = "/" +  caption + ":";
 		}			
 		
@@ -144,6 +149,13 @@ public class SearchActivity extends Activity {
 	        case R.id.search:
 	            onSearchRequested();
 	            return true;
+	        case R.id.reset:
+	        	this.filterSelectionTracker = "";
+	        	this.filter = "";
+				this.filterSelectionTracker = "";
+		    	specHeaderFilterName = "";
+		    	searchAndPresentResults();
+	            return true;
 	        default:
 	        	if (!item.hasSubMenu()){
 	        		
@@ -183,22 +195,19 @@ public class SearchActivity extends Activity {
 			if (query.length()>0){
 				specQuery = query + ":";
 			}
-			
-			specHeader = specQuery + specTotal + specHeaderFilterName + specHeaderLetter ;
-			if ((specHeaderFilterName.length()>0) || (specHeaderLetter.length()>0)){
-				specHeader = specHeader + specResultCount;
-			}
-				
-			
-			
-			if (specHeaderFilterName.length()>0){
-				if (specHeaderLetter.length()==0){
-					// it means specResultCount is related to the filter
-					specHeaderFilterName = specHeaderFilterName + specResultCount;	
-				}
+			if (specTotal.length()==0){
+				specTotal = specResultCount;
 			}
 			
+			specHeader = specQuery + specTotal;
 			
+			if (specHeaderFilterName.length()>0) {
+				specHeader = specHeader + specHeaderFilterName + specResultCount;
+				specHeaderFilterName = specHeaderFilterName + specResultCount;	
+			}
+			if (specHeaderLetter.length()>0) {
+				specHeader = specHeader + specHeaderLetter + specResultCount;
+			}
 			
 			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
 			headerTextView.setText(specHeader);
@@ -206,7 +215,7 @@ public class SearchActivity extends Activity {
 		}
 	}	
 
-	protected void setClusterCollection(SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages){
+	protected void setClusterCollection(JournalsCollectionsNetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, IdAndValueObjects letters){
 		
 		clusterCollection = new ClusterCollection();
 		Cluster cluster;
@@ -215,7 +224,7 @@ public class SearchActivity extends Activity {
 		int subMenuId;
 		SearchFilter searchFilter;
 		int k;
-		SciELOCollection c;
+		JournalsCollection c;
 		for (int i=0;i<clusterCodeOrder.length;i++){
 			idAndValueObjects = null;
 			
@@ -236,7 +245,11 @@ public class SearchActivity extends Activity {
 				} else {
 	    			if (clusterCodeOrder[i].equals("la")){
 	    				idAndValueObjects = languages;
-	    			}		        				
+	    			} else {
+	    				if (clusterCodeOrder[i].equals("le")){
+		    				idAndValueObjects = letters;
+		    			}
+	    			}
 	
 				}
 		    	for (k=0;k<idAndValueObjects.getCount();k++){        		

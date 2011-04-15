@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 
 import android.util.Log;
@@ -32,9 +33,10 @@ public class SearchService {
 		BufferedReader reader;
 		
 		try { 
+			
 			u = queryURL;
 			URL url = new URL(u);		
-			
+						
 			con = (HttpURLConnection) url.openConnection();
 			con.setReadTimeout(getMilliseconds(10)); /* milliseconds */ 
 			con.setConnectTimeout(getMilliseconds(10)); /* milliseconds */ 

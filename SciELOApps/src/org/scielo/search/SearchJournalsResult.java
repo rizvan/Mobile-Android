@@ -16,14 +16,15 @@ public class SearchJournalsResult extends SearchResult {
 	
 	protected ArrayList<Journal> searchResultList;
 	
-	protected SciELONetwork jc;
+	protected JournalsCollectionsNetwork jc;
 	protected IdAndValueObjects subjects;
 	protected IdAndValueObjects languages;
+	protected IdAndValueObjects letters;
 	protected IdAndValueObjects URL_list;
 	
-	protected IdAndValueObjects currentAndNextLetters;
 	
-	private AlphabeticPagination pagination;
+	
+	private FollowingLetters followingLetters;
 	
 	private boolean rebuildPagination;
 	private boolean isInit;
@@ -35,7 +36,7 @@ public class SearchJournalsResult extends SearchResult {
 		return journalsTotal;
 	}
 	
-	SearchJournalsResult(IdAndValueObjects urls, ClusterCollection clusterCollection, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
+	SearchJournalsResult(IdAndValueObjects urls, ClusterCollection clusterCollection, JournalsCollectionsNetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, IdAndValueObjects letters, ArrayList<Journal> searchResultList, ArrayList<Page> pagesList){
 		super(pagesList);
 		this.URL_list = urls;
     	this.jc = jc;
@@ -43,10 +44,9 @@ public class SearchJournalsResult extends SearchResult {
     	this.languages = languages;
 		this.searchResultList = searchResultList;
 		this.clusterCollection = clusterCollection;	
-		
-		pagination = new AlphabeticPagination();
-		pagination.generateLetters();
-		pagination.loadPagesList(pagesList);
+		this.letters = letters;
+		followingLetters = new FollowingLetters(letters);
+		//pagination.loadPagesList(pagesList);
 		
     }
 	
@@ -54,6 +54,8 @@ public class SearchJournalsResult extends SearchResult {
 		String r = "";
 		String filterSubject = "";
 		String filterCollection = "";
+		String filterInitialLetter = "";
+		
 		String[] temp = filter.split(" AND ");
 		
 		
@@ -63,21 +65,26 @@ public class SearchJournalsResult extends SearchResult {
 			} else {
 				if (temp[i].contains("in:")){
 					filterCollection = temp[i].substring(3);
+				} else {
+					if (temp[i].contains("le:")){
+						filterInitialLetter = temp[i].replace("le:","");
+					} 
 				}
+ 
 			}
 		}
 		
 		
 		if ((filterSubject.length()==0) && (filterCollection.length()==0)){
 			
-			if (selectedPageIndex<0){
+			if (filterInitialLetter.length()>0){
+				r = URL_list.getItem("alphabetic").getValue() ;
+				rebuildPagination = false;
+			} else {
 				r = URL_list.getItem("initial_url").getValue() ;
 				//generateAlphabeticList();
 				rebuildPagination = false;
 				isInit = true;
-			} else {
-				r = URL_list.getItem("alphabetic").getValue() ;
-				rebuildPagination = false;
 			}
 			
 		} else {
@@ -99,10 +106,14 @@ public class SearchJournalsResult extends SearchResult {
 			}
 		}
 		
-		if (selectedPageIndex > -1){	
+		if (filterInitialLetter.length() > 0){	
+			
 			IdAndValue item;
-			item = pagination.getLetterInfo(selectedPageIndex);
-			r = r.replace("LETTERz" ,'"'+ item.getValue()   + '"');
+			String l = filterInitialLetter.replace("\"", "");
+			
+			r = r.replace("LETTERz" ,'"'+ followingLetters.getFollowing(l)   + '"');
+			
+			item = letters.getItem(l);
 			r = r.replace("LETTER" , '"'+ item.getId()+ '"');
 			
 			rebuildPagination = false;
@@ -112,6 +123,8 @@ public class SearchJournalsResult extends SearchResult {
 			//rebuildPagination = true;
 		}
 		
+		r = r.replace("\"", "%22");
+		r = r.replace(" ", "%20");
 		return r;
 	}
 	
@@ -135,96 +148,97 @@ public class SearchJournalsResult extends SearchResult {
 		String collectionCode;
 		String last = "";
 		String _pid;
-		SciELOCollection col = new SciELOCollection();
 		JSONArray s;
 		String subj = "";
+		JournalsCollection col = new JournalsCollection();
 		
-		searchResultList.clear();
-		/*
-		 * {"id":"9553ce99-9536-47de-b987-3a5626e7680d","key":["arg","20030404"],"value":{"collection":"arg","issn":"0002-7014","title":"Ameghiniana","subject":["PALEONTOLOGIA"],"publisher":{"_":"Asociaci\u00f3n Paleontol\u00f3gica Argentina"},"insert_date":"20030404"}},
-
-		 * 
-		 */
-		//message = "docs.length: " +  new Integer(this.docs.length()).toString() + "\n" + "rows: " + this.itemsPerPage;
-		String t = new Integer(this.docs.length()).toString();
-		String str_i = "";
-		
-		total = t;
-		
-		if (rebuildPagination){
-			pagination.resetLetters();
-		}
-		
-		for (int i=0; i<this.docs.length(); i++){
-			r = new Journal();
-			last = "";
+		if (this.docs.length()>0){
+			searchResultList.clear();
+			/*
+			 * {"id":"9553ce99-9536-47de-b987-3a5626e7680d","key":["arg","20030404"],"value":{"collection":"arg","issn":"0002-7014","title":"Ameghiniana","subject":["PALEONTOLOGIA"],"publisher":{"_":"Asociaci\u00f3n Paleontol\u00f3gica Argentina"},"insert_date":"20030404"}},
+	
+			 * 
+			 */
+			//message = "docs.length: " +  new Integer(this.docs.length()).toString() + "\n" + "rows: " + this.itemsPerPage;
+			String t = new Integer(this.docs.length()).toString();
+			String str_i = "";
 			
-			str_i = new Integer(i+1).toString();
-			try {				
-				last = last + "\n" +"item " ;
-				resultItem = this.docs.getJSONObject(i).getJSONObject("value");
-				r.setPosition( str_i  + "/" + t );
+			total = t;
+			
+			if (rebuildPagination){
+				//pagination.resetLetters();
+			}
+			
+			for (int i=0; i<this.docs.length(); i++){
+				r = new Journal();
+				last = "";
 				
-				Log.d(TAG, "[" + str_i + "] 1");
-				try {
-					r.setTitle(  resultItem.getString("title"));
-					if (rebuildPagination){
-						pagination.addLetter(r.getTitle().substring(0,1));
+				str_i = new Integer(i+1).toString();
+				try {				
+					last = last + "\n" +"item " ;
+					resultItem = this.docs.getJSONObject(i).getJSONObject("value");
+					r.setPosition( str_i  + "/" + t );
+					
+					Log.d(TAG, "[" + str_i + "] 1");
+					try {
+						r.setTitle(  resultItem.getString("title"));
+						if (rebuildPagination){
+							//pagination.addLetter(r.getTitle().substring(0,1));
+						}
+						
+					} catch (JSONException e) {
+						last = last + "\n" +"ti";
+						Log.d(TAG, "[" + str_i + "]" + last);
+					}
+					Log.d(TAG, "[" + str_i + "] 2");
+					try {
+						collectionCode = resultItem.getString("collection");
+						r.setCollectionId(collectionCode);
+					} catch (JSONException e) {
+						last = last + "\n" +"in" ;	
+						collectionCode = "";
+						Log.d(TAG, "[" + str_i + "]" + last);
+					}
+					Log.d(TAG, "[" + str_i + "] 3");
+					try {
+						_pid = resultItem.getString("issn");	
+						r.setId(_pid);
+					} catch (JSONException e) {
+						last = last + "\n" +"id" ;
+						_pid = "";
+						Log.d(TAG, "[" + str_i + "]" + last);
+					}
+					Log.d(TAG, "[" + str_i + "] 4");
+					try {
+						s = resultItem.getJSONArray("subject");
+						subj = "";
+						for (int k=0; k<s.length();k++){
+							subj = subj + s.getString(k) +  ";";
+						}
+						r.setSubjects(subj);
+						
+					} catch (JSONException e) {
+						last = last + "\n" +"id" ;
+						_pid = "";
+						Log.d(TAG, "[" + str_i + "] " + last);
 					}
 					
-				} catch (JSONException e) {
-					last = last + "\n" +"ti";
-					Log.d(TAG, "[" + str_i + "]" + last);
-				}
-				Log.d(TAG, "[" + str_i + "] 2");
-				try {
-					collectionCode = resultItem.getString("collection");
-					r.setCollectionId(collectionCode);
-				} catch (JSONException e) {
-					last = last + "\n" +"in" ;	
-					collectionCode = "";
-					Log.d(TAG, "[" + str_i + "]" + last);
-				}
-				Log.d(TAG, "[" + str_i + "] 3");
-				try {
-					_pid = resultItem.getString("issn");	
-					r.setId(_pid);
-				} catch (JSONException e) {
-					last = last + "\n" +"id" ;
-					_pid = "";
-					Log.d(TAG, "[" + str_i + "]" + last);
-				}
-				Log.d(TAG, "[" + str_i + "] 4");
-				try {
-					s = resultItem.getJSONArray("subject");
-					subj = "";
-					for (int k=0; k<s.length();k++){
-						subj = subj + s.getString(k) +  ";";
-					}
-					r.setSubjects(subj);
+					Log.d(TAG, "[" + str_i + "] 5");
+					col = jc.getItem(collectionCode);
+					r.setCollection(col.getName());
+					r.setCollectionId(col.getId());
 					
+					searchResultList.add(r);
+						
 				} catch (JSONException e) {
-					last = last + "\n" +"id" ;
-					_pid = "";
-					Log.d(TAG, "[" + str_i + "] " + last);
-				}
+					Log.d(TAG, "JSONException loadResultList " + str_i + " " + last, e);	
+		        } 
 				
-				Log.d(TAG, "[" + str_i + "] 5");
-				col = jc.getItem(collectionCode);
-				
-				r.setCollection(col.getName());
-				
-				searchResultList.add(r);
-					
-			} catch (JSONException e) {
-				Log.d(TAG, "JSONException loadResultList " + str_i + " " + last, e);	
-	        } 
-			
+			}
+			if (rebuildPagination){
+				//pagination.loadPagesList(pagesList);
+			}
 		}
-		if (rebuildPagination){
-			pagination.loadPagesList(pagesList);
-		}
-		
 	}
 /*
 	private void generateAlphabeticList(){

@@ -14,26 +14,25 @@ import android.util.Log;
 public class SearchDocsResult extends SearchResult{
 	// Parse to get translated text
 	private JSONObject facetFields;	
-	private String generic_PDF_URL;	
 	
 	private ArrayList<Document> searchResultList;
 		
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jc;
 	private IdAndValueObjects subjects;
 	private IdAndValueObjects languages;
 	
 	private NumericPagination pagination;
 	
 	
-	SearchDocsResult(String url, ClusterCollection clusterCollection, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList, String _generic_pdf_url ){
+	SearchDocsResult(String url, ClusterCollection clusterCollection, JournalsCollectionsNetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList ){
 		super(pagesList);
 		this.url = url;
-    	this.generic_PDF_URL = _generic_pdf_url;		
     	this.jc = jc;
     	this.subjects = subjects;
     	this.languages = languages;
 		this.searchResultList = searchResultList;
 		this.clusterCollection = clusterCollection;
+		pagination = new NumericPagination();
     }
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
 		String u = "";
@@ -44,7 +43,7 @@ public class SearchDocsResult extends SearchResult{
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
 		}	
-		if (selectedPageIndex==0){
+		if (selectedPageIndex<1){
 			query = query + "&start=0" ;
 		} else {
 			query = query + "&start=" + this.pagination.getPageSearchKey(selectedPageIndex);
@@ -93,7 +92,7 @@ public class SearchDocsResult extends SearchResult{
 			
 			
 			
-			pagination = new NumericPagination(from, total, itemsPerPage);
+			pagination.setData(from, total, itemsPerPage);
 			pagination.generatePages(pagesList);
 			this.docs = response.getJSONArray("docs");
 		} catch(JSONException e){
@@ -202,8 +201,8 @@ public class SearchDocsResult extends SearchResult{
 		String result;
 		String collectionCode;
 		
-		String link;
-		Article_PDF_URL article_PDF_URL = new Article_PDF_URL(this.generic_PDF_URL);
+		//ArticleURL articleURL = new ArticleURL(this.generic_PDF_URL, this.generic_article_URL);
+		
 		String _pid;
 		String _filename;
 		String _lang;
@@ -212,7 +211,7 @@ public class SearchDocsResult extends SearchResult{
 	    String lang_code = "";
 
 	    Cluster languageCluster;
-	    SciELOCollection col = new SciELOCollection();
+	    JournalsCollection col = new JournalsCollection();
 	    
 		languageCluster = clusterCollection.getItemById("la");
 		searchResultList.clear();
@@ -243,7 +242,6 @@ public class SearchDocsResult extends SearchResult{
 				}
 				try {
 					collectionCode = resultItem.getString("in");
-					r.setCollectionId(collectionCode);
 				} catch (JSONException e) {
 					last = last + "\n" +"in" ;	
 					collectionCode = "";
@@ -251,7 +249,7 @@ public class SearchDocsResult extends SearchResult{
 				try {
 					_pid = resultItem.getString("id");	
 					_pid = _pid.replace("art-", "");
-					_pid = _pid.replace("^c" + r.getCollectionId(), "");
+					_pid = _pid.replace("^c" + collectionCode, "");
 					r.setDocumentId(_pid);
 				} catch (JSONException e) {
 					last = last + "\n" +"id" ;
@@ -270,9 +268,11 @@ public class SearchDocsResult extends SearchResult{
 					_lang = "";
 				}
 				col = jc.getItem(collectionCode);			
-				link = article_PDF_URL.getURL(col.getUrl(), col.getNickname(), _pid, _filename, _lang);
-				r.setDocumentPDFLink(link);
-				r.setDocumentCollection(col.getName());
+				
+				
+				r.setFilename(_filename);
+				r.setLang(_lang);
+				r.setCol(col);
 				
 				try {
 					r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));					

@@ -24,7 +24,7 @@ public class TOCActivity extends SearchActivity {
 	//private String searchResultCount;
 	//private String currSearchExpr = "";
     
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jc;
 
 	private IdAndValueObjects languages;
 	private IdAndValueObjects subjects;
@@ -52,7 +52,7 @@ public class TOCActivity extends SearchActivity {
 	    serviceURL = this.getResources().getString(R.string.search_feed_issuetoc);
 	    
 
-	    jc = new SciELONetwork();
+	    jc = new JournalsCollectionsNetwork();
 		jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
@@ -92,7 +92,7 @@ public class TOCActivity extends SearchActivity {
 	    query_id = issue.getId();
 	    collectionId = getIntent().getStringExtra("collection_id");
 		
-		ssData = new TOCResult(serviceURL, this.getResources().getString(R.string.pdf_url), jc.getItem(collectionId), subjects, languages, searchResultList, pagesList);
+		ssData = new TOCResult(serviceURL, jc.getItem(collectionId), subjects, languages, searchResultList, pagesList);
 		
 		TextView header = (TextView) findViewById(R.id.TextViewHeader);
 		header.setText(issue.getText());
@@ -110,7 +110,7 @@ public class TOCActivity extends SearchActivity {
 		           
 		           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
 		           //docIntent.putExtra("DATA", selectedSearchResult);
-		           String q = "id:" + '"' + "art-" + document.getDocumentId() + "^c" + document.getCollectionId() + '"';
+		           String q = "id:" + '"' + "art-" + document.getDocumentId() + "^c" + document.getCol().getId() + '"';
 		           docIntent.putExtra("query", q);
 		           startActivity(docIntent);
 		           

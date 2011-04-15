@@ -1,8 +1,6 @@
 package org.scielo.search;
 
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
@@ -15,21 +13,18 @@ public class TOCResult extends SearchResult {
 
 	protected JSONObject facetFields;
 	
-	protected String generic_PDF_URL;	
 	
 	protected ArrayList<Document> searchResultList;
 	
-	protected SciELOCollection col;
+	protected JournalsCollection col;
 	protected IdAndValueObjects subjects;
 	protected IdAndValueObjects languages;
 	
 	
 
-	TOCResult(String url, String _generic_pdf_url, SciELOCollection col, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList){
+	TOCResult(String url, JournalsCollection col, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Document> searchResultList, ArrayList<Page> pagesList){
 		super(pagesList);
 		this.url = url;
-		this.generic_PDF_URL = _generic_pdf_url;		
-		
     	this.col = col;
     	this.subjects = subjects;
     	this.languages = languages;
@@ -74,7 +69,7 @@ public class TOCResult extends SearchResult {
 		JSONObject resultItem ;
 		Document r;
 		String result;
-		String collectionCode;
+		//String collectionCode;
 		
 		String _pid;
 		String last = "";
@@ -113,15 +108,14 @@ public class TOCResult extends SearchResult {
 					last = last + "\n" +"au" ;
 				}
 
-
-				r.setCollectionId(col.getId());
+				r.setCol(col);
+				
 					_pid = id;	
 					_pid = _pid.replace("art-", "");
-					_pid = _pid.replace("^c" + r.getCollectionId(), "");
+					_pid = _pid.replace("^c" + col.getId(), "");
 					r.setDocumentId(_pid);
 				
 				
-				r.setDocumentCollection(col.getName());
 				
 				try {
 					r.setIssueLabel(resultItem.getJSONArray("v702").getJSONObject(0).getString("_"));					

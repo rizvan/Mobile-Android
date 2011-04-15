@@ -7,12 +7,14 @@ import java.util.HashMap;
 import android.util.Log;
 
 public class ClusterCollection {
-	private HashMap<String,Cluster> clusterValues;
+	private HashMap<String,Cluster> clusterById;
 	private ArrayList<String> arrayId = new ArrayList<String>();
+	private HashMap<String,SearchFilter> filterByMenuId;
 	
 	
 	ClusterCollection(){
-		clusterValues = new HashMap<String,Cluster>();	
+		clusterById = new HashMap<String,Cluster>();	
+		filterByMenuId = new HashMap<String,SearchFilter>();	
 			
 	}
 	
@@ -20,46 +22,38 @@ public class ClusterCollection {
 		boolean r = false;
 		Log.d("ClusterCollection.addCluster", "inicio" );
     	if (cluster != null){
-    		Log.d("ClusterCollection.addCluster", "clusterValues.add" );
-        	
-    		this.clusterValues.put(cluster.getId(),cluster);
+    		Log.d("ClusterCollection.addCluster", "clusterValues.add" );        	    		
+    		this.clusterById.put(cluster.getId(),cluster);    		
     		arrayId.add(arrayId.size(), cluster.getId());
+    		
+    		SearchFilter sf = null;
+    		for (int i=0;i<cluster.getFilterCount();i++){
+    			sf = cluster.getFilterByIndex(i);
+    			
+    			filterByMenuId.put( new Integer(sf.getSubmenuId()).toString(), sf);
+    		}
     		r = true;
     	}
     	return r;
 	}
 	public Cluster getItemById(String id){		
-		return clusterValues.get(id);
+		return clusterById.get(id);
 	}
 	public Cluster getItemByIndex(int index){		
-		return clusterValues.get(arrayId.get(index));
+		return clusterById.get(arrayId.get(index));
 	}
 	public int getCount(){
-		return this.clusterValues.size();
+		return this.clusterById.size();
 	}
 	public void clear(){
-		this.clusterValues.clear();
-		arrayId = null;
+		this.clusterById.clear();
+		arrayId.clear();
+		filterByMenuId.clear();
 	}
 	
 	
-	public SearchFilter getFilterBySubmenuId(int submenuId, String test){
-		int i = 0;
-		boolean found = false;
-		SearchFilter sf = null;
-		test = "";
-		
-		while (i < getCount() && !found){
-			sf = getItemByIndex(i).getFilterBySubmenuId(submenuId);
-			test = test + getItemByIndex(i).display();
-			found = (sf != null);
-			i++;
-		}
-		if (found){
-			return sf;	
-		} else {
-			return null;
-		}		
+	public SearchFilter getFilterBySubmenuId(int submenuId, String test){		
+		return filterByMenuId.get(new Integer(submenuId).toString());
 	}
 	
 }

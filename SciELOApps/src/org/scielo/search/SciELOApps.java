@@ -34,7 +34,7 @@ public class SciELOApps extends TabActivity implements OnTabChangeListener{
 
 	    
 	    tabHost.setup();
-	    tabHost.setCurrentTab(1);
+	    tabHost.setCurrentTab(0);
 	    
 	    for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
         {

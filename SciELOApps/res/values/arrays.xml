@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string-array name="initials">   
+<item>A</item>
+	<item>B</item>
+	<item>C</item>
+	<item>D</item>
+	<item>E</item>
+	<item>F</item>
+	<item>G</item>
+    <item>H</item>
+	<item>I</item>
+	<item>J</item>
+	<item>K</item>
+	<item>L</item>
+	<item>M</item>
+	<item>N</item>
+    <item>O</item>
+	<item>P</item>
+	<item>Q</item>
+	<item>R</item>
+	<item>S</item>
+	<item>T</item>
+	<item>U</item>
+	<item>V</item>
+	<item>W</item>
+	<item>X</item>
+	<item>Y</item>
+	<item>Z</item>
+	
+</string-array>
+
 <string-array name="cluster_list_doc">
 	<item>ac</item>
 	<item>ta_cluster</item>
@@ -10,6 +40,7 @@
 <string-array name="cluster_list_journal">
 	<item>ac</item>
 	<item>in</item>	
+	<item>le</item>
 </string-array>
 <string-array name="collections_code">
 	<item>scl</item>
@@ -74,26 +105,24 @@
 	<item>collection_subject</item>
 	<item>collection</item>
 	<item>subject</item>
-	<item>issue</item>
 	
 </string-array>
 <string-array name="journal_urls">
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=20</item>
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=50</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
 	
 	<!-- ok  -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
 	
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
 	
 	<!-- ok  -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
 	
 	<!-- colocar em ordem cronologica inversa -->
-	<item>http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PID"&amp;endkey="PIDz"</item>
 	
 </string-array>
 </resources>

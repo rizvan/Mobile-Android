@@ -22,19 +22,18 @@ public class SearchDocsActivity extends SearchActivity {
 	
 	private String serviceURL = "";
 	
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jcn;
 	private IdAndValueObjects languages;
 	private IdAndValueObjects subjects;
 
     private Document document;
+    
+    private ArticleURL articleURL;
+    
     private ArrayAdapter<Document> aa;
     private ArrayList<Document> searchResultList =  new ArrayList<Document>();	
 	private SearchDocsResult ssData;
 
-	
-	
-	
-		
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -43,8 +42,10 @@ public class SearchDocsActivity extends SearchActivity {
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    serviceURL = this.getResources().getString(R.string.search_feed);
 	    
-		jc = new SciELONetwork();
-		jc.multiAdd(
+	    articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
+	    
+		jcn = new JournalsCollectionsNetwork();
+		jcn.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
 			getResources().getStringArray(R.array.log_collections_code), 
@@ -58,9 +59,7 @@ public class SearchDocsActivity extends SearchActivity {
 		
 		//setClusterCollection(jc, subjects, languages);
 		clusterCollection = new ClusterCollection();
-		ssData = new SearchDocsResult(serviceURL, clusterCollection, jc, subjects, languages, searchResultList, pagesList, this.getResources().getString(R.string.pdf_url));
-		
-
+		ssData = new SearchDocsResult(serviceURL, clusterCollection, jcn, subjects, languages, searchResultList, pagesList);
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 
@@ -79,8 +78,13 @@ public class SearchDocsActivity extends SearchActivity {
 	           docIntent.putExtra("id", document.getDocumentId());
 	           docIntent.putExtra("title", document.getDocumentTitle());
 	           docIntent.putExtra("authors", document.getDocumentAuthors());
-	           docIntent.putExtra("pdf", document.getDocumentPDFLink());
-	           docIntent.putExtra("collection", document.getDocumentCollection());
+	           
+	           if (document.getDocumentURL().length()==0){
+	        	   document.setDocumentURL(articleURL.getArticleURL(document));
+	           }
+	           
+	           docIntent.putExtra("url", document.getDocumentURL());
+	           docIntent.putExtra("collection", document.getCol().getName());
 	           docIntent.putExtra("abstract", document.getDocumentAbstracts());
 	           docIntent.putExtra("issue", document.getIssueLabel());
 	           startActivity(docIntent);
@@ -121,7 +125,7 @@ public class SearchDocsActivity extends SearchActivity {
 		if (this.filter.length()==0){
 			specHeaderFilterName = "";
 		}
-		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex);
+		return ssData.getURL(query, this.getResources().getString(R.string.search_doc_count), this.filter, this.selectedPageIndex);
 	}
 	protected void specLoadAndDisplayData(String result){
 		

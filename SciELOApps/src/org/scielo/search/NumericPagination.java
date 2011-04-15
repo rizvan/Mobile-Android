@@ -14,7 +14,16 @@ public class NumericPagination {
 	private ArrayList<Page> pagesList;
 	protected static final String TAG = "Pagination";
 	
-	NumericPagination(String from, String resultCount, int itemsPerPage){		
+	NumericPagination(){
+		from = "";
+		resultCount = "";
+		itemsPerPage = 0;
+		currentItem = 1;
+	}
+	
+	
+	
+	void setData(String from, String resultCount, int itemsPerPage){		
     	this.from = from;
     	this.resultCount = resultCount;
     	this.itemsPerPage = itemsPerPage;   
@@ -66,7 +75,7 @@ public class NumericPagination {
 
 			i++;
 		}
-		
+		this.pagesList = pagesList;
 	}
 	
 	

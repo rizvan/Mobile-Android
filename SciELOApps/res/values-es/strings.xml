@@ -13,7 +13,8 @@
 	<string name="menuItemRefineByYear">Refinar por año</string>
 	<string name="menuItemRefineByCollection">Refinar por colección</string>
 	<string name="menuItemRefineByLanguage">Refinar por idioma</string>
-
+	<string name="menuItemRefineByInitial">Refinar por iniciales</string>
+	
 	<string name="menuItemSendEmail">e-mail</string>
 	<string name="menuItemSaveResult">guardar</string>
 	<string name="menuItemSaveBookmark">bookmark</string>
@@ -25,5 +26,5 @@
 	<string name="search_button">buscar</string>
 	<string name="menuItemDownloadPDF">Download PDF</string>
 	
-	
+	<string name="reset_label">reiniciar</string>
 </resources>

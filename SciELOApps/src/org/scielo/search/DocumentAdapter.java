@@ -50,7 +50,7 @@ public class DocumentAdapter extends ArrayAdapter<Document> {
         TextView issueView = (TextView)resultView.findViewById(R.id.TextViewIssue);
         
         if (! this.isTOC){
-        	colView.setText(item.getDocumentCollection());
+        	colView.setText(item.getCol().getName());
             issueView.setText(item.getIssueLabel());
             positionView.setText(item.getPosition());
             abstr = item.getDocumentAbstracts();

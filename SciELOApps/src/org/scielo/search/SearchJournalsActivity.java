@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,7 +25,8 @@ public class SearchJournalsActivity extends SearchActivity {
 	//private String searchResultCount;
 	//private String currSearchExpr = "";
     
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jc;
+	private IdAndValueObjects letters;
 	private IdAndValueObjects languages;
 	private IdAndValueObjects subjects;
 	private IdAndValueObjects searchURLs;
@@ -52,7 +52,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	    selectedPageIndex = -1;
 	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
 	    
-		jc = new SciELONetwork();
+		jc = new JournalsCollectionsNetwork();
 		jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 
@@ -61,6 +61,9 @@ public class SearchJournalsActivity extends SearchActivity {
 		subjects = new IdAndValueObjects();
 		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
 				getResources().getStringArray(R.array.subjects_name),false);
+		letters = new IdAndValueObjects();
+		letters.multiAdd(getResources().getStringArray(R.array.initials),
+				getResources().getStringArray(R.array.initials),false);
 		languages = new IdAndValueObjects();
 		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
 				getResources().getStringArray(R.array.languages_name), false);
@@ -68,8 +71,8 @@ public class SearchJournalsActivity extends SearchActivity {
 		searchURLs.multiAdd(getResources().getStringArray(R.array.journal_urls_id),
 				getResources().getStringArray(R.array.journal_urls), false);
 		
-		setClusterCollection(jc, subjects, languages);
-		ssData = new SearchJournalsResult(searchURLs, clusterCollection, jc, subjects, languages, searchResultList,pagesList);
+		setClusterCollection(jc, subjects, languages, letters);
+		ssData = new SearchJournalsResult(searchURLs, clusterCollection, jc, subjects, languages, letters, searchResultList, pagesList);
 		
 		searchResultListView = (ListView) findViewById(R.id.list);
 

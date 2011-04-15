@@ -52,6 +52,11 @@ public class AlphabeticPagination {
 		IdAndValue item = new IdAndValue(currentLetter, nextLetter);
 		return item;
 	}
+	public String getNextLetter(String id ){
+		
+		return currentAndNextLetters.getItem( id ).getValue();
+		
+	}
 	
 	public void generateLetters(){
 		String letter;

@@ -6,12 +6,12 @@ import java.util.HashMap;
 
 public class Cluster {
 	private HashMap<String,SearchFilter> values;
-	private HashMap<String,SearchFilter> menuId;
+	//private HashMap<String,SearchFilter> menuId;
 	private ArrayList<String> arrayId = new ArrayList<String>();
 	private String id;
 	
 	Cluster(String _id){
-		menuId = new HashMap<String,SearchFilter>();
+		//menuId = new HashMap<String,SearchFilter>();
 		values = new HashMap<String,SearchFilter>();		
 		
 		id = _id;
@@ -24,7 +24,7 @@ public class Cluster {
 		if (filter!=null){		
 		   this.values.put(filterCode,filter);
 		   arrayId.add(arrayId.size(), filterCode);		   
-		   this.menuId.put(new Integer(menuId).toString() ,filter);
+		   //this.menuId.put(new Integer(menuId).toString() ,filter);
 		}
 	}
 	public SearchFilter getFilterById(String id){		
@@ -33,9 +33,9 @@ public class Cluster {
 	public SearchFilter getFilterByIndex(int index){		
 		return this.values.get(arrayId.get(index));
 	}
-	public SearchFilter getFilterBySubmenuId(int submenuId){		
-		return this.menuId.get(new Integer(submenuId).toString());
-	}
+	//public SearchFilter getFilterBySubmenuId(int submenuId){		
+	//	return this.menuId.get(new Integer(submenuId).toString());
+	//}
 	public String display(){
 		String r = "";
 		SearchFilter filter;

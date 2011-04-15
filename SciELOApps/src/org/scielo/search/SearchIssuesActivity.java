@@ -26,7 +26,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	//private String searchResultCount;
 	//private String currSearchExpr = "";
     
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jc;
 
 	private IdAndValueObjects languages;
 	private IdAndValueObjects subjects;
@@ -56,7 +56,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	    serviceURL = this.getResources().getString(R.string.search_feed_issues);
 	    
 
-	    jc = new SciELONetwork();
+	    jc = new JournalsCollectionsNetwork();
 	    jc.multiAdd(
   		    getResources().getStringArray(R.array.collections_code),
 			getResources().getStringArray(R.array.collections_name), 

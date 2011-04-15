@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">SciELO</string>
-	
+	<string name="search_doc_count">50</string>
 	<string name="search_feed">http://search.bvsalud.org:8080/dia-controller/?site=scielo&amp;col=org&amp;output=json&amp;lang=pt&amp;fl=20&amp;sort=score%2Bdesc&amp;op=search</string>
-	<string name="search_feed_journal">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title</string>
-	<string name="search_feed_issues">http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
-	<string name="search_feed_issuetoc">http://teste.webservices.scielo.org/scieloorg/_design/couchdb/_view/article_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
-	<string name="pdf_url">http://search.scielo.org/showpdf.php?pdf=http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
-	<string name="pdf_url_clean">http://search.scielo.org/viewpdf.php?pdf=REPLACE_PDF_FILENAME.pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG&amp;tlng=REPLACE_LANG</string>
+	<string name="search_feed_issues">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PIDz"&amp;endkey="PID"&amp;descending=true</string>
+	<string name="search_feed_issuetoc">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/article_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
+	<string name="pdf_url">http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf</string>
+	<string name="pdf_and_log_url">http://search.scielo.org/showpdf.php?pdf=REPLACE_PDF_URL&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
+	<!-- string name="pdf_and_log_url">http://search.scielo.org/viewpdf.php?pdf=REPLACE_PDF_URL&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG&amp;tlng=REPLACE_LANG</string>  -->
+	<string name="article_url">http://REPLACE_COLLECTION_URL/scielo.php?script=sci_arttext&amp;pid=REPLACE_PID</string>
 </resources>

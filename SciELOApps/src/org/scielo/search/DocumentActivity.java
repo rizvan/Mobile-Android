@@ -24,19 +24,19 @@ public class DocumentActivity extends Activity{
 	
 	private ArrayList<Document> searchResultList =  new ArrayList<Document>();
 	private ArrayList<Page> pagesList =  new ArrayList<Page>();
-	private SciELONetwork jc;
+	private JournalsCollectionsNetwork jc;
 	private IdAndValueObjects subjects;
 	private IdAndValueObjects languages;
 	private SearchDocsResult ssData;
 	private SearchService ss;
-	private String pdf;
+	private String url;
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
 	    setContentView(R.layout.doc);
 
-	    jc = new SciELONetwork();
+	    jc = new JournalsCollectionsNetwork();
 	    jc.multiAdd(
 	  		    getResources().getStringArray(R.array.collections_code),
 				getResources().getStringArray(R.array.collections_name), 
@@ -49,7 +49,7 @@ public class DocumentActivity extends Activity{
 	    languages.multiAdd(getResources().getStringArray(R.array.languages_id),
 					getResources().getStringArray(R.array.languages_name),false);
 	    ClusterCollection clusterCollection = new ClusterCollection();
-	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), clusterCollection ,jc, subjects, languages, searchResultList, pagesList, this.getResources().getString(R.string.pdf_url));
+	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), clusterCollection ,jc, subjects, languages, searchResultList, pagesList);
 	    ss = new SearchService();
 		
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    
@@ -72,9 +72,14 @@ public class DocumentActivity extends Activity{
 		    TextViewTitle.setText(doc.getDocumentTitle());
 		    TextViewAuthors.setText(doc.getDocumentAuthors());
 		    //TextViewPDF.setText(doc.getDocumentPDFLink());
-		    pdf = doc.getDocumentPDFLink();
+		    
+		    ArticleURL articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
+		    
+		    doc.setDocumentURL(articleURL.getArticleURL(doc));
+		    
+		    url = doc.getDocumentURL();
 		    TextViewAbstract.setText(doc.getDocumentAbstracts());
-		    TextViewCollection.setText(jc.getItem(doc.getCollectionId()).getName());
+		    TextViewCollection.setText(doc.getCol().getName());
 	    } else {
 		    TextViewIssue.setText(getIntent().getStringExtra("issue"));
 		    TextViewID.setText(getIntent().getStringExtra("id"));
@@ -83,7 +88,7 @@ public class DocumentActivity extends Activity{
 		    //TextViewPDF.setText(getIntent().getStringExtra("pdf"));
 		    TextViewAbstract.setText(getIntent().getStringExtra("abstract"));
 		    TextViewCollection.setText(getIntent().getStringExtra("collection"));	  
-		    pdf = getIntent().getStringExtra("pdf");
+		    url = getIntent().getStringExtra("url");
 	    }
 	}
 	@Override
@@ -108,15 +113,13 @@ public class DocumentActivity extends Activity{
         	emailIntent.setType("text/plain");
         	//emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "roberta.takenaka@scielo.org");
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
-			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + pdf );
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + url );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
             res = true;
             break;
         case R.id.menuItemDownloadPDF:
-        	final Intent pdfIntent = new Intent(android.content.Intent.ACTION_VIEW , Uri.parse(pdf) );
-        	
+        	final Intent pdfIntent = new Intent(android.content.Intent.ACTION_VIEW , Uri.parse(url) );        	
 			startActivity(pdfIntent);
-
         	res= true;
         	break;
       //case R.id.menuItemSaveResult:

@@ -14,7 +14,7 @@ public class SearchIssuesResult extends SearchResult {
 	protected String generic_PDF_URL;		
 	protected ArrayList<Issue> searchResultList;
 	
-	protected SciELONetwork jc;
+	protected JournalsCollectionsNetwork jc;
 	protected IdAndValueObjects subjects;
 	protected IdAndValueObjects languages;
 	
@@ -29,7 +29,7 @@ public class SearchIssuesResult extends SearchResult {
 	}
 
 	
-	SearchIssuesResult(String url, SciELONetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Issue> searchResultList, ArrayList<Page> pagesList){
+	SearchIssuesResult(String url, JournalsCollectionsNetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, ArrayList<Issue> searchResultList, ArrayList<Page> pagesList){
 		super(pagesList);
 		this.url = url;
     	this.jc = jc;
@@ -91,7 +91,7 @@ public class SearchIssuesResult extends SearchResult {
 
 				try {					
 					// jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("responseHeader").getJSONObject("params");
-					r.setDate(resultItem.getJSONArray("v65").getJSONObject(0).getString("_").substring(0,3));	
+					r.setDate(resultItem.getJSONArray("v65").getJSONObject(0).getString("_").substring(0,4));	
 				} catch (JSONException e) {
 					last = last + "\n" +"year";
 				}

@@ -22,6 +22,9 @@
 	<string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
 	<string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
 	<string name="menuItemRefineBySubjectEngineering">Engineering</string>
+	
+	<string name="menuItemRefineByInitial">Refine by initials</string>
+	
 	<string name="menuItemSendEmail">Send e-mail</string>
 	<string name="menuItemSaveResult">Save</string>
 	<string name="menuItemSaveBookmark">Bookmark</string>
@@ -32,4 +35,6 @@
 	<string name="search_label">search</string>
 	<string name="search_hint">search</string>
 	<string name="total">total</string>
+	
+	<string name="reset_label">reset</string>
 </resources>
