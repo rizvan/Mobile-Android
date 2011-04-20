@@ -79,11 +79,16 @@ public class SearchDocsActivity extends SearchActivity {
 	           docIntent.putExtra("title", document.getDocumentTitle());
 	           docIntent.putExtra("authors", document.getDocumentAuthors());
 	           
-	           if (document.getDocumentURL().length()==0){
-	        	   document.setDocumentURL(articleURL.getArticleURL(document));
+	           if (document.getPdf_url().length()==0){
+	        	   document.setPdf_url(articleURL.returnPDFURL(document));
 	           }
+	           if (document.getHtml_url().length()==0){
+	        	   document.setHtml_url(articleURL.returnFullTextURL(document));
+	           }
+
 	           
-	           docIntent.putExtra("url", document.getDocumentURL());
+	           docIntent.putExtra("fulltext_url", document.getHtml_url());
+	           docIntent.putExtra("pdf_url", document.getPdf_url());
 	           docIntent.putExtra("collection", document.getCol().getName());
 	           docIntent.putExtra("abstract", document.getDocumentAbstracts());
 	           docIntent.putExtra("issue", document.getIssueLabel());

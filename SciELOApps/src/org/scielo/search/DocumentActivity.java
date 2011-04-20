@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+
 import android.widget.TextView;
 
 public class DocumentActivity extends Activity{
@@ -29,7 +30,8 @@ public class DocumentActivity extends Activity{
 	private IdAndValueObjects languages;
 	private SearchDocsResult ssData;
 	private SearchService ss;
-	private String url;
+	private String pdf_url;
+	private String fulltext_url;
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -75,9 +77,18 @@ public class DocumentActivity extends Activity{
 		    
 		    ArticleURL articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
 		    
-		    doc.setDocumentURL(articleURL.getArticleURL(doc));
 		    
-		    url = doc.getDocumentURL();
+		    if (doc.getPdf_url().length()==0){
+		    	doc.setPdf_url(articleURL.returnPDFURL(doc));
+	        }
+	        if (doc.getHtml_url().length()==0){
+	        	doc.setHtml_url(articleURL.returnFullTextURL(doc));
+	        }
+		    
+	        pdf_url = doc.getPdf_url();
+	        fulltext_url = doc.getHtml_url();
+		    
+		       
 		    TextViewAbstract.setText(doc.getDocumentAbstracts());
 		    TextViewCollection.setText(doc.getCol().getName());
 	    } else {
@@ -88,7 +99,8 @@ public class DocumentActivity extends Activity{
 		    //TextViewPDF.setText(getIntent().getStringExtra("pdf"));
 		    TextViewAbstract.setText(getIntent().getStringExtra("abstract"));
 		    TextViewCollection.setText(getIntent().getStringExtra("collection"));	  
-		    url = getIntent().getStringExtra("url");
+		    pdf_url = getIntent().getStringExtra("pdf_url");
+		    fulltext_url = getIntent().getStringExtra("fulltext_url");
 	    }
 	}
 	@Override
@@ -98,13 +110,30 @@ public class DocumentActivity extends Activity{
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.menu_details, menu);
       
+    	
     	return true;
     }
-	
+	@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	
+    	MenuItem menuItem;
+    	//MenuItem subMenuItem;
+       
+        if (pdf_url.length()==0){
+            for (int index=0; index < menu.size(); index++){
+            	menuItem = menu.getItem(index);
+        		if (menuItem.getItemId()==R.id.menuItemDownloadPDF){
+        			menuItem.setVisible(false);
+        		}
+        	}        	
+        }
+        
+    	return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	boolean res = false;
-    	
+    	final Intent docIntent;
       // item.getItemId()
         switch (item.getItemId()) {
         case R.id.menuItemSendEmail:
@@ -113,13 +142,18 @@ public class DocumentActivity extends Activity{
         	emailIntent.setType("text/plain");
         	//emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "roberta.takenaka@scielo.org");
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
-			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + url );
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + fulltext_url + "\n" + pdf_url );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
             res = true;
             break;
         case R.id.menuItemDownloadPDF:
-        	final Intent pdfIntent = new Intent(android.content.Intent.ACTION_VIEW , Uri.parse(url) );        	
-			startActivity(pdfIntent);
+        	docIntent = new Intent(android.content.Intent.ACTION_VIEW , Uri.parse(pdf_url) );        	
+			startActivity(docIntent);
+        	res= true;
+        	break;
+        case R.id.menuItemFulltext:
+        	docIntent = new Intent(android.content.Intent.ACTION_VIEW , Uri.parse(fulltext_url) );        	
+			startActivity(docIntent);
         	res= true;
         	break;
       //case R.id.menuItemSaveResult:

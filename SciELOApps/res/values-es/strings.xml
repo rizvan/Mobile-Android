@@ -24,7 +24,8 @@
 	<string name="search_hint">búsqueda</string>
 	<string name="search_expression_hint">búsqueda</string>
 	<string name="search_button">buscar</string>
-	<string name="menuItemDownloadPDF">Download PDF</string>
+	<string name="menuItemDownloadPDF">Bajar PDF</string>
+	<string name="menuItemFulltext">Texto completo</string>
 	
 	<string name="reset_label">reiniciar</string>
 </resources>

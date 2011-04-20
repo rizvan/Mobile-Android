@@ -29,6 +29,8 @@
 	<string name="menuItemSaveResult">Save</string>
 	<string name="menuItemSaveBookmark">Bookmark</string>
 	<string name="menuItemDownloadPDF">Download PDF</string>
+	<string name="menuItemFulltext">Full text</string>
+	
 	
 	<string name="text_sendTo">e-mail</string>
 	<string name="button_send">send</string>

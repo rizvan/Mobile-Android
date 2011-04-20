@@ -27,7 +27,8 @@
 		<item name="android:background">#FFFFFF</item> <!-- amarelo FFFF33-->
 	</style>
   	<style name="MyTabView" parent="@android:style/Widget.ListView">
-  		<item name="android:tabStripEnabled">true</item> 
+  		
+  		 
   		<item name="android:background">#FFFFFF</item>
   	</style>
 	<style name="textview_document_position" parent="TextView">
@@ -67,18 +68,20 @@
 	<style name="textview_issue"  parent="TextView">
 		<item name="android:textSize">15sp</item>
 		<item name="android:padding">10sp</item>  
+		<item name="android:textColor">#000000</item>	
+		<item name="android:background">#FFFFFF</item>		
 		
 	</style>
 	<style name="textview_journal"  parent="TextView">
 	</style>	
 	<style name="document_page" parent="TextView">
 	</style>
-	<style name="MyGridView" parent="android:style/Widget.GridView">
-		<item name="android:numColumns">6</item>
+	<!-- style name="MyGridView" parent="android:style/Widget.GridView">
+		<item name="android:numColumns">5</item>
 		<item name="android:gravity">center</item>
 		<item name="android:background">#500000</item>	
 				
-	</style>
+	</style> -->
 	<style name="PaginationView" parent="android:style/Widget.GridView">
 		<item name="android:numColumns">7</item>
 		<item name="android:gravity">center</item>

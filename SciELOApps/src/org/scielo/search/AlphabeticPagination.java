@@ -47,7 +47,7 @@ public class AlphabeticPagination {
 	
 	public IdAndValue getLetterInfo(int index ){
 		
-		String currentLetter = localPagesList.get(index).getSearchKey();
+		String currentLetter = localPagesList.get(index).getIndex2search();
 		String nextLetter = currentAndNextLetters.getItem( currentLetter ).getValue();
 		IdAndValue item = new IdAndValue(currentLetter, nextLetter);
 		return item;

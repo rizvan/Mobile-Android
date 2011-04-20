@@ -37,6 +37,7 @@
           		<category android:name="android.intent.category.DEFAULT"/>
       			<category android:name="android.intent.category.BROWSABLE" />
           	</intent-filter>
+          	
         </activity>
         <activity android:name=".TOCActivity">
         </activity>
@@ -45,9 +46,8 @@
             
         </activity -->
     </application>
-    <provider android:name=".SavedItemsProvider" android:authorities="org.scielo.search">
-    </provider>
     
-    <uses-sdk android:minSdkVersion="8" />
+    
+    <uses-sdk android:minSdkVersion="7" />
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

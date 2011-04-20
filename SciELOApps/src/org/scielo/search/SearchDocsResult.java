@@ -37,17 +37,20 @@ public class SearchDocsResult extends SearchResult{
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
 		String u = "";
 		String query = "";
+		
 		//URLEncoder.encode(queryURL, "UTF-8")
 		u = this.url;
 		u =	u.replace("&amp;", "&" );
 		if (itemsPerPage.length()>0){
 			query = query + "&count=" + itemsPerPage;
-		}	
-		if (selectedPageIndex<1){
+		}
+		query = query + "&start=" + this.pagination.returnSearchStartParameter(selectedPageIndex);
+		/*
+		if ((selectedPageIndex<0) || (this.pagination.getPagesList()==null)){
 			query = query + "&start=0" ;
 		} else {
-			query = query + "&start=" + this.pagination.getPageSearchKey(selectedPageIndex);
-		}
+			query = query + "&start=" + this.pagination.returnSearchStartParameter(selectedPageIndex);	
+		}*/
 		if (searchExpression.length()>0){
 			try {
 				query = query + "&q=" + URLEncoder.encode(searchExpression, "UTF-8");
@@ -224,7 +227,7 @@ public class SearchDocsResult extends SearchResult{
 				last = last + "\n" +"item " ;
 				resultItem = this.docs.getJSONObject(i);
 				//r.setPosition( new Integer(i+currentItem).toString() );
-				r.setPosition( new Integer(i + pagination.getCurrentItem()).toString() + "/" + new Integer(pagination.getResultCount()).toString() );
+				r.setPosition( new Integer(i + pagination.getSelectedItemIndex() + 1).toString() + "/" + new Integer(pagination.getResultCount()).toString() );
 				
 				try {
 					r.setDocumentTitle(  resultItem.getJSONArray("ti").getString(0));	

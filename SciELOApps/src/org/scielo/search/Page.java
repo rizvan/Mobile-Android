@@ -9,9 +9,9 @@ public class Page {
 		this.searchkey = _searchkey;
 	}
 	public String getLabel(){
-		return "[ " + this.label + " ]";
+		return  this.label ;
 	}
-	public String getSearchKey(){
+	public String getIndex2search(){
 		return this.searchkey;
 	}
 }

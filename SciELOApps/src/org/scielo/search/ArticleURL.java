@@ -13,20 +13,21 @@ public class ArticleURL {
 		this.generic_article_url = _generic_article_url;
 	}
 	
-	public String getArticleURL(Document doc){
+	public String returnPDFURL(Document doc){
 		String url;
 		
-		url = getURL(this.generic_PDF_URL, doc);
+		url = returnURL(this.generic_PDF_URL, doc);
 		if (urlTester.check(url)){
 			//url = url.replace("REPLACE_PDF_URL", url);
 			doc.setPdf_url(url);
-			url = getURL(this.generic_pdf_and_log_url, doc);
-		} else {
-			url = getURL(this.generic_article_url, doc);
-		}
+			url = returnURL(this.generic_pdf_and_log_url, doc);
+		} 
 		return url;
 	}
-	public String getURL(String generic_url, Document doc){
+	public String returnFullTextURL(Document doc){		
+		return returnURL(this.generic_article_url, doc);
+	}
+	public String returnURL(String generic_url, Document doc){
 		String url;
 		String f = "";
 		String[] a;
