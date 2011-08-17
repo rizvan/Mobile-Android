@@ -39,4 +39,8 @@
 	<string name="total">total</string>
 	
 	<string name="reset_label">reset</string>
+	
+	<string name="call_naveg">Browser</string>
+	<string name="call_search">Search</string>
+	
 </resources>

@@ -109,7 +109,7 @@
 </string-array>
 <string-array name="journal_urls">
 	<!-- colocar em ordem alfabetica, filtrar por letra -->
-	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=50</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=10</item>
 	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
 	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
 	

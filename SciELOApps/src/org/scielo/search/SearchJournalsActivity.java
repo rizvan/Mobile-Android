@@ -7,138 +7,70 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
 
 
 public class SearchJournalsActivity extends SearchActivity {
-	
-	
-	//private String searchResultCount;
-	//private String currSearchExpr = "";
-    
-	private JournalsCollectionsNetwork jc;
-	private IdAndValueObjects letters;
-	private IdAndValueObjects languages;
-	private IdAndValueObjects subjects;
-	private IdAndValueObjects searchURLs;
 
-    private Journal document;
-    private ArrayAdapter<Journal> aa;
-    private ArrayList<Journal> searchResultList =  new ArrayList<Journal>();
-	private SearchJournalsResult ssData;
-
-	protected GridView paginationGridView;    
-	protected PaginationItemAdapter aaPage;    
-	protected PageAdapter aaPageH;
-	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
-	protected Page page;
-	
+	protected Journal searched;
+	//protected ArrayAdapter<Journal> arrayAdapter;
+    protected ArrayList<Journal> resultList =  new ArrayList<Journal>();
+	//protected JournalSearcher searcher;
 	
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.search);
-	    specHeader = "";
-	    query = "";
-	    selectedPageIndex = -1;
-	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
-	    
-		jc = new JournalsCollectionsNetwork();
-		jc.multiAdd(
-  		    getResources().getStringArray(R.array.collections_code),
-			getResources().getStringArray(R.array.collections_name), 
-			getResources().getStringArray(R.array.log_collections_code), 
-			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new IdAndValueObjects();
-		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name),false);
-		letters = new IdAndValueObjects();
-		letters.multiAdd(getResources().getStringArray(R.array.initials),
-				getResources().getStringArray(R.array.initials),false);
-		languages = new IdAndValueObjects();
-		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name), false);
+		IdAndValueObjects searchURLs;
+		
+		
+		
+		clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
+		super.onCreate(savedInstanceState);
+		loadClusterCollection();
 		searchURLs = new IdAndValueObjects();
 		searchURLs.multiAdd(getResources().getStringArray(R.array.journal_urls_id),
 				getResources().getStringArray(R.array.journal_urls), false);
 		
-		setClusterCollection(jc, subjects, languages, letters);
-		ssData = new SearchJournalsResult(searchURLs, clusterCollection, jc, subjects, languages, letters, searchResultList, pagesList);
+		searcher = new JournalSearcher(searchURLs, resultList, pagesList);
 		
-		searchResultListView = (ListView) findViewById(R.id.list);
-
-	    int resID = R.layout.list_item_journal;
-	    aa = new JournalAdapter(this, resID, searchResultList);
-	    searchResultListView.setAdapter(aa);	    
+		int resID = R.layout.list_item_journal;
+	    arrayAdapter = new JournalAdapter(this, resID, resultList);
+	    searchResultListView.setAdapter(arrayAdapter);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
-		           document = searchResultList.get(_index);
-		           //showDialog(SEARCH_RESULT_DIALOG);
-		           
+		           searched = resultList.get(_index);
 		           Intent docIntent = new Intent(_v.getContext(), SearchIssuesActivity.class);
-		           //docIntent.putExtra("DATA", selectedSearchResult);
-		           docIntent.putExtra("id", document.getId());
-		           docIntent.putExtra("title", document.getTitle());
-		           docIntent.putExtra("collection", document.getCollection());
-		           docIntent.putExtra("collection_id", document.getCollectionId());
-		           
+		           docIntent.putExtra("id", searched.getId());
+		           docIntent.putExtra("title", searched.getTitle());
+		           docIntent.putExtra("collection", searched.getCollection());
+		           docIntent.putExtra("collection_id", searched.getCollectionId());		           
 		           startActivity(docIntent);
-		           
-	               
 		       }
 		});
 	    
-	    
-	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
-	    paginationGridView.setAdapter(aaPage);	    
+	    paginationGridView.setAdapter(aaPage);
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
 		           selectedPageIndex = _index;
 		           
-		           specHeaderLetter = "/" + pagesList.get(_index).getLabel()+ ":";
-		           searchAndPresentResults();
+		           displayLetter = "/" + pagesList.get(_index).getLabel()+ ":";
+		           searchAndDisplay();
 		           
 		           selectedPageIndex = -1;
 		       }
 		    });
 	    
-	    // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_gallery_item, new ArrayList<String>());
-	    
-/*
-	    gal = (Gallery) findViewById(R.id.gallery);
-	    
-	    
-	    aaPageH = new PageAdapter(this, R.layout.pagination_horizontal, pagesList);
-	    gal.setAdapter(aaPageH);	    
-	    gal.setOnItemClickListener(new OnItemClickListener() {
-		       @Override
-			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {		           
-		           selectedPageIndex = _index;
-		           
-		           specHeaderLetter = "/" + pagesList.get(_index).getLabel()+ ":";
-		           searchAndPresentResults();
-		           
-		           selectedPageIndex = -1;
-		       }
-		    });
-	    
-	    */
 
-	    //oldOnCreate();
-	    //onSearchRequested();
-	    handleIntent(getIntent());
+	    setQueryAndSearchAndDisplay(getIntent());
 	}	
 	
 	
@@ -153,23 +85,64 @@ public class SearchJournalsActivity extends SearchActivity {
     }
 	
 
-	protected String specGetURL(){
-		return ssData.getURL(query, "",  this.filter, this.selectedPageIndex);
+	protected String getURL(){
+		return ((JournalSearcher) searcher).buildURL(query, "",  this.filter, this.selectedPageIndex);
 	}
-	protected void specLoadAndDisplayData(String result){
+	private void loadClusterCollection(){
 		
+		int subMenuId;
+		int k;
+		Cluster cluster;
+		IdAndValueObjects idAndValueObjects;
+		IdAndValue idAndValue;
+		SearchFilter searchFilter;
+		JournalsCollection c;
+
 		
-		ssData.genLoadData(result);
-		//searchResultCount = ssData.getResultCount();
-		clusterCollection = ssData.getSearchClusterCollection();
-		
-		specTotal = ssData.getJournalsTotal();
-		specResultCount = ssData.getResultCount();
-		
-		
-		
-		// ssData.getJournalsTotal();
-		aa.notifyDataSetChanged();		
-		aaPage.notifyDataSetChanged();
+
+		for (int i=0;i<clusterCodeOrder.length;i++){
+			idAndValueObjects = null;
+			
+			cluster = new Cluster(clusterCodeOrder[i]);
+			if (clusterCodeOrder[i].equals("in")){
+				for (k=0;k<SciELOApps.myConfig.getJcn().getCount() ;k++){        		
+		    		c = SciELOApps.myConfig.getJcn().getItemByIndex(k);
+		    		
+		    		searchFilter = new SearchFilter(c.getName(), "0", c.getId(), cluster.getId() );
+					subMenuId = k + (i * 100) ;
+		    		searchFilter.setSubmenuId(subMenuId);
+		    		cluster.addFilter(searchFilter, subMenuId, c.getId());        			
+				}
+				clusterCollection.add(cluster);
+			} else {
+				if (clusterCodeOrder[i].equals("ac")){
+					idAndValueObjects = SciELOApps.myConfig.getSubjects();
+				} else {
+	    			if (clusterCodeOrder[i].equals("la")){
+	    				idAndValueObjects = SciELOApps.myConfig.getLanguages();
+	    			} else {
+	    				if (clusterCodeOrder[i].equals("le")){
+		    				idAndValueObjects = SciELOApps.myConfig.getLetters();
+		    			}
+	    			}
+	
+				}
+				Log.d("SearchActivity", clusterCodeOrder[i]);
+				
+				if (idAndValueObjects!=null){
+			    	for (k=0;k<idAndValueObjects.getCount();k++){        		
+			    		idAndValue = idAndValueObjects.getItemByIndex(k);
+			    		searchFilter = new SearchFilter(idAndValue.getValue(), "0",  idAndValue.getId(), cluster.getId() );
+						subMenuId = k + (i * 100) ;
+			    		searchFilter.setSubmenuId(subMenuId);
+			    		cluster.addFilter(searchFilter, subMenuId, idAndValue.getId());        			
+					}
+					clusterCollection.add(cluster);
+				} else {
+					Log.d("SearchActivity", "nenhum idAndValueObjects");
+				}
+			}
+		}
 	}
+	
 }

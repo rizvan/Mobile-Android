@@ -1,58 +1,59 @@
 package org.scielo.search;
 
 
-import android.app.TabActivity;
+import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-//import android.graphics.Color;
+
 import android.os.Bundle;
 
-import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
 
-public class SciELOApps extends TabActivity implements OnTabChangeListener{
-	TabHost tabHost;
+public class SciELOApps extends Activity {
+	
+	
+
+	static MyAppConfig myConfig = new MyAppConfig();
+	
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.main);
-	    
-	    Resources res = getResources(); // Resource object to get Drawables
-	    
-	    tabHost = getTabHost();  // The activity TabHost
-	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
-	    Intent intent;  // Reusable Intent for each tab
-	    
-	    // Create an Intent to launch an Activity for the tab (to be reused)
-	    intent = new Intent().setClass(this, SearchDocsActivity.class);
-	    spec = tabHost.newTabSpec("tab_search_docs").setIndicator(res.getString(R.string.tab_list_docs_name)).setContent(intent);
-	    tabHost.addTab(spec);
-	    
-	    intent = new Intent().setClass(this, SearchJournalsActivity.class);
-	    spec = tabHost.newTabSpec("tab_list_journals").setIndicator(res.getString(R.string.tab_list_journals_name)).setContent(intent);
-	    tabHost.addTab(spec);
+		
+		JournalsCollectionsNetwork jcn;
+		IdAndValueObjects languages;
+		IdAndValueObjects subjects;
+		IdAndValueObjects letters;
+		
+		super.onCreate(savedInstanceState);
+    	setContentView(R.layout.maintabless);
+    	
+    	jcn = new JournalsCollectionsNetwork();
+		jcn.multiAdd(
+  		    getResources().getStringArray(R.array.collections_code),
+			getResources().getStringArray(R.array.collections_name), 
+			getResources().getStringArray(R.array.log_collections_code), 
+			getResources().getStringArray(R.array.collections_url) );		
+		subjects = new IdAndValueObjects();
+		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
+				getResources().getStringArray(R.array.subjects_name),true);
+		languages = new IdAndValueObjects();
+		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
+				getResources().getStringArray(R.array.languages_name), false);
+		letters = new IdAndValueObjects();
+		letters.multiAdd(getResources().getStringArray(R.array.initials),
+				getResources().getStringArray(R.array.initials),false);
 
-	    
-	    tabHost.setup();
-	    tabHost.setCurrentTab(1);
-	    
-	    for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        {
-	    	tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 40;
-        }
-        
+		myConfig.setJcn(jcn);
+		myConfig.setSubjects(subjects);
+		myConfig.setLanguages(languages);
+		myConfig.setLetters(letters);
+		
+		//Intent docIntent = new Intent(SciELOApps.this, SearchJournalsActivity.class);
+		Intent docIntent = new Intent(SciELOApps.this, SearchDocsActivity.class);
+		startActivity(docIntent);
+
+				           
+        //startActivity(docIntent);					
+    
     }
 
     
     
-	@Override
-	public void onTabChanged(String tabId) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-        {
-        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#7392B5"));
-        } 
-				
-		tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#4E4E9C"));
-	}
+	
 }

@@ -25,33 +25,20 @@ public class DocumentActivity extends Activity{
 	
 	private ArrayList<Document> searchResultList =  new ArrayList<Document>();
 	private ArrayList<Page> pagesList =  new ArrayList<Page>();
-	private JournalsCollectionsNetwork jc;
-	private IdAndValueObjects subjects;
-	private IdAndValueObjects languages;
-	private SearchDocsResult ssData;
+
+	private DocSearcher ssData;
 	private SearchService ss;
 	private String pdf_url;
 	private String fulltext_url;
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
 	    setContentView(R.layout.doc);
 
-	    jc = new JournalsCollectionsNetwork();
-	    jc.multiAdd(
-	  		    getResources().getStringArray(R.array.collections_code),
-				getResources().getStringArray(R.array.collections_name), 
-				getResources().getStringArray(R.array.log_collections_code), 
-				getResources().getStringArray(R.array.collections_url) );		
-	    subjects = new IdAndValueObjects();
-	    subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
-					getResources().getStringArray(R.array.subjects_name),true);
-	    languages = new IdAndValueObjects();
-	    languages.multiAdd(getResources().getStringArray(R.array.languages_id),
-					getResources().getStringArray(R.array.languages_name),false);
 	    ClusterCollection clusterCollection = new ClusterCollection();
-	    ssData = new SearchDocsResult(this.getResources().getString(R.string.search_feed), clusterCollection ,jc, subjects, languages, searchResultList, pagesList);
+	    ssData = new DocSearcher(this.getResources().getString(R.string.search_feed), clusterCollection , searchResultList, pagesList);
 	    ss = new SearchService();
 		
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    

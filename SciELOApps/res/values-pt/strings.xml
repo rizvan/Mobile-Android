@@ -29,4 +29,8 @@
 	<string name="menuItemFulltext">texto completo</string>
 	
 	<string name="reset_label">reiniciar</string>
+	
+	<string name="call_naveg">Navegar</string>
+	<string name="call_search">Pesquisar</string>
+	
 </resources>

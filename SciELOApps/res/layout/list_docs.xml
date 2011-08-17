@@ -5,6 +5,7 @@
     android:orientation="vertical"
     style="@style/MyTabView"
     >
+    
     <LinearLayout 
 	    android:id="@+id/searchBox"
 	    android:layout_width="fill_parent"

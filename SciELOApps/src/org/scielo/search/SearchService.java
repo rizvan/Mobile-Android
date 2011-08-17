@@ -11,7 +11,7 @@ import java.net.URL;
 import android.util.Log;
 
 public class SearchService {
-	private static final String TAG = "Search";
+	private static final String TAG = "SearchService";
 	
 	
 	SearchService(){
@@ -35,17 +35,23 @@ public class SearchService {
 		try { 
 			
 			u = queryURL;
+			//u = "http://www.google.com";
 			URL url = new URL(u);		
 						
 			
 			
 			System.setProperty("http.keepAlive", "false");
 			con = (HttpURLConnection) url.openConnection();
-			con.setReadTimeout(getMilliseconds(10)); /* milliseconds */ 
-			con.setConnectTimeout(getMilliseconds(10)); /* milliseconds */ 
+			con.setReadTimeout(getMilliseconds(5)); /* milliseconds */ 
+			con.setConnectTimeout(getMilliseconds(5)); /* milliseconds */ 
 			con.setRequestMethod("GET");
-			con.setDoInput(true);			
+			//con.setDoInput(true);			
 			con.connect();
+			
+			
+			
+			
+			
 			// Check if task has been interrupted
 			if (Thread.interrupted())
 				throw new InterruptedException();
@@ -58,7 +64,9 @@ public class SearchService {
 				payload += line;
 			}
 			reader.close();
-			
+		} catch  (java.net.MalformedURLException e){  
+			  
+			Log.e(TAG, "MalformedURLException", e);
 		} catch (IOException e) {
 			Log.e(TAG, "IOException", e);
 		} catch (InterruptedException e) {

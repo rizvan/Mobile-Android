@@ -8,138 +8,90 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
+
 import android.widget.AdapterView.OnItemClickListener;
 
-
-
-
-
 public class SearchIssuesActivity extends SearchActivity {
-	
-	private String serviceURL = "";
 
-	private String filter = "";
+	protected Issue searched;
+	protected ArrayList<Issue> resultList =  new ArrayList<Issue>();
 	
-	//private String searchResultCount;
-	//private String currSearchExpr = "";
-    
-	private JournalsCollectionsNetwork jc;
-
-	private IdAndValueObjects languages;
-	private IdAndValueObjects subjects;
-
-	private Issue document;
-    private Journal journal;
-    private ArrayAdapter<Issue> aa;
-    private ArrayList<Issue> searchResultList =  new ArrayList<Issue>();
-	private SearchIssuesResult ssData;
-	
-	protected GridView paginationGridView;    
-	protected PaginationItemAdapter aaPage;    
-	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
-	protected Page page;
-	
-	
-	
+        
 	private String  collectionId = "";
 			
 	
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.search);
-	    
-	    clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
-	    serviceURL = this.getResources().getString(R.string.search_feed_issues);
-	    
-
-	    jc = new JournalsCollectionsNetwork();
-	    jc.multiAdd(
-  		    getResources().getStringArray(R.array.collections_code),
-			getResources().getStringArray(R.array.collections_name), 
-			getResources().getStringArray(R.array.log_collections_code), 
-			getResources().getStringArray(R.array.collections_url) );		
-		subjects = new IdAndValueObjects();
-		subjects.multiAdd(getResources().getStringArray(R.array.subjects_id),
-				getResources().getStringArray(R.array.subjects_name), true);
-		languages = new IdAndValueObjects();
-		languages.multiAdd(getResources().getStringArray(R.array.languages_id),
-				getResources().getStringArray(R.array.languages_name),false);
 		
-		journal = new Journal();
+		super.onCreate(savedInstanceState);
+	    
+	    
+	    Journal journal = new Journal();
 		
+	    collectionId = getIntent().getStringExtra("collection_id");
+	    
 		journal.setId(getIntent().getStringExtra("id"));
 		journal.setTitle(getIntent().getStringExtra("title"));
 		journal.setCollection(getIntent().getStringExtra("collection"));
-		journal.setCollectionId(getIntent().getStringExtra("collection_id"));
+		journal.setCollectionId(collectionId);
 	    query_id = journal.getId();
-	    collectionId = getIntent().getStringExtra("collection_id");
-	    //serviceURL = serviceURL.replace("REPLACE_PID", document.getId());
+	    
 		
-		ssData = new SearchIssuesResult( serviceURL, jc, subjects, languages, searchResultList, pagesList);
+		searcher = new IssuesSearcher( this.getResources().getString(R.string.search_feed_issues), resultList, pagesList, journal);
 		
-		ssData.setJournal(journal);
 		
-		searchResultListView = (ListView) findViewById(R.id.list);
-
+		
 	    int resID = R.layout.list_item_issue;
-	    aa = new IssueAdapter(this, resID, searchResultList);
-	    searchResultListView.setAdapter(aa);	    
+	    arrayAdapter = new IssueAdapter(this, resID, resultList);
+	    searchResultListView.setAdapter(arrayAdapter);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
-		           document = searchResultList.get(_index);
+		           searched = resultList.get(_index);
 		           //showDialog(SEARCH_RESULT_DIALOG);
 		           
 		           Intent docIntent = new Intent(_v.getContext(), TOCActivity.class);
 		           //docIntent.putExtra("DATA", selectedSearchResult);
-		           docIntent.putExtra("id", document.getId());
-		           docIntent.putExtra("date", document.getDate());
-		           docIntent.putExtra("v", document.getVolume());
-		           docIntent.putExtra("n", document.getNumber());
-		           docIntent.putExtra("s", document.getSuppl());
-		           docIntent.putExtra("collection_id", document.getJournal().getCollectionId());
-		           docIntent.putExtra("collection", document.getJournal().getCollection());
-		           docIntent.putExtra("title", document.getJournal().getTitle());
+		           docIntent.putExtra("id", searched.getId());
+		           docIntent.putExtra("date", searched.getDate());
+		           docIntent.putExtra("v", searched.getVolume());
+		           docIntent.putExtra("n", searched.getNumber());
+		           docIntent.putExtra("s", searched.getSuppl());
+		           docIntent.putExtra("collection_id", searched.getJournal().getCollectionId());
+		           docIntent.putExtra("collection", searched.getJournal().getCollection());
+		           docIntent.putExtra("title", searched.getJournal().getTitle());
 		           startActivity(docIntent);
 		           
 	               
 		       }
 		});
-	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
-	    paginationGridView.setAdapter(aaPage);	    
+	    paginationGridView.setAdapter(aaPage);
 	    paginationGridView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
 			   public void onItemClick(AdapterView<?> _av, View _v, int _index, long arg3) {
 		           
 		           selectedPageIndex = _index;
-		           searchAndPresentResults();	
+		           searchAndDisplay();	
 		       }
 		    });
 
 	    //oldOnCreate();
 	    //onSearchRequested();
-	    handleIntent(getIntent());
+	    setQueryAndSearchAndDisplay(getIntent());
 	}	
 	
 	
-	protected String specGetURL(){
+	protected String getURL(){
 		//this.pagePosition = aaPage.getPageSelected();
-		return ssData.getURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
+		return ((IssuesSearcher) searcher).buildURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
-	protected void specLoadAndDisplayData(String result){
+	protected void loadAndDisplayResult(String result){
 		
-		ssData.genLoadData(result);
-		//pagesList = ssData.getPageList();
-		clusterCollection = ssData.getSearchClusterCollection();
-		specHeader = ssData.getJournal().getTitle() + " " + ssData.getJournal().getId();
-		aa.notifyDataSetChanged();		
-		aaPage.notifyDataSetChanged();
+		displayHeader = ((IssuesSearcher) searcher).getJournal().getTitle() + " " + ((IssuesSearcher) searcher).getJournal().getId();
+		super.loadAndDisplayResult(result);
+		
 	}
+
 	
 	
 }

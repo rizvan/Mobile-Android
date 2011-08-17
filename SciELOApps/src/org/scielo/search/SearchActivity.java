@@ -3,100 +3,135 @@ package org.scielo.search;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.Menu;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.TextView;
-//import android.widget.EditText;
-//import org.json.JSONArray;
-//import org.json.JSONException;
-//import org.json.JSONObject;
-import android.app.SearchManager;
-import android.content.Intent;
-//import android.view.KeyEvent;
-import android.view.Menu;
-//import android.view.MenuInflater;
-//import android.view.SubMenu;
-//import android.view.SubMenu;
-//import android.view.View.OnKeyListener;
-import android.widget.ListView;
 
 public class SearchActivity extends Activity {
+	TextView textNav;
+	TextView textSearch;
+	
 	View searchButton;	
 	TextView headerTextView;
 	ListView searchResultListView;
+	
 	protected Gallery gal;
-
 	protected GridView paginationGridView;    
-	protected PaginationItemAdapter aaPage;  
 	
 	
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
+
+	protected PaginationItemAdapter aaPage;  
+	protected PageAdapter aaPageH;
+	protected ArrayAdapter<?> arrayAdapter;
 	
 	
-	protected int selectedMenuId;
-	
-	protected String filterSelectionTracker = "";
-	protected String letterOrPageSelected = "";
-	protected String filter = "";
-	protected int selectedPageIndex = 0;
-	protected String query = "";
-	protected String query_id = "";
-	protected ClusterCollection clusterCollection;
+	protected Page page;	
+	protected Searcher searcher;
 	protected SearchService ss  = new SearchService();
+	
+	protected ClusterCollection clusterCollection;
 	protected String[] clusterCodeOrder;
 	
-	protected String specHeader = "";
-	protected String specQuery = "";
+	protected String displayHeader = "";
+	protected String displayQuery = "";	
+	protected String displayFilterName = "";
+	protected String displayResultTotal ="";
+	protected String displayTotal = "";
+	protected String displayLetter = "";
 	
-	protected String specHeaderFilterName = "";
-	protected String specResultCount ="";
-	protected String specTotal = "";
-	protected String specHeaderLetter = "";
+	protected int selectedPageIndex = 0;
+	protected String query = "";
+	protected String filter = "";
+
+	private String filterSelectionTracker = "";	
+	protected String query_id = "";
+	
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    
+	    clusterCollection = new ClusterCollection();
+	    
+	    displayHeader = "";
+	    query = "";
+	    selectedPageIndex = -1;
+	    
+	    
+	    setContentView(R.layout.search);
+	    
+		searchResultListView = (ListView) findViewById(R.id.list);
+	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
+	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+	    
+	    
+	    textNav = (TextView) findViewById(R.id.call_naveg);
+    	textSearch = (TextView) findViewById(R.id.call_search);
+		
+    	textNav.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
+	            startActivity(docIntent);
+			}
+		});
+    	
+    	textSearch.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
+	            startActivity(docIntent);					
+			}
+		});
+	    
+	}
 	
 	@Override
 	protected void onNewIntent(Intent intent) {
 	    setIntent(intent);
-	    handleIntent(intent);
+	    setQueryAndSearchAndDisplay(intent);
 	}
 
-	protected void handleIntent(Intent intent) {
+	protected void setQueryAndSearchAndDisplay(Intent intent) {
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      query = intent.getStringExtra(SearchManager.QUERY);
 	    } else {
 	    	query = query_id;
-	    }
-	    
-	    searchAndPresentResults();
+	    }	    
+	    searchAndDisplay();
 	}
-	
-    
 	
 	protected void addFilter(String _filter, String caption){
 		String prefix = _filter.substring(0, 4);
 		
 		if (this.filterSelectionTracker.length()>0){			
 			if (this.filterSelectionTracker.contains(prefix)){
-				// reinicializa
 				this.filterSelectionTracker = _filter;
 				this.filter = _filter;
-		    	specHeaderFilterName = "/" + caption + ":";
+		    	displayFilterName = "/" + caption + ":";
 
 			} else {
 				this.filterSelectionTracker = this.filterSelectionTracker + "|" + _filter;
 				this.filter = this.filter + " AND " + _filter;				
-		    	specHeaderFilterName = specHeaderFilterName + "/" + caption + ":";
+		    	displayFilterName = displayFilterName + "/" + caption + ":";
 			}
 		} else {
 			this.filter = _filter;
 			this.filterSelectionTracker = _filter;
-	    	specHeaderFilterName = "/" +  caption + ":";
+	    	displayFilterName = "/" +  caption + ":";
 		}			
 		
     	this.selectedPageIndex = -1;
-    	specHeaderLetter = "";
+    	displayLetter = "";
 
 	}
 	@Override
@@ -152,9 +187,9 @@ public class SearchActivity extends Activity {
 	        case R.id.reset:
 	        	this.filterSelectionTracker = "";
 	        	this.filter = "";
-				this.filterSelectionTracker = "";
-		    	specHeaderFilterName = "";
-		    	searchAndPresentResults();
+				
+		    	displayFilterName = "";
+		    	searchAndDisplay();
 	            return true;
 	        default:
 	        	if (!item.hasSubMenu()){
@@ -163,7 +198,7 @@ public class SearchActivity extends Activity {
 		            if (sf != null) {
 		            	teste2 = sf.getFilterExpression();
 		            	addFilter(teste2 , sf.getCaption());
-		            	searchAndPresentResults();	            	
+		            	searchAndDisplay();	            	
 		            }	        	
 		            
 	        	}
@@ -171,96 +206,54 @@ public class SearchActivity extends Activity {
         }
         
     }
-	protected void specLoadAndDisplayData(String result){
+
+	protected String getURL(){
+		return "";
+	}
+	
+	public void searchAndDisplay() {
 		
-	}
-	protected String specGetURL(){
-		return "";
-	}
-	protected String specGetAcumHeader(){
-		return "";
-	}
-	public void searchAndPresentResults() {
-		String queryurl;
 		String result;
 		
-		queryurl = specGetURL();
-		result = ss.call(queryurl);
+		String url = getURL();
+		result = ss.call(url);
 		
 		if (result.length()>0){
-			specLoadAndDisplayData(result);
-			//aaPage.notifyDataSetChanged();
-			
-			
+			loadAndDisplayResult(result);
+		}
 			if (query.length()>0){
-				specQuery = query + ":";
+				displayQuery = query + ":";
 			}
-			if (specTotal.length()==0){
-				specTotal = specResultCount;
+			if (displayTotal.length()==0){
+				displayTotal = displayResultTotal;
 			}
 			
-			specHeader = specQuery + specTotal;
+			displayHeader = displayQuery + displayTotal;
 			
-			if (specHeaderFilterName.length()>0) {
-				specHeader = specHeader + specHeaderFilterName + specResultCount;
-				specHeaderFilterName = specHeaderFilterName + specResultCount;	
+			if (displayFilterName.length()>0) {
+				displayHeader = displayHeader + displayFilterName + displayResultTotal;
+				displayFilterName = displayFilterName + displayResultTotal;	
 			}
-			if (specHeaderLetter.length()>0) {
-				specHeader = specHeader + specHeaderLetter + specResultCount;
+			if (displayLetter.length()>0) {
+				displayHeader = displayHeader + displayLetter + displayResultTotal;
 			}
 			
 			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
-			headerTextView.setText(specHeader);
-			
-		}
+			headerTextView.setText(displayHeader);
 	}	
 
-	protected void setClusterCollection(JournalsCollectionsNetwork jc, IdAndValueObjects subjects, IdAndValueObjects languages, IdAndValueObjects letters){
-		
-		clusterCollection = new ClusterCollection();
-		Cluster cluster;
-		IdAndValueObjects idAndValueObjects;
-		IdAndValue idAndValue;
-		int subMenuId;
-		SearchFilter searchFilter;
-		int k;
-		JournalsCollection c;
-		for (int i=0;i<clusterCodeOrder.length;i++){
-			idAndValueObjects = null;
-			
-			cluster = new Cluster(clusterCodeOrder[i]);
-			if (clusterCodeOrder[i].equals("in")){
-				for (k=0;k<jc.getCount() ;k++){        		
-		    		c = jc.getItemByIndex(k);
-		    		
-		    		searchFilter = new SearchFilter(c.getName(), "0", c.getId(), cluster.getId() );
-					subMenuId = k + (i * 100) ;
-		    		searchFilter.setSubmenuId(subMenuId);
-		    		cluster.addFilter(searchFilter, subMenuId, c.getId());        			
-				}
-				clusterCollection.add(cluster);
-			} else {
-				if (clusterCodeOrder[i].equals("ac")){
-					idAndValueObjects = subjects;
-				} else {
-	    			if (clusterCodeOrder[i].equals("la")){
-	    				idAndValueObjects = languages;
-	    			} else {
-	    				if (clusterCodeOrder[i].equals("le")){
-		    				idAndValueObjects = letters;
-		    			}
-	    			}
 	
-				}
-		    	for (k=0;k<idAndValueObjects.getCount();k++){        		
-		    		idAndValue = idAndValueObjects.getItemByIndex(k);
-		    		searchFilter = new SearchFilter(idAndValue.getValue(), "0",  idAndValue.getId(), cluster.getId() );
-					subMenuId = k + (i * 100) ;
-		    		searchFilter.setSubmenuId(subMenuId);
-		    		cluster.addFilter(searchFilter, subMenuId, idAndValue.getId());        			
-				}
-				clusterCollection.add(cluster);
-			}
+	protected void loadAndDisplayResult(String result){
+		searcher.genLoadData(result);
+		ClusterCollection cCollection = searcher.getSearchClusterCollection();		
+		
+		if (cCollection!=null){
+			clusterCollection = cCollection;
 		}
+		displayTotal = searcher.getQtdTotal();
+		displayResultTotal = searcher.getResultTotal();
+		arrayAdapter.notifyDataSetChanged();		
+		aaPage.notifyDataSetChanged();
 	}
+	
 }

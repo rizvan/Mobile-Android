@@ -39,23 +39,30 @@ public class ArticleURL {
 		
 		if (url.contains("REPLACE_PDF_FILENAME")) {
 			filename = doc.getFilename();
-			filename = filename.replace( (char)92 , (char)47);
-			filename = filename.replace(".htm", "").replace(".html", "").replace(".xml","");
-			
-			filename = filename.replace( "//", "/");
-			filename = filename.toLowerCase();
-			
-			a = filename.split("/");
-			i = a.length;
-						
-			f = a[i-4] + "/" + a[i-3] + "/" + a[i-1];			
+			if (filename.length()>0){
+				filename = filename.replace( (char)92 , (char)47);
+				filename = filename.replace(".htm", "").replace(".html", "").replace(".xml","");
+				
+				filename = filename.replace( "//", "/");
+				filename = filename.toLowerCase();
+				
+				a = filename.split("/");
+				i = a.length;
+							
+				f = a[i-4] + "/" + a[i-3] + "/" + a[i-1];
+				
+				url = url.replace("REPLACE_PDF_FILENAME", f);
+			}			
 		}
 		url = url.replace("REPLACE_COLLECTION_URL", doc.getCol().getUrl());
 		url = url.replace("REPLACE_PID", doc.getDocumentId());
 		url = url.replace("REPLACE_LANG", doc.getLang());
 		url = url.replace("REPLACE_APP", doc.getCol().getNickname());
-		url = url.replace("REPLACE_PDF_FILENAME", f);
+		
 		url = url.replace("REPLACE_PDF_URL", doc.getPdf_url());
+		if (urlTester.check(url)==false){
+			url = "";
+		}
 		return url;
 	}
 }
