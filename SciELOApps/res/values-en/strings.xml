@@ -40,7 +40,7 @@
 	
 	<string name="reset_label">reset</string>
 	
-	<string name="call_naveg">Browser</string>
-	<string name="call_search">Search</string>
-	
+	<string name="call_naveg">browsing</string>
+	<string name="call_search">searching</string>
+	<string name="wellcome">This application allows to search scientific articles and browse them by journals and issues</string>
 </resources>

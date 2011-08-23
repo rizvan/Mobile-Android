@@ -81,7 +81,11 @@ public class DocSearcher extends Searcher{
 			Log.d("SearchResult_DOC","4");	
 			
 			
-			totalResults = response.get("numFound").toString();				
+			totalResults = response.get("numFound").toString();
+			
+			if (totalQtd.length()==0){
+				totalQtd = totalResults;
+			}
 			String from = responseParameters.get("start").toString();
 			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			
@@ -140,13 +144,13 @@ public class DocSearcher extends Searcher{
 	        			
 	        			
 	        			if (cluster_id.equals("in")){
-	        				filterName = SciELOApps.myConfig.getJcn().getItem(filterCode).getName();
+	        				filterName = SciELOAppsActivity.myConfig.getJcn().getItem(filterCode).getName();
 	        			} else {
 		        			if (cluster_id.equals("la")){
-		        				filterName = SciELOApps.myConfig.getLanguages().getItem(filterCode).getValue();
+		        				filterName = SciELOAppsActivity.myConfig.getLanguages().getItem(filterCode).getValue();
 		        			} else {
 			        			if (cluster_id.equals("ac")){
-			        				filterName = SciELOApps.myConfig.getSubjects().getItem(filterCode).getValue() ;
+			        				filterName = SciELOAppsActivity.myConfig.getSubjects().getItem(filterCode).getValue() ;
 			        			} else {
 			        				filterName = filterCode;
 			        			}		        				
@@ -266,7 +270,7 @@ public class DocSearcher extends Searcher{
 				
 				r.setFilename(_filename);
 				r.setLang(_lang);
-				r.setCol(SciELOApps.myConfig.getJcn().getItem(collectionCode));
+				r.setCol(SciELOAppsActivity.myConfig.getJcn().getItem(collectionCode));
 				
 				try {
 					r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));					

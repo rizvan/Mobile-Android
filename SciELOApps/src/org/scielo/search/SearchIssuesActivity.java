@@ -38,7 +38,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	    
 		
 		searcher = new IssuesSearcher( this.getResources().getString(R.string.search_feed_issues), resultList, pagesList, journal);
-		
+		displayQuery = getIntent().getStringExtra("title");
 		
 		
 	    int resID = R.layout.list_item_issue;

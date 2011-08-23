@@ -25,7 +25,7 @@ public class JournalSearcher extends Searcher {
 		
     	this.resultList = searchResultList;
 		
-		followingLetters = new FollowingLetters(SciELOApps.myConfig.getLetters());
+		followingLetters = new FollowingLetters(SciELOAppsActivity.myConfig.getLetters());
     }
 	
 	public String buildURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex) {
@@ -91,7 +91,7 @@ public class JournalSearcher extends Searcher {
 			
 			r = r.replace("LETTERz" ,'"'+ followingLetters.getFollowing(l)   + '"');
 			
-			item = SciELOApps.myConfig.getLetters().getItem(l);
+			item = SciELOAppsActivity.myConfig.getLetters().getItem(l);
 			r = r.replace("LETTER" , '"'+ item.getId()+ '"');
 			
 			rebuildPagination = false;
@@ -204,7 +204,7 @@ public class JournalSearcher extends Searcher {
 					}
 					
 					Log.d(TAG, "[" + str_i + "] 5");
-					col = SciELOApps.myConfig.getJcn().getItem(collectionCode);
+					col = SciELOAppsActivity.myConfig.getJcn().getItem(collectionCode);
 					r.setCollection(col.getName());
 					r.setCollectionId(col.getId());
 					

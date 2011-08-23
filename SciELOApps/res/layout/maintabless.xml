@@ -4,39 +4,100 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    style="@style/MyApp" 
+    style="@style/MyAppHome" 
     >
-    <TextView 
-				android:id="@+id/banner" 
-				android:layout_height="wrap_content"
-				style="@style/banner" android:layout_width="wrap_content"/>
 				
-      <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
+	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
 	    
 	    > 	
-		<TextView 
-				android:id="@+id/call_search" 
+	    <TextView 
+				android:id="@+id/banner" 
+				style="@style/banner" 
 				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content"
-				android:text="@string/call_search" 	
-				style="@style/mainOption" 	
-				android:gravity="left"
-		android:clickable="true" 
-		android:layout_gravity="left"
-		/>	
-		<TextView 
-				android:id="@+id/call_naveg" 
-				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content"
-				android:text="@string/call_naveg"
-				android:gravity="right"
-				android:layout_gravity="right" 
-				style="@style/mainOption" 
-						
-		/></LinearLayout -->
-
+				android:layout_height="wrap_content"/>
+		<!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+	    
+		    >
+		    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"	
+		        
+		    > 	
+				<TextView 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					style="@style/mainOptionSearch" 	
+					
+					/>
+				<TextView 
+					android:id="@+id/call_search" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					android:text="@string/call_search" 	
+					style="@style/mainOption" 
+  			   />	
+			</LinearLayout>
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"	
+		      
+		    >
+		        <TextView android:layout_width="wrap_content" style="@style/mainOptionBrowse" android:layout_height="wrap_content"></TextView>
+				<TextView 
+					android:id="@+id/call_naveg" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					android:text="@string/call_naveg" 	
+					style="@style/mainOption" 	
+					
+			/>
+			</LinearLayout>
+				</LinearLayout-->
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_gravity="center" 
+	    android:padding="10sp"
+		    >
+			    <Button android:layout_height="fill_parent" 
+			        android:layout_width="wrap_content" 
+			        android:text="@string/call_naveg"
+			        android:textSize="10sp"
+			        android:id="@+id/call_naveg" 
+			        android:drawableTop="@drawable/browse"
+			        android:layout_gravity="center" 
+			        android:padding="10sp"
+			        ></Button>
+			
+			    <Button android:layout_height="fill_parent" 
+			        android:layout_width="wrap_content" 
+			        android:text="@string/call_search"
+			        android:textSize="10sp"
+			        android:id="@+id/call_search" 
+			        android:drawableTop="@drawable/ic_menu_search"
+			        android:layout_gravity="center"
+			        android:padding="10sp" 
+			        ></Button>
+			</LinearLayout>
+			
+			
+			
+		
+    </LinearLayout>
+      <TextView 
+				android:id="@+id/home_text" 
+				style="@style/home_text"
+				android:padding="20sp"
+				android:text="@string/wellcome" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		
 </LinearLayout>
 

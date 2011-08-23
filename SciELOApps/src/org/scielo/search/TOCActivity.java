@@ -52,9 +52,9 @@ public class TOCActivity extends SearchActivity {
 	    query_id = issue.getId();
 	    collectionId = getIntent().getStringExtra("collection_id");
 		
+	    displayQuery = issue.getIssueLabel(true);
 	    
-	    
-		searcher = new TOCSearcher(this.getResources().getString(R.string.search_feed_issuetoc), resultList, pagesList, SciELOApps.myConfig.getJcn().getItem(collectionId));
+		searcher = new TOCSearcher(this.getResources().getString(R.string.search_feed_issuetoc), resultList, pagesList, SciELOAppsActivity.myConfig.getJcn().getItem(collectionId));
 		
 		
 		

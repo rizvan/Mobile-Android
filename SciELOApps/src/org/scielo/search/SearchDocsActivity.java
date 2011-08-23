@@ -100,6 +100,7 @@ public class SearchDocsActivity extends SearchActivity {
 		if (this.filter.length()==0){
 			displayFilterName = "";
 		}
+		displayQuery = query;
 		return ((DocSearcher) searcher).getURL(query, this.getResources().getString(R.string.search_doc_count), this.filter, this.selectedPageIndex);
 	}
 	/*

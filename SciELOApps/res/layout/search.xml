@@ -14,31 +14,83 @@
 	    > 	
 	    <TextView 
 				android:id="@+id/banner" 
-				android:layout_height="wrap_content"
-				style="@style/banner" android:layout_width="wrap_content"/>
-		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				style="@style/banner" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"/>
+		<!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="vertical"
 	    
+		    >
+		    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"	
+		        
 		    > 	
-			<TextView 
+				<TextView 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"
+					style="@style/mainOptionSearch" 	
+					
+					/>
+				<TextView 
 					android:id="@+id/call_search" 
 					android:layout_width="wrap_content" 
 					android:layout_height="wrap_content"
 					android:text="@string/call_search" 	
-					style="@style/mainOption" 	
-					
-			/>	
-			<TextView 
+					style="@style/mainOption" 
+  			   />	
+			</LinearLayout>
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"	
+		      
+		    >
+		        <TextView android:layout_width="wrap_content" style="@style/mainOptionBrowse" android:layout_height="wrap_content"></TextView>
+				<TextView 
 					android:id="@+id/call_naveg" 
 					android:layout_width="wrap_content" 
 					android:layout_height="wrap_content"
-					android:text="@string/call_naveg"
-					style="@style/mainOption" 
-							
+					android:text="@string/call_naveg" 	
+					style="@style/mainOption" 	
+					
 			/>
-		</LinearLayout>
+			</LinearLayout>
+				</LinearLayout-->
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_gravity="center" 
+	    android:padding="10sp"
+		    >
+			    <Button android:layout_height="fill_parent" 
+			        android:layout_width="wrap_content" 
+			        android:text="@string/call_naveg"
+			        android:textSize="10sp"
+			        android:id="@+id/call_naveg" 
+			        android:drawableTop="@drawable/browse"
+			        android:layout_gravity="center" 
+			        android:padding="10sp"
+			        ></Button>
+			
+			    <Button android:layout_height="fill_parent" 
+			        android:layout_width="wrap_content" 
+			        android:text="@string/call_search"
+			        android:textSize="10sp"
+			        android:id="@+id/call_search" 
+			        android:drawableTop="@drawable/ic_menu_search"
+			        android:layout_gravity="center"
+			        android:padding="10sp" 
+			        ></Button>
+			</LinearLayout>
+			
+			
+			
+		
     </LinearLayout>
     
     	<TextView 
@@ -62,6 +114,7 @@
        	android:orientation="horizontal" 
        	android:layout_width="fill_parent" 
     	android:layout_height="fill_parent" 
+    	style="@style/listView"
        >
        
        </ListView>

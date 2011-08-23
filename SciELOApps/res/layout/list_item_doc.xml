@@ -4,12 +4,13 @@
 	android:layout_height="wrap_content"
 	android:layout_width="fill_parent" 
 	android:orientation="vertical"
+	
 	>
 	<TextView 
 		android:id="@+id/TextViewDocumentPosition" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_title"
+		style="@style/textview_document_position"
 		
 		/><TextView 
 		android:id="@+id/TextViewDocumentTitle" 
@@ -34,7 +35,7 @@
 		android:id="@+id/TextViewIssue" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		style="@style/textview_issue"
+		style="@style/textview_issue1"
 		/>  
 	<TextView 
 		android:id="@+id/TextViewDocumentAbstract" 

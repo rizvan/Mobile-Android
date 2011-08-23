@@ -44,7 +44,7 @@ public class SearchActivity extends Activity {
 	protected String[] clusterCodeOrder;
 	
 	protected String displayHeader = "";
-	protected String displayQuery = "";	
+		
 	protected String displayFilterName = "";
 	protected String displayResultTotal ="";
 	protected String displayTotal = "";
@@ -56,6 +56,7 @@ public class SearchActivity extends Activity {
 
 	private String filterSelectionTracker = "";	
 	protected String query_id = "";
+	protected String displayQuery ="";
 	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -107,6 +108,7 @@ public class SearchActivity extends Activity {
 	    } else {
 	    	query = query_id;
 	    }	    
+	    
 	    searchAndDisplay();
 	}
 	
@@ -179,6 +181,7 @@ public class SearchActivity extends Activity {
         int itemSelected;
         
         String teste2 = "";
+        String teste3 = "";
         itemSelected = item.getItemId();
         switch (itemSelected) {
 	        case R.id.search:
@@ -197,7 +200,8 @@ public class SearchActivity extends Activity {
 		    	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(itemSelected, teste2);
 		            if (sf != null) {
 		            	teste2 = sf.getFilterExpression();
-		            	addFilter(teste2 , sf.getCaption());
+		            	teste3 = sf.getCaption();
+		            	addFilter(teste2 , teste3);
 		            	searchAndDisplay();	            	
 		            }	        	
 		            
@@ -221,25 +225,21 @@ public class SearchActivity extends Activity {
 		if (result.length()>0){
 			loadAndDisplayResult(result);
 		}
-			if (query.length()>0){
-				displayQuery = query + ":";
-			}
-			if (displayTotal.length()==0){
-				displayTotal = displayResultTotal;
-			}
-			
-			displayHeader = displayQuery + displayTotal;
-			
-			if (displayFilterName.length()>0) {
-				displayHeader = displayHeader + displayFilterName + displayResultTotal;
-				displayFilterName = displayFilterName + displayResultTotal;	
-			}
-			if (displayLetter.length()>0) {
-				displayHeader = displayHeader + displayLetter + displayResultTotal;
-			}
-			
-			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
-			headerTextView.setText(displayHeader);
+
+		displayHeader = displayTotal;
+	    if (displayQuery.length()>0){
+	    	displayHeader = displayHeader + displayQuery + ":" + displayResultTotal;
+		}
+		if (displayFilterName.length()>0) {
+			displayFilterName = displayFilterName + displayResultTotal;
+			displayHeader = displayHeader + displayFilterName ;				
+		}
+		if (displayLetter.length()>0) {
+			displayHeader = displayHeader + displayLetter + displayResultTotal;
+		}
+		
+		headerTextView = (TextView) findViewById(R.id.TextViewHeader);
+		headerTextView.setText(displayHeader);
 	}	
 
 	
@@ -252,6 +252,7 @@ public class SearchActivity extends Activity {
 		}
 		displayTotal = searcher.getQtdTotal();
 		displayResultTotal = searcher.getResultTotal();
+		
 		arrayAdapter.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}

@@ -105,8 +105,8 @@ public class SearchJournalsActivity extends SearchActivity {
 			
 			cluster = new Cluster(clusterCodeOrder[i]);
 			if (clusterCodeOrder[i].equals("in")){
-				for (k=0;k<SciELOApps.myConfig.getJcn().getCount() ;k++){        		
-		    		c = SciELOApps.myConfig.getJcn().getItemByIndex(k);
+				for (k=0;k<SciELOAppsActivity.myConfig.getJcn().getCount() ;k++){        		
+		    		c = SciELOAppsActivity.myConfig.getJcn().getItemByIndex(k);
 		    		
 		    		searchFilter = new SearchFilter(c.getName(), "0", c.getId(), cluster.getId() );
 					subMenuId = k + (i * 100) ;
@@ -116,13 +116,13 @@ public class SearchJournalsActivity extends SearchActivity {
 				clusterCollection.add(cluster);
 			} else {
 				if (clusterCodeOrder[i].equals("ac")){
-					idAndValueObjects = SciELOApps.myConfig.getSubjects();
+					idAndValueObjects = SciELOAppsActivity.myConfig.getSubjects();
 				} else {
 	    			if (clusterCodeOrder[i].equals("la")){
-	    				idAndValueObjects = SciELOApps.myConfig.getLanguages();
+	    				idAndValueObjects = SciELOAppsActivity.myConfig.getLanguages();
 	    			} else {
 	    				if (clusterCodeOrder[i].equals("le")){
-		    				idAndValueObjects = SciELOApps.myConfig.getLetters();
+		    				idAndValueObjects = SciELOAppsActivity.myConfig.getLetters();
 		    			}
 	    			}
 	
