@@ -65,7 +65,7 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
-		    android:layout_gravity="center" 
+		    android:layout_gravity="right" 
 	    android:padding="10sp"
 		    >
 			    <Button android:layout_height="fill_parent" 
@@ -73,7 +73,7 @@
 			        android:text="@string/call_naveg"
 			        android:textSize="10sp"
 			        android:id="@+id/call_naveg" 
-			        android:drawableTop="@drawable/browse"
+			        
 			        android:layout_gravity="center" 
 			        android:padding="10sp"
 			        ></Button>
@@ -83,7 +83,6 @@
 			        android:text="@string/call_search"
 			        android:textSize="10sp"
 			        android:id="@+id/call_search" 
-			        android:drawableTop="@drawable/ic_menu_search"
 			        android:layout_gravity="center"
 			        android:padding="10sp" 
 			        ></Button>

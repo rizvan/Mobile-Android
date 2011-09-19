@@ -1,36 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="tab_list_docs_name">Documentos</string>
-	<string name="tab_list_journals_name">Periódicos</string>
-	<string name="tab_list_issues_name">Números recentes</string>
-	<string name="tab_settings_name">Configuração</string>
-	<string name="menu_update">Atualizar resultado</string>
-	<string name="search_result_details_title">Detalhes do resultado</string>
-	<string name="searchResultDialogTitle">Search result dialog title</string>
-	<string name="search_interrupted">Search result dialog title</string>
-	<string name="menuItemRefineBySubject">Refinar por assunto</string>
-	<string name="menuItemRefineByJournal">Refinar por periódico</string>
-	<string name="menuItemRefineByYear">Refinar por ano</string>
-	<string name="menuItemRefineByCollection">Refinar por coleção</string>
-	<string name="menuItemRefineByLanguage">Refinar por idioma</string>
-	
-	<string name="menuItemRefineByInitial">Refinar por inicial</string>
-	
-	<string name="menuItemSendEmail">e-mail</string>
-	<string name="menuItemSaveResult">guardar</string>
-	<string name="menuItemSaveBookmark">bookmark</string>
-	<string name="text_sendTo">e-mail</string>
-	<string name="button_send">enviar</string>
-	<string name="search_label">pesquisar</string>
-	<string name="search_hint">pesquisa</string>
-	<string name="search_expression_hint">pesquisa</string>
-	<string name="search_button">pesquisar</string>
-	<string name="menuItemDownloadPDF">Baixar PDF</string>
-	<string name="menuItemFulltext">texto completo</string>
-	
-	<string name="reset_label">reiniciar</string>
-	
-	<string name="call_naveg">navegar</string>
-	<string name="call_search">pesquisa</string>
-	
+    <string name="tab_list_docs_name">Documentos</string>
+    <string name="tab_list_journals_name">Periódicos</string>
+    <string name="tab_list_issues_name">Números recentes</string>
+    <string name="tab_settings_name">Configuração</string>
+    <string name="menu_update">Atualizar resultado</string>
+    <string name="search_result_details_title">Detalhes do resultado</string>
+    <string name="searchResultDialogTitle">Search result dialog title</string>
+    <string name="search_interrupted">Search result dialog title</string>
+    <string name="menuItemRefineBySubject">Refinar por assunto</string>
+    <string name="menuItemRefineByJournal">Refinar por periódico</string>
+    <string name="menuItemRefineByYear">Refinar por ano</string>
+    <string name="menuItemRefineByCollection">Refinar por coleção</string>
+    <string name="menuItemRefineByLanguage">Refinar por idioma</string>
+    <string name="menuItemRefineByInitial">Refinar por inicial</string>
+    <string name="menuItemSendEmail">e-mail</string>
+    <string name="menuItemSaveResult">guardar</string>
+    <string name="menuItemSaveBookmark">bookmark</string>
+    <string name="text_sendTo">e-mail</string>
+    <string name="button_send">enviar</string>
+    <string name="search_label">pesquisar</string>
+    <string name="search_hint">pesquisa</string>
+    <string name="search_expression_hint">pesquisa</string>
+    <string name="search_button">pesquisar</string>
+    <string name="menuItemDownloadPDF">Baixar PDF</string>
+    <string name="menuItemFulltext">texto completo</string>
+    <string name="reset_label">reiniciar</string>
+    <string name="call_naveg">periódicos</string>
+    <string name="call_search">artigos</string>
 </resources>

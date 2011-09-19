@@ -29,7 +29,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		IdAndValueObjects searchURLs;
 		
-		
+		SEPARATOR = ":";
 		
 		clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
 		super.onCreate(savedInstanceState);

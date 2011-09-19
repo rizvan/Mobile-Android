@@ -83,9 +83,10 @@ public class DocSearcher extends Searcher{
 			
 			totalResults = response.get("numFound").toString();
 			
-			if (totalQtd.length()==0){
-				totalQtd = totalResults;
+			if (SciELOAppsActivity.totalOfDocuments.length()==0){
+				SciELOAppsActivity.totalOfDocuments = totalResults;
 			}
+			totalQtd = SciELOAppsActivity.totalOfDocuments;
 			String from = responseParameters.get("start").toString();
 			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			

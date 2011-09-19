@@ -57,7 +57,7 @@ public class ArticleURL {
 		url = url.replace("REPLACE_COLLECTION_URL", doc.getCol().getUrl());
 		url = url.replace("REPLACE_PID", doc.getDocumentId());
 		url = url.replace("REPLACE_LANG", doc.getLang());
-		url = url.replace("REPLACE_APP", doc.getCol().getNickname());
+		url = url.replace("REPLACE_APP_ID", doc.getCol().getId());
 		
 		url = url.replace("REPLACE_PDF_URL", doc.getPdf_url());
 		if (urlTester.check(url)==false){

@@ -22,13 +22,14 @@ public class SearchDocsActivity extends SearchActivity {
     protected ArrayList<Document> resultList =  new ArrayList<Document>();	
     
     protected ArticleURL articleURL;
-
+    
+    
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 		clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_doc);
 	    
 		super.onCreate(savedInstanceState);
-	    
+	    SEPARATOR = ":";
 	    articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
 		searcher = new DocSearcher(this.getResources().getString(R.string.search_feed), clusterCollection, resultList, pagesList);
 		
@@ -78,6 +79,7 @@ public class SearchDocsActivity extends SearchActivity {
 	        	//header = header + searcher.getResultCount();
 		        selectedPageIndex = position;
 		        searchAndDisplay();	
+		        updateHeader = false;
 	        }
 	    });
 
@@ -101,6 +103,8 @@ public class SearchDocsActivity extends SearchActivity {
 			displayFilterName = "";
 		}
 		displayQuery = query;
+		
+		updateHeader =  (this.selectedPageIndex < 0);
 		return ((DocSearcher) searcher).getURL(query, this.getResources().getString(R.string.search_doc_count), this.filter, this.selectedPageIndex);
 	}
 	/*

@@ -46,7 +46,7 @@
 		<item name="android:background">#FFFFFF</item> <!--  texto -->
     </style>
     <style name="banner">
-		<item name="android:background">@drawable/scielo</item>
+		<item name="android:background">@drawable/scielo4</item>
 		<item name="android:padding">10sp</item>  
 		<item name="android:gravity">top</item>
 	</style>
@@ -55,9 +55,9 @@
 		<item name="android:padding">5sp</item>  
 		<item name="android:gravity">center</item>
 	</style>
-	<style name="MyMenu" parent="android:Theme.Light">
-  		<item name="android:background">#FFFF00</item> 
+	<style name="MyMenu" >
+  		<item name="android:background">#111111</item> 
   		<item name="android:textColor">#FF00FF</item> 
-  		<item name="android:textSize">5sp</item> 
+  		<item name="android:textSize">1sp</item> 
   	</style>
 </resources>

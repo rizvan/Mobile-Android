@@ -6,8 +6,7 @@
     <string name="search_feed_issues">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PIDz"&amp;endkey="PID"&amp;descending=true&amp;include_docs=true</string>
     <string name="search_feed_issuetoc">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/article_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
     <string name="pdf_url">http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf</string>
-    <string name="pdf_and_log_url">http://search.scielo.org/showpdf.php?pdf=REPLACE_PDF_URL&amp;log_script=http://scielo-log.bireme.br/scielolog/updateLog02.php&amp;page=sci_pdf&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
-    <!-- string name="pdf_and_log_url">http://search.scielo.org/viewpdf.php?pdf=REPLACE_PDF_URL&amp;app=REPLACE_APP&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG&amp;tlng=REPLACE_LANG</string>  -->
+    <string name="pdf_and_log_url">http://homolog.search.scielo.org/pdf.php?pdf=REPLACE_PDF_FILENAME&amp;page=sci_pdf&amp;app=REPLACE_APP_ID&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
     <string name="article_url">http://REPLACE_COLLECTION_URL/scielo.php?script=sci_arttext&amp;pid=REPLACE_PID</string>
     <string name="total"/>
     <string name="menuItemDownloadPDF"/>
@@ -44,4 +43,5 @@
     <string name="menuItemFulltext"/>
     <string name="tab_list_docs_name"/>
     <string name="search_expression_hint"/>
+    <string name="wellcome">This application allows to search scientific articles and browse them by journals and issues</string>
 </resources>

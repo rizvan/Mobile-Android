@@ -117,6 +117,13 @@ public class DocumentActivity extends Activity{
         
     	return true;
     }
+	
+	private String formatText(CharSequence charSequence){
+		if (charSequence.length()>0){
+			charSequence =  charSequence + "\n\n";
+		}
+		return (String) charSequence;
+	}
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	boolean res = false;
@@ -129,7 +136,10 @@ public class DocumentActivity extends Activity{
         	emailIntent.setType("text/plain");
         	//emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "roberta.takenaka@scielo.org");
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
-			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, TextViewTitle.getText() + "\n" + TextViewAbstract.getText() + "\n" + fulltext_url + "\n" + pdf_url );
+			
+			
+			
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatText(TextViewTitle.getText()) + formatText(TextViewAbstract.getText()) + formatText(fulltext_url) + formatText(pdf_url) );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
             res = true;
             break;

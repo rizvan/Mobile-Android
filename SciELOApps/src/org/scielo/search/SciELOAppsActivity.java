@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class SciELOAppsActivity extends Activity {
     /** Called when the activity is first created. */
     static MyAppConfig myConfig = new MyAppConfig();
+    static String totalOfDocuments = "";
     TextView textNav;
     TextView textSearch;
 

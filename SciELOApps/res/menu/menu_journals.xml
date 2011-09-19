@@ -4,21 +4,20 @@
           android:title="@string/search_label"
           android:icon="@drawable/ic_menu_search" /> -->
 
-	<item android:id="@+id/reset"
-          android:title="@string/reset_label"/>
-   <item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject">
+	<item android:id="@+id/reset" android:title="@string/reset_label" style="menu_item"/>
+    <item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"  style="menu_item">
 		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  style="MyMenu">
 			
 		</menu>
 	</item>
 	
-	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject">
+	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection"  style="menu_item">
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection"  style="MyMenu">
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByInitial" android:title="@string/menuItemRefineByInitial">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByInitial">
+	<item android:id="@+id/menuItemRefineByInitial" android:title="@string/menuItemRefineByInitial"  style="menu_item">
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByInitial"  style="MyMenu">
 			
 		</menu>
 	</item>

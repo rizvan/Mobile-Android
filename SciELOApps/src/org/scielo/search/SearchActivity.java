@@ -57,6 +57,9 @@ public class SearchActivity extends Activity {
 	private String filterSelectionTracker = "";	
 	protected String query_id = "";
 	protected String displayQuery ="";
+	protected String SEPARATOR = "";
+	
+	protected boolean updateHeader = false;
 	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -112,24 +115,24 @@ public class SearchActivity extends Activity {
 	    searchAndDisplay();
 	}
 	
-	protected void addFilter(String _filter, String caption){
+	protected void addFilter(String _filter, String caption, String sep){
 		String prefix = _filter.substring(0, 4);
 		
 		if (this.filterSelectionTracker.length()>0){			
 			if (this.filterSelectionTracker.contains(prefix)){
 				this.filterSelectionTracker = _filter;
 				this.filter = _filter;
-		    	displayFilterName = "/" + caption + ":";
+		    	displayFilterName = "/" + caption + sep;
 
 			} else {
 				this.filterSelectionTracker = this.filterSelectionTracker + "|" + _filter;
 				this.filter = this.filter + " AND " + _filter;				
-		    	displayFilterName = displayFilterName + "/" + caption + ":";
+		    	displayFilterName = displayFilterName + "/" + caption + sep;
 			}
 		} else {
 			this.filter = _filter;
 			this.filterSelectionTracker = _filter;
-	    	displayFilterName = "/" +  caption + ":";
+	    	displayFilterName = "/" +  caption + sep;
 		}			
 		
     	this.selectedPageIndex = -1;
@@ -201,7 +204,7 @@ public class SearchActivity extends Activity {
 		            if (sf != null) {
 		            	teste2 = sf.getFilterExpression();
 		            	teste3 = sf.getCaption();
-		            	addFilter(teste2 , teste3);
+		            	addFilter(teste2 , teste3, SEPARATOR);
 		            	searchAndDisplay();	            	
 		            }	        	
 		            
@@ -225,21 +228,26 @@ public class SearchActivity extends Activity {
 		if (result.length()>0){
 			loadAndDisplayResult(result);
 		}
-
-		displayHeader = displayTotal;
-	    if (displayQuery.length()>0){
-	    	displayHeader = displayHeader + displayQuery + ":" + displayResultTotal;
-		}
-		if (displayFilterName.length()>0) {
-			displayFilterName = displayFilterName + displayResultTotal;
-			displayHeader = displayHeader + displayFilterName ;				
-		}
-		if (displayLetter.length()>0) {
-			displayHeader = displayHeader + displayLetter + displayResultTotal;
-		}
 		
-		headerTextView = (TextView) findViewById(R.id.TextViewHeader);
-		headerTextView.setText(displayHeader);
+		if (updateHeader == true){
+			
+			displayHeader = displayTotal;
+		    if (displayQuery.length()>0){
+		    	displayHeader = displayHeader + "/" + displayQuery + SEPARATOR + displayResultTotal;
+			}
+			if (displayFilterName.length()>0) {
+				displayFilterName = displayFilterName + displayResultTotal;
+				displayHeader = displayHeader + displayFilterName ;				
+			}
+			if (displayLetter.length()>0) {
+				displayHeader = displayHeader + displayLetter + displayResultTotal;
+			}
+			
+			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
+			headerTextView.setText(displayHeader);
+		} else {
+			updateHeader = true;
+		}
 	}	
 
 	
@@ -250,9 +258,9 @@ public class SearchActivity extends Activity {
 		if (cCollection!=null){
 			clusterCollection = cCollection;
 		}
-		displayTotal = searcher.getQtdTotal();
-		displayResultTotal = searcher.getResultTotal();
 		
+		displayResultTotal = searcher.getResultTotal();
+		displayTotal = searcher.getQtdTotal();
 		arrayAdapter.notifyDataSetChanged();		
 		aaPage.notifyDataSetChanged();
 	}
