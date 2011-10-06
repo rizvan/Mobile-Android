@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SciELOAppsActivity extends Activity {
@@ -14,7 +15,9 @@ public class SciELOAppsActivity extends Activity {
     static String totalOfDocuments = "";
     TextView textNav;
     TextView textSearch;
-
+    LinearLayout layout;
+    public static String currentSearchMainActivity = "";
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		
@@ -24,7 +27,7 @@ public class SciELOAppsActivity extends Activity {
 		IdAndValueObjects letters;
 		
 		super.onCreate(savedInstanceState);
-    	setContentView(R.layout.maintabless);
+    	setContentView(R.layout.main);
     	
     	jcn = new JournalsCollectionsNetwork();
 		jcn.multiAdd(
@@ -47,12 +50,22 @@ public class SciELOAppsActivity extends Activity {
 		myConfig.setLanguages(languages);
 		myConfig.setLetters(letters);
         
+		
+		
+		
+		
+		
         textNav = (TextView) findViewById(R.id.call_naveg);
     	textSearch = (TextView) findViewById(R.id.call_search);
+    	
+    	Intent docIntent = new Intent(textSearch.getContext(), SearchDocsActivity.class);		           
+        startActivity(docIntent);	
+        currentSearchMainActivity = "articles";
 		
     	textNav.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				currentSearchMainActivity = "journals";
 				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
 	            startActivity(docIntent);
 			}
@@ -61,10 +74,12 @@ public class SciELOAppsActivity extends Activity {
     	textSearch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				currentSearchMainActivity = "articles";
 				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
 	            startActivity(docIntent);					
 			}
 		});
+		
 
     }
 }

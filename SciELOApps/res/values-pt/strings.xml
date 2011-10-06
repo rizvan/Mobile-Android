@@ -28,4 +28,7 @@
     <string name="reset_label">reiniciar</string>
     <string name="call_naveg">periódicos</string>
     <string name="call_search">artigos</string>
+    <string name="call_naveg_letter">P</string>
+    <string name="call_search_letter">A</string>
+    <string name="wellcome">Encontre artigos científicos nas coleções SciELO e navegue pelos periódicos e seus números</string>
 </resources>

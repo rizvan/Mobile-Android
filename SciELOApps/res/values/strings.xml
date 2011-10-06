@@ -8,40 +8,9 @@
     <string name="pdf_url">http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf</string>
     <string name="pdf_and_log_url">http://homolog.search.scielo.org/pdf.php?pdf=REPLACE_PDF_FILENAME&amp;page=sci_pdf&amp;app=REPLACE_APP_ID&amp;pid=REPLACE_PID&amp;lang=REPLACE_LANG</string>
     <string name="article_url">http://REPLACE_COLLECTION_URL/scielo.php?script=sci_arttext&amp;pid=REPLACE_PID</string>
-    <string name="total"/>
-    <string name="menuItemDownloadPDF"/>
-    <string name="menuItemSaveResult"/>
-    <string name="searchResultDialogTitle"/>
-    <string name="tab_list_journals_name"/>
-    <string name="search_interrupted"/>
-    <string name="menuItemRefineBySubjectExactAndEarthSciences"/>
-    <string name="menuItemSaveBookmark"/>
-    <string name="menuItemRefineBySubjectHumanSciences"/>
-    <string name="search_hint"/>
-    <string name="menuItemRefineBySubjectBiologicalSciences"/>
-    <string name="search_result_details_title"/>
-    <string name="tab_settings_name"/>
-    <string name="menuItemRefineBySubjectHealthSciences"/>
-    <string name="menuItemRefineByInitial"/>
-    <string name="text_sendTo"/>
-    <string name="menuItemRefineByLanguage"/>
-    <string name="search_button"/>
-    <string name="menuItemRefineByYear"/>
-    <string name="menuItemSendEmail"/>
-    <string name="call_naveg"/>
-    <string name="menuItemRefineByCollection"/>
-    <string name="tab_list_issues_name"/>
-    <string name="call_search"/>
-    <string name="search_label"/>
-    <string name="menuItemRefineBySubject"/>
-    <string name="menuItemRefineByJournal"/>
-    <string name="menuItemRefineBySubjectAgriculturalSciences"/>
-    <string name="menuItemRefineBySubjectEngineering"/>
-    <string name="menu_update"/>
-    <string name="reset_label"/>
-    <string name="button_send"/>
-    <string name="menuItemFulltext"/>
-    <string name="tab_list_docs_name"/>
-    <string name="search_expression_hint"/>
-    <string name="wellcome">This application allows to search scientific articles and browse them by journals and issues</string>
+    
+    <string name="call_naveg">periódicos</string>
+    <string name="call_search">artigos</string>
+    <string name="call_naveg_letter">P</string>
+    <string name="call_search_letter">A</string>
 </resources>

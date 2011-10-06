@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    style="@style/MyAppHome" 
+    >
+      
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"	  
+	    android:padding="5sp" 
+	    > 	
+	  	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="wrap_content"
+		    android:orientation="vertical" android:layout_height="wrap_content"
+		    android:padding="1sp"
+		    android:background="#FFFFFF"
+		    android:gravity="left"
+		    > 	
+		    
+		    <TextView 
+					android:id="@+id/banner" 
+					style="@style/banner" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"/>
+		</LinearLayout>
+	  	
+	  	
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:orientation="horizontal"			    
+			     style="@style/mainOptionBox"		
+			     android:id="@+id/mainOptionBox"		
+			    > 	
+				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:layout_width="wrap_content"
+				    android:layout_height="fill_parent"
+				    android:orientation="horizontal"	
+				    style="@style/mainOptionBoxBorder"
+				    android:id="@+id/mainOptionBoxBorderA"
+				    >
+				    
+				    <!--  borda preta -->
+				    <TextView 
+							android:id="@+id/call_search_letter" 
+							android:layout_width="fill_parent" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_search_letter" 	
+							style="@style/mainOptionCapital" 
+		  			   />
+		  			   <TextView 
+							android:id="@+id/call_search" 
+							android:layout_width="fill_parent" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_search" 	
+							style="@style/mainOption" 
+		  			   />
+				</LinearLayout>
+			
+			
+				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:layout_width="wrap_content"
+				    android:layout_height="fill_parent"
+				    android:orientation="horizontal"	
+				    style="@style/mainOptionBoxBorderOff"
+				    android:id="@+id/mainOptionBoxBorderJ"
+				    
+				    ><!--  borda preta -->
+				    <TextView 
+							android:id="@+id/call_naveg_letter" 
+							android:layout_width="fill_parent" 
+							android:layout_height="wrap_content"
+							android:text="@string/call_naveg_letter" 	
+							style="@style/mainOptionCapitalOff" 	
+							
+					/><TextView 
+							android:id="@+id/call_naveg" 
+							android:layout_width="fill_parent" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_naveg" 	
+							style="@style/mainOptionOff" 	
+							
+					/>
+				</LinearLayout>
+			
+		</LinearLayout>
+    </LinearLayout>
+      <TextView 
+				android:id="@+id/home_text" 
+				style="@style/home_text"
+				android:padding="20sp"
+				android:text="@string/wellcome" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+      
+		
+</LinearLayout>
+

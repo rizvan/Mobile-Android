@@ -31,6 +31,7 @@
   	</style>
 	<style name="MyAppHome" >	
   		<item name="android:background">#FFFFFF</item>
+  		<item name="android:textSize">1sp</item>
   	</style>
   	<style name="home_text">
   		<item name="android:padding">10sp</item>
@@ -38,19 +39,89 @@
 		<item name="android:textColor">#000000</item>
   		
   	</style>
+  	<!-- 
+  	mainOptionBox | mainOptionBoxOff
+  	 -->
   	<style name="mainOptionBox" >		
-  	<item name="android:background">#000000</item>
-  		<item name="android:padding">10sp</item>
-		<item name="android:gravity">left</item>
-	</style>
-  	<style name="mainOption" >		
   	    <item name="android:background">#FFFFFF</item>
-  		<item name="android:padding">3sp</item>
-		<item name="android:textSize">15sp</item>
-		<item name="android:textColor">#000000</item>
-		<item name="android:typeface">serif</item>
-		<item name="android:gravity">center</item>
+  		<item name="android:padding">1sp</item>
+		<item name="android:gravity">right</item>
 	</style>
+  	<style name="mainOptionBoxOff" >		
+  		<item name="android:background">#C0C0C0</item>
+  		<item name="android:padding">1sp</item>
+		<item name="android:gravity">right</item>
+	</style>
+	<!-- 
+  	mainOptionBox | mainOptionBoxOff
+  	 -->
+  	<style name="mainOptionBoxBorder" >		
+  		<item name="android:background">#000000</item>
+  		<item name="android:paddingTop">1sp</item>
+		<item name="android:paddingLeft">5sp</item>
+		<item name="android:paddingRight">1sp</item>
+		<item name="android:paddingBottom">1sp</item>
+	</style>	
+  	 <style name="mainOptionBoxBorderOff" >		
+  		<item name="android:background">#000000</item>
+  		<item name="android:paddingTop">1sp</item>
+		<item name="android:paddingLeft">5sp</item>
+		<item name="android:paddingRight">1sp</item>
+		<item name="android:paddingBottom">1sp</item>
+	</style>		
+  	<!-- 
+  	mainOption | mainOptionOff
+  	 -->
+  	<style name="mainOption" >		
+  	    <item name="android:background">#500000</item>
+		<item name="android:textColor">#FFFFFF</item>
+  		<item name="android:paddingRight">8sp</item>
+		<item name="android:paddingBottom">12sp</item>
+		<item name="android:paddingTop">8sp</item>
+		<item name="android:textSize">10sp</item>
+		<item name="android:typeface">serif</item>
+		<item name="android:gravity">bottom</item>
+	</style>
+	<style name="mainOptionOff" >		
+  	    <item name="android:background">#C0C0C0</item>  	    
+		<item name="android:textColor">#FFFFFF</item>
+  		<item name="android:paddingRight">8sp</item>
+		<item name="android:paddingBottom">12sp</item>
+		<item name="android:paddingTop">8sp</item>
+		<item name="android:textSize">10sp</item>
+		<item name="android:typeface">serif</item>
+		<item name="android:gravity">bottom</item>
+	</style>
+	
+	<!-- 
+  	mainOptionCapital | mainOptionCapitalOff
+  	 -->
+	<style name="mainOptionCapital">
+	    <item name="android:background">#500000</item>
+		<item name="android:textColor">#FFFFFF</item>
+  		<item name="android:textSize">30sp</item>
+		<item name="android:typeface">serif</item>
+		<item name="android:gravity">bottom</item>
+		<item name="android:paddingLeft">12sp</item>
+		<item name="android:paddingRight">12sp</item>
+		<item name="android:paddingBottom">12sp</item>
+		<item name="android:paddingTop">8sp</item>					
+	</style>
+	<style name="mainOptionCapitalOff">
+	    <item name="android:background">#C0C0C0</item>
+		<item name="android:textColor">#FFFFFF</item>
+  		<item name="android:textSize">30sp</item>
+		<item name="android:typeface">serif</item>
+		<item name="android:gravity">bottom</item>
+		<item name="android:paddingLeft">12sp</item>
+		<item name="android:paddingRight">12sp</item>
+		<item name="android:paddingBottom">12sp</item>
+		<item name="android:paddingTop">8sp</item>					
+	</style>
+  	
+		
+  	
+	
   	<style name="mainOptionSearch" >		
   	    <item name="android:background">@drawable/ic_menu_search</item>
 		<item name="android:gravity">left</item>
@@ -162,4 +233,5 @@
 		<!-- <item name="android:background">#989898</item>  -->
 		<item name="android:background">#000099</item>
 	</style>
+	
 </resources>

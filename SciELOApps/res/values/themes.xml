@@ -17,7 +17,7 @@
 
 <resources>
 	<style name="Theme.SciELOApps" parent="android:Theme.NoTitleBar">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">1sp</item>
         <item name="android:padding">1sp</item>
     	<item name="android:gravity">left</item>
 		 <!-- item name="android:background">#CCFF00</item> --><!--verde, fundo da app e tab -->
@@ -48,7 +48,12 @@
     <style name="banner">
 		<item name="android:background">@drawable/scielo4</item>
 		<item name="android:padding">10sp</item>  
-		<item name="android:gravity">top</item>
+		<item name="android:gravity">center</item>
+	</style>
+	<style name="div">
+		<item name="android:background">@drawable/div</item>
+		<item name="android:padding">10sp</item>  
+		<item name="android:gravity">center</item>
 	</style>
     <style name="banner01">
 		<item name="android:background">@drawable/scielo01</item>

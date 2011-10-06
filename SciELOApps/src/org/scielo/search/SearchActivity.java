@@ -21,6 +21,8 @@ public class SearchActivity extends Activity {
 	TextView textNav;
 	TextView textSearch;
 	
+	
+	
 	View searchButton;	
 	TextView headerTextView;
 	ListView searchResultListView;
@@ -59,6 +61,7 @@ public class SearchActivity extends Activity {
 	protected String displayQuery ="";
 	protected String SEPARATOR = "";
 	
+	
 	protected boolean updateHeader = false;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,15 @@ public class SearchActivity extends Activity {
 	    query = "";
 	    selectedPageIndex = -1;
 	    
+	    int layout_id;
+		if (SciELOAppsActivity.currentSearchMainActivity.compareTo("journals")==0){
+	    	layout_id = R.layout.search_journals ;
+	    } else {
+	    	
+	    	layout_id = R.layout.search_articles ;
+	    }
 	    
-	    setContentView(R.layout.search);
+	    setContentView(layout_id);
 	    
 		searchResultListView = (ListView) findViewById(R.id.list);
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
@@ -81,9 +91,12 @@ public class SearchActivity extends Activity {
 	    textNav = (TextView) findViewById(R.id.call_naveg);
     	textSearch = (TextView) findViewById(R.id.call_search);
 		
+    	
+    	
     	textNav.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) {				
+				SciELOAppsActivity.currentSearchMainActivity = "journals";
 				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
 	            startActivity(docIntent);
 			}
@@ -91,13 +104,15 @@ public class SearchActivity extends Activity {
     	
     	textSearch.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) {				
+				SciELOAppsActivity.currentSearchMainActivity = "articles";
 				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
 	            startActivity(docIntent);					
 			}
 		});
 	    
 	}
+	
 	
 	@Override
 	protected void onNewIntent(Intent intent) {
