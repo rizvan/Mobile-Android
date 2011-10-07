@@ -31,4 +31,5 @@
     <string name="call_naveg_letter">P</string>
     <string name="call_search_letter">A</string>
     <string name="wellcome">Encontre artigos científicos nas coleções SciELO e navegue pelos periódicos e seus números</string>
+    <string name="email_message_title">Esta mensagem foi enviada pela aplicação móvel de SciELO</string>
 </resources>

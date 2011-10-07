@@ -35,7 +35,7 @@
     <string name="reset_label">reset</string>
     <string name="call_naveg">journals</string>
     <string name="call_naveg_letter">J</string>
-    
     <string name="call_search">articles</string>
     <string name="wellcome">Search scientific articles in SciELO collection and browse by journals and theirs issues</string>
+    <string name="email_message_title">This message was sent by SciELO mobile application</string>
 </resources>

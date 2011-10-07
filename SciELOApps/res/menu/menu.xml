@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="Context Menu" style="MyMenu">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="Context Menu" >
     <item android:id="@+id/search"
           android:title="@string/search_label"
           android:icon="@drawable/ic_menu_search" 
-          style="menu_item"/>
+          />
 
-	<item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"  style="menu_item">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  style="MyMenu">
+	<item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByJournal" android:title="@string/menuItemRefineByJournal"  style="menu_item">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByJournal" style="MyMenu">
+	<item android:id="@+id/menuItemRefineByJournal" android:title="@string/menuItemRefineByJournal"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByJournal" >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByYear" android:title="@string/menuItemRefineByYear"  style="menu_item">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByYear" style="MyMenu">
+	<item android:id="@+id/menuItemRefineByYear" android:title="@string/menuItemRefineByYear"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByYear" >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByLanguage" android:title="@string/menuItemRefineByLanguage"  style="menu_item">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByLanguage" style="MyMenu">
+	<item android:id="@+id/menuItemRefineByLanguage" android:title="@string/menuItemRefineByLanguage"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByLanguage" >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection" style="menu_item">
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection" style="MyMenu">
+	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection" >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection" >
 			
 		</menu>
 	</item>

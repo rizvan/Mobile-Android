@@ -17,52 +17,12 @@
 
 <resources>
 	<style name="Theme.SciELOApps" parent="android:Theme.NoTitleBar">
-        <item name="android:textSize">1sp</item>
-        <item name="android:padding">1sp</item>
-    	<item name="android:gravity">left</item>
+        
+        <item name="android:background">#FFFFFF</item>
 		 <!-- item name="android:background">#CCFF00</item> --><!--verde, fundo da app e tab -->
 		<!-- item name="android:textViewStyle">@style/TextView1</item> -->
 		      
     </style>
-    <style name="TextView">
-        <item name="android:background">#FFFFFF</item>
-		<item name="android:textColor">#000000</item>
-		<item name="android:padding">2sp</item>  
-    </style>
-    <style name="TextView1">
-        <item name="android:background">#989898</item>
-		<item name="android:textColor">#FFFFFF</item>
+    
 	
-    </style>
-	<style name="TextView2">
-        <item name="android:textColor">#FF00FF</item>
-		<item name="android:background">#FFFF00</item>
-		
-    </style>
-
-    <style name="Theme.Document" parent="Theme.SciELOApps">
-		<item name="android:padding">5sp</item>  
-		<!-- item name="android:background">#FFFFFF</item>  original -->      
-		<item name="android:background">#FFFFFF</item> <!--  texto -->
-    </style>
-    <style name="banner">
-		<item name="android:background">@drawable/scielo4</item>
-		<item name="android:padding">10sp</item>  
-		<item name="android:gravity">center</item>
-	</style>
-	<style name="div">
-		<item name="android:background">@drawable/div</item>
-		<item name="android:padding">10sp</item>  
-		<item name="android:gravity">center</item>
-	</style>
-    <style name="banner01">
-		<item name="android:background">@drawable/scielo01</item>
-		<item name="android:padding">5sp</item>  
-		<item name="android:gravity">center</item>
-	</style>
-	<style name="MyMenu" >
-  		<item name="android:background">#111111</item> 
-  		<item name="android:textColor">#FF00FF</item> 
-  		<item name="android:textSize">1sp</item> 
-  	</style>
 </resources>

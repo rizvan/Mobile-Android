@@ -1,38 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  	<style name="MyTabHost" parent="android:Theme.Light">
-  		<item name="android:textColor">#000000</item> 
-  		<item name="android:background">#FFFFFF</item> <!-- roxo #660066-->
+	<style name="MyAppHome" >	
+  		<item name="android:background">#FFFFFF</item>  		
+  	</style>
+  	<style name="MyTabView" parent="@android:style/Widget.ListView">
+  		<item name="android:background">#FFFFFF</item>
+  		<item name="android:padding">5sp</item>  
+  	</style>
+<style name="banner">
+		<item name="android:background">@drawable/scielo4</item>
+		<item name="android:padding">10sp</item>  
+		<item name="android:gravity">center</item>
+	</style>
+	<style name="listView">
+  		<item name="android:background">#FFFFFF</item>
+  		<item name="android:padding">5sp</item>
   	</style>
   	
-	<style name="MyTabHostLinearLayout" parent="MyTabHost">
-  		<item name="android:textColor">#000000</item> 
-  		<!-- item name="android:background">#FFFFFF</item>  --> 
-  		<item name="android:background">#FFFFFF</item> <!-- pink #FF33FF-->
-  	</style> 
-  
-	<style name="MyTabWidget" parent="@android:style/Widget.TabWidget">
-  		<item name="android:textColor">#FFFFFF</item> 
-		<item name="android:ellipsize">marquee</item> 
-		<item name="android:gravity">top</item> 
-		<item name="android:singleLine">true</item>  
-		<!--  item name="android:background">#33FFCC</item>  azul #33FFCC-->
-	</style>
-	<style name="MyTabContent" parent="@android:style/Widget.TabWidget">
-  		<item name="android:textColor">#FFFFFF</item> 
-		<item name="android:ellipsize">marquee</item> 
-		<item name="android:gravity">top</item> 
-		<item name="android:singleLine">true</item>  
-		<item name="android:background">#FFFFFF</item> <!-- amarelo FFFF33-->
-	</style>
-	<style name="MyApp" >	
-  		<item name="android:background">#FFFFFF</item>
-  	</style>
-	<style name="MyAppHome" >	
-  		<item name="android:background">#FFFFFF</item>
-  		<item name="android:textSize">1sp</item>
-  	</style>
   	<style name="home_text">
   		<item name="android:padding">10sp</item>
 		<item name="android:textSize">15sp</item>
@@ -44,46 +29,49 @@
   	 -->
   	<style name="mainOptionBox" >		
   	    <item name="android:background">#FFFFFF</item>
-  		<item name="android:padding">1sp</item>
+  		<item name="android:paddingTop">1sp</item>
+		<item name="android:paddingLeft">1sp</item>
+		<item name="android:paddingRight">1sp</item>
 		<item name="android:gravity">right</item>
 	</style>
   	<style name="mainOptionBoxOff" >		
   		<item name="android:background">#C0C0C0</item>
-  		<item name="android:padding">1sp</item>
+  		<item name="android:paddingTop">1sp</item>
+		<item name="android:paddingLeft">1sp</item>
+		<item name="android:paddingRight">1sp</item>
 		<item name="android:gravity">right</item>
 	</style>
 	<!-- 
   	mainOptionBox | mainOptionBoxOff
   	 -->
   	<style name="mainOptionBoxBorder" >		
-  		<item name="android:background">#000000</item>
+  		<item name="android:background">#FFFFFF</item>
   		<item name="android:paddingTop">1sp</item>
 		<item name="android:paddingLeft">5sp</item>
 		<item name="android:paddingRight">1sp</item>
-		<item name="android:paddingBottom">1sp</item>
+		
 	</style>	
   	 <style name="mainOptionBoxBorderOff" >		
-  		<item name="android:background">#000000</item>
+  		<item name="android:background">#FFFFFF</item>
   		<item name="android:paddingTop">1sp</item>
 		<item name="android:paddingLeft">5sp</item>
-		<item name="android:paddingRight">1sp</item>
-		<item name="android:paddingBottom">1sp</item>
+		<item name="android:paddingRight">1sp</item>		
 	</style>		
   	<!-- 
   	mainOption | mainOptionOff
   	 -->
   	<style name="mainOption" >		
-  	    <item name="android:background">#500000</item>
+  	    <item name="android:background">#8B0000</item>
 		<item name="android:textColor">#FFFFFF</item>
   		<item name="android:paddingRight">8sp</item>
 		<item name="android:paddingBottom">12sp</item>
 		<item name="android:paddingTop">8sp</item>
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:typeface">serif</item>
 		<item name="android:gravity">bottom</item>
 	</style>
 	<style name="mainOptionOff" >		
-  	    <item name="android:background">#C0C0C0</item>  	    
+  	    <item name="android:background">#DFDFBF</item>  	    
 		<item name="android:textColor">#FFFFFF</item>
   		<item name="android:paddingRight">8sp</item>
 		<item name="android:paddingBottom">12sp</item>
@@ -97,7 +85,7 @@
   	mainOptionCapital | mainOptionCapitalOff
   	 -->
 	<style name="mainOptionCapital">
-	    <item name="android:background">#500000</item>
+	    <item name="android:background">#8B0000</item>
 		<item name="android:textColor">#FFFFFF</item>
   		<item name="android:textSize">30sp</item>
 		<item name="android:typeface">serif</item>
@@ -108,7 +96,7 @@
 		<item name="android:paddingTop">8sp</item>					
 	</style>
 	<style name="mainOptionCapitalOff">
-	    <item name="android:background">#C0C0C0</item>
+	    <item name="android:background">#DFDFBF</item>
 		<item name="android:textColor">#FFFFFF</item>
   		<item name="android:textSize">30sp</item>
 		<item name="android:typeface">serif</item>
@@ -118,28 +106,11 @@
 		<item name="android:paddingBottom">12sp</item>
 		<item name="android:paddingTop">8sp</item>					
 	</style>
-  	
-		
-  	
-	
-  	<style name="mainOptionSearch" >		
-  	    <item name="android:background">@drawable/ic_menu_search</item>
-		<item name="android:gravity">left</item>
-	</style>
-  	<style name="mainOptionBrowse" >		
-  	    <item name="android:background">@drawable/browse</item>
-		<item name="android:gravity">left</item>
-	</style>
-  	<style name="MyTabView" parent="@android:style/Widget.ListView">
   		
-  		 
-  		<item name="android:background">#FFFFFF</item>
-  	</style>
-  	<style name="listView">
-  		<item name="android:background">#FFFFFF</item>
-  		<item name="android:padding">5sp</item>
-  	</style>
-	<style name="textview_document_position" parent="TextView">
+	
+  	
+  	
+	<style name="textview_document_position" >
 		<item name="android:textSize">10sp</item>
 		<item name="android:textColor">#000000</item>
 		
@@ -154,84 +125,71 @@
 		<item name="android:textColor">#500000</item>
 		<item name="android:background">#FFFFFF</item>
 	</style>
-	<style name="textview_document_authors" parent="TextView">
+	<style name="textview_document_authors" >
 		<item name="android:textStyle">italic</item>
+		<item name="android:textColor">#000000</item>
 	</style>
 		
-	<style name="textview_collection" parent="TextView">
+	<style name="textview_collection" >
 		<item name="android:textSize">13sp</item>
 		<item name="android:textStyle">italic</item>
+		<item name="android:textColor">#000000</item>
 	</style>
-	<style name="textview_document_abstract" parent="TextView">
+	<style name="textview_document_abstract" >
 		<item name="android:padding">10sp</item>
+		<item name="android:textColor">#000000</item>
 	</style>
-	<style name="textview_header"  parent="TextView">
+	<style name="textview_header"  >
 		<item name="android:textSize">13sp</item>
-		<item name="android:textColor">#FFFFFF</item>
-		<item name="android:background">#080808</item>
+		<item name="android:textColor">#500000</item>
+		<item name="android:background">#FFFFFF</item>
 	</style>
 	
-	<style name="textview_subject"  parent="TextView">
+	<style name="textview_subject"  >
 		<item name="android:textSize">10sp</item>
+		<item name="android:textColor">#000000</item>
 		
 	</style>
-	<style name="textview_issue1"  parent="TextView">
+	<style name="textview_issue1"  >
 		<item name="android:textSize">10sp</item>
 		<item name="android:padding">15sp</item>  
 		<item name="android:textColor">#000000</item>	
 		<item name="android:background">#FFFFFF</item>		
 		
 	</style>
-	<style name="textview_issue"  parent="TextView">
+	<style name="textview_issue"  >
 		<item name="android:textSize">20sp</item>
 		<item name="android:padding">15sp</item>  
 		<item name="android:textColor">#000000</item>	
 		<item name="android:background">#FFFFFF</item>		
 		
 	</style>
-	<style name="textview_journal"  parent="TextView">
+	<style name="textview_journal"  >
 	</style>	
-	<style name="document_page" parent="TextView">
+	<style name="document_page" >
 	</style>
-	<!-- style name="MyGridView" parent="android:style/Widget.GridView">
-		<item name="android:numColumns">5</item>
-		<item name="android:gravity">center</item>
-		<item name="android:background">#500000</item>	
-				
-	</style> -->
+	
 	<style name="PaginationView" parent="android:style/Widget.GridView">
 		<item name="android:numColumns">7</item>
 		<item name="android:gravity">center</item>
 		<item name="android:textColor">#500000</item>	
-		<item name="android:background">#FFFFFF</item>		
+		<item name="android:background">#DFDFBF</item>		
 		<item name="android:padding">1sp</item>  			
 	</style>
-	<style name="pagelist" parent="TextView">
+	<style name="pagelist" >
 	<item name="android:padding">1sp</item>  
 		<!-- item name="android:background">#500000</item> -->
-		<item name="android:background">#FFFFFF</item>
+		<item name="android:background">#DFDFBF</item>
+		<item name="android:gravity">center</item>
 	</style>
-	<style name="page" parent="TextView">
+	<style name="page" >
 		<item name="android:textSize">14sp</item>
 		<item name="android:padding">1sp</item>  
-		<!-- item name="android:textStyle">bold</item> -->	
-		<!-- item name="android:textColor">#FFFFFF</item>	
-		<item name="android:background">#500000</item> -->	
 		<item name="android:textColor">#000000</item>	
-		<item name="android:background">#FFFFFF</item>	
-		
+		<item name="android:background">#DFDFBF</item>	
+		<item name="android:gravity">center</item>		
 	</style>
 	
-	<style name="menu_item" >
-		<item name="android:textSize">10sp</item>
-		<item name="android:padding">2sp</item>  
-		<item name="android:textColor">#001100</item>	
-		<item name="android:background">#FFFFFF</item>	
-		
-	</style>
-	<style name="MyListView" parent="@android:style/Widget.ListView">
-		<!-- <item name="android:background">#989898</item>  -->
-		<item name="android:background">#000099</item>
-	</style>
+	
 	
 </resources>

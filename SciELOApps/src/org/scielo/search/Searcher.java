@@ -43,7 +43,7 @@ public class Searcher {
 		return this.URL;
 	}
 	
-	public String getQtdTotal() {
+	protected String getQtdTotal() {
 		return totalQtd;
 	}
 	public String getResultTotal(){

@@ -135,11 +135,8 @@ public class DocumentActivity extends Activity{
         	final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         	emailIntent.setType("text/plain");
         	//emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "roberta.takenaka@scielo.org");
-			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, TextViewTitle.getText());
-			
-			
-			
-			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatText(TextViewTitle.getText()) + formatText(TextViewAbstract.getText()) + formatText(fulltext_url) + formatText(pdf_url) );
+			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "[SciELO] " + TextViewTitle.getText());
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatText("[SciELO]")+  formatText(TextViewTitle.getText() + ". " + TextViewIssue.getText() ) + formatText(fulltext_url) + formatText(pdf_url) + formatText(TextViewAbstract.getText())  );
 			startActivity(Intent.createChooser(emailIntent, "Email:"));
             res = true;
             break;

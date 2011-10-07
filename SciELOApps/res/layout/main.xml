@@ -11,7 +11,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"	  
-	    android:padding="5sp" 
+	    
 	    > 	
 	  	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_width="wrap_content"
@@ -47,14 +47,14 @@
 				    <!--  borda preta -->
 				    <TextView 
 							android:id="@+id/call_search_letter" 
-							android:layout_width="fill_parent" 
+							android:layout_width="wrap_content" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_search_letter" 	
 							style="@style/mainOptionCapital" 
 		  			   />
 		  			   <TextView 
 							android:id="@+id/call_search" 
-							android:layout_width="fill_parent" 
+							android:layout_width="wrap_content" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_search" 	
 							style="@style/mainOption" 
@@ -72,14 +72,14 @@
 				    ><!--  borda preta -->
 				    <TextView 
 							android:id="@+id/call_naveg_letter" 
-							android:layout_width="fill_parent" 
-							android:layout_height="wrap_content"
+							android:layout_width="wrap_content" 
+							android:layout_height="fill_parent"
 							android:text="@string/call_naveg_letter" 	
 							style="@style/mainOptionCapitalOff" 	
 							
 					/><TextView 
 							android:id="@+id/call_naveg" 
-							android:layout_width="fill_parent" 
+							android:layout_width="wrap_content" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_naveg" 	
 							style="@style/mainOptionOff" 	
@@ -89,6 +89,9 @@
 			
 		</LinearLayout>
     </LinearLayout>
+            <TextView 
+					android:background="#8B0000"
+					android:layout_width="fill_parent" android:layout_height="wrap_content"/>
       <TextView 
 				android:id="@+id/home_text" 
 				style="@style/home_text"

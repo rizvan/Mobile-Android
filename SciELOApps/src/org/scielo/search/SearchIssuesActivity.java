@@ -85,8 +85,7 @@ public class SearchIssuesActivity extends SearchActivity {
 		//this.pagePosition = aaPage.getPageSelected();
 		return ((IssuesSearcher) searcher).buildURL(query, "20", this.filter, this.selectedPageIndex, collectionId);
 	}
-	protected void loadAndDisplayResult(String result){
-		
+	protected void loadAndDisplayResult(String result){		
 		displayHeader = ((IssuesSearcher) searcher).getJournal().getTitle() + " " + ((IssuesSearcher) searcher).getJournal().getId();
 		super.loadAndDisplayResult(result);
 		

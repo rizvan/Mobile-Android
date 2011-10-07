@@ -81,4 +81,18 @@ public class Issue {
 		}
 		return r;
 	}
+	public String getIssueLabel2(boolean displayTitle) {
+		// TODO Auto-generated method stub
+		String r = "";
+		if (displayTitle){
+			r = journal.getTitle() + " ";	
+		}
+		r = r + format("", " ", date);
+		r = r + format("v.", " ", volume);
+		r = r + format("n.", " ", number);
+		r = r + format("s.", " ", suppl);
+		
+		
+		return r;
+	}
 }

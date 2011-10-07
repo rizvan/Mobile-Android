@@ -22,6 +22,7 @@ public class TOCSearcher extends Searcher {
 		this.col = col;
     }
 
+	
 	public String getURL(String searchExpression, String itemsPerPage, String filter, int selectedPageIndex, String collectionId) {
 		String u = "";
 		//URLEncoder.encode(queryURL, "UTF-8")

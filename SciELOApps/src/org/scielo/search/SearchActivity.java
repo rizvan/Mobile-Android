@@ -243,7 +243,30 @@ public class SearchActivity extends Activity {
 		if (result.length()>0){
 			loadAndDisplayResult(result);
 		}
-		
+		if (displayHeader==""){
+			if (updateHeader==true){
+				displayHeader = displayTotal;
+			    if (displayQuery.length()>0){
+			    	displayHeader = displayHeader + "/" + displayQuery + SEPARATOR + displayResultTotal;
+				}
+				if (displayFilterName.length()>0) {
+					displayFilterName = displayFilterName + displayResultTotal;
+					displayHeader = displayHeader + displayFilterName ;				
+				}
+				if (displayLetter.length()>0) {
+					displayHeader = displayHeader + displayLetter + displayResultTotal;
+				}
+				
+			} else {
+				updateHeader=true;
+			}
+		} else {
+			
+		}
+		headerTextView = (TextView) findViewById(R.id.TextViewHeader);
+		headerTextView.setText(displayHeader);
+		displayHeader = "";
+		/*
 		if (updateHeader == true){
 			
 			displayHeader = displayTotal;
@@ -260,9 +283,12 @@ public class SearchActivity extends Activity {
 			
 			headerTextView = (TextView) findViewById(R.id.TextViewHeader);
 			headerTextView.setText(displayHeader);
-		} else {
-			updateHeader = true;
-		}
+			displayHeader = "";
+		}  else {
+				updateHeader = true;	
+			
+		}*/
+		
 	}	
 
 	

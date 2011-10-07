@@ -30,4 +30,5 @@
     <string name="call_search">artículos</string>
     <string name="call_naveg_letter">R</string>
     <string name="wellcome">Busque artículos científicos en las colecciones SciELO e navegue por los títulos de revistas e sus números</string>
+    <string name="email_message_title">Este mensaje fue enviado por la aplicación mobile de SciELO</string>
 </resources>
