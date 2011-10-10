@@ -37,17 +37,18 @@ public final class R {
         public static final int ic_menu_save=0x7f020006;
         public static final int ic_menu_search=0x7f020007;
         public static final int ic_menu_send=0x7f020008;
-        public static final int ic_menu_view=0x7f020009;
-        public static final int ic_tab_albums_grey=0x7f02000a;
-        public static final int ic_tab_albums_white=0x7f02000b;
-        public static final int icon=0x7f02000c;
-        public static final int logo=0x7f02000d;
-        public static final int scielo=0x7f02000e;
-        public static final int scielo01=0x7f02000f;
-        public static final int scielo02=0x7f020010;
-        public static final int scielo3=0x7f020011;
-        public static final int scielo4=0x7f020012;
-        public static final int scielo_home=0x7f020013;
+        public static final int ic_menu_share=0x7f020009;
+        public static final int ic_menu_view=0x7f02000a;
+        public static final int ic_tab_albums_grey=0x7f02000b;
+        public static final int ic_tab_albums_white=0x7f02000c;
+        public static final int icon=0x7f02000d;
+        public static final int logo=0x7f02000e;
+        public static final int scielo=0x7f02000f;
+        public static final int scielo01=0x7f020010;
+        public static final int scielo02=0x7f020011;
+        public static final int scielo3=0x7f020012;
+        public static final int scielo4=0x7f020013;
+        public static final int scielo_home=0x7f020014;
     }
     public static final class id {
         public static final int TextViewCollection=0x7f09000a;

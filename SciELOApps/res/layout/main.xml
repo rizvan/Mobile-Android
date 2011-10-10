@@ -29,18 +29,30 @@
 		</LinearLayout>
 	  	
 	  	
-			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			
+    </LinearLayout>
+            <TextView 
+					android:background="#8B0000"
+					android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+      <TextView 
+				android:id="@+id/home_text" 
+				style="@style/home_text"
+				android:padding="20sp"
+				android:text="@string/wellcome" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:orientation="horizontal"			    
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"	
+			    		    
 			     style="@style/mainOptionBox"		
 			     android:id="@+id/mainOptionBox"		
 			    > 	
 				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				    android:layout_width="wrap_content"
+				    android:layout_width="fill_parent"
 				    android:layout_height="fill_parent"
 				    android:orientation="horizontal"	
-				    style="@style/mainOptionBoxBorder"
+				    android:gravity="center"
+				    style="@style/mainOptionBoxBorderOff"
 				    android:id="@+id/mainOptionBoxBorderA"
 				    >
 				    
@@ -50,24 +62,25 @@
 							android:layout_width="wrap_content" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_search_letter" 	
-							style="@style/mainOptionCapital" 
+							style="@style/mainOptionCapitalOff" 
 		  			   />
 		  			   <TextView 
 							android:id="@+id/call_search" 
-							android:layout_width="wrap_content" 
+							android:layout_width="fill_parent" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_search" 	
-							style="@style/mainOption" 
+							style="@style/mainOptionOff" 
 		  			   />
 				</LinearLayout>
 			
 			
 				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				    android:layout_width="wrap_content"
+				    android:layout_width="fill_parent"
 				    android:layout_height="fill_parent"
 				    android:orientation="horizontal"	
 				    style="@style/mainOptionBoxBorderOff"
 				    android:id="@+id/mainOptionBoxBorderJ"
+				    android:gravity="center"
 				    
 				    ><!--  borda preta -->
 				    <TextView 
@@ -79,7 +92,7 @@
 							
 					/><TextView 
 							android:id="@+id/call_naveg" 
-							android:layout_width="wrap_content" 
+							android:layout_width="fill_parent" 
 							android:layout_height="fill_parent"
 							android:text="@string/call_naveg" 	
 							style="@style/mainOptionOff" 	
@@ -88,16 +101,6 @@
 				</LinearLayout>
 			
 		</LinearLayout>
-    </LinearLayout>
-            <TextView 
-					android:background="#8B0000"
-					android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-      <TextView 
-				android:id="@+id/home_text" 
-				style="@style/home_text"
-				android:padding="20sp"
-				android:text="@string/wellcome" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-      
 		
 </LinearLayout>
 

@@ -15,6 +15,8 @@ public class SciELOAppsActivity extends Activity {
     static String totalOfDocuments = "";
     TextView textNav;
     TextView textSearch;
+    TextView textNavL;
+    TextView textSearchL;
     LinearLayout layout;
     public static String currentSearchMainActivity = "";
     
@@ -55,14 +57,16 @@ public class SciELOAppsActivity extends Activity {
 		
 		
 		
-        textNav = (TextView) findViewById(R.id.call_naveg);
+		textNav = (TextView) findViewById(R.id.call_naveg);
     	textSearch = (TextView) findViewById(R.id.call_search);
+    	textNavL = (TextView) findViewById(R.id.call_naveg_letter);
+    	textSearchL = (TextView) findViewById(R.id.call_search_letter);
     	
     	Intent docIntent = new Intent(textSearch.getContext(), SearchDocsActivity.class);		           
         startActivity(docIntent);	
         currentSearchMainActivity = "articles";
 		
-    	textNav.setOnClickListener(new OnClickListener() {
+        textNav.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				currentSearchMainActivity = "journals";
@@ -72,6 +76,23 @@ public class SciELOAppsActivity extends Activity {
 		});
     	
     	textSearch.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				currentSearchMainActivity = "articles";
+				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
+	            startActivity(docIntent);					
+			}
+		});
+    	textNavL.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				currentSearchMainActivity = "journals";
+				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
+	            startActivity(docIntent);
+			}
+		});
+    	
+    	textSearchL.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				currentSearchMainActivity = "articles";

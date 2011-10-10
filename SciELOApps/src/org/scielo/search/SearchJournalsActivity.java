@@ -86,6 +86,7 @@ public class SearchJournalsActivity extends SearchActivity {
 	
 
 	protected String getURL(){
+		updateHeader = true;
 		return ((JournalSearcher) searcher).buildURL(query, "",  this.filter, this.selectedPageIndex);
 	}
 	private void loadClusterCollection(){

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 public class DocumentActivity extends Activity{
 	private TextView TextViewIssue; 
-	private TextView TextViewID;
 	private TextView TextViewTitle; 
 	private TextView TextViewAuthors; 
 	//private TextView TextViewPDF; 
@@ -41,8 +40,8 @@ public class DocumentActivity extends Activity{
 	    ssData = new DocSearcher(this.getResources().getString(R.string.search_feed), clusterCollection , searchResultList, pagesList);
 	    ss = new SearchService();
 		
-	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentPosition);	    
-	    TextViewID = (TextView) findViewById(R.id.TextViewDocumentID);	    
+	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentIssueLabel);	    
+	    //TextViewID = (TextView) findViewById(R.id.TextViewDocumentID);	    
 	    TextViewTitle = (TextView) findViewById(R.id.TextViewDocumentTitle);
 	    TextViewAuthors = (TextView) findViewById(R.id.TextViewDocumentAuthors);
 	    //TextViewPDF = (TextView) findViewById(R.id.TextViewDocumentPDFLink);	
@@ -57,7 +56,7 @@ public class DocumentActivity extends Activity{
 
 			Document doc = searchResultList.get(0);
 			TextViewIssue.setText(doc.getIssueLabel());
-		    TextViewID.setText(doc.getDocumentId());
+		    //TextViewID.setText(doc.getDocumentId());
 		    TextViewTitle.setText(doc.getDocumentTitle());
 		    TextViewAuthors.setText(doc.getDocumentAuthors());
 		    //TextViewPDF.setText(doc.getDocumentPDFLink());
@@ -80,7 +79,7 @@ public class DocumentActivity extends Activity{
 		    TextViewCollection.setText(doc.getCol().getName());
 	    } else {
 		    TextViewIssue.setText(getIntent().getStringExtra("issue"));
-		    TextViewID.setText(getIntent().getStringExtra("id"));
+		    //TextViewID.setText(getIntent().getStringExtra("id"));
 		    TextViewTitle.setText(getIntent().getStringExtra("title"));
 		    TextViewAuthors.setText(getIntent().getStringExtra("authors"));
 		    //TextViewPDF.setText(getIntent().getStringExtra("pdf"));

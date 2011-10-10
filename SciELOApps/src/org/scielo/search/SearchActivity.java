@@ -21,6 +21,9 @@ public class SearchActivity extends Activity {
 	TextView textNav;
 	TextView textSearch;
 	
+	TextView textNavLetter;
+	TextView textSearchLetter;
+	
 	
 	
 	View searchButton;	
@@ -62,7 +65,7 @@ public class SearchActivity extends Activity {
 	protected String SEPARATOR = "";
 	
 	
-	protected boolean updateHeader = false;
+	protected boolean updateHeader = true;
 	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -90,6 +93,8 @@ public class SearchActivity extends Activity {
 	    
 	    textNav = (TextView) findViewById(R.id.call_naveg);
     	textSearch = (TextView) findViewById(R.id.call_search);
+	    textNavLetter = (TextView) findViewById(R.id.call_naveg_letter);
+    	textSearchLetter = (TextView) findViewById(R.id.call_search_letter);
 		
     	
     	
@@ -110,6 +115,25 @@ public class SearchActivity extends Activity {
 	            startActivity(docIntent);					
 			}
 		});
+    	
+    	textNavLetter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {				
+				SciELOAppsActivity.currentSearchMainActivity = "journals";
+				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
+	            startActivity(docIntent);
+			}
+		});
+    	
+    	textSearchLetter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {				
+				SciELOAppsActivity.currentSearchMainActivity = "articles";
+				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
+	            startActivity(docIntent);					
+			}
+		});
+	    
 	    
 	}
 	
@@ -243,29 +267,23 @@ public class SearchActivity extends Activity {
 		if (result.length()>0){
 			loadAndDisplayResult(result);
 		}
-		if (displayHeader==""){
-			if (updateHeader==true){
-				displayHeader = displayTotal;
-			    if (displayQuery.length()>0){
-			    	displayHeader = displayHeader + "/" + displayQuery + SEPARATOR + displayResultTotal;
-				}
-				if (displayFilterName.length()>0) {
-					displayFilterName = displayFilterName + displayResultTotal;
-					displayHeader = displayHeader + displayFilterName ;				
-				}
-				if (displayLetter.length()>0) {
-					displayHeader = displayHeader + displayLetter + displayResultTotal;
-				}
-				
-			} else {
-				updateHeader=true;
+		
+		if (updateHeader==true){
+			displayHeader = displayTotal;
+		    if (displayQuery.length()>0){
+		    	displayHeader = displayHeader + "/" + displayQuery + SEPARATOR + displayResultTotal;
 			}
-		} else {
-			
+			if (displayFilterName.length()>0) {
+				displayFilterName = displayFilterName + displayResultTotal;
+				displayHeader = displayHeader + displayFilterName ;				
+			}
+			if (displayLetter.length()>0) {
+				displayHeader = displayHeader + displayLetter + displayResultTotal;
+			}			
 		}
 		headerTextView = (TextView) findViewById(R.id.TextViewHeader);
 		headerTextView.setText(displayHeader);
-		displayHeader = "";
+		//displayHeader = "";
 		/*
 		if (updateHeader == true){
 			

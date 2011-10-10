@@ -18,10 +18,15 @@ public class ArticleURL {
 		
 		url = returnURL(this.generic_PDF_URL, doc);
 		if (urlTester.check(url)){
-			//url = url.replace("REPLACE_PDF_URL", url);
-			doc.setPdf_url(url);
-			url = returnURL(this.generic_pdf_and_log_url, doc);
-		} 
+			if (this.generic_pdf_and_log_url != this.generic_PDF_URL){
+				
+				//url = url.replace("REPLACE_PDF_URL", url);
+				doc.setPdf_url(url);
+				url = returnURL(this.generic_pdf_and_log_url, doc);
+			}
+		}  else {
+			url = "";
+		}
 		return url;
 	}
 	public String returnFullTextURL(Document doc){		

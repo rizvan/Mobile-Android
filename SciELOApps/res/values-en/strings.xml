@@ -22,11 +22,11 @@
     <string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
     <string name="menuItemRefineBySubjectEngineering">Engineering</string>
     <string name="menuItemRefineByInitial">Refine by initials</string>
-    <string name="menuItemSendEmail">Send e-mail</string>
-    <string name="menuItemSaveResult">Save</string>
+    <string name="menuItemSendEmail">share</string>
+    <string name="menuItemSaveResult">save</string>
     <string name="menuItemSaveBookmark">Bookmark</string>
-    <string name="menuItemDownloadPDF">Download PDF</string>
-    <string name="menuItemFulltext">Full text</string>
+    <string name="menuItemDownloadPDF">download PDF</string>
+    <string name="menuItemFulltext">full text</string>
     <string name="text_sendTo">e-mail</string>
     <string name="button_send">send</string>
     <string name="search_label">search</string>

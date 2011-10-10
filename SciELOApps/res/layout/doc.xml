@@ -20,31 +20,24 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 >
 
 	<TextView 
-		android:id="@+id/TextViewDocumentPosition" 
-		android:layout_width="fill_parent" 		
-		android:layout_height="wrap_content" 
-		style="@style/textview_document_position"
-		/>	
-	
-	<TextView 
 		android:id="@+id/TextViewDocumentCollection" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_collection"
+		style="@style/doc_tv_collection"
 		/>	
-	
+		
 	<TextView 
-		android:id="@+id/TextViewDocumentID" 
+		android:id="@+id/TextViewDocumentIssueLabel" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_position"
+		style="@style/doc_tv_issue_label"
 		/>	
-	
+		
 	<TextView 
 		android:id="@+id/TextViewDocumentTitle" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_highlight"		
+		style="@style/doc_tv_document_title"		
 		/>
 	
 	
@@ -52,21 +45,21 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/TextViewDocumentAuthors" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_authors"
+		style="@style/doc_tv_document_authors"
 		/>
 	
 	<TextView 
 		android:id="@+id/TextViewDocumentAbstract" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_abstract"
+		style="@style/doc_tv_document_abstract"
 		/>
 	
 	<!-- TextView 
 		android:id="@+id/TextViewDocumentPDFLink" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
-		style="@style/textview_document_pdf" 
+		style="@style/doc_tv_document_pdf" 
 		
 		/>	 -->
 

@@ -2,7 +2,7 @@
 	<item 
 		android:id="@+id/menuItemSendEmail" 
 		android:title="@string/menuItemSendEmail"
-		android:icon="@drawable/ic_menu_send"
+		android:icon="@drawable/ic_menu_share"
 		
 		>
 		

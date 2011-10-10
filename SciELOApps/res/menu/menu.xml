@@ -5,28 +5,29 @@
           android:icon="@drawable/ic_menu_search" 
           />
 
-	<item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"  >
+	<item android:id="@+id/menuItemRefineByLanguage" android:title="@string/menuItemRefineByLanguage"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByLanguage" >
+			
+		</menu>
+	</item><item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"  >
 		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByJournal" android:title="@string/menuItemRefineByJournal"  >
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByJournal" >
-			
-		</menu>
-	</item>
+	
 	<item android:id="@+id/menuItemRefineByYear" android:title="@string/menuItemRefineByYear"  >
 		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByYear" >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByLanguage" android:title="@string/menuItemRefineByLanguage"  >
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByLanguage" >
+	
+	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection" >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection" >
 			
 		</menu>
 	</item>
-	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection" >
-		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection" >
+	<item android:id="@+id/menuItemRefineByJournal" android:title="@string/menuItemRefineByJournal"  >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByJournal" >
 			
 		</menu>
 	</item>

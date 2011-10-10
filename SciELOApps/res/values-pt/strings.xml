@@ -14,7 +14,7 @@
     <string name="menuItemRefineByCollection">Refinar por coleção</string>
     <string name="menuItemRefineByLanguage">Refinar por idioma</string>
     <string name="menuItemRefineByInitial">Refinar por inicial</string>
-    <string name="menuItemSendEmail">e-mail</string>
+    <string name="menuItemSendEmail">compartilhar</string>
     <string name="menuItemSaveResult">guardar</string>
     <string name="menuItemSaveBookmark">bookmark</string>
     <string name="text_sendTo">e-mail</string>
@@ -23,7 +23,7 @@
     <string name="search_hint">pesquisa</string>
     <string name="search_expression_hint">pesquisa</string>
     <string name="search_button">pesquisar</string>
-    <string name="menuItemDownloadPDF">Baixar PDF</string>
+    <string name="menuItemDownloadPDF">baixar PDF</string>
     <string name="menuItemFulltext">texto completo</string>
     <string name="reset_label">reiniciar</string>
     <string name="call_naveg">periódicos</string>
