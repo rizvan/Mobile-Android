@@ -10,34 +10,34 @@
 		android:id="@+id/TextViewPosition" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_document_position"
+		style="@style/j_lv_tv_document_position"
 		
 		/>
 	<TextView 
 		android:id="@+id/TextViewTitle" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_highlight"
+		style="@style/j_lv_tv_highlight"
 		
 		/>
 	<!-- TextView 
 		android:id="@+id/TextViewISSN" 
 		android:layout_width="fill_parent" 		
 		android:layout_height="wrap_content" 
-		style="@style/textview_collection"
+		style="@style/j_lv_tv_collection"
 		
 		/> -->
 	<TextView 
 		android:id="@+id/TextViewCollection" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		style="@style/textview_collection"
+		style="@style/j_lv_tv_collection"
 		/>
 	<TextView 
 		android:id="@+id/TextViewSubjects" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		style="@style/textview_subject"
+		style="@style/j_lv_tv_subject"
 		/>
 	
 </LinearLayout>

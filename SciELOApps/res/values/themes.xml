@@ -17,10 +17,10 @@
 
 <resources>
 	<style name="Theme.SciELOApps" parent="android:Theme.NoTitleBar">
-        <item name="android:background">#FFFFFF</item>
-        <item name="android:textSize">15sp</item>
-        
-    </style>
+        <item name="android:textSize">20sp</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:panelFullBackground">@color/menu_selector</item>
+   </style>
     
 	
 </resources>

@@ -14,8 +14,8 @@ public class NumericPagination {
 	
 	private ArrayList<Page> pagesList;
 	protected static final String TAG = "Pagination";
-	static final int MAX_CELLS = 7;
-	static final int MAX = 5;
+	static final int MAX_CELLS = 6;
+	static final int MAX = 4;
 	int q = 0;
 	
 	NumericPagination(){

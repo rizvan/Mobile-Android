@@ -90,7 +90,7 @@
     </LinearLayout>
             <TextView 
 					android:background="#8B0000"
-					android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+					android:layout_width="fill_parent" android:layout_height="2sp"/>
     
     	<TextView 
 	    android:id="@+id/TextViewHeader"

@@ -13,4 +13,7 @@
     <string name="call_search">artigos</string>
     <string name="call_naveg_letter">P</string>
     <string name="call_search_letter">A</string>
+    <string name="address">www.scielo.org</string>
+    <string name="email">scielo@scielo.org</string>
+    
 </resources>
