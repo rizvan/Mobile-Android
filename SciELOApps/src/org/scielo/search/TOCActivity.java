@@ -35,8 +35,8 @@ public class TOCActivity extends SearchActivity {
 	    issue.setId(getIntent().getStringExtra("id"));
 	    issue.setJournal(j);
 	    issue.setNumber(getIntent().getStringExtra("n"));
-	    issue.setSuppl(getIntent().getStringExtra("v"));
-	    issue.setVolume(getIntent().getStringExtra("s"));
+	    issue.setSuppl(getIntent().getStringExtra("s"));
+	    issue.setVolume(getIntent().getStringExtra("v"));
 	    /*
 	     * docIntent.putExtra("id", document.getId());
 		           docIntent.putExtra("date", document.getDate());
