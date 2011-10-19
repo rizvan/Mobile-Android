@@ -26,9 +26,13 @@
     <string name="menuItemDownloadPDF">bajar PDF</string>
     <string name="menuItemFulltext">texto completo</string>
     <string name="reset_label">reiniciar</string>
-    <string name="call_naveg">revistas</string>
-    <string name="call_search">artículos</string>
+    <string name="call_naveg">evistas</string>
+    <string name="call_search">rtículos</string>
     <string name="call_naveg_letter">R</string>
-    <string name="wellcome">Busque artículos científicos en las colecciones SciELO e navegue por los títulos de revistas e sus números</string>
+    <string name="wellcome_articles">Busque por artículos científicos, compártalos, visítalos en el sitio web y descargue los PDF</string>
+    <string name="wellcome_journals">Navegue por las revistas y números</string>
     <string name="email_message_title">Este mensaje fue enviado por la aplicación mobile de SciELO</string>
+    <string name="version">versión 1.0</string>
+    <string name="wellcome_articles_instr">Haga un clic en Artículos</string>
+    <string name="wellcome_journals_instr">Haga un clic en Revistas</string>
 </resources>

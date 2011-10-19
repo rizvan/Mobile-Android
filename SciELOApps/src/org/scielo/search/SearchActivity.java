@@ -24,7 +24,7 @@ public class SearchActivity extends Activity {
 	TextView textNavLetter;
 	TextView textSearchLetter;
 	
-	
+	TextView banner;
 	
 	View searchButton;	
 	TextView headerTextView;
@@ -96,6 +96,16 @@ public class SearchActivity extends Activity {
 	    textNavLetter = (TextView) findViewById(R.id.call_naveg_letter);
     	textSearchLetter = (TextView) findViewById(R.id.call_search_letter);
 		
+    	banner = (TextView) findViewById(R.id.banner);
+    	
+    	    	
+    	banner.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent docIntent = new Intent(v.getContext(), HomeActivity.class);		           
+		        startActivity(docIntent);
+			}
+		});
     	
     	
     	textNav.setOnClickListener(new OnClickListener() {

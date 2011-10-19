@@ -26,10 +26,14 @@
     <string name="menuItemDownloadPDF">baixar PDF</string>
     <string name="menuItemFulltext">texto completo</string>
     <string name="reset_label">reiniciar</string>
-    <string name="call_naveg">periódicos</string>
-    <string name="call_search">artigos</string>
+    <string name="call_naveg">eriódicos</string>
+    <string name="call_search">rtigos</string>
     <string name="call_naveg_letter">P</string>
     <string name="call_search_letter">A</string>
-    <string name="wellcome">Encontre artigos científicos nas coleções SciELO e navegue pelos periódicos e seus números</string>
+    <string name="wellcome_articles">Pesquise artigos científicos, compartilhe-os, visite-os no web site e baixe os PDF</string>
+    <string name="wellcome_journals">Navegue pelos periódicos</string>
     <string name="email_message_title">Esta mensagem foi enviada pela aplicação móvel de SciELO</string>
+    <string name="version">versão 1.0</string>
+    <string name="wellcome_articles_instr">Faça um clique em Artigos</string>
+    <string name="wellcome_journals_instr">Faça um clique em Periódicos</string>
 </resources>

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" 
+	android:orientation="vertical"
+	style="@style/MyTabView"
+>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" 
+	android:orientation="vertical"
+	>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -89,27 +100,46 @@
 	  	
 			
     </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"	
+			    android:paddingBottom="50sp"
+			    > 	
             <TextView 
 					android:background="#8B0000"
 					android:layout_width="fill_parent" android:layout_height="2sp"/>
       <TextView 
 				android:id="@+id/home_text" 
-				style="@style/home_text"
-				android:padding="20sp"
+				style="@style/home_text"				
 				android:text="@string/wellcome" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
       <TextView 
-				android:id="@+id/home_text" 
-				style="@style/home_text"
-				android:padding="20sp"
-				android:gravity="center"
-				android:text="@string/address" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+				android:id="@+id/articles" 
+				style="@style/home_text2"
+				
+				android:text="@string/wellcome_articles" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
       <TextView 
-				android:id="@+id/home_text" 
-				style="@style/home_text"
-				android:padding="20sp"
-				android:gravity="center"
-				android:text="@string/email" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-      
-		
+				android:id="@+id/articles_instr" 
+				style="@style/home_text3"				
+				android:text="@string/wellcome_articles_instr" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+      <TextView 
+				android:id="@+id/journals" 
+				style="@style/home_text2"
+				
+				android:text="@string/wellcome_journals" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+      <TextView 
+				android:id="@+id/journals_instr" 
+				style="@style/home_text3"				
+				android:text="@string/wellcome_journals_instr" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+	</LinearLayout>
+    	<TextView android:layout_width="fill_parent" android:background="#8B0000" android:layout_height="2sp"></TextView>
+	    
+    <LinearLayout android:layout_width="fill_parent" android:orientation="horizontal" android:layout_height="wrap_content" android:gravity="center" >
+        <TextView android:id="@+id/address_text" style="@style/foot_text" android:layout_width="wrap_content" android:text="@string/address" android:layout_height="wrap_content"></TextView>
+        <TextView android:id="@+id/email_text" style="@style/foot_text" android:layout_width="wrap_content" android:text="@string/email" android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
+    
+        <TextView android:layout_width="fill_parent" android:background="#8B0000" android:layout_height="2sp"></TextView>
+<TextView android:id="@+id/version" style="@style/foot_text" android:layout_width="fill_parent" android:text="@string/version" android:layout_height="wrap_content"></TextView>
 </LinearLayout>
-
+</ScrollView></LinearLayout>

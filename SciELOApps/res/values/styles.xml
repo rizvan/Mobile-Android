@@ -20,9 +20,33 @@
   	</style>
   	
   	<style name="home_text">
-  		<item name="android:padding">10sp</item>
-		<item name="android:textSize">15sp</item>
+  		<item name="android:padding">30sp</item>
+  		<item name="android:gravity">center</item>
+		<item name="android:textSize">25sp</item>
+		<item name="android:textColor">#500000</item>
+  		
+  	</style>
+  	<style name="home_text2">
+  		<item name="android:paddingLeft">15sp</item>
+  		<item name="android:paddingBottom">15sp</item>
+  		<item name="android:textSize">20sp</item>
 		<item name="android:textColor">#000000</item>
+		
+  	</style>
+  	<style name="home_text3">
+  		<item name="android:paddingLeft">50sp</item>
+  		<item name="android:paddingBottom">30sp</item>  		
+  		<item name="android:textStyle">italic</item>
+  		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">#000000</item>
+		<item name="android:gravity">center</item>
+  		
+  	</style>
+  	<style name="foot_text">
+  		<item name="android:textSize">15sp</item>
+		<item name="android:textColor">#000000</item>
+		<item name="android:gravity">center</item>
+		<item name="android:padding">10sp</item>
   		
   	</style>
   	<!-- 
@@ -68,7 +92,7 @@
   		<item name="android:paddingRight">8sp</item>
 		<item name="android:paddingBottom">12sp</item>
 		<item name="android:paddingTop">8sp</item>
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:typeface">serif</item>
 		<item name="android:gravity">bottom</item>
 	</style>
@@ -78,7 +102,7 @@
   		<item name="android:paddingRight">8sp</item>
 		<item name="android:paddingBottom">12sp</item>
 		<item name="android:paddingTop">8sp</item>
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:typeface">serif</item>
 		<item name="android:gravity">bottom</item>
 	</style>
@@ -113,12 +137,12 @@
   	
   	<!--  LV -->
   	<style name="lv_textview_document_position" >
-		<item name="android:textSize">12sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 	<style name="lv_textview_document_title">		
-		<item name="android:textSize">18sp</item>
+		<item name="android:textSize">20sp</item>
 		<item name="android:textColor">#8B0000</item>
 				
 	</style>
@@ -128,44 +152,44 @@
 		<item name="android:background">#FFFFFF</item>
 	</style> -->
 	<style name="lv_textview_document_authors" >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 		
 	<style name="lv_textview_issue1"  >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">#000000</item>	
 		<item name="android:gravity">left</item>			
 	</style>
 		
 	<style name="lv_textview_collection" >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">#000000</item>
 		<item name="android:gravity">right</item>
 	</style>
 	
 	<style name="lv_textview_document_abstract" >
 		<item name="android:textColor">#000000</item>
-		<item name="android:textSize">17sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:padding">10sp</item>		
 	</style>
 	
 	
   	<!-- doc -->
   	<style name="doc_tv_document_position" >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 <style name="doc_tv_issue_label" >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 	<style name="doc_tv_collection" >
-		<item name="android:textSize">15sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 	</style>
@@ -173,13 +197,13 @@
 
 	<style name="doc_tv_document_title">	
 		<item name="android:padding">10sp</item>	
-		<item name="android:textSize">20sp</item>
+		<item name="android:textSize">25sp</item>
 		<item name="android:textColor">#8B0000</item>
 		<item name="android:background">#FFFFFF</item>		
 	</style>
 	
 	<style name="doc_tv_document_authors" >
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">20sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 		<item name="android:padding">10sp</item>
@@ -188,71 +212,72 @@
 	<style name="doc_tv_document_abstract" >
 		<item name="android:padding">5sp</item>
 		<item name="android:textColor">#000000</item>
-		<item name="android:textSize">18sp</item>
+		<item name="android:textSize">20sp</item>
 	</style>
 	<!-- journal list -->
 	<style name="j_lv_tv_document_position" >
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>	
 	<style name="j_lv_tv_highlight" >		
-		<item name="android:textSize">17sp</item>
+		<item name="android:textSize">18sp</item>
 		<item name="android:textColor">#8B0000</item>
 	</style>
 	<style name="j_lv_tv_collection" >
-		<item name="android:textSize">13sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 	</style>
 	<style name="j_lv_tv_subject"  >
-		<item name="android:textSize">13sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textColor">#000000</item>		
 	</style>
 	
 	<!--  -->
 	<style name="textview_document_position" >
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 	<style name="textview_document_title">		
-		<item name="android:textSize">17sp</item>
+		<item name="android:textSize">20sp</item>
 		<item name="android:textColor">#8B0000</item>
 		<item name="android:background">#FFFFFF</item>		
 	</style>
 	<style name="textview_highlight" >		
-		<item name="android:textSize">17sp</item>
+		<item name="android:textSize">20sp</item>
 		<item name="android:textColor">#8B0000</item>
 		<item name="android:background">#FFFFFF</item>
 	</style>
 	<style name="textview_document_authors" >
+	<item name="android:textSize">20sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 	</style>
 		
 	<style name="textview_collection" >
-		<item name="android:textSize">13sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textStyle">italic</item>
 		<item name="android:textColor">#000000</item>
 	</style>
 	<style name="textview_document_abstract" >
-		<item name="android:padding">10sp</item>
+		<item name="android:padding">15sp</item>
 		<item name="android:textColor">#000000</item>
 	</style>
 	<style name="textview_header"  >
-		<item name="android:textSize">13sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:textColor">#8B0000</item>
 		<item name="android:background">#FFFFFF</item>
 	</style>
 	
 	<style name="textview_subject"  >
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">13sp</item>
 		<item name="android:textColor">#000000</item>
 		
 	</style>
 	<style name="textview_issue1"  >
-		<item name="android:textSize">10sp</item>
+		<item name="android:textSize">13sp</item>
 		<item name="android:padding">15sp</item>  
 		<item name="android:textColor">#000000</item>	
 		<item name="android:background">#FFFFFF</item>		
