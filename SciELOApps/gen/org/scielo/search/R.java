@@ -46,28 +46,13 @@ public final class R {
         public static final int white=0x7f060003;
     }
     public static final class drawable {
-        public static final int acroread=0x7f020000;
-        public static final int background_piece=0x7f020001;
-        public static final int banner=0x7f020002;
-        public static final int browse=0x7f020003;
-        public static final int div=0x7f020004;
-        public static final int document_preview=0x7f020005;
-        public static final int document_preview_deactivated=0x7f020006;
-        public static final int ic_menu_filter=0x7f020007;
-        public static final int ic_menu_save=0x7f020008;
-        public static final int ic_menu_search=0x7f020009;
-        public static final int ic_menu_send=0x7f02000a;
-        public static final int ic_menu_share=0x7f02000b;
-        public static final int ic_menu_view=0x7f02000c;
-        public static final int ic_tab_albums_grey=0x7f02000d;
-        public static final int ic_tab_albums_white=0x7f02000e;
-        public static final int icon=0x7f02000f;
-        public static final int logo=0x7f020010;
-        public static final int scielo=0x7f020011;
-        public static final int scielo01=0x7f020012;
-        public static final int scielo02=0x7f020013;
-        public static final int scielo3=0x7f020014;
-        public static final int scielo_home=0x7f020015;
+        public static final int banner=0x7f020000;
+        public static final int ic_menu_filter=0x7f020001;
+        public static final int ic_menu_save=0x7f020002;
+        public static final int ic_menu_search=0x7f020003;
+        public static final int ic_menu_share=0x7f020004;
+        public static final int ic_menu_view=0x7f020005;
+        public static final int scielo=0x7f020006;
     }
     public static final class id {
         public static final int TextViewCollection=0x7f0a0009;
@@ -77,7 +62,7 @@ public final class R {
         public static final int TextViewDocumentIssueLabel=0x7f0a0001;
         public static final int TextViewDocumentPosition=0x7f0a0005;
         public static final int TextViewDocumentTitle=0x7f0a0002;
-        public static final int TextViewHeader=0x7f0a001c;
+        public static final int TextViewHeader=0x7f0a001f;
         public static final int TextViewIssue=0x7f0a0006;
         public static final int TextViewPosition=0x7f0a0007;
         public static final int TextViewSubjects=0x7f0a000a;
@@ -92,25 +77,28 @@ public final class R {
         public static final int call_search_letter=0x7f0a000e;
         public static final int email_text=0x7f0a0019;
         public static final int home_text=0x7f0a0013;
+        public static final int image=0x7f0a001c;
         public static final int journals=0x7f0a0016;
         public static final int journals_instr=0x7f0a0017;
-        public static final int list=0x7f0a001e;
+        public static final int layout_root=0x7f0a001b;
+        public static final int list=0x7f0a0021;
         public static final int mainOptionBox=0x7f0a000c;
         public static final int mainOptionBoxBorderA=0x7f0a000d;
         public static final int mainOptionBoxBorderJ=0x7f0a0010;
-        public static final int menuItemDownloadPDF=0x7f0a0027;
-        public static final int menuItemFulltext=0x7f0a0026;
-        public static final int menuItemRefineByCollection=0x7f0a0023;
-        public static final int menuItemRefineByInitial=0x7f0a0029;
-        public static final int menuItemRefineByJournal=0x7f0a0024;
-        public static final int menuItemRefineByLanguage=0x7f0a0020;
-        public static final int menuItemRefineBySubject=0x7f0a0021;
-        public static final int menuItemRefineByYear=0x7f0a0022;
-        public static final int menuItemSendEmail=0x7f0a0025;
-        public static final int page=0x7f0a001b;
-        public static final int paginationListView=0x7f0a001d;
-        public static final int reset=0x7f0a0028;
-        public static final int search=0x7f0a001f;
+        public static final int menuItemDownloadPDF=0x7f0a002a;
+        public static final int menuItemFulltext=0x7f0a0029;
+        public static final int menuItemRefineByCollection=0x7f0a0026;
+        public static final int menuItemRefineByInitial=0x7f0a002c;
+        public static final int menuItemRefineByJournal=0x7f0a0027;
+        public static final int menuItemRefineByLanguage=0x7f0a0023;
+        public static final int menuItemRefineBySubject=0x7f0a0024;
+        public static final int menuItemRefineByYear=0x7f0a0025;
+        public static final int menuItemSendEmail=0x7f0a0028;
+        public static final int page=0x7f0a001e;
+        public static final int paginationListView=0x7f0a0020;
+        public static final int reset=0x7f0a002b;
+        public static final int search=0x7f0a0022;
+        public static final int text=0x7f0a001d;
         public static final int version=0x7f0a001a;
     }
     public static final class layout {
@@ -119,9 +107,10 @@ public final class R {
         public static final int list_item_issue=0x7f030002;
         public static final int list_item_journal=0x7f030003;
         public static final int main=0x7f030004;
-        public static final int pagination=0x7f030005;
-        public static final int search_articles=0x7f030006;
-        public static final int search_journals=0x7f030007;
+        public static final int no_result_dialog=0x7f030005;
+        public static final int pagination=0x7f030006;
+        public static final int search_articles=0x7f030007;
+        public static final int search_journals=0x7f030008;
     }
     public static final class menu {
         public static final int menu=0x7f090000;
@@ -132,6 +121,7 @@ public final class R {
     public static final class string {
         public static final int Old_pdf_and_log_url=0x7f070006;
         public static final int address=0x7f07000e;
+        public static final int alert=0x7f07003a;
         public static final int app_name=0x7f070000;
         public static final int article_url=0x7f070008;
         public static final int button_send=0x7f07002d;
@@ -159,6 +149,8 @@ public final class R {
         public static final int menuItemSaveResult=0x7f070028;
         public static final int menuItemSendEmail=0x7f070027;
         public static final int menu_update=0x7f070015;
+        public static final int message_no_internet=0x7f070039;
+        public static final int no_results_found=0x7f070038;
         public static final int pdf_and_log_url=0x7f070007;
         public static final int pdf_url=0x7f070005;
         public static final int reset_label=0x7f070031;

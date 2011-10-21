@@ -90,10 +90,12 @@ public class DocSearcher extends Searcher{
 			String from = responseParameters.get("start").toString();
 			int itemsPerPage = Integer.parseInt(responseParameters.get("rows").toString());
 			
+			iTotalResults = Integer.parseInt(totalResults);
 			
-			
-			pagination.setData(from, totalResults, itemsPerPage);
-			pagination.generatePages(pagesList);
+			if (iTotalResults>0){
+				pagination.setData(from, totalResults, itemsPerPage);
+				pagination.generatePages(pagesList);
+			}
 			this.documentRoot = response.getJSONArray("docs");
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				

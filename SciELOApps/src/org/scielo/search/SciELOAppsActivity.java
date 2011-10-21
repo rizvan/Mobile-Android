@@ -44,7 +44,7 @@ public class SciELOAppsActivity extends Activity {
 		myConfig.setLetters(letters);
 
 		banner = (TextView) findViewById(R.id.banner);
-		Intent docIntent = new Intent(banner.getContext(), HomeActivity.class);		           
+		Intent docIntent = new Intent(banner.getContext(), SearchDocsActivity.class);		           
         startActivity(docIntent);	
 
     }

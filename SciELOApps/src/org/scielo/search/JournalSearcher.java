@@ -110,7 +110,7 @@ public class JournalSearcher extends Searcher {
 		try {
 			
 			documentRoot = rawResult.getJSONArray("rows");
-			
+			iTotalResults = documentRoot.length();
 			if (isInit){
 				totalQtd = rawResult.getString("total_rows") ;
 			} 			

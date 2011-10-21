@@ -107,19 +107,4 @@ public class SearchDocsActivity extends SearchActivity {
 		updateHeader =  (this.selectedPageIndex < 0);
 		return ((DocSearcher) searcher).getURL(query, this.getResources().getString(R.string.search_doc_count), this.filter, this.selectedPageIndex);
 	}
-	/*
-	protected void loadAndDisplayResult(String result){
-		
-		searcher.genLoadData(result);
-		//pagesList = searcher.getPageList();
-		clusterCollection = searcher.getSearchClusterCollection();
-		
-		displayResultTotal = searcher.getResultTotal();
-		
-		arrayAdapter.notifyDataSetChanged();		
-		aaPage.notifyDataSetChanged();
-	}*/
-	
-	
-
 }

@@ -43,14 +43,7 @@ public class IssuesSearcher extends Searcher {
 		
 		return u ;						
 	}
-	public void readRawResult(JSONObject rawResult){		
-		try {
-			documentRoot = rawResult.getJSONArray("rows");
-			//pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
-		} catch(JSONException e){
-			Log.d(TAG, "JSONException", e);				
-		}
-	}
+	
 	
 	public void loadResultList(){
 		JSONObject resultItem ;

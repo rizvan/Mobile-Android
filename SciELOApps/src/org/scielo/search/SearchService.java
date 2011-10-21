@@ -18,12 +18,8 @@ public class SearchService {
 		
 	}
 	
-	private int getMilliseconds(int min){
-		int sec;
-		int millisec;
-		sec = min * 60;
-		millisec = sec * 1000;
-		return millisec;
+	private int getMilliseconds(int sec){
+		return sec * 60 * 1000;	
 	}
 	public String call(String queryURL) {
 		HttpURLConnection con = null;
@@ -64,20 +60,18 @@ public class SearchService {
 				payload += line;
 			}
 			reader.close();
-		} catch  (java.net.MalformedURLException e){  
-			  
+		} catch  (java.net.MalformedURLException e){  			  
 			Log.e(TAG, "MalformedURLException", e);
 		} catch (IOException e) {
 			Log.e(TAG, "IOException", e);
 		} catch (InterruptedException e) {
-			Log.d(TAG, "InterruptedException", e);
-			
+			Log.d(TAG, "InterruptedException", e);			
 		} finally {
 			if (con != null) {
 				con.disconnect();
 			}	
 		}	
-		
+
 		return payload;
 	}
 }

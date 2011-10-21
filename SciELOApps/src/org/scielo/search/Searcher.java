@@ -26,8 +26,8 @@ public class Searcher {
 	
 	protected String totalResults="";
 	protected String totalQtd = "";
-	
-	
+	protected int iTotalResults = 0;
+	protected boolean connProblem=false;
 		
 	Searcher(ArrayList<Page> pagesList, IdAndValueObjects urls){
 		this.URL_list = urls;
@@ -38,6 +38,13 @@ public class Searcher {
 		this.URL = url;
 		this.pagesList = pagesList;
     }
+	
+	protected int getIntTotalResults(){
+		return iTotalResults;
+	}
+	protected boolean hasConnectionProblem(){	
+		return connProblem;
+	}
 	
 	protected String getURL(){
 		return this.URL;
@@ -69,6 +76,7 @@ public class Searcher {
 	protected void readRawResult(JSONObject rawResult){		
 		try {
 			documentRoot = rawResult.getJSONArray("rows");
+			iTotalResults = documentRoot.length();
 			//pagination.loadData("1", new Integer(docs.length()).toString(), 3000, 0);			
 		} catch(JSONException e){
 			Log.d(TAG, "JSONException", e);				

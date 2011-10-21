@@ -3,14 +3,20 @@ package org.scielo.search;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.View.OnClickListener;
+
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Gallery;
@@ -67,6 +73,10 @@ public class SearchActivity extends Activity {
 	
 	protected boolean updateHeader = true;
 	
+	private static final int DIALOG_NO_RESULT = 0;
+	private static final int DIALOG_RESULT = 1;
+	private static final int DIALOG_NO_INTERNET = 2;
+	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
@@ -111,36 +121,53 @@ public class SearchActivity extends Activity {
     	textNav.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				SciELOAppsActivity.currentSearchMainActivity = "journals";
-				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
-	            startActivity(docIntent);
+				if (SciELOAppsActivity.currentSearchMainActivity == "journals"){
+					searchAndDisplay();
+				} else {
+					SciELOAppsActivity.currentSearchMainActivity = "journals";
+					Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
+		            startActivity(docIntent);					
+				}
 			}
 		});
     	
     	textSearch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				SciELOAppsActivity.currentSearchMainActivity = "articles";
-				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
-	            startActivity(docIntent);					
+				if (SciELOAppsActivity.currentSearchMainActivity == "articles"){
+					searchAndDisplay();
+				} else {
+					SciELOAppsActivity.currentSearchMainActivity = "articles";
+					Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
+		            startActivity(docIntent);
+				}
+									
 			}
 		});
     	
     	textNavLetter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				SciELOAppsActivity.currentSearchMainActivity = "journals";
-				Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
-	            startActivity(docIntent);
+				if (SciELOAppsActivity.currentSearchMainActivity == "journals"){
+					searchAndDisplay();
+				} else {
+					SciELOAppsActivity.currentSearchMainActivity = "journals";
+					Intent docIntent = new Intent(v.getContext(), SearchJournalsActivity.class);
+		            startActivity(docIntent);					
+				}
 			}
 		});
     	
     	textSearchLetter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				SciELOAppsActivity.currentSearchMainActivity = "articles";
-				Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
-	            startActivity(docIntent);					
+				if (SciELOAppsActivity.currentSearchMainActivity == "articles"){
+					searchAndDisplay();
+				} else {
+					SciELOAppsActivity.currentSearchMainActivity = "articles";
+					Intent docIntent = new Intent(v.getContext(), SearchDocsActivity.class);		           
+		            startActivity(docIntent);
+				}				
 			}
 		});
 	    
@@ -276,6 +303,8 @@ public class SearchActivity extends Activity {
 		
 		if (result.length()>0){
 			loadAndDisplayResult(result);
+		} else {			
+			showDialog(DIALOG_NO_INTERNET);						
 		}
 		
 		if (updateHeader==true){
@@ -321,17 +350,60 @@ public class SearchActivity extends Activity {
 
 	
 	protected void loadAndDisplayResult(String result){
-		searcher.genLoadData(result);
-		ClusterCollection cCollection = searcher.getSearchClusterCollection();		
 		
-		if (cCollection!=null){
-			clusterCollection = cCollection;
-		}
+			searcher.genLoadData(result);
+			ClusterCollection cCollection = searcher.getSearchClusterCollection();		
+			
+			if (cCollection!=null){
+				clusterCollection = cCollection;
+			}
+			
+			displayResultTotal = searcher.getResultTotal();
+			displayTotal = searcher.getQtdTotal();
+			arrayAdapter.notifyDataSetChanged();		
+			aaPage.notifyDataSetChanged();
+			
 		
-		displayResultTotal = searcher.getResultTotal();
-		displayTotal = searcher.getQtdTotal();
-		arrayAdapter.notifyDataSetChanged();		
-		aaPage.notifyDataSetChanged();
 	}
+	@Override
+    public Dialog onCreateDialog(int id) {
+		LayoutInflater li = LayoutInflater.from(this);
+        View resView = li.inflate(R.layout.no_result_dialog, null);
+
+        AlertDialog.Builder resDialog = new AlertDialog.Builder(this);
+        
+        switch(id) {
+        	case (DIALOG_NO_INTERNET) :
+        		resDialog.setTitle(this.getString(R.string.alert));
+        		
+        	break;
+        	case (DIALOG_NO_RESULT) :
+        		resDialog.setTitle("zero");
+        	break;
+        	case (DIALOG_RESULT) :
+        		resDialog.setTitle("positivo");
+        	break;
+        }
+        resDialog.setView(resView);      
+      
+        return resDialog.create();
+    }
+	@Override
+    public void onPrepareDialog(int id, Dialog dialog) {
+        AlertDialog resDialog = (AlertDialog) dialog;
+        
+        switch(id) {
+        	case (DIALOG_NO_RESULT) :
+        		resDialog.setTitle("zero");
+        	break;
+        	case (DIALOG_RESULT) :
+        		resDialog.setTitle("positivo");
+        	break;
+        }
+        
+        
+    }
+
+	
 	
 }

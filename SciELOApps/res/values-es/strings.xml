@@ -35,4 +35,7 @@
     <string name="version">versión 1.0</string>
     <string name="wellcome_articles_instr">Haga un clic en Artículos</string>
     <string name="wellcome_journals_instr">Haga un clic en Revistas</string>
+    <string name="no_results_found">Ningun resultado encontrado</string>
+    <string name="message_no_internet">El servicio que provee los datos o el acceso a Internet no están funcionando. Intente nuevamente.</string>
+    <string name="alert">Aviso</string>
 </resources>
