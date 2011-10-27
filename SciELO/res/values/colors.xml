@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<color name="bege">#EEE8AA</color>
+	<color name="grey">#f7f7f7</color>
+	<color name="red">#8B0000</color>
+	<color name="white">#FFFFFF</color>
+	
+	<color name="normal">#FFFFFF</color>
+	<color name="pressed">#FFFFFF</color>
+	<color name="selected">#8B0000</color>	
+	<color name="pressed_selected">#FFFFFF</color>
+
+	<color name="menu_normal">#DFDFBF</color>
+	<color name="menu_pressed">#f7f7f7</color>
+	<color name="menu_selected">#f7f7f7</color>	
+	<color name="menu_pressed_selected">#f7f7f7</color>
+</resources>

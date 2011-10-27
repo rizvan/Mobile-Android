@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    style="@style/MyTabView"
+    >
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"	  
+	    android:padding="0sp" 
+	    > 	
+	  	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="wrap_content"
+		    android:orientation="vertical" android:layout_height="wrap_content"
+		    android:padding="1sp"
+		    android:background="#FFFFFF"
+		    android:gravity="left"
+		    > 	
+		    
+		    <TextView 
+					android:id="@+id/banner" 
+					style="@style/banner" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"/>
+		</LinearLayout>
+	  	
+	  	
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:orientation="horizontal"			    
+			     style="@style/mainOptionBox"		
+			     android:id="@+id/mainOptionBox"		
+			    > 	
+				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:layout_width="wrap_content"
+				    android:layout_height="fill_parent"
+				    android:orientation="horizontal"	
+				    style="@style/mainOptionBoxBorderOff"
+				    android:id="@+id/mainOptionBoxBorderA"
+				    >
+				    
+				    <!--  borda preta -->
+				    <TextView 
+							android:id="@+id/call_search_letter" 
+							android:layout_width="fill_parent" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_search_letter" 	
+							style="@style/mainOptionCapitalOff" 
+		  			   />
+		  			   <TextView 
+							android:id="@+id/call_search" 
+							android:layout_width="wrap_content" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_search" 	
+							style="@style/mainOptionOff" 
+		  			   />
+				</LinearLayout>
+			
+			
+				<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:layout_width="wrap_content"
+				    android:layout_height="fill_parent"
+				    android:orientation="horizontal"	
+				    style="@style/mainOptionBoxBorder"
+				    android:id="@+id/mainOptionBoxBorderJ"
+				    
+				    ><!--  borda preta -->
+				    <TextView 
+							android:id="@+id/call_naveg_letter" 
+							android:layout_width="wrap_content" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_naveg_letter" 	
+							style="@style/mainOptionCapital" 	
+							
+					/><TextView 
+							android:id="@+id/call_naveg" 
+							android:layout_width="wrap_content" 
+							android:layout_height="fill_parent"
+							android:text="@string/call_naveg" 	
+							style="@style/mainOption" 	
+							
+					/>
+				</LinearLayout>
+			
+		</LinearLayout>
+    </LinearLayout>
+            <TextView 
+					android:background="#8B0000"
+					android:layout_width="fill_parent" android:layout_height="2sp"/>
+		
+	  	
+    	<TextView 
+	    android:id="@+id/TextViewHeader"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    style="@style/textview_header"
+	    
+	/> 
+	<GridView   
+       android:id="@+id/paginationListView" 
+       android:orientation="horizontal" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       style="@style/PaginationView"
+       >
+       
+       </GridView>
+ 	<ListView 
+       	android:id="@+id/list" 
+       	android:orientation="horizontal" 
+       	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent" 
+    	style="@style/listView"
+       >
+       
+       </ListView>
+</LinearLayout>

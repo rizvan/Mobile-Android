@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_height="wrap_content"
+	android:layout_width="fill_parent" 
+	android:orientation="vertical"
+	
+	>
+	<TextView 
+		android:id="@+id/TextViewDocumentPosition" 
+		android:layout_width="fill_parent" 		
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_document_position"
+		
+		/><TextView 
+		android:id="@+id/TextViewDocumentTitle" 
+		android:layout_width="fill_parent" 		
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_document_title"
+		
+		/>
+	<TextView 
+		android:id="@+id/TextViewDocumentAuthors" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_document_authors"
+		/>
+		
+	<TextView 
+		android:id="@+id/TextViewIssue" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_issue1"
+		/>  
+		<TextView 
+		android:id="@+id/TextViewDocumentCollection" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_collection"
+		/>  
+		
+		
+	<TextView 
+		android:id="@+id/TextViewDocumentAbstract" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		style="@style/lv_textview_document_abstract"
+		/>
+		
+		
+</LinearLayout>
