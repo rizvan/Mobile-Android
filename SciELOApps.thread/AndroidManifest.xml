@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.scielo.search"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <application android:icon="@drawable/scielo" android:label="@string/app_name" android:theme="@style/Theme.SciELOApps">
+        <activity android:name=".SciELOAppsActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HomeActivity"
+                  android:label="@string/app_name">
+            
+        </activity>
+        <activity android:name=".SearchJournalsActivity" 
+                  android:label="@string/search_button" 
+                 >
+            
+        </activity>
+        <activity android:name=".SearchIssuesActivity" >            
+        </activity>       
+
+        <activity android:name=".TOCActivity">
+        </activity>
+        
+		<activity android:name=".SearchDocsActivity" 
+                  android:label="@string/search_button" 
+                  >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable" />
+        </activity>
+		<activity android:name=".Search" 
+                  android:label="@string/search_button" 
+                  >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable" />
+        </activity>
+		<activity android:name=".DocumentActivity" >
+            <intent-filter>
+        	    <action android:name="android.intent.action.SEND"/>
+        	    <category android:name="android.intent.category.BROWSABLE"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+          		<category android:name="android.intent.category.DEFAULT"/>
+      			<category android:name="android.intent.category.BROWSABLE" />
+          	</intent-filter>          	
+        </activity>
+        
+
+    </application>
+    
+</manifest>

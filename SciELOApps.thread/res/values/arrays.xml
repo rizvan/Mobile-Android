@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="initials">   
+<item>A</item>
+	<item>B</item>
+	<item>C</item>
+	<item>D</item>
+	<item>E</item>
+	<item>F</item>
+	<item>G</item>
+    <item>H</item>
+	<item>I</item>
+	<item>J</item>
+	<item>K</item>
+	<item>L</item>
+	<item>M</item>
+	<item>N</item>
+    <item>O</item>
+	<item>P</item>
+	<item>Q</item>
+	<item>R</item>
+	<item>S</item>
+	<item>T</item>
+	<item>U</item>
+	<item>V</item>
+	<item>W</item>
+	<item>X</item>
+	<item>Y</item>
+	<item>Z</item>
+	
+</string-array>
+
+<string-array name="cluster_list_doc">
+	<item>la</item> <!-- language -->
+	<item>ac</item>           <!-- subject -->
+	<item>year_cluster</item> <!-- year -->
+	<item>in</item>	<!--  collection -->
+	<item>ta_cluster</item>   <!-- journal -->
+</string-array>
+<string-array name="cluster_list_journal">
+	<item>ac</item>
+	<item>in</item>	
+	<item>le</item>
+</string-array>
+<string-array name="collections_code">
+	<item>scl</item>
+	<item>chl</item>
+	<item>spa</item>
+	<item>arg</item>
+	<item>cub</item>
+	
+	<item>esp</item>
+	<item>col</item>
+	<item>mex</item>
+	<item>ven</item>
+	<item>prt</item>
+	<item>sss</item>
+	<item>sza</item>
+</string-array>
+<string-array name="log_collections_code">
+	<item>scielobr</item>
+	<item>scielocl</item>
+	<item>scielosp</item>
+	<item>scieloar</item>
+	<item>scielocu</item>
+	<item>scieloes</item>
+	<item>scielocol</item>
+	<item>scielomex</item>
+	<item>scieloven</item>
+	<item>scielopt</item>
+	<item>scieloss</item>
+	<item>scieloza</item>
+</string-array>
+<string-array name="collections_url">
+	<item>www.scielo.br</item>
+	<item>www.scielo.cl</item>
+	<item>www.scielosp.org</item>
+	<item>www.scielo.org.ar</item>
+	<item>scielo.sld.cu</item>
+	<item>scielo.isciii.es</item>
+	<item>www.scielo.org.co</item>
+	<item>www.scielo.org.mx</item>
+	<item>www.scielo.org.ve</item>
+	<item>www.scielo.oces.mctes.pt</item>
+	<item>socialsciences.scielo.org</item>
+	<item>www.scielo.org.za</item>
+</string-array>
+
+<string-array name="subjects_id">
+    <item>Human Sciences</item>
+	<item>Health Sciences</item>
+	<item>Biological Sciences</item>
+	<item>Agricultural Sciences</item>
+	<item>Exact and Earth Sciences</item>
+	<item>Engineering</item>
+    <item>Linguistics, Letters and Arts</item>	
+    <item>nd</item>
+</string-array>
+
+
+<string-array name="journal_urls_id">
+    <item>initial_url</item>
+	<item>alphabetic</item>
+	<item>letter</item>
+	<item>collection_subject</item>
+	<item>collection</item>
+	<item>subject</item>
+	
+</string-array>
+<string-array name="journal_urls">
+	<!-- colocar em ordem alfabetica, filtrar por letra -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?limit=10</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"</item>
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_keys?startkey="LETTER"&amp;endkey="LETTERz"&amp;limit=1</item>
+	
+	<!-- ok  -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_collection_keys?startkey=["SUBJECT","COLLECTION","LETTER"]&amp;endkey=["SUBJECT","COLLECTION","LETTERz"]</item>
+	
+	<!-- colocar em ordem alfabetica, filtrar por letra -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_collectionstitle_keys?startkey=["COLLECTION","LETTER"]&amp;endkey=["COLLECTION","LETTERz"]</item>
+	
+	<!-- ok  -->
+	<item>http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/title_subject_title_keys?startkey=["SUBJECT","LETTER"]&amp;endkey=["SUBJECT","LETTERz"]</item>
+	
+	<!-- colocar em ordem cronologica inversa -->
+	
+</string-array>
+</resources>

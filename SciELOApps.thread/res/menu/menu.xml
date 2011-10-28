@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="Context Menu" >
+    <item android:id="@+id/search"
+          android:title="@string/search_label"
+          android:icon="@drawable/ic_menu_search" 
+          />
+
+	<item android:id="@+id/menuItemRefineByLanguage" android:title="@string/menuItemRefineByLanguage"  
+	    android:icon="@drawable/ic_menu_filter" >
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByLanguage" >
+			
+		</menu>
+	</item><item android:id="@+id/menuItemRefineBySubject" android:title="@string/menuItemRefineBySubject"
+		    android:icon="@drawable/ic_menu_filter" 
+	  
+	>
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineBySubject"  >
+			
+		</menu>
+	</item>
+	
+	<item android:id="@+id/menuItemRefineByYear" android:title="@string/menuItemRefineByYear"  
+		    android:icon="@drawable/ic_menu_filter" 
+	>
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByYear" >
+			
+		</menu>
+	</item>
+	
+	<item android:id="@+id/menuItemRefineByCollection" android:title="@string/menuItemRefineByCollection" 
+			    android:icon="@drawable/ic_menu_filter" 
+	>
+	
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByCollection" >
+			
+		</menu>
+	</item>
+	<item android:id="@+id/menuItemRefineByJournal" android:title="@string/menuItemRefineByJournal"  
+			    android:icon="@drawable/ic_menu_filter" 
+	>
+	
+		<menu xmlns:android="http://schemas.android.com/apk/res/android" android:name="@string/menuItemRefineByJournal" >
+			
+		</menu>
+	</item>
+</menu>
