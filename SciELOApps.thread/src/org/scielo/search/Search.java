@@ -67,9 +67,9 @@ public class Search extends Activity {
 	private GridView paginationGridView;
 	private ListView resultListView;
 	
-	private DocumentAdapter listItemAdapter;
-	private JournalAdapter journalAdapter;
-	private PaginationItemAdapter pageAdapter;
+	private DocumentAdapter docListAdapter;
+	private JournalAdapter journalListAdapter;
+	private PaginationItemAdapter pageListAdapter;
 	private OnItemClickListener listItemListener;
 	private OnItemClickListener pageListener;
 	
@@ -97,7 +97,10 @@ public class Search extends Activity {
 	IdAndValueObjects journal_ws_urls= new IdAndValueObjects();
 
 
-	private List<Journal> journalList;
+	private ArrayList<Journal> journalResultList = new ArrayList<Journal>();
+
+
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,8 +122,8 @@ public class Search extends Activity {
     	    articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
     	    layout_id = R.layout.search_articles;
     	    layout_menu_id = R.menu.menu;
-    	    listItemAdapter = new DocumentAdapter(this, R.layout.list_item_doc, docResulList,false);
-        	pageAdapter = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+    	    docListAdapter = new DocumentAdapter(this, R.layout.list_item_doc, docResulList,false);
+        	pageListAdapter = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
     	    break;
         case DATA_JOURNAL:
         	clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
@@ -131,7 +134,7 @@ public class Search extends Activity {
     		            layout_id = R.layout.search_journals;
     	    layout_menu_id = R.menu.menu_journals;
     	    
-    	    journalAdapter = new JournalAdapter(this, R.layout.list_item_journal, journalList);
+    	    journalListAdapter = new JournalAdapter(this, R.layout.list_item_journal, journalResultList);
     	    break;
         }
         
@@ -172,11 +175,14 @@ public class Search extends Activity {
 	}
     
     private void setAdapters(){
-    	if (listItemAdapter != null){
-    		resultListView.setAdapter(listItemAdapter);        		
+    	if (docListAdapter != null){
+    		resultListView.setAdapter(docListAdapter);        		
     	}
-    	if (pageAdapter!=null){
-	    	paginationGridView.setAdapter(pageAdapter);
+    	if (pageListAdapter!=null){
+	    	paginationGridView.setAdapter(pageListAdapter);
+    	}
+    	if (journalListAdapter != null){
+    		resultListView.setAdapter(journalListAdapter);
     	}
     }
     
@@ -221,34 +227,51 @@ public class Search extends Activity {
     	textSearch.setOnClickListener(a);
     	textNavLetter.setOnClickListener(j);
     	textNav.setOnClickListener(j);
-	
-    	listItemListener = new OnItemClickListener() {
- 	       @Override
- 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
- 	           Document searched = docResulList.get(_index);
- 	           //showDialog(SEARCH_RESULT_DIALOG);
- 	           
- 	           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
- 	           //docIntent.putExtra("DATA", selectedSearchResult);
- 	           docIntent.putExtra("query", "");
- 	           docIntent.putExtra("id", searched.getDocumentId());
- 	           docIntent.putExtra("title", searched.getDocumentTitle());
- 	           docIntent.putExtra("authors", searched.getDocumentAuthors());
- 	           
- 	           if (searched.getPdf_url().length()==0){
- 	        	   searched.setPdf_url(articleURL.returnPDFURL(searched));
- 	           }
- 	           if (searched.getHtml_url().length()==0){
- 	        	   searched.setHtml_url(articleURL.returnFullTextURL(searched));
- 	           }
-	           docIntent.putExtra("fulltext_url", searched.getHtml_url());
- 	           docIntent.putExtra("pdf_url", searched.getPdf_url());
- 	           docIntent.putExtra("collection", searched.getCol().getName());
- 	           docIntent.putExtra("abstract", searched.getDocumentAbstracts());
- 	           docIntent.putExtra("issue", searched.getIssueLabel());
- 	           startActivity(docIntent);
- 	       }
- 		};
+	    switch (dataType){
+	    case DATA_JOURNAL:
+	    	listItemListener = new OnItemClickListener() {
+			       @Override
+				   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
+			           Journal searched = journalResultList.get(_index);
+			           Intent docIntent = new Intent(_v.getContext(), SearchIssuesActivity.class);
+			           docIntent.putExtra("id", searched.getId());
+			           docIntent.putExtra("title", searched.getTitle());
+			           docIntent.putExtra("collection", searched.getCollection());
+			           docIntent.putExtra("collection_id", searched.getCollectionId());		           
+			           startActivity(docIntent);
+			       }
+			};
+	    	break;
+	    case DATA_DOC:
+	    	listItemListener = new OnItemClickListener() {
+	 	       @Override
+	 		   public void onItemClick(AdapterView<?> _av, View _v, int _index, long id) {
+	 	           Document searched = docResulList.get(_index);
+	 	           //showDialog(SEARCH_RESULT_DIALOG);
+	 	           
+	 	           Intent docIntent = new Intent(_v.getContext(), DocumentActivity.class);
+	 	           //docIntent.putExtra("DATA", selectedSearchResult);
+	 	           docIntent.putExtra("query", "");
+	 	           docIntent.putExtra("id", searched.getDocumentId());
+	 	           docIntent.putExtra("title", searched.getDocumentTitle());
+	 	           docIntent.putExtra("authors", searched.getDocumentAuthors());
+	 	           
+	 	           if (searched.getPdf_url().length()==0){
+	 	        	   searched.setPdf_url(articleURL.returnPDFURL(searched));
+	 	           }
+	 	           if (searched.getHtml_url().length()==0){
+	 	        	   searched.setHtml_url(articleURL.returnFullTextURL(searched));
+	 	           }
+		           docIntent.putExtra("fulltext_url", searched.getHtml_url());
+	 	           docIntent.putExtra("pdf_url", searched.getPdf_url());
+	 	           docIntent.putExtra("collection", searched.getCol().getName());
+	 	           docIntent.putExtra("abstract", searched.getDocumentAbstracts());
+	 	           docIntent.putExtra("issue", searched.getIssueLabel());
+	 	           startActivity(docIntent);
+	 	       }
+	 		};
+	 		break;
+	    }
  		pageListener = new OnItemClickListener() {
 	        
  			@Override
@@ -259,6 +282,7 @@ public class Search extends Activity {
 	        	queueUpdate(1000);
 	        }
 	    };
+	    
     	resultListView.setOnItemClickListener(listItemListener);
 	    paginationGridView.setOnItemClickListener(pageListener);
 
@@ -456,6 +480,11 @@ public class Search extends Activity {
     		header_update = (param_start=="0");
     		url = docWS.getURL(this.getResources().getString(R.string.search_feed), this.getResources().getString(R.string.search_doc_count), param_words, param_filter, param_start);
     		break;
+    	case DATA_JOURNAL:
+    		header_update = true;
+    		JournalWS jWS = new JournalWS();
+    		url = jWS.getURL(journal_ws_urls, param_words, param_filter);
+    		break;
     	}
     	
 		
@@ -471,6 +500,13 @@ public class Search extends Activity {
     		if (ws_docs_total==""){
     			ws_docs_total = ws_result_total;
     		}
+    		break;
+    	case DATA_JOURNAL:
+    		JournalWS jWS = new JournalWS();
+    		jWS.loadData(text, clusterCodeOrder, clusterCollection, journalResultList);
+    		ws_result_total = jWS.getResult_total();
+    		ws_docs_total = jWS.getDocs_total();
+    		
     		break;
     	}
     }
@@ -523,11 +559,14 @@ public class Search extends Activity {
     		text ="No results found";
     	}
     	guiSetText(headerText, header_text);
-    	if (listItemAdapter!=null){
-    		guiSetData(listItemAdapter, docResulList);
+    	if (docListAdapter!=null){
+    		guiSetData(docListAdapter, docResulList);
     	}
-    	if (pageAdapter!=null){
-    		guiSetData(pageAdapter, pagesList);	
+    	if (journalListAdapter!=null){
+    		guiSetData(journalListAdapter, journalResultList);
+    	}
+    	if (pageListAdapter!=null){
+    		guiSetData(pageListAdapter, pagesList);	
     	}
     	
     	
