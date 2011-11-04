@@ -111,9 +111,12 @@ public class Search extends MyActivity {
         clusterCollection = new ClusterCollection();
 	    
 	    header_text = "";
+	    header_slash = "";
+	    header_sep = "";
+	    
 	    ws_param_search_expression = "";
 	    
-	    dataType = getIntent().getIntExtra("date_type", SciELOAppsActivity.DATA_DOC);
+	    dataType = getIntent().getIntExtra("data_type", SciELOAppsActivity.DATA_DOC);
         
 	    switch(dataType){
         case SciELOAppsActivity.DATA_DOC:
@@ -129,6 +132,7 @@ public class Search extends MyActivity {
             
         	header_sep = ":";
             header_slash = "/";
+            
     	    break;
         case SciELOAppsActivity.DATA_JOURNAL:
         	SciELOAppsActivity.currentSearchMainActivity = "journals";
@@ -144,6 +148,7 @@ public class Search extends MyActivity {
             header_slash = "/";
             break;
         case SciELOAppsActivity.DATA_ISSUES:
+        	SciELOAppsActivity.currentSearchMainActivity = "journals";
         	journal = new Journal();
         	journal.setId(getIntent().getStringExtra("id"));
     		journal.setTitle(getIntent().getStringExtra("title"));
@@ -162,6 +167,7 @@ public class Search extends MyActivity {
     		header_update = false;
     		break;
         case SciELOAppsActivity.DATA_TOC:
+        	SciELOAppsActivity.currentSearchMainActivity = "journals";
         	journal = new Journal();
         	journal.setCollectionName(getIntent().getStringExtra("collection"));
         	journal.setTitle(getIntent().getStringExtra("title"));
@@ -235,29 +241,23 @@ public class Search extends MyActivity {
     	OnClickListener a = new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				if (SciELOAppsActivity.currentSearchMainActivity == "articles"){
-					queueUpdate(1000);
-				} else {
 					dataType = SciELOAppsActivity.DATA_DOC;
 					
 					Intent docIntent = new Intent(v.getContext(), Search.class);
-					docIntent.putExtra("date_type", dataType);
+					docIntent.putExtra("data_type", dataType);
 		            startActivity(docIntent);
-				}				
+								
 			}
 		};
     	OnClickListener j = new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				if (SciELOAppsActivity.currentSearchMainActivity == "journals"){
-					queueUpdate(1000);
-				} else {
 					dataType = SciELOAppsActivity.DATA_JOURNAL;
 					
 					Intent docIntent = new Intent(v.getContext(), Search.class);
-					docIntent.putExtra("date_type", dataType);
+					docIntent.putExtra( "data_type", dataType);
 		            startActivity(docIntent);
-				}				
+								
 			}
 		};
     	textSearchLetter.setOnClickListener(a);
@@ -329,8 +329,6 @@ public class Search extends MyActivity {
     		           docIntent.putExtra("collection", searched.getJournal().getCollectionName());
     		           docIntent.putExtra("title", searched.getJournal().getTitle());
     		           startActivity(docIntent);
-    		           
-    	               
     		       }
     		};
     	    break;
@@ -346,9 +344,7 @@ public class Search extends MyActivity {
  		           String q = "id:" + '"' + "art-" + searched.getDocumentId() + "^c" + searched.getCol().getId() + '"';
  		           docIntent.putExtra("query", q);
  		           startActivity(docIntent);
- 		           
- 	               
- 		       }
+ 		        }
 	    	};
 	    	break;
 	    }
@@ -529,7 +525,7 @@ public class Search extends MyActivity {
     		journal_ws_urls.multiAdd(getResources().getStringArray(R.array.journal_urls_id),
     				getResources().getStringArray(R.array.journal_urls), false);
     		
-    		url = jWS.getURL(journal_ws_urls, ws_param_search_expression, ws_param_filter);
+    		url = jWS.getURL(journal_ws_urls, ws_param_filter);
     		break;
     	case SciELOAppsActivity.DATA_ISSUES:
     		IssuesWS issuesWS = new IssuesWS();
@@ -551,16 +547,24 @@ public class Search extends MyActivity {
     		docWS = new DocumentsWS();
     		docWS.loadData(text, clusterCollection, docResultList, pagesList,this.getResources().getString(R.string.search_doc_count));
     		ws_result_total = docWS.getResultTotal();
+    		if (SciELOAppsActivity.docs_total == "") {
+    			ws_docs_total = ws_result_total;
+    		}
+    		SciELOAppsActivity.docs_total = ws_docs_total;
     		if (ws_docs_total==""){
     			ws_docs_total = ws_result_total;
     		}
     		break;
     	case SciELOAppsActivity.DATA_JOURNAL:
     		JournalsWS jWS = new JournalsWS();
-    		jWS.loadData(text, clusterCodeOrder, clusterCollection, journalResultList);
+    		jWS.loadData(text, clusterCodeOrder, clusterCollection, journalResultList, (ws_param_filter.length()==0));
+    		header_update = true;
     		ws_result_total = jWS.getResult_total();
-    		ws_docs_total = jWS.getDocs_total();
-    		
+    		String t = jWS.getDocs_total();
+    		if (t!="") {
+    			SciELOAppsActivity.journals_total = t;
+    		}
+    		ws_docs_total = SciELOAppsActivity.journals_total;
     		break;
     	case SciELOAppsActivity.DATA_ISSUES:
     		IssuesWS ws = new IssuesWS();

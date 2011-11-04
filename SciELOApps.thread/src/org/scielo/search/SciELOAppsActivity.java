@@ -8,14 +8,19 @@ import android.widget.TextView;
 public class SciELOAppsActivity extends Activity {
     /** Called when the activity is first created. */
     static MyAppConfig myConfig = new MyAppConfig();
+    
     public static final int DATA_DOC = 0;
 	public static final int DATA_JOURNAL = 1;
 	public static final int DATA_ISSUES = 2;
 	public static final int DATA_TOC = 3;
 	
-    static String totalOfDocuments = "";
-    public static String currentSearchMainActivity = "";
-    TextView banner;
+    
+	public static String currentSearchMainActivity = "";
+	
+	public static String journals_total="";
+	public static String docs_total="";
+    
+	TextView banner;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {

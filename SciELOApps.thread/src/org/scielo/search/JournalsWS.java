@@ -12,16 +12,16 @@ import android.util.Log;
 public class JournalsWS {
 
 	private static final String TAG = "JournalWS";
-	private boolean isInit;
+	
 	NextLetter next_letter = new NextLetter(SciELOAppsActivity.myConfig.getLetters());
-	private String result_total;
-	private String docs_total;
+	private String result_total = "";
+	private String docs_total = "";
 	
 	public JournalsWS(){
 		
 	}
 	
-	public String getURL( IdAndValueObjects journal_ws_urls, String param_words, String param_filter) {
+	public String getURL( IdAndValueObjects journal_ws_urls, String param_filter) {
 		String r = "";
 		String filterSubject = "";
 		String filterCollection = "";
@@ -52,7 +52,7 @@ public class JournalsWS {
 				r = journal_ws_urls.getItem("alphabetic").getValue() ;
 			} else {
 				r = journal_ws_urls.getItem("initial_url").getValue() ;
-				isInit = true;
+				
 			}
 			
 		} else {
@@ -144,7 +144,7 @@ public class JournalsWS {
 	}
 
 	public void loadData(String text, String[] clusterCodeOrder, ClusterCollection clusterCollection,
-		ArrayList<Journal> journalResultList) {
+		ArrayList<Journal> journalResultList, boolean isInit) {
 	// TODO Auto-generated method stub
 	// TODO Auto-generated method stub
 			

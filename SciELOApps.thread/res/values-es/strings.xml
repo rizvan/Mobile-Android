@@ -28,6 +28,8 @@
     <string name="reset_label">reiniciar</string>
     <string name="call_naveg">evistas</string>
     <string name="call_search">rtículos</string>
+    <string name="call_search_letter">A</string>
+    
     <string name="call_naveg_letter">R</string>
     <string name="wellcome_articles">Busque por artículos científicos, compártalos, visítalos en el sitio web y descargue los PDF</string>
     <string name="wellcome_journals">Navegue por las revistas y números</string>
