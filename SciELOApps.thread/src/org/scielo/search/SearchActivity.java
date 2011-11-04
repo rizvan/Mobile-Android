@@ -42,7 +42,7 @@ public class SearchActivity extends Activity {
 	
 	protected ArrayList<Page> pagesList  = new ArrayList<Page>();	
 
-	protected PaginationItemAdapter aaPage;  
+	protected PaginationAdapter aaPage;  
 	protected PageAdapter aaPageH;
 	protected ArrayAdapter<?> arrayAdapter;
 	
@@ -98,7 +98,7 @@ public class SearchActivity extends Activity {
 	    
 		searchResultListView = (ListView) findViewById(R.id.list);
 	    paginationGridView = (GridView) findViewById(R.id.paginationListView);
-	    aaPage = new PaginationItemAdapter(this, R.layout.pagination, pagesList);
+	    aaPage = new PaginationAdapter(this, R.layout.pagination, pagesList);
 	    
 	    
 	    textNav = (TextView) findViewById(R.id.call_naveg);

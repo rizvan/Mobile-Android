@@ -12,11 +12,11 @@ import android.util.Log;
 
 public class SearchTask implements Runnable{
 	private static final String TAG = "SearchService";
-	private Search search;
+	private MyActivity search;
 	private String URL;
 	
 	
-	SearchTask(Search search, String URL){
+	SearchTask(MyActivity search, String URL){
 		this.search = search;
 		this.URL = URL;
 	}

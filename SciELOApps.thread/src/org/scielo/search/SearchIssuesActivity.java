@@ -32,7 +32,7 @@ public class SearchIssuesActivity extends SearchActivity {
 	    
 		journal.setId(getIntent().getStringExtra("id"));
 		journal.setTitle(getIntent().getStringExtra("title"));
-		journal.setCollection(getIntent().getStringExtra("collection"));
+		journal.setCollectionName(getIntent().getStringExtra("collection"));
 		journal.setCollectionId(collectionId);
 	    query_id = journal.getId();
 	    
@@ -42,7 +42,7 @@ public class SearchIssuesActivity extends SearchActivity {
 		
 		
 	    int resID = R.layout.list_item_issue;
-	    arrayAdapter = new IssueAdapter(this, resID, resultList);
+	    arrayAdapter = new IssuesListAdapter(this, resID, resultList);
 	    searchResultListView.setAdapter(arrayAdapter);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
@@ -58,7 +58,7 @@ public class SearchIssuesActivity extends SearchActivity {
 		           docIntent.putExtra("n", searched.getNumber());
 		           docIntent.putExtra("s", searched.getSuppl());
 		           docIntent.putExtra("collection_id", searched.getJournal().getCollectionId());
-		           docIntent.putExtra("collection", searched.getJournal().getCollection());
+		           docIntent.putExtra("collection", searched.getJournal().getCollectionName());
 		           docIntent.putExtra("title", searched.getJournal().getTitle());
 		           startActivity(docIntent);
 		           

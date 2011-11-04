@@ -34,7 +34,7 @@ public class SearchDocsActivity extends SearchActivity {
 		searcher = new DocSearcher(this.getResources().getString(R.string.search_feed), clusterCollection, resultList, pagesList);
 		
 	    int resID = R.layout.list_item_doc;
-	    arrayAdapter = new DocumentAdapter(this, resID, resultList,false);
+	    arrayAdapter = new DocumentsListAdapter(this, resID, resultList,false);
 	    
 	    
 	    searchResultListView.setAdapter(arrayAdapter);	    

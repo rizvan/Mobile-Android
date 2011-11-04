@@ -53,7 +53,7 @@ public class Issue {
 		this.date = date;
 	}
 	public String getText(){
-		String r = journal.getCollection() + "\n" + journal.getTitle() + " ";
+		String r = journal.getCollectionName() + "\n" + journal.getTitle() + " ";
 		r = r + format("v.", " ", volume);
 		r = r + format("n.", " ", number);
 		r = r + format("s.", " ", suppl);

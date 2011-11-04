@@ -1,11 +1,16 @@
 package org.scielo.search;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,32 +19,28 @@ import android.view.MenuItem;
 
 import android.widget.TextView;
 
-public class DocumentActivity extends Activity{
+public class DocumentActivity extends   MyActivity{
 	private TextView TextViewIssue; 
 	private TextView TextViewTitle; 
 	private TextView TextViewAuthors; 
 	//private TextView TextViewPDF; 
 	private TextView TextViewAbstract; 
-	private TextView TextViewCollection; 
-	
-	private ArrayList<Document> searchResultList =  new ArrayList<Document>();
-	private ArrayList<Page> pagesList =  new ArrayList<Page>();
-
-	private DocSearcher ssData;
-	private SearchService ss;
-	private String pdf_url;
+	private TextView TextViewCollection;
 	private String fulltext_url;
+	private String pdf_url; 
 	
+	private Handler guiThread;
+	private ExecutorService transThread;
+	private Runnable updateTask;
+	private Future<?> transPending;
+	protected String url;
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
 	    setContentView(R.layout.doc);
 
-	    ClusterCollection clusterCollection = new ClusterCollection();
-	    ssData = new DocSearcher(this.getResources().getString(R.string.search_feed), clusterCollection , searchResultList, pagesList);
-	    ss = new SearchService();
-		
 	    TextViewIssue = (TextView) findViewById(R.id.TextViewDocumentIssueLabel);	    
 	    //TextViewID = (TextView) findViewById(R.id.TextViewDocumentID);	    
 	    TextViewTitle = (TextView) findViewById(R.id.TextViewDocumentTitle);
@@ -47,45 +48,23 @@ public class DocumentActivity extends Activity{
 	    //TextViewPDF = (TextView) findViewById(R.id.TextViewDocumentPDFLink);	
 	    TextViewAbstract = (TextView) findViewById(R.id.TextViewDocumentAbstract);
 	    TextViewCollection = (TextView) findViewById(R.id.TextViewDocumentCollection);	
+	    
+	    
 	    if (getIntent().getStringExtra("query").length()>0){
-	    	String queryurl = ssData.getURL(getIntent().getStringExtra("query"), "20", "", 0);
-			String result = ss.call(queryurl);
-			ssData.genLoadData(result);
-			
-			searchResultList = ssData.getSearchResultList();
-
-			Document doc = searchResultList.get(0);
-			TextViewIssue.setText(doc.getIssueLabel());
-		    //TextViewID.setText(doc.getDocumentId());
-		    TextViewTitle.setText(doc.getDocumentTitle());
-		    TextViewAuthors.setText(doc.getDocumentAuthors());
-		    //TextViewPDF.setText(doc.getDocumentPDFLink());
-		    
-		    ArticleURL articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
-		    
-		    
-		    if (doc.getPdf_url().length()==0){
-		    	doc.setPdf_url(articleURL.returnPDFURL(doc));
-	        }
-	        if (doc.getHtml_url().length()==0){
-	        	doc.setHtml_url(articleURL.returnFullTextURL(doc));
-	        }
-		    
-	        pdf_url = doc.getPdf_url();
-	        fulltext_url = doc.getHtml_url();
-		    
-		       
-		    TextViewAbstract.setText(doc.getDocumentAbstracts());
-		    TextViewCollection.setText(doc.getCol().getName());
+	    	DocumentsWS docWS = new DocumentsWS();
+	    	url=docWS.getURL(this.getResources().getString(R.string.search_feed), "1", getIntent().getStringExtra("query"), "", "0");
+	    	initThreading();
+	    	queueUpdate(1000);
 	    } else {
-		    TextViewIssue.setText(getIntent().getStringExtra("issue"));
-		    //TextViewID.setText(getIntent().getStringExtra("id"));
-		    TextViewTitle.setText(getIntent().getStringExtra("title"));
-		    TextViewAuthors.setText(getIntent().getStringExtra("authors"));
-		    //TextViewPDF.setText(getIntent().getStringExtra("pdf"));
-		    TextViewAbstract.setText(getIntent().getStringExtra("abstract"));
-		    TextViewCollection.setText(getIntent().getStringExtra("collection"));	  
-		    pdf_url = getIntent().getStringExtra("pdf_url");
+	    	
+	    	guiSetText(TextViewIssue, getIntent().getStringExtra("issue"));
+			guiSetText(TextViewTitle, getIntent().getStringExtra("title"));
+			guiSetText(TextViewAuthors, getIntent().getStringExtra("authors"));
+			guiSetText(TextViewAbstract, getIntent().getStringExtra("abstract"));
+			guiSetText(TextViewCollection, getIntent().getStringExtra("collection"));
+			
+
+			pdf_url = getIntent().getStringExtra("pdf_url");
 		    fulltext_url = getIntent().getStringExtra("fulltext_url");
 	    }
 	}
@@ -160,4 +139,90 @@ public class DocumentActivity extends Activity{
       }
 
       return res;
-    }}
+    }
+    
+    private void initThreading() {
+    	guiThread = new Handler();
+    	transThread = Executors.newSingleThreadExecutor();
+    	// This task does a translation and updates the screen
+    	updateTask = new Runnable() {
+    		
+
+			public void run() {
+    		    // Get text to translate
+    			//String q = origText.getText().toString().trim();
+    			   
+		        // Cancel prvious translation if there was one
+		        if (transPending != null)
+			        transPending.cancel(true);
+			    // Take care of the easy case
+			    
+				    	// Let user know we re doing something
+
+// Begin translation now but do not wait for it
+			    	try {
+
+			    		SearchTask translateTask = new SearchTask(
+			    				DocumentActivity.this, // reference to activity
+			    			url);
+			    		transPending = transThread.submit(translateTask);
+			    	} catch (RejectedExecutionException e) {
+			    		// Unable to start new task
+			    		
+			    	}
+			    
+    		}    		
+    	};
+    }
+
+	/** Request an update to start after a short delay */
+    private void queueUpdate(long delayMillis) {
+    	// Cancel previous update if it has no started yet
+    	guiThread.removeCallbacks(updateTask);
+    	// Start an update if nothing happens after a few milliseconds
+    	guiThread.postDelayed(updateTask, delayMillis);
+    	
+    }
+    
+    /** All changes to the GUI must be done in the GUI thread */
+    private void guiSetText(final TextView view, final String text) {
+    	guiThread.post(new Runnable() {
+    		public void run() {
+    			view.setText(text);
+    		}
+    	});
+    }
+    /** Modify text on the screen (called from another thread) */
+    public void setResult(String text) {
+       	if (text.length()>0){
+       		ClusterCollection clusterCollection = new ClusterCollection();
+       		DocumentsWS docws = new DocumentsWS();
+       		ArrayList<Page> pagesList = new ArrayList<Page>();
+        	ArrayList<Document> resultList = new ArrayList<Document>();
+			docws.loadData(text, clusterCollection, resultList, pagesList, "1") ;
+
+			Document doc = resultList.get(0);
+			ArticleURL articleURL = new ArticleURL(getResources().getString(R.string.pdf_and_log_url), getResources().getString(R.string.pdf_url), getResources().getString(R.string.article_url));
+
+			if (doc.getPdf_url().length()==0){
+		    	doc.setPdf_url(articleURL.returnPDFURL(doc));
+	        }
+	        if (doc.getHtml_url().length()==0){
+	        	doc.setHtml_url(articleURL.returnFullTextURL(doc));
+	        }
+		    pdf_url = doc.getPdf_url();
+	        fulltext_url = doc.getHtml_url();
+		    
+			guiSetText(TextViewIssue, doc.getIssueLabel());
+			guiSetText(TextViewTitle, doc.getDocumentTitle());
+			guiSetText(TextViewAuthors, doc.getAuthors());
+			guiSetText(TextViewAbstract, doc.getDocumentAbstracts());
+			guiSetText(TextViewCollection, doc.getCol().getName());
+			
+       	}
+
+       	
+    	
+    }
+        
+}

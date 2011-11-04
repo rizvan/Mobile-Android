@@ -29,7 +29,7 @@ public class TOCActivity extends SearchActivity {
 		issue = new Issue();
 		Journal j = new Journal();
 		
-		j.setCollection(getIntent().getStringExtra("collection"));
+		j.setCollectionName(getIntent().getStringExtra("collection"));
 		j.setTitle(getIntent().getStringExtra("title"));
 		
 	    issue.setId(getIntent().getStringExtra("id"));
@@ -59,7 +59,7 @@ public class TOCActivity extends SearchActivity {
 		
 		
 		int resID = R.layout.list_item_doc;
-	    arrayAdapter = new DocumentAdapter(this, resID, resultList, true);
+	    arrayAdapter = new DocumentsListAdapter(this, resID, resultList, true);
 	    
 	    searchResultListView.setAdapter(arrayAdapter);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {

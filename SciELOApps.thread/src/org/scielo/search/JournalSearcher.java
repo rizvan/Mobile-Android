@@ -205,7 +205,7 @@ public class JournalSearcher extends Searcher {
 					
 					Log.d(TAG, "[" + str_i + "] 5");
 					col = SciELOAppsActivity.myConfig.getJcn().getItem(collectionCode);
-					r.setCollection(col.getName());
+					r.setCollectionName(col.getName());
 					r.setCollectionId(col.getId());
 					
 					resultList.add(r);

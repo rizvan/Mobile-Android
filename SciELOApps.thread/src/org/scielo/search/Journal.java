@@ -31,10 +31,10 @@ public class Journal {
 	public void setSubjects(String subjects) {
 		this.subjects = subjects;
 	}
-	public String getCollection() {
+	public String getCollectionName() {
 		return collection;
 	}
-	public void setCollection(String collection) {
+	public void setCollectionName(String collection) {
 		this.collection = collection;
 	}
 	public String getCollectionId() {

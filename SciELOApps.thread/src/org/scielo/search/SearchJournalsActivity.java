@@ -41,7 +41,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		searcher = new JournalSearcher(searchURLs, resultList, pagesList);
 		
 		int resID = R.layout.list_item_journal;
-	    arrayAdapter = new JournalAdapter(this, resID, resultList);
+	    arrayAdapter = new JournalsListAdapter(this, resID, resultList);
 	    searchResultListView.setAdapter(arrayAdapter);	    
 	    searchResultListView.setOnItemClickListener(new OnItemClickListener() {
 		       @Override
@@ -50,7 +50,7 @@ public class SearchJournalsActivity extends SearchActivity {
 		           Intent docIntent = new Intent(_v.getContext(), SearchIssuesActivity.class);
 		           docIntent.putExtra("id", searched.getId());
 		           docIntent.putExtra("title", searched.getTitle());
-		           docIntent.putExtra("collection", searched.getCollection());
+		           docIntent.putExtra("collection", searched.getCollectionName());
 		           docIntent.putExtra("collection_id", searched.getCollectionId());		           
 		           startActivity(docIntent);
 		       }
