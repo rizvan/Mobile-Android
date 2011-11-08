@@ -1,48 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="tab_list_docs_name">Documents</string>
-    <string name="tab_list_journals_name">Journals</string>
-    <string name="tab_list_issues_name">Recent issues</string>
-    <string name="tab_settings_name">Settings</string>
-    <string name="menu_update">Refresh Result</string>
-    <string name="search_result_details_title">Result details</string>
-    <string name="searchResultDialogTitle">Search result dialog title</string>
-    <string name="search_interrupted">Search result dialog title</string>
-    <string name="search_expression_hint">Search</string>
-    <string name="search_button">search</string>
-    <string name="menuItemRefineBySubject">subjects</string>
-    <string name="menuItemRefineByJournal">journals</string>
-    <string name="menuItemRefineByYear">dates</string>
-    <string name="menuItemRefineByCollection">collections</string>
-    <string name="menuItemRefineByLanguage">languages</string>
-    <string name="menuItemRefineBySubjectHumanSciences">Human Sciences</string>
-    <string name="menuItemRefineBySubjectHealthSciences">Health Sciences</string>
-    <string name="menuItemRefineBySubjectBiologicalSciences">Biological Sciences</string>
-    <string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
-    <string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
-    <string name="menuItemRefineBySubjectEngineering">Engineering</string>
-    <string name="menuItemRefineByInitial">alphabetic list</string>
-    <string name="menuItemSendEmail">share</string>
-    <string name="menuItemSaveResult">save</string>
-    <string name="menuItemSaveBookmark">Bookmark</string>
-    <string name="menuItemDownloadPDF">download PDF</string>
-    <string name="menuItemFulltext">full text</string>
-    <string name="text_sendTo">e-mail</string>
-    <string name="button_send">send</string>
-    <string name="search_label">search</string>
-    <string name="search_hint">search</string>
-    <string name="total">total</string>
-    <string name="reset_label">reset</string>
-    <string name="call_naveg">ournals</string>
-    <string name="call_naveg_letter">J</string>
-    <string name="call_search">rticles</string>
-    <string name="wellcome_articles">Search scientific articles, share them, view full text and donwload PDF</string>
-    <string name="wellcome_journals">Browse by journals and their issues</string>
-    <string name="email_message_title">This message was sent by SciELO mobile application</string>
-    <string name="version">version 1.0</string>
-    <string name="wellcome_articles_instr">Click on Articles</string>
-    <string name="wellcome_journals_instr">Click on Journals</string>
-    <string name="no_results_found">No results found</string>
-    <string name="message_no_internet">The service which provides the data or the access to Internet is not working. Try it again.</string>
-    <string name="alert">Alert</string>
+   
 </resources>

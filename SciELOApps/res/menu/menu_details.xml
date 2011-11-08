@@ -10,13 +10,13 @@
 	<item 
 		android:id="@+id/menuItemFulltext" 
 		android:title="@string/menuItemFulltext"
-		android:icon="@drawable/ic_menu_view"
+		android:icon="@drawable/ic_menu_browser"
 		>
 	</item>
 	<item 
 		android:id="@+id/menuItemDownloadPDF" 
 		android:title="@string/menuItemDownloadPDF"
-		android:icon="@drawable/ic_menu_save"
+		android:icon="@drawable/ic_menu_download"
 		>
 	</item> 
 	

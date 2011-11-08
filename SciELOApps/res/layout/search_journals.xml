@@ -109,6 +109,7 @@
        >
        
        </GridView>
+       
  	<ListView 
        	android:id="@+id/list" 
        	android:orientation="horizontal" 

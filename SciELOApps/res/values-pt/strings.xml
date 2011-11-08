@@ -34,9 +34,11 @@
     <string name="wellcome_journals">Navegue pelos periódicos</string>
     <string name="email_message_title">Esta mensagem foi enviada pela aplicação móvel de SciELO</string>
     <string name="version">versão 1.0</string>
-    <string name="wellcome_articles_instr">Faça um clique em Artigos</string>
-    <string name="wellcome_journals_instr">Faça um clique em Periódicos</string>
+    <string name="wellcome_articles_instr">Clique na aba Artigos</string>
+    <string name="wellcome_journals_instr">Clique na aba Periódicos</string>
     <string name="no_results_found">Nenhum resultado encontrado</string>
     <string name="message_no_internet">O serviço que provee os dados ou o acesso a Internet não estão funcionando. Tente novamente.</string>
     <string name="alert">Aviso</string>
+
+<string name="loading_data_message">carregando os dados</string>
 </resources>

@@ -44,4 +44,9 @@ public class SearchFilter {
 		}
 		return r;
 	}
+
+	public void setCaption(String name) {
+		// TODO Auto-generated method stub
+		this.caption = name;
+	}
 }

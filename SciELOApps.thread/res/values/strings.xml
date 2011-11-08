@@ -51,10 +51,10 @@
     <string name="wellcome_journals">Browse by journals and their issues</string>
     <string name="email_message_title">This message was sent by SciELO mobile application</string>
     <string name="version">version 1.0</string>
-    <string name="wellcome_articles_instr">Click on Articles</string>
-    <string name="wellcome_journals_instr">Click on Journals</string>
+    <string name="wellcome_articles_instr">Click on Articles tab</string>
+    <string name="wellcome_journals_instr">Click on Journals tab</string>
     <string name="no_results_found">No results found</string>
     <string name="message_no_internet">The service which provides the data or the access to Internet is not working. Try it again.</string>
     <string name="alert">Alert</string>
-    
+	<string name="loading_data_message">loading data</string>    
 </resources>

@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,7 +55,7 @@ public class DocumentActivity extends   MyActivity{
 	    	initThreading();
 	    	queueUpdate(1000);
 	    } else {
-	    	
+	    	guiThread = new Handler();
 	    	guiSetText(TextViewIssue, getIntent().getStringExtra("issue"));
 			guiSetText(TextViewTitle, getIntent().getStringExtra("title"));
 			guiSetText(TextViewAuthors, getIntent().getStringExtra("authors"));

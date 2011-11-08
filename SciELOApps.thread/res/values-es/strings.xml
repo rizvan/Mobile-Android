@@ -33,11 +33,13 @@
     <string name="call_naveg_letter">R</string>
     <string name="wellcome_articles">Busque por artículos científicos, compártalos, visítalos en el sitio web y descargue los PDF</string>
     <string name="wellcome_journals">Navegue por las revistas y números</string>
-    <string name="email_message_title">Este mensaje fue enviado por la aplicación mobile de SciELO</string>
+    <string name="email_message_title">Este mensaje fue enviado por la aplicación movil de SciELO</string>
     <string name="version">versión 1.0</string>
     <string name="wellcome_articles_instr">Haga un clic en Artículos</string>
     <string name="wellcome_journals_instr">Haga un clic en Revistas</string>
     <string name="no_results_found">Ningun resultado encontrado</string>
     <string name="message_no_internet">El servicio que provee los datos o el acceso a Internet no están funcionando. Intente nuevamente.</string>
     <string name="alert">Aviso</string>
+
+<string name="loading_data_message">cargando los datos</string>
 </resources>

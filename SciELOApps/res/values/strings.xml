@@ -2,19 +2,59 @@
 <resources>
     <string name="app_name">SciELO</string>
     <string name="search_doc_count">10</string>
-    <string name="search_feed">http://192.168.1.31:8080/iahx-controller/?site=scielo&amp;col=org&amp;output=json&amp;lang=pt&amp;fl=10&amp;sort=score%2Bdesc&amp;op=search</string>
-    <string name="search_feed_issues">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PIDz"&amp;endkey="PID"&amp;descending=true&amp;include_docs=true</string>
-    <string name="search_feed_issuetoc">http://homolog.webservices.scielo.org/scieloorg/_design/couchdb/_view/article_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
+    <string name="search_feed">http://ws.search.scielo.org/iahx-controller/?site=scielo&amp;col=org&amp;output=json&amp;lang=pt&amp;fl=10&amp;sort=score%2Bdesc&amp;op=search</string>
+    <string name="search_feed_issues">http://webservices.scielo.org/scieloorg/_design/couchdb/_view/issue_id?startkey="PIDz"&amp;endkey="PID"&amp;descending=true&amp;include_docs=true</string>
+    <string name="search_feed_issuetoc">http://webservices.scielo.org/scieloorg/_design/couchdb/_view/article_id?include_docs=true&amp;startkey="PID"&amp;endkey="PIDz"</string>
     <string name="pdf_url">http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf</string>
-    <string name="Old_pdf_and_log_url">http://homolog.search.scielo.org/pdf.php?pdf=REPLACE_PDF_FILENAME&amp;app=REPLACE_APP_ID&amp;pid=REPLACE_PID&amp;lng=REPLACE_LANG</string>
+    <string name="Old_pdf_and_log_url">http://search.scielo.org/pdf.php?pdf=REPLACE_PDF_FILENAME&amp;app=REPLACE_APP_ID&amp;pid=REPLACE_PID&amp;lng=REPLACE_LANG</string>
     <string name="pdf_and_log_url">http://REPLACE_COLLECTION_URL/pdf/REPLACE_PDF_FILENAME.pdf</string>
     <string name="article_url">http://REPLACE_COLLECTION_URL/scielo.php?script=sci_arttext&amp;pid=REPLACE_PID</string>
-    <string name="call_naveg">periódicos</string>
-    <string name="call_search">artigos</string>
-    <string name="call_naveg_letter">P</string>
-    <string name="call_search_letter">A</string>
     <string name="wellcome">Scientific Electronic Library Online</string>
     <string name="address">www.scielo.org</string>
     <string name="email">scielo@scielo.org</string>
     <string name="twitter_text">\@redescielo</string>
+    
+    
+    <!-- DEFAULT in English -->
+     <string name="search_button">search</string>
+    
+    <string name="menuItemRefineBySubject">subjects</string>
+    <string name="menuItemRefineByJournal">journals</string>
+    <string name="menuItemRefineByYear">dates</string>
+    <string name="menuItemRefineByCollection">collections</string>
+    <string name="menuItemRefineByLanguage">languages</string>
+    <string name="menuItemRefineBySubjectHumanSciences">Human Sciences</string>
+    <string name="menuItemRefineBySubjectHealthSciences">Health Sciences</string>
+    <string name="menuItemRefineBySubjectBiologicalSciences">Biological Sciences</string>
+    <string name="menuItemRefineBySubjectAgriculturalSciences">Agricultural Sciences</string>
+    <string name="menuItemRefineBySubjectExactAndEarthSciences">Exact And Earth Sciences</string>
+    <string name="menuItemRefineBySubjectEngineering">Engineering</string>
+    <string name="menuItemRefineByInitial">alphabetic list</string>
+    <string name="menuItemSendEmail">share</string>
+    <string name="menuItemSaveResult">save</string>
+    <string name="menuItemSaveBookmark">Bookmark</string>
+    <string name="menuItemDownloadPDF">download PDF</string>
+    <string name="menuItemFulltext">full text</string>
+    <string name="text_sendTo">e-mail</string>
+    <string name="button_send">send</string>
+    <string name="search_label">search</string>
+    <string name="search_hint">search</string>
+    <string name="total">total</string>
+    <string name="reset_label">reset</string>
+    <string name="call_naveg">ournals</string>
+    <string name="call_naveg_letter">J</string>
+    <string name="call_search">rticles</string>
+    
+	<string name="call_search_letter">A</string>
+    
+    <string name="wellcome_articles">Search scientific articles, share them, view full text and donwload PDF</string>
+    <string name="wellcome_journals">Browse by journals and their issues</string>
+    <string name="email_message_title">This message was sent by SciELO mobile application</string>
+    <string name="version">version 1.0</string>
+    <string name="wellcome_articles_instr">Click on Articles tab</string>
+    <string name="wellcome_journals_instr">Click on Journals tab</string>
+    <string name="no_results_found">No results found</string>
+    <string name="message_no_internet">The service which provides the data or the access to Internet is not working. Try it again.</string>
+    <string name="alert">Alert</string>
+	<string name="loading_data_message">loading data</string>    
 </resources>
