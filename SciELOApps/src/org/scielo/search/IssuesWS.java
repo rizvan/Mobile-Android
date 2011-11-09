@@ -64,48 +64,56 @@ public class IssuesWS  {
 				
 				try {					
 					resultItem = resultItem.getJSONObject("doc");	
+
+					String compl="";
+					
+					try {
+						compl  = resultItem.getJSONArray("v41").getJSONObject(0).getString("_");
+					}  catch (JSONException e) {
+						compl = "";
+					}
+					
+					if (compl.equals("")) {
+						try {					
+							// jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("responseHeader").getJSONObject("params");
+							r.setDate(resultItem.getJSONArray("v65").getJSONObject(0).getString("_").substring(0,4) );	
+						} catch (JSONException e) {
+							last = last + "\n" +"year";
+						}
+						try {
+							r.setVolume(resultItem.getJSONArray("v31").getJSONObject(0).getString("_"));					
+						} catch (JSONException e) {
+							last = last + "\n" +"vol" ;						
+						}
+						try {
+							r.setNumber(resultItem.getJSONArray("v32").getJSONObject(0).getString("_"));						
+						} catch (JSONException e) {
+							last = last + "\n" +"number" ;
+						}
+						try {
+							suppl = resultItem.getJSONArray("v131").getJSONObject(0).getString("_");
+						} catch (JSONException e) {
+							last = last + "\n" +"suppl" ;			
+						}
+						if (suppl.equals("")){
+							try {
+								suppl = resultItem.getJSONArray("v132").getJSONObject(0).getString("_");
+							} catch (JSONException e) {
+								last = last + "\n" +"suppl" ;			
+							}					
+						}
+						r.setSuppl(suppl);
+						r.setId(id);						
+						searchResultList.add(r);
+					}
 				} catch (JSONException e) {
-					last = last + "\n" +"doc";
+					last = last + "\n" +"pr?";
 				}
+
 				// "v31":[{"_":"23"}]
 
-				try {					
-					// jsonObject.getJSONArray("diaServerResponse").getJSONObject(0).getJSONObject("responseHeader").getJSONObject("params");
-					r.setDate(resultItem.getJSONArray("v65").getJSONObject(0).getString("_").substring(0,4));	
-				} catch (JSONException e) {
-					last = last + "\n" +"year";
-				}
-				try {
-					r.setVolume(resultItem.getJSONArray("v31").getJSONObject(0).getString("_"));					
-				} catch (JSONException e) {
-					last = last + "\n" +"vol" ;						
-				}
-				try {
-					r.setNumber(resultItem.getJSONArray("v32").getJSONObject(0).getString("_"));						
-				} catch (JSONException e) {
-					last = last + "\n" +"number" ;
-					
-				}
-				try {
-					suppl = resultItem.getJSONArray("v131").getJSONObject(0).getString("_");
-				} catch (JSONException e) {
-					last = last + "\n" +"suppl" ;			
-				}
-				if (suppl==""){
-					try {
-						suppl = resultItem.getJSONArray("v132").getJSONObject(0).getString("_");
-					} catch (JSONException e) {
-						last = last + "\n" +"suppl" ;			
-					}					
-				}
-				
-				r.setSuppl(suppl);
-				
-					r.setId(id);						
-				
-				
-				
-				searchResultList.add(r);
+
+
 			} catch (JSONException e) {
 				Log.d(TAG, "JSONException loadResultList " + new Integer(i).toString() + " " + last, e);	
 	        } 

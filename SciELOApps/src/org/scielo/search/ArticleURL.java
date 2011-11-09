@@ -16,6 +16,8 @@ public class ArticleURL {
 	public String returnPDFURL(Document doc){
 		String url;
 		
+		
+		
 		url = returnURL(this.generic_PDF_URL, doc);
 		if (urlTester.check(url)){
 			if (this.generic_pdf_and_log_url != this.generic_PDF_URL){
@@ -30,7 +32,12 @@ public class ArticleURL {
 		return url;
 	}
 	public String returnFullTextURL(Document doc){		
-		return returnURL(this.generic_article_url, doc);
+		String u = this.generic_article_url;
+		String t = doc.getCompl();
+		if (t.equals("pr")){
+			u = u.replace( "script=sci_arttext", "script=sci_arttext_pr");
+		} 
+		return returnURL(u, doc);
 	}
 	public String returnURL(String generic_url, Document doc){
 		String url;

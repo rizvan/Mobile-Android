@@ -10,9 +10,9 @@
     <string name="search_interrupted">Search result dialog title</string>
     <string name="menuItemRefineBySubject">temas</string>
     <string name="menuItemRefineByJournal">revistas</string>
-    <string name="menuItemRefineByYear">años</string>
+    <string name="menuItemRefineByYear">fechas</string>
     <string name="menuItemRefineByCollection">colecciones</string>
-    <string name="menuItemRefineByLanguage">lengua</string>
+    <string name="menuItemRefineByLanguage">lenguas</string>
     <string name="menuItemRefineByInitial">alfabética</string>
     <string name="menuItemSendEmail">compartir</string>
     <string name="menuItemSaveResult">guardar</string>
@@ -33,7 +33,7 @@
     <string name="call_naveg_letter">R</string>
     <string name="wellcome_articles">Busque por artículos científicos, compártalos, visítalos en el sitio web y descargue los PDF</string>
     <string name="wellcome_journals">Navegue por las revistas y números</string>
-    <string name="email_message_title">Este mensaje fue enviado por la aplicación movil de SciELO</string>
+    <string name="email_message_title">Este mensaje fue enviado por la aplicación SciELO para Android</string>
     <string name="version">versión 1.0</string>
     <string name="wellcome_articles_instr">Haga un clic en Artículos</string>
     <string name="wellcome_journals_instr">Haga un clic en Revistas</string>

@@ -99,6 +99,7 @@ public class Search extends MyActivity {
 	private Issue issue;
 
 	private int layout_menu_id;
+	private String header_tracking ="";
 
 
 	
@@ -304,6 +305,9 @@ public class Search extends MyActivity {
 	 	           if (searched.getPdf_url().length()==0){
 	 	        	   searched.setPdf_url(articleURL.returnPDFURL(searched));
 	 	           }
+	 	           
+	 	           String teste = searched.getCompl();
+	 	           String teste2 = articleURL.returnFullTextURL(searched);
 	 	           if (searched.getHtml_url().length()==0){
 	 	        	   searched.setHtml_url(articleURL.returnFullTextURL(searched));
 	 	           }
@@ -312,6 +316,7 @@ public class Search extends MyActivity {
 	 	           docIntent.putExtra("collection", searched.getCol().getName());
 	 	           docIntent.putExtra("abstract", searched.getDocumentAbstracts());
 	 	           docIntent.putExtra("issue", searched.getIssueLabel());
+	 	           
 	 	           startActivity(docIntent);
 	 	       }
 	 		};
@@ -380,6 +385,7 @@ public class Search extends MyActivity {
 	      ws_param_search_expression = intent.getStringExtra(SearchManager.QUERY);
 	      header_filter = "";
 	      ws_param_filter = "";
+	      header_search_expression = ws_param_search_expression;
 	    } 
 
 	}
@@ -497,18 +503,18 @@ public class Search extends MyActivity {
 			if (this.filterSelectionTracker.contains(prefix)){
 				this.filterSelectionTracker = _filter;
 				this.ws_param_filter = _filter;
-		    	header_filter = header_slash + caption + sep;
+		    	
 			} else {
 				this.filterSelectionTracker = this.filterSelectionTracker + "|" + _filter;
 				this.ws_param_filter = this.ws_param_filter + " AND " + _filter;				
-		    	header_filter = header_filter + header_slash + caption + sep;
+		    	
 			}
 		} else {
 			this.ws_param_filter = _filter;
 			this.filterSelectionTracker = _filter;
-	    	header_filter = header_slash  +  caption + sep;
+	    	
 		}			
-		
+		header_filter = caption;
     	ws_param_start = "0";
     	header_letter = "";
 
@@ -521,7 +527,7 @@ public class Search extends MyActivity {
     	case SciELOAppsActivity.DATA_DOC:
     		DocumentsWS docWS;
     		docWS = new DocumentsWS();
-    		header_update = (ws_param_start=="0");
+    		header_update = (ws_param_start.equals("0"));
     		url = docWS.getURL(this.getResources().getString(R.string.search_feed), this.getResources().getString(R.string.search_doc_count), ws_param_search_expression, ws_param_filter, ws_param_start);
     		break;
     	case SciELOAppsActivity.DATA_JOURNAL:
@@ -553,13 +559,10 @@ public class Search extends MyActivity {
     		docWS = new DocumentsWS();
     		docWS.loadData(text, clusterCollection, docResultList, pagesList,this.getResources().getString(R.string.search_doc_count));
     		ws_result_total = docWS.getResultTotal();
-    		if (SciELOAppsActivity.docs_total == "") {
-    			ws_docs_total = ws_result_total;
+    		if (SciELOAppsActivity.docs_total.equals("")) {
+    			SciELOAppsActivity.docs_total = ws_result_total;
     		}
-    		SciELOAppsActivity.docs_total = ws_docs_total;
-    		if (ws_docs_total==""){
-    			ws_docs_total = ws_result_total;
-    		}
+    		ws_docs_total = SciELOAppsActivity.docs_total;
     		break;
     	case SciELOAppsActivity.DATA_JOURNAL:
     		JournalsWS jWS = new JournalsWS();
@@ -604,7 +607,7 @@ public class Search extends MyActivity {
 			    	// Begin translation now but do not wait for it
 			    	try {
 			    		setUrl();
-			    		//headerText.setText(url);
+			    		headerText.setText(getResources().getString(R.string.loading_data_message) + "... ");
 			    		SearchTask translateTask = new SearchTask(
 			    				Search.this, // reference to activity
 			    			url);
@@ -623,7 +626,8 @@ public class Search extends MyActivity {
 
 	/** Request an update to start after a short delay */
     private void queueUpdate(long delayMillis) {
-    	
+    	headerText.setText(getResources().getString(R.string.loading_data_message) + "... ");
+		
     	// Cancel previous update if it has no started yet
     	guiThread.removeCallbacks(updateTask);
     	// Start an update if nothing happens after a few milliseconds
@@ -655,6 +659,17 @@ public class Search extends MyActivity {
     	if (text.length()>0){
        		treatResult(text);
        		if (header_update==true){
+       			if (header_search_expression.length()>0){
+       				header_tracking = header_slash + header_search_expression + header_sep + ws_result_total;
+       				header_search_expression ="";
+    			}
+    			if (header_filter.length()>0) {
+    				header_tracking = header_tracking + header_slash + header_filter + header_sep + ws_result_total;
+    			}
+    			if (header_letter.length()>0) {
+    				header_tracking = header_tracking + header_slash + header_letter  + header_sep + ws_result_total;
+    			}
+       			/*
     			header_text = ws_docs_total;
     		    if (header_search_expression.length()>0){
     		    	header_text = header_text + header_slash + header_search_expression + header_sep + ws_result_total;
@@ -665,7 +680,8 @@ public class Search extends MyActivity {
     			}
     			if (header_letter.length()>0) {
     				header_text = header_text + header_slash + header_letter  + header_sep + ws_result_total;
-    			}			
+    			}	*/	
+    			header_text = ws_docs_total + header_tracking ;
     		}
     		
     	} else {

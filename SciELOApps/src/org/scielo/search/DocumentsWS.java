@@ -28,7 +28,7 @@ public class DocumentsWS {
 			query = query + "&count=" + itemsPerPage;
 		}
 		String str_start;
-		if (start==""){
+		if (start.equals("")){
 			str_start = "0";
 		} else {
 			str_start = start;
@@ -195,6 +195,11 @@ public class DocumentsWS {
 					last = last + "\n" +"ti";
 				}
 				try {
+					r.setCompl(  resultItem.getString("pr"));	
+				} catch (JSONException e) {
+					last = last + "\n" +"pr";
+				}
+				try {
 					result = "";
 					for (int j=0; j<resultItem.getJSONArray("au").length(); j++) {
 						result = result + resultItem.getJSONArray("au").getString(j) + "; ";
@@ -237,11 +242,24 @@ public class DocumentsWS {
 				r.setLang(_lang);
 				r.setCol(SciELOAppsActivity.myConfig.getJcn().getItem(collectionCode));
 				
-				try {
-					r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));					
-				} catch (JSONException e) {
-					last = last + "\n" +"fo";
-				}
+				
+					if (r.getCompl().equals("")){
+						try {
+						r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));
+						
+						} catch (JSONException e) {
+							last = last + "\n" +"fo";
+						}
+					} else {
+						try {
+							r.setIssueLabel(resultItem.getJSONArray("ta").getString(0)+ " "+resultItem.getJSONArray("da").getString(0).substring(0,4) + " (press release)");
+												
+						} catch (JSONException e) {
+							last = last + "\n" +"fo";
+						}
+						
+					}
+					
 				
 				abstracts = "";				
 				for (k=0;k< languageCluster.getFilterCount();k++){

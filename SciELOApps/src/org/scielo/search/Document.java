@@ -17,6 +17,7 @@ public class Document {
 	private JournalsCollection col;
 	private String filename; 
 	private String lang;
+	private String compl;
 	
 	
 
@@ -36,6 +37,7 @@ public class Document {
     	issueLabel = "";
     	filename = "";
     	lang = "";
+    	compl = "";
     	setCol(new JournalsCollection());
     	
 	}
@@ -208,5 +210,14 @@ public class Document {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+
+	public void setCompl(String string) {
+		// TODO Auto-generated method stub
+		this.compl = string;
 	}	
+	public String getCompl(){
+		return this.compl;
+	}
 }

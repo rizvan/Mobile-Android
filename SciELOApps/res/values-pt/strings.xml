@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="tab_list_docs_name">Documentos</string>
     <string name="tab_list_journals_name">Periódicos</string>
@@ -10,7 +10,7 @@
     <string name="search_interrupted">Search result dialog title</string>
     <string name="menuItemRefineBySubject">assuntos</string>
     <string name="menuItemRefineByJournal">periódicos</string>
-    <string name="menuItemRefineByYear">anos</string>
+    <string name="menuItemRefineByYear">datas</string>
     <string name="menuItemRefineByCollection">coleções</string>
     <string name="menuItemRefineByLanguage">idiomas</string>
     <string name="menuItemRefineByInitial">alfabética</string>
@@ -32,7 +32,7 @@
     <string name="call_search_letter">A</string>
     <string name="wellcome_articles">Pesquise artigos científicos, compartilhe-os, visite-os no web site e baixe os PDF</string>
     <string name="wellcome_journals">Navegue pelos periódicos</string>
-    <string name="email_message_title">Esta mensagem foi enviada pela aplicação móvel de SciELO</string>
+    <string name="email_message_title">Esta mensagem foi enviada pela aplicação SciELO para Android</string>
     <string name="version">versão 1.0</string>
     <string name="wellcome_articles_instr">Clique na aba Artigos</string>
     <string name="wellcome_journals_instr">Clique na aba Periódicos</string>
