@@ -41,6 +41,9 @@
 	<item>ac</item>
 	<item>in</item>	
 	<item>le</item>
+	<item>ac</item>
+	<item>in</item>	
+	<item>le</item>
 </string-array>
 <string-array name="collections_code">
 	<item>scl</item>
@@ -48,7 +51,7 @@
 	<item>spa</item>
 	<item>arg</item>
 	<item>cub</item>
-	
+	<item>cri</item>
 	<item>esp</item>
 	<item>col</item>
 	<item>mex</item>
@@ -63,6 +66,7 @@
 	<item>scielosp</item>
 	<item>scieloar</item>
 	<item>scielocu</item>
+	<item>scielocr</item>
 	<item>scieloes</item>
 	<item>scielocol</item>
 	<item>scielomex</item>
@@ -77,6 +81,7 @@
 	<item>www.scielosp.org</item>
 	<item>www.scielo.org.ar</item>
 	<item>scielo.sld.cu</item>
+	<item>www.scielo.sa.cr</item>
 	<item>scielo.isciii.es</item>
 	<item>www.scielo.org.co</item>
 	<item>www.scielo.org.mx</item>

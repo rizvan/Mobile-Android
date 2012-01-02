@@ -8,15 +8,26 @@
     <string name="search_result_details_title">Detalhes do resultado</string>
     <string name="searchResultDialogTitle">Search result dialog title</string>
     <string name="search_interrupted">Search result dialog title</string>
+    
+    
+     
+    <string name="menuItemRefineBySubjectHeader">periódicos por assunto</string>
+    <string name="menuItemRefineByCollectionHeader">periódicos por colección</string>
+    <string name="menuItemRefineByInitialHeader">lista alfabética</string>
+    
     <string name="menuItemRefineBySubject">assuntos</string>
+    <string name="menuItemRefineByCollection">coleções</string>
+    <string name="menuItemRefineByInitial">A-Z</string>
+    <string name="menuItemRefineByLanguage">idiomas</string>
     <string name="menuItemRefineByJournal">periódicos</string>
     <string name="menuItemRefineByYear">datas</string>
-    <string name="menuItemRefineByCollection">coleções</string>
-    <string name="menuItemRefineByLanguage">idiomas</string>
-    <string name="menuItemRefineByInitial">alfabética</string>
+    
+    
     <string name="menuItemSendEmail">compartilhar</string>
     <string name="menuItemSaveResult">guardar</string>
     <string name="menuItemSaveBookmark">bookmark</string>
+    
+    
     <string name="text_sendTo">e-mail</string>
     <string name="button_send">enviar</string>
     <string name="search_label">pesquisar</string>
@@ -33,7 +44,7 @@
     <string name="wellcome_articles">Pesquise artigos científicos, compartilhe-os, visite-os no web site e baixe os PDF</string>
     <string name="wellcome_journals">Navegue pelos periódicos</string>
     <string name="email_message_title">Esta mensagem foi enviada pela aplicação SciELO para Android</string>
-    <string name="version">versão 1.0</string>
+    <string name="version">versão</string>
     <string name="wellcome_articles_instr">Clique na aba Artigos</string>
     <string name="wellcome_journals_instr">Clique na aba Periódicos</string>
     <string name="no_results_found">Nenhum resultado encontrado</string>

@@ -1,37 +1,28 @@
 package org.scielo.search;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsSpinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 
 public class Search extends MyActivity {
@@ -80,7 +71,7 @@ public class Search extends MyActivity {
 	private String header_text = "";
 	private String header_sep = "";
 	private String header_filter = "";
-	private String header_letter = "";
+	//private String header_letter = "";
 	private String header_slash = "";
 	private String header_search_expression ="";
 
@@ -100,7 +91,23 @@ public class Search extends MyActivity {
 
 	private int layout_menu_id;
 	private String header_tracking ="";
-
+	private String currentFilter = "";
+	private String currentCaption= "";
+	private String bkp_ws_param_filter = "";
+	private String bkp_filterSelectionTracker= "";
+	private String bkp_le= "";
+	private String bkp_ac= "";
+	private String bkp_in= "";
+	private String bkp_le_caption= "";
+	private String bkp_ac_caption= "";
+	private String bkp_in_caption= "";
+	private String bkp_la;
+	private String bkp_la_caption;
+	private String bkp_ta;
+	private String bkp_ta_caption;
+	private String bkp_y;
+	private String bkp_y_caption;
+	
 
 	
 	
@@ -150,8 +157,12 @@ public class Search extends MyActivity {
     	    
         	clusterCodeOrder = getResources().getStringArray(R.array.cluster_list_journal);
             
+        	//this.queueUpdate(1000);  
+        	
         	header_sep = ":";
             header_slash = "/";
+            addFilter("le:A" , "A", header_sep);
+        	
             break;
         case SciELOAppsActivity.DATA_ISSUES:
         	SciELOAppsActivity.currentSearchMainActivity = "journals";
@@ -412,7 +423,6 @@ public class Search extends MyActivity {
         	int i;
             int clusterIndex = 0;
             
-            
             for (int index=0; index < menu.size(); index++){
         		menuItem = menu.getItem(index);
         		subMenu = menuItem.getSubMenu();        		
@@ -463,6 +473,7 @@ public class Search extends MyActivity {
         }            
     	return true;
     }
+	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {    
         super.onOptionsItemSelected(item);
@@ -475,15 +486,26 @@ public class Search extends MyActivity {
 	        case R.id.search:
 	            onSearchRequested();
 	            return true;
+	            /*
 	        case R.id.reset:
 	        	//this.filterSelectionTracker = "";
 	        	ws_param_filter = "";
 				header_filter = "";
 				
 		    	queueUpdate(1000);
-	            return true;
+	            return true;*/
+	        case R.id.menuItemNewSearchByCollection:
+    		case R.id.menuItemNewSearchByInitial:
+    		case R.id.menuItemNewSearchBySubject:
+    			resetParameters();
+    			
+        			break;
+    		
+    		
 	        default:
 	        	if (!item.hasSubMenu()){
+	        		
+	        		
 	        	    SearchFilter sf = clusterCollection.getFilterBySubmenuId(itemSelected, teste2);
 		            if (sf != null) {
 		            	teste2 = sf.getFilterExpression();
@@ -494,32 +516,181 @@ public class Search extends MyActivity {
 		        }
 	            return true;	          	          
         }
+        return true;
         
     }
-	protected void addFilter(String _filter, String caption, String sep){
-		String prefix = _filter.substring(0, 4);
-		
-		if (this.filterSelectionTracker.length()>0){			
-			if (this.filterSelectionTracker.contains(prefix)){
-				this.filterSelectionTracker = _filter;
-				this.ws_param_filter = _filter;
-		    	
-			} else {
-				this.filterSelectionTracker = this.filterSelectionTracker + "|" + _filter;
-				this.ws_param_filter = this.ws_param_filter + " AND " + _filter;				
-		    	
-			}
-		} else {
-			this.ws_param_filter = _filter;
-			this.filterSelectionTracker = _filter;
-	    	
-		}			
-		header_filter = caption;
-    	ws_param_start = "0";
-    	header_letter = "";
-
+	
+	private void resetParameters() {
+		// TODO Auto-generated method stub
+		this.ws_param_filter ="";
+		this.filterSelectionTracker="";
+		this.header_tracking="";
 	}
 
+	protected void addFilter(String _filter, String caption, String sep){
+		if (dataType == SciELOAppsActivity.DATA_DOC){
+			addFilter4Articles( _filter,  caption,  sep);
+		}
+		if (dataType == SciELOAppsActivity.DATA_JOURNAL){
+			addFilter4Journal( _filter,  caption,  sep);
+		}
+		
+	}
+
+	protected void addFilter4Articles(String _filter, String caption, String sep){
+			String prefix = _filter.substring(0, 4);
+			
+			if (this.filterSelectionTracker.contains(prefix)){
+				
+				this.ws_param_filter = 	 _filter;
+				this.filterSelectionTracker = 	 _filter;
+				this.header_tracking = "";
+				
+				header_filter = "";
+				/*
+				
+				this.ws_param_filter = _filter;
+				this.filterSelectionTracker = _filter;
+				header_tracking ="";
+				*/
+			} else {
+				
+				String concat = "";
+				if (this.ws_param_filter.length()>0){
+					concat = " AND ";
+				}
+				this.ws_param_filter = this.ws_param_filter + concat + _filter;		
+				
+				if (this.filterSelectionTracker.length()>0){
+					concat = "|";
+				}
+				this.filterSelectionTracker = this.filterSelectionTracker + concat + _filter;
+				header_filter = 	caption;
+		    }
+					
+			
+	    	ws_param_start = "0";
+	    	
+		
+	}
+
+	protected void addFilter4Journal(String _filter, String caption, String sep){
+		String prefix = _filter.substring(0, 3);
+		String toReplace = "";
+		String captionToReplace = "";
+		this.currentFilter = _filter;
+		this.currentCaption = caption;
+		
+		this.bkp_ws_param_filter  = this.ws_param_filter;
+		this.bkp_filterSelectionTracker = this.filterSelectionTracker;
+		
+		if (this.filterSelectionTracker.contains(prefix)){
+			if (prefix.equals("le:")){
+				toReplace = this.bkp_le ;
+				this.bkp_le = _filter;
+				captionToReplace = this.bkp_le_caption;
+				this.bkp_le_caption = caption;
+			}
+			if (prefix.equals("ac:")){
+				toReplace = this.bkp_ac ;
+				this.bkp_ac = _filter;			
+				captionToReplace = this.bkp_ac_caption;
+				this.bkp_ac_caption = caption;
+			}
+			if (prefix.equals("in:")){
+				toReplace = this.bkp_in ;
+				this.bkp_in = _filter;
+				captionToReplace = this.bkp_in_caption;
+				this.bkp_in_caption = caption;
+			}
+			if (prefix.equals("la:")){
+				toReplace = this.bkp_la ;
+				this.bkp_la = _filter;
+				captionToReplace = this.bkp_la_caption;
+				this.bkp_la_caption = caption;
+			}
+			if (prefix.equals("ta_cluster:")){
+				toReplace = this.bkp_ta ;
+				this.bkp_ta = _filter;
+				captionToReplace = this.bkp_ta_caption;
+				this.bkp_ta_caption = caption;
+			}
+			if (prefix.equals("year_cluster:")){
+				toReplace = this.bkp_y ;
+				this.bkp_y = _filter;
+				captionToReplace = this.bkp_y_caption;
+				this.bkp_y_caption = caption;
+			}
+			this.ws_param_filter = 	this.ws_param_filter.replace(toReplace, _filter);
+			this.filterSelectionTracker = 	this.filterSelectionTracker.replace(toReplace, _filter);
+			//this.header_tracking = this.header_tracking.replace(captionToReplace, caption);
+			
+			int i = this.header_tracking.indexOf(header_slash + captionToReplace + ":");
+			String c = this.header_tracking.substring(i+1);
+			int k = c.indexOf(header_slash);
+			if (k == -1){
+				this.header_tracking =  this.header_tracking.substring(0,i);
+			} else{
+				String before = this.header_tracking.substring(0,i);
+				String after = this.header_tracking.substring(i+k+1);
+				this.header_tracking =  before+ after;
+			}
+			
+			header_filter = caption;
+			/*
+			
+			this.ws_param_filter = _filter;
+			this.filterSelectionTracker = _filter;
+			header_tracking ="";
+			*/
+		} else {
+			if (prefix.equals("le:")){
+				this.bkp_le = _filter;
+				this.bkp_le_caption = caption;
+			}
+			if (prefix.equals("ac:")){
+				this.bkp_ac = _filter;	
+				this.bkp_ac_caption = caption;
+			}
+			if (prefix.equals("in:")){
+				this.bkp_in = _filter;
+				this.bkp_in_caption = caption;
+			}
+			if (prefix.equals("ta_cluster:")){
+				this.bkp_ta= _filter;
+				this.bkp_ta_caption = caption;
+			}
+			if (prefix.equals("year_cluster:")){
+				this.bkp_y = _filter;	
+				this.bkp_y_caption = caption;
+			}
+			if (prefix.equals("la:")){
+				this.bkp_la = _filter;
+				this.bkp_la_caption = caption;
+			}
+			String concat = "";
+			if (this.ws_param_filter.length()>0){
+				concat = " AND ";
+			}
+			this.ws_param_filter = this.ws_param_filter + concat + _filter;		
+			
+			if (this.filterSelectionTracker.length()>0){
+				concat = "|";
+			}
+			this.filterSelectionTracker = this.filterSelectionTracker + concat + _filter;
+			header_filter = 	caption;
+	    }
+				
+		ws_param_start = "0";
+    }
+	
+	
+	private void restoreParameters(){
+		this.ws_param_filter =this.bkp_ws_param_filter;
+		this.filterSelectionTracker=this.bkp_filterSelectionTracker;
+		
+	}
+	
     private void  setUrl() {
 		// TODO Auto-generated method stub
     	
@@ -567,13 +738,15 @@ public class Search extends MyActivity {
     	case SciELOAppsActivity.DATA_JOURNAL:
     		JournalsWS jWS = new JournalsWS();
     		jWS.loadData(text, clusterCodeOrder, clusterCollection, journalResultList, (ws_param_filter.length()==0));
-    		header_update = true;
+    		
+    		
+    		
     		ws_result_total = jWS.getResult_total();
-    		String t = jWS.getDocs_total();
-    		if (t!="") {
-    			SciELOAppsActivity.journals_total = t;
-    		}
-    		ws_docs_total = SciELOAppsActivity.journals_total;
+    		ws_docs_total = jWS.getDocs_total();
+    		header_update = true;
+			//updateFilterSelectionTracker();
+			
+    		
     		break;
     	case SciELOAppsActivity.DATA_ISSUES:
     		IssuesWS ws = new IssuesWS();
@@ -656,37 +829,20 @@ public class Search extends MyActivity {
     /** Modify text on the screen (called from another thread) */
     public void setResult(String text) {
     	resultIsReady =true;
-    	if (text.length()>0){
-       		treatResult(text);
-       		if (header_update==true){
-       			if (header_search_expression.length()>0){
-       				header_tracking = header_slash + header_search_expression + header_sep + ws_result_total;
-       				header_search_expression ="";
-    			}
-    			if (header_filter.length()>0) {
-    				header_tracking = header_tracking + header_slash + header_filter + header_sep + ws_result_total;
-    			}
-    			if (header_letter.length()>0) {
-    				header_tracking = header_tracking + header_slash + header_letter  + header_sep + ws_result_total;
-    			}
-       			/*
-    			header_text = ws_docs_total;
-    		    if (header_search_expression.length()>0){
-    		    	header_text = header_text + header_slash + header_search_expression + header_sep + ws_result_total;
-    			}
-    			if (header_filter.length()>0) {
-    				header_filter = header_filter + ws_result_total;
-    				header_text = header_text + header_filter ;				
-    			}
-    			if (header_letter.length()>0) {
-    				header_text = header_text + header_slash + header_letter  + header_sep + ws_result_total;
-    			}	*/	
-    			header_text = ws_docs_total + header_tracking ;
-    		}
-    		
-    	} else {
-    		text ="No results found";
-    	}
+    	treatResult(text);
+   		if (header_update==true){
+   			if (header_search_expression.length()>0){
+   				header_tracking = header_slash + header_search_expression + header_sep + ws_result_total;
+   				header_search_expression ="";
+			}
+			if (header_filter.length()>0) {
+				header_tracking = header_tracking + header_slash + header_filter + header_sep + ws_result_total;
+			}
+				
+			header_text = ws_docs_total + header_tracking ;
+		}
+		
+    	
     	guiSetText(headerText, header_text);
     	if (docListAdapter!=null){
     		guiSetData(docListAdapter, docResultList);

@@ -8,13 +8,20 @@
     <string name="search_result_details_title">Detalles del resultado</string>
     <string name="searchResultDialogTitle">Search result dialog title</string>
     <string name="search_interrupted">Search result dialog title</string>
+    
+    <string name="menuItemRefineBySubjectHeader">revistas por tema</string>
+    <string name="menuItemRefineByCollectionHeader">revistas por colección</string>
+    <string name="menuItemRefineByInitialHeader">lista alfabética</string>
+    
     <string name="menuItemRefineBySubject">temas</string>
+    <string name="menuItemRefineByCollection">collections</string>
+    <string name="menuItemRefineByInitial">A-Z</string>
+    <string name="menuItemRefineByLanguage">lenguas</string>
     <string name="menuItemRefineByJournal">revistas</string>
     <string name="menuItemRefineByYear">fechas</string>
-    <string name="menuItemRefineByCollection">colecciones</string>
-    <string name="menuItemRefineByLanguage">lenguas</string>
-    <string name="menuItemRefineByInitial">alfabética</string>
-    <string name="menuItemSendEmail">compartir</string>
+    
+    
+	<string name="menuItemSendEmail">compartir</string>
     <string name="menuItemSaveResult">guardar</string>
     <string name="menuItemSaveBookmark">bookmark</string>
     <string name="text_sendTo">e-mail</string>
@@ -34,7 +41,7 @@
     <string name="wellcome_articles">Busque por artículos científicos, compártalos, visítalos en el sitio web y descargue los PDF</string>
     <string name="wellcome_journals">Navegue por las revistas y números</string>
     <string name="email_message_title">Este mensaje fue enviado por la aplicación SciELO para Android</string>
-    <string name="version">versión 1.0</string>
+    <string name="version">versión</string>
     <string name="wellcome_articles_instr">Haga un clic en Artículos</string>
     <string name="wellcome_journals_instr">Haga un clic en Revistas</string>
     <string name="no_results_found">Ningun resultado encontrado</string>

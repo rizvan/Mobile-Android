@@ -243,9 +243,18 @@ public class DocumentsWS {
 				r.setCol(SciELOAppsActivity.myConfig.getJcn().getItem(collectionCode));
 				
 				
+				
 					if (r.getCompl().equals("")){
 						try {
-						r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));
+							String year = "";
+							
+							year = resultItem.getJSONArray("da").getString(0).substring(0,4);
+							
+							if ( ! resultItem.getJSONArray("fo").getString(0).contains(year)) {
+								r.setIssueLabel(resultItem.getJSONArray("fo").getString(0)+ " "+year );
+							} else {
+								r.setIssueLabel(resultItem.getJSONArray("fo").getString(0));
+							}
 						
 						} catch (JSONException e) {
 							last = last + "\n" +"fo";

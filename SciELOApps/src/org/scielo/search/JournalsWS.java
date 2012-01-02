@@ -52,6 +52,8 @@ public class JournalsWS {
 				r = journal_ws_urls.getItem("alphabetic").getValue() ;
 			} else {
 				r = journal_ws_urls.getItem("initial_url").getValue() ;
+				//r = journal_ws_urls.getItem("alphabetic").getValue() ;
+				//filterInitialLetter =  "A";
 				
 			}
 			
@@ -154,9 +156,9 @@ public class JournalsWS {
 				JSONArray documentRoot = rawResult.getJSONArray("rows");
 				int iTotalResults = documentRoot.length();
 				result_total = new Integer(iTotalResults).toString();
-				if (isInit){
+				
 					docs_total = rawResult.getString("total_rows") ;
-				}
+				
 				loadClusterCollection(clusterCodeOrder, clusterCollection);
 				loadResultList(documentRoot, journalResultList);
 				

@@ -18,6 +18,7 @@ public class Document {
 	private String filename; 
 	private String lang;
 	private String compl;
+	private String pubDate;
 	
 	
 
@@ -38,6 +39,7 @@ public class Document {
     	filename = "";
     	lang = "";
     	compl = "";
+    	pubDate = "";
     	setCol(new JournalsCollection());
     	
 	}
@@ -48,6 +50,12 @@ public class Document {
 	}
 	public void setDocumentId(String text){
 		this.id = text;
+	}
+	public void setPubDate(String text){
+		this.pubDate = text;
+	}
+	public String getPubDate(){
+		return this.pubDate;
 	}
 	public void setPosition(String text){
 		this.position = text;
